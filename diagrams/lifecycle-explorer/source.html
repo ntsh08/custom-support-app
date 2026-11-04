@@ -1,0 +1,70 @@
+<div id="support-line-explorer">
+  <div class="sl-heading"><h2>Following a support request</h2><span class="text-small text-muted">Concept sketch · select a stage</span></div>
+  <div class="viz-controls" aria-label="Case ownership">
+    <button type="button" class="btn" data-model="human" aria-pressed="true">Executive owns the case</button>
+    <button type="button" class="btn" data-model="ai" aria-pressed="false">AI owns the case</button>
+  </div>
+  <div class="sl-line" id="sl-stages"></div>
+  <div class="sl-foot text-small text-muted" aria-live="polite" id="sl-foot"></div>
+</div>
+<style>
+  #support-line-explorer {color:var(--foreground);display:grid;gap:calc(var(--font-size-base) * 1.25)}
+  #support-line-explorer .sl-heading {display:grid;gap:calc(var(--font-size-base) * .25);padding-right:90px}
+  #support-line-explorer .sl-line {position:relative}
+  #support-line-explorer .sl-line::before {content:"";position:absolute;top:20px;bottom:20px;left:10px;width:1px;background:var(--border)}
+  #support-line-explorer .sl-stage {position:relative;padding:0 0 calc(var(--font-size-base) * .6) 34px}
+  #support-line-explorer .sl-stage::before {content:"";position:absolute;left:5px;top:15px;width:11px;height:11px;border-radius:50%;background:var(--muted-foreground)}
+  #support-line-explorer .sl-stage.is-open::before {background:var(--viz-series-1)}
+  #support-line-explorer .sl-stage-head {display:flex;align-items:center;gap:calc(var(--font-size-base) * .7);flex-wrap:wrap}
+  #support-line-explorer .sl-owner {color:var(--muted-foreground)}
+  #support-line-explorer .sl-stage-panel {padding:calc(var(--font-size-base) * .65) 0 calc(var(--font-size-base) * 1.1)}
+  #support-line-explorer .sl-branches {list-style:none;padding:0;margin:0;display:grid;gap:calc(var(--font-size-base) * .8)}
+  #support-line-explorer .sl-branches li {position:relative;padding-left:23px;display:grid;gap:calc(var(--font-size-base) * .25)}
+  #support-line-explorer .sl-branches li::before {content:"";position:absolute;left:0;top:0;height:12px;width:13px;border-left:1px solid var(--border);border-bottom:1px solid var(--border)}
+  #support-line-explorer .sl-question {font-weight:500}
+  #support-line-explorer .sl-answer {color:var(--muted-foreground)}
+  #support-line-explorer .sl-foot {padding-left:34px}
+  @media (prefers-reduced-motion:no-preference) {#support-line-explorer .sl-stage-panel {animation:sl-reveal .2s ease-out} @keyframes sl-reveal {from {transform:translateY(-4px)} to {transform:translateY(0)}}}
+</style>
+<script>
+(() => {
+  const root = document.getElementById('support-line-explorer');
+  const stageRoot = root.querySelector('#sl-stages');
+  const foot = root.querySelector('#sl-foot');
+  const stages = [
+    {name:'Receive',human:'System → executive queue',ai:'System → AI queue',source:'Conceptual lifecycle · channel behavior varies by organization',branches:[['Where does the request arrive?','Email, chat or WhatsApp'],['Is this a new problem?','Find an existing case or create one'],['What should carry forward?','Customer identity, order and conversation']]},
+    {name:'Triage',human:'AI suggests · executive verifies',ai:'AI classifies · rules route',source:'Interview report · labels could determine whether a due date appeared',branches:[['What kind of issue is this?','Delivery, payment, return or another category'],['Who should own it?','Match responsibility, skills and available capacity'],['What if a label is missing?','A deadline may never be created']]},
+    {name:'Investigate',human:'Executive investigates · AI gathers context',ai:'AI investigates · exceptions reach a human',source:'Research synthesis · evidence availability and access remain assumptions',branches:[['What do we know?','Order record, delivery event and prior contact'],['What is disputed or missing?','Customer report versus available delivery evidence'],['Who can unblock the case?','Customer, courier or an internal team']]},
+    {name:'Decide',human:'Executive chooses · lead approves exceptions',ai:'AI follows policy · human supplies missing decisions',source:'Documented product pattern · an approval and a full takeover are different',branches:[['Which resolution is permitted?','Answer, investigate further, replace or refund'],['Does this require authority?','Approve the proposed action or change the plan'],['Can AI continue?','Supply one decision, or transfer case ownership']]},
+    {name:'Act & follow up',human:'Executive retains ownership',ai:'AI continues · failures route for intervention',source:'Interview report · the participant maintains a separate tracker for follow-ups',branches:[['Was the action actually completed?','Distinguish success, pending, failure and unknown'],['Are we waiting on someone?','Keep a named owner and a next update'],['What happens when a step fails?','Inspect the result before retrying or escalating']]},
+    {name:'Close & learn',human:'Executive checks closure',ai:'Configured closure · team reviews outcomes',source:'Interview report · a reply could close a task while internal work remained',branches:[['Did we reply, or resolve the problem?','A sent message is a different event from completed work'],['What remains open?','Keep dependencies and payment follow-up visible'],['What should improve next time?','Review errors, unclear guidance and repeated issues']]}
+  ];
+  let model = 'human';
+  let expanded = 4;
+  function restore(state) {
+    const saved=state?.privateContent;
+    if(saved && ['human','ai'].includes(saved.model)) model=saved.model;
+    if(saved && Number.isInteger(saved.expanded) && saved.expanded>=-1 && saved.expanded<stages.length) expanded=saved.expanded;
+  }
+  function render() {
+    stageRoot.replaceChildren();
+    stages.forEach((s,i) => {
+      const section=document.createElement('section'); section.className='sl-stage'+(expanded===i?' is-open':'');
+      const header=document.createElement('div');header.className='sl-stage-head';
+      const button=document.createElement('button');button.type='button';button.className='btn btn-ghost';button.textContent=s.name+(expanded===i?' −':' +');button.setAttribute('aria-expanded',String(expanded===i));button.setAttribute('aria-controls','sl-panel-'+i);
+      button.addEventListener('click',()=>{expanded=expanded===i?-1:i;render();root.querySelector('[aria-controls="sl-panel-'+i+'"]').focus();save();});
+      const owner=document.createElement('span');owner.className='sl-owner text-small';owner.textContent=s[model];header.append(button,owner);section.append(header);
+      const panel=document.createElement('div');panel.id='sl-panel-'+i;panel.className='sl-stage-panel';panel.hidden=expanded!==i;
+      const branches=document.createElement('ul');branches.className='sl-branches';
+      s.branches.forEach(([q,a])=>{const li=document.createElement('li');const question=document.createElement('span');question.className='sl-question';question.textContent=q;const answer=document.createElement('span');answer.className='sl-answer';answer.textContent=a;li.append(question,answer);branches.append(li);});
+      panel.append(branches);section.append(panel);stageRoot.append(section);
+    });
+    root.querySelectorAll('[data-model]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.model===model)));
+    foot.textContent=expanded>=0?stages[expanded].source:'Conceptual workflow · expand a stage to explore the questions beneath it';
+  }
+  function save(){if(window.openai?.setWidgetState)window.openai.setWidgetState({modelContent:{ownership:model,expandedStage:expanded>=0?stages[expanded].name:null},privateContent:{model,expanded}}).catch(()=>{});}
+  root.querySelectorAll('[data-model]').forEach(b=>b.addEventListener('click',()=>{model=b.dataset.model;render();save();}));
+  restore(window.openai?.widgetState);render();
+  window.addEventListener('openai:set_globals',event=>{if(event.detail?.globals?.widgetState){restore(event.detail.globals.widgetState);render();}});
+})();
+</script>

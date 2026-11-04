@@ -18,6 +18,7 @@ Dates below reflect documented activity or when evidence was shared. They are no
 | Mapped the participant's current workflow | First draft; 5 Nov 2026 | Made record boundaries, dependencies and incomplete closure visible; listed uncertainties for follow-up. | [Current workflow](../diagrams/current-support-workflow.md) |
 | Mapped the general lifecycle and both AI ownership models | Conceptual drafts; 5 Nov 2026 | Distinguished executive-owned assistance, AI-owned processing, approval and full handover. | [General workflow maps](../diagrams/general-support-lifecycle.md) |
 | Developed an assignment scope proposal | Draft for Nitish's review; 5 Nov 2026 | Proposed one detailed missing-delivery case, selected edge states, screen inventory and exclusions before starting designs. | [Scope proposal](design-scope-proposal.md) |
+| Created an expandable lifecycle explainer | Working HTML page; 5 Nov 2026 | Makes the support lifecycle explorable, with questions beneath each stage and a comparison of ownership models. Browser-checked stage expansion and ownership switching. | [Lifecycle explorer](../diagrams/lifecycle-explorer/index.html) |
 | Maintained project documentation and version history | Ongoing | Preserves evidence, decisions and changes for handoff. | decisions/; Git history |
 
 ## Playbook references discussed
