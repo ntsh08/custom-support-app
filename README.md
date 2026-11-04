@@ -7,5 +7,7 @@ Juspay product design assignment: an AI-powered customer support workspace for a
 - `process/`: [assignment activity log](process/activity-log.md), with evidence and learning
 - `diagrams/`: [current support workflow](diagrams/current-support-workflow.md) and planned operational diagrams
 - [Practitioner interview synthesis](research/interviews/p01-support-practitioner.md): findings, limits and follow-up questions
+- [General lifecycle and AI workflow maps](diagrams/general-support-lifecycle.md): conceptual diagrams for both ownership models
+- [Design scope proposal](process/design-scope-proposal.md): recommended scenario, branches, screens and exclusions, pending review
 
 Figma: https://www.figma.com/design/kqO24W36v19LyhCkSP4pH5/Login-Screen?node-id=1225-80
