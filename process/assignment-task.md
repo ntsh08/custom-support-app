@@ -28,6 +28,8 @@ Agreed with Nitish on 5 November 2026. This is the working plan for the designs.
 
 ## Team Lead overview (one screen, fed by the same cases)
 
+Dashboard only: a list of what needs the lead, with no flows behind the items ([decision](../decisions/2026-11-05-team-lead-dashboard-only.md)).
+
 - Approvals waiting (Case 4)
 - Courier spike: 4 claims in one pincode (Case 4)
 - Suspected false claims to review (Case 5)
