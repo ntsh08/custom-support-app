@@ -1,0 +1,30 @@
+# AI closes the ticket when the payment provider confirms the refund
+
+Status: Active          Type: Flow
+Date: 2026-11-05        Decided by: Nitish
+Skill version: 1.0.0
+Screens: Case workspace (Case 4), Team Lead overview
+Link: ../process/assignment-task.md
+Supersedes: none
+
+## Problem
+After a refund starts, the ticket needs a clear end. The store usually knows when the gateway reports success, not when the money reaches the customer's bank.
+
+## Decision
+When the payment provider confirms the refund succeeded, AI sends the customer the amount, reference number (ARN/UTR) and expected date, then closes the ticket. A failed refund keeps the ticket open with the executive. If the customer says the money never arrived, the ticket reopens with the reference number ready. The Team Lead sees failed refunds only.
+
+## Why
+Not stated directly. Nitish chose this after asking whether stores track the money reaching the customer's account; they usually don't, because the bank notifies the customer. Claude's earlier suggestion was to wait for the customer to confirm.
+
+## Evidence
+Designer judgement; common store practice (not verified across stores).   Confidence: Medium
+
+## Rejected options
+- Keep the ticket open until the customer confirms they got the money → extra follow-ups for a rare problem.
+
+## Guardrails for the next designer
+- Never show "credited" unless the system actually knows it.
+- A failed refund must never close the ticket.
+
+## Revisit when
+"Refund not received" reopens become frequent.
