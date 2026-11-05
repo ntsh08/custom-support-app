@@ -1,0 +1,118 @@
+/* JusDesk design tokens v1. Generated from the Figma variables on the 'JusDesk · Design System' page.
+   Light theme only. Font: Inter. Edit in Figma first, then regenerate. */
+
+:root {
+  /* Primitives */
+  --jd-gray-0: #FFFFFF;
+  --jd-gray-50: #F7F7F8;
+  --jd-gray-100: #EFEFF1;
+  --jd-gray-200: #E4E4E8;
+  --jd-gray-300: #D1D1D6;
+  --jd-gray-400: #A3A4AB;
+  --jd-gray-500: #6B6C74;
+  --jd-gray-600: #5C5D65;
+  --jd-gray-700: #45464D;
+  --jd-gray-800: #2C2D33;
+  --jd-gray-900: #18181C;
+  --jd-gray-950: #0D0D10;
+  --jd-purple-50: #F5F2FF;
+  --jd-purple-100: #ECE5FF;
+  --jd-purple-200: #D9CCFF;
+  --jd-purple-300: #BDA6FF;
+  --jd-purple-400: #9F7DFF;
+  --jd-purple-500: #8457FF;
+  --jd-purple-600: #7040F5;
+  --jd-purple-700: #5B2FD6;
+  --jd-purple-800: #4826AA;
+  --jd-purple-900: #331C78;
+  --jd-green-50: #E9F7EF;
+  --jd-green-600: #1E9E61;
+  --jd-green-700: #147A4B;
+  --jd-amber-50: #FFF4E0;
+  --jd-amber-500: #F0A01E;
+  --jd-amber-700: #9A5B00;
+  --jd-red-50: #FDECEB;
+  --jd-red-600: #D2342B;
+  --jd-red-700: #B3261E;
+  --jd-blue-50: #EAF2FF;
+  --jd-blue-600: #2F78E8;
+  --jd-blue-700: #1D5FC2;
+
+  /* Semantic colour */
+  --jd-bg-canvas: var(--jd-gray-0);
+  --jd-bg-subtle: var(--jd-gray-50);
+  --jd-bg-muted: var(--jd-gray-100);
+  --jd-bg-inverse: var(--jd-gray-950);
+  --jd-bg-brand: var(--jd-purple-600);
+  --jd-bg-brand-hover: var(--jd-purple-700);
+  --jd-bg-brand-soft: var(--jd-purple-50);
+  --jd-bg-brand-soft-strong: var(--jd-purple-100);
+  --jd-bg-ai: var(--jd-purple-50);
+  --jd-bg-success: var(--jd-green-50);
+  --jd-bg-warning: var(--jd-amber-50);
+  --jd-bg-danger: var(--jd-red-50);
+  --jd-bg-danger-solid: var(--jd-red-600);
+  --jd-bg-info: var(--jd-blue-50);
+  --jd-text-primary: var(--jd-gray-950);
+  --jd-text-secondary: var(--jd-gray-600);
+  --jd-text-tertiary: var(--jd-gray-500);
+  --jd-text-inverse: var(--jd-gray-0);
+  --jd-text-on-brand: var(--jd-gray-0);
+  --jd-text-brand: var(--jd-purple-600);
+  --jd-text-ai: var(--jd-purple-700);
+  --jd-text-success: var(--jd-green-700);
+  --jd-text-warning: var(--jd-amber-700);
+  --jd-text-danger: var(--jd-red-700);
+  --jd-text-info: var(--jd-blue-700);
+  --jd-border-default: var(--jd-gray-200);
+  --jd-border-subtle: var(--jd-gray-100);
+  --jd-border-strong: var(--jd-gray-300);
+  --jd-border-brand: var(--jd-purple-500);
+  --jd-border-ai: var(--jd-purple-200);
+  --jd-border-danger: var(--jd-red-600);
+  --jd-icon-default: var(--jd-gray-700);
+  --jd-icon-muted: var(--jd-gray-500);
+  --jd-icon-brand: var(--jd-purple-600);
+  --jd-icon-inverse: var(--jd-gray-0);
+  --jd-status-success: var(--jd-green-600);
+  --jd-status-warning: var(--jd-amber-500);
+  --jd-status-danger: var(--jd-red-600);
+  --jd-status-info: var(--jd-blue-600);
+  --jd-status-neutral: var(--jd-gray-400);
+
+  /* Spacing and radius */
+  --jd-space-2: 2px;
+  --jd-space-4: 4px;
+  --jd-space-6: 6px;
+  --jd-space-8: 8px;
+  --jd-space-12: 12px;
+  --jd-space-16: 16px;
+  --jd-space-20: 20px;
+  --jd-space-24: 24px;
+  --jd-space-32: 32px;
+  --jd-space-40: 40px;
+  --jd-space-48: 48px;
+  --jd-radius-xs: 6px;
+  --jd-radius-sm: 10px;
+  --jd-radius-md: 14px;
+  --jd-radius-lg: 20px;
+  --jd-radius-xl: 28px;
+  --jd-radius-full: 999px;
+
+  /* Shadows */
+  --jd-shadow-card: 0 1px 2px rgb(13 13 16 / 0.04), 0 2px 8px rgb(13 13 16 / 0.04);
+  --jd-shadow-raised: 0 2px 6px rgb(13 13 16 / 0.06), 0 12px 32px rgb(13 13 16 / 0.12);
+
+  --jd-font: "Inter", system-ui, sans-serif;
+}
+
+.jd-display { font-family: var(--jd-font); font-size: 40px; line-height: 44px; font-weight: 800; letter-spacing: -0.02em; }
+.jd-title { font-family: var(--jd-font); font-size: 24px; line-height: 30px; font-weight: 700; letter-spacing: -0.015em; }
+.jd-heading { font-family: var(--jd-font); font-size: 18px; line-height: 24px; font-weight: 600; letter-spacing: -0.01em; }
+.jd-subheading { font-family: var(--jd-font); font-size: 15px; line-height: 20px; font-weight: 600; letter-spacing: -0.005em; }
+.jd-body { font-family: var(--jd-font); font-size: 14px; line-height: 20px; font-weight: 400; letter-spacing: 0; }
+.jd-body-strong { font-family: var(--jd-font); font-size: 14px; line-height: 20px; font-weight: 500; letter-spacing: 0; }
+.jd-small { font-family: var(--jd-font); font-size: 13px; line-height: 18px; font-weight: 400; letter-spacing: 0; }
+.jd-caption { font-family: var(--jd-font); font-size: 12px; line-height: 16px; font-weight: 500; letter-spacing: 0; }
+.jd-label { font-family: var(--jd-font); font-size: 11px; line-height: 14px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+.jd-button { font-family: var(--jd-font); font-size: 14px; line-height: 20px; font-weight: 600; letter-spacing: 0; }
