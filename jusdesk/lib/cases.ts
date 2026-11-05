@@ -84,7 +84,7 @@ export const CASES: Case[] = [
     ],
     evidence: [
       { kind: "door", title: "Courier photo", note: "Green door, parcel on the step", door: "#2F6B4F", parcel: true },
-      { kind: "door", title: "Last delivery here, 12 Oct", note: "White door, flat B-204", door: "#F4F2EE", plate: "B-204" },
+      { kind: "door", title: "Last delivery, 12 Oct", note: "White door, flat B-204", door: "#F4F2EE", plate: "B-204" },
       { kind: "map", title: "Rider's GPS", note: "600 m from the address", metres: 600 },
     ],
     facts: [
@@ -144,7 +144,7 @@ export const CASES: Case[] = [
         ai: "Replacement FX-48213-R is packed. Claim CLM-2291 is filed with Shadowfax. I'll close the case once Ananya's parcel is delivered with an OTP.",
         adds: [
           { kind: "agent", who: "You", time: "Now", text: "Hi Ananya, you're right: the courier's photo shows a different door. I'm sending a new kurta today so it reaches you by Friday, and we'll take it up with Shadowfax. Nothing more needed from you." },
-          { kind: "event", time: "Now", text: "Reship FX-48213-R created · courier claim CLM-2291 filed", ai: true },
+          { kind: "event", time: "Now", text: "Reship FX-48213-R created, claim CLM-2291 filed", ai: true },
         ],
         options: [],
         simulate: { label: "Simulate: delivered with OTP on Thursday", next: "closed" },
@@ -226,8 +226,8 @@ export const CASES: Case[] = [
         status: "Waiting on Priya (team lead) · usually within 1 h",
         options: [],
         adds: [
-          { kind: "agent", who: "You", time: "Now", text: "Hi Rohan, I'm sorry, the jacket in size L is out of stock. I've asked for a full refund of ₹6,500 to your UPI and will confirm as soon as it's on its way." },
-          { kind: "event", time: "Now", text: "Refund sent to Priya for approval" },
+          { kind: "agent", who: "You", time: "10:40 am", text: "Hi Rohan, I'm sorry, the jacket in size L is out of stock. I've asked for a full refund of ₹6,500 to your UPI and will confirm as soon as it's on its way." },
+          { kind: "event", time: "10:41 am", text: "Refund sent to Priya for approval" },
         ],
         simulate: { label: "Simulate: Priya approves", next: "failed" },
       },
@@ -260,7 +260,31 @@ export const CASES: Case[] = [
             },
             next: "retrying",
           },
+          {
+            id: "card",
+            label: "Refund to card ending 4417",
+            confirm: {
+              title: "Refund to card instead",
+              lines: [
+                ["Refund", "₹6,500"],
+                ["To", "Card ending 4417 (used on his last order)"],
+                ["Earlier attempt", "Failed, no money moved"],
+                ["Arrives", "Usually 5–7 working days on cards"],
+              ],
+              note: "The ticket closes when the payment provider confirms.",
+              cta: "Refund to card",
+            },
+            next: "toCard",
+          },
         ],
+      },
+      toCard: {
+        group: "waiting",
+        nextStep: "Refund with payment provider",
+        status: "Refund sent to card · closes when the payment provider confirms",
+        options: [],
+        adds: [{ kind: "event", time: "11:30 am", text: "Refund of ₹6,500 sent to the card ending 4417", ai: true }],
+        simulate: { label: "Simulate: provider confirms refund", next: "closed" },
       },
       retrying: {
         group: "waiting",
@@ -269,18 +293,18 @@ export const CASES: Case[] = [
         options: [],
         adds: [
           { kind: "customer", channel: "email", time: "11:34 am", text: "Please use rohan.shah@okhdfc. Thanks." },
-          { kind: "event", time: "Now", text: "Refund of ₹6,500 retried to rohan.shah@okhdfc", ai: true },
+          { kind: "event", time: "11:35 am", text: "Refund of ₹6,500 retried to rohan.shah@okhdfc", ai: true },
         ],
         simulate: { label: "Simulate: provider confirms refund", next: "closed" },
       },
       closed: {
         group: "closed",
         nextStep: "Closed",
-        status: "Closed · refund confirmed, UTR 4290 8812 3301",
+        status: "Closed · refund confirmed by the payment provider",
         options: [],
         adds: [
-          { kind: "event", time: "11:36 am", text: "Payment provider confirmed the refund · UTR 4290 8812 3301", ai: true },
-          { kind: "agent", who: "JusDesk assistant", time: "11:36 am", text: "Your refund of ₹6,500 is on its way (UTR 4290 8812 3301). It usually shows in your account within a day. If it doesn't, just reply here." },
+          { kind: "event", time: "11:37 am", text: "Payment provider confirmed the refund · ref 4290 8812 3301", ai: true },
+          { kind: "agent", who: "JusDesk assistant", time: "11:37 am", text: "Your refund of ₹6,500 is on its way (ref 4290 8812 3301). It usually shows in your account within a day. If it doesn't, just reply here." },
         ],
       },
     },
@@ -321,7 +345,7 @@ export const CASES: Case[] = [
         nextStep: "Review flagged claim",
         timeLeft: "15 min",
         urgent: "bad",
-        ai: "The proof matches her address and the OTP was entered. The signals below are worth a second look, but they don't prove anything. This needs Priya's call.",
+        ai: "The proof matches her address and the OTP was entered. The signals above are worth a second look, but they don't prove anything. This needs Priya's call.",
         draft: "Hi Meera, thanks for letting us know. We're checking the delivery with Delhivery and will update you by 6 pm tomorrow.",
         options: [
           {

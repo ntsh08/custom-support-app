@@ -5,7 +5,7 @@ function Scene({ e }: { e: Evidence }) {
   if (e.kind === "door") {
     const light = e.door.toUpperCase() === "#F4F2EE";
     return (
-      <svg viewBox="0 0 200 130" role="img" aria-label={`${e.title}: ${e.note}`}>
+      <svg viewBox="0 0 200 130" preserveAspectRatio="xMidYMid slice" role="img" aria-label={`${e.title}: ${e.note}`}>
         <rect width="200" height="130" fill={light ? "#D8D4CC" : "#C9B79C"} />
         <rect y="102" width="200" height="28" fill={light ? "#B9B3A8" : "#A89478"} />
         <rect x="64" y="16" width="72" height="88" rx="3" fill={e.door} stroke={light ? "#C9C4BA" : "none"} />
@@ -29,7 +29,7 @@ function Scene({ e }: { e: Evidence }) {
   }
   if (e.kind === "gate") {
     return (
-      <svg viewBox="0 0 200 130" role="img" aria-label={`${e.title}: ${e.note}`}>
+      <svg viewBox="0 0 200 130" preserveAspectRatio="xMidYMid slice" role="img" aria-label={`${e.title}: ${e.note}`}>
         <rect width="200" height="130" fill="#CFD6DA" />
         <rect y="100" width="200" height="30" fill="#A9B1B5" />
         <rect x="20" y="30" width="70" height="72" fill="#E9E4D8" />
@@ -47,7 +47,7 @@ function Scene({ e }: { e: Evidence }) {
     const far = e.metres > 100;
     const end = far ? { x: 172, y: 26 } : { x: 62, y: 96 };
     return (
-      <svg viewBox="0 0 230 130" role="img" aria-label={`${e.title}: ${e.note}`}>
+      <svg viewBox="0 0 230 130" preserveAspectRatio="xMidYMid slice" role="img" aria-label={`${e.title}: ${e.note}`}>
         <rect width="230" height="130" fill="#EFEFF1" />
         <path d="M0 36H230M0 92H230M58 0V130M150 0V130" stroke="#fff" strokeWidth="9" />
         <path d="M0 64H230M104 0V130" stroke="#fff" strokeWidth="4" />
@@ -68,7 +68,7 @@ function Scene({ e }: { e: Evidence }) {
     );
   }
   return (
-    <svg viewBox="0 0 200 130" role="img" aria-label={`${e.title}: ${e.note}`}>
+    <svg viewBox="0 0 200 130" preserveAspectRatio="xMidYMid slice" role="img" aria-label={`${e.title}: ${e.note}`}>
       <rect width="200" height="130" fill="#F7F7F8" />
       <rect x="0.5" y="0.5" width="199" height="129" rx="11.5" fill="none" stroke="#D1D1D6" strokeDasharray="5 5" />
       <text x="100" y="69" fontSize="11" fill="#6B6C74" textAnchor="middle" fontFamily="Inter, sans-serif">No photo</text>

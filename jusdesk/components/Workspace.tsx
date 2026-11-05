@@ -28,6 +28,8 @@ export function Workspace() {
   const stage = c.stages[st.stage];
   const thread = [...c.thread, ...st.extra];
   const draft = drafts[c.id + st.stage] ?? stage.draft ?? "";
+  const [compare, setCompare] = useState(false);
+  const canCompare = c.evidence.filter((e) => e.kind === "door").length >= 2;
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -42,6 +44,24 @@ export function Workspace() {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [ordered, selected]);
+
+  // Deep links for demos and review captures: ?case=rohan&stage=failed&confirm=retry
+  useEffect(() => {
+    const q = new URLSearchParams(window.location.search);
+    const cs = CASES.find((x) => x.id === q.get("case"));
+    if (!cs) return;
+    setSelected(cs.id);
+    if (q.get("compare")) setCompare(true);
+    const sk = q.get("stage");
+    if (sk && cs.stages[sk]) {
+      const path = Object.keys(cs.stages);
+      const upto = path.slice(0, path.indexOf(sk) + 1);
+      const extra = upto.flatMap((k) => (k === cs.start ? [] : cs.stages[k].adds ?? []));
+      setStates((s) => ({ ...s, [cs.id]: { stage: sk, extra } }));
+      const o = cs.stages[sk].options.find((x) => x.id === q.get("confirm"));
+      if (o) setConfirming(o);
+    }
+  }, []);
 
   useEffect(() => {
     threadEnd.current?.scrollIntoView({ block: "end" });
@@ -77,6 +97,12 @@ export function Workspace() {
   const needs = ordered.filter((x) => c && states[x.id] && x.stages[states[x.id].stage].group === "needs").length;
 
   return (
+    <>
+    <div className="narrow" role="note">
+      <div className="logo" aria-hidden="true">J</div>
+      <h1>JusDesk is a desktop workspace</h1>
+      <p>Open it on a screen at least 1100 px wide to work the queue and a case side by side.</p>
+    </div>
     <div className="app">
       <nav className="rail" aria-label="Main">
         <div className="logo" aria-label="JusDesk">J</div>
@@ -145,10 +171,17 @@ export function Workspace() {
 
           <section className="evidence" aria-label="Evidence">
             <div className="escroll">
-              <div className={`strip n${c.evidence.length}`}>
+              <div className={`strip n${c.evidence.length}${compare && canCompare ? " compare" : ""}`}>
                 {c.evidence.map((e, i) => <EvidenceTile key={i} e={e} />)}
               </div>
-              <p className="illus">Illustrations of courier evidence · demo data</p>
+              <div className="erow">
+                <p className="illus">Illustrations of courier evidence · demo data</p>
+                {canCompare && (
+                  <button className="btn s sm" aria-pressed={compare} onClick={() => setCompare((v) => !v)}>
+                    {compare ? "Smaller photos" : "Compare photos side by side"}
+                  </button>
+                )}
+              </div>
               <dl className="facts">
                 {c.facts.map((f) => (
                   <div key={f.label}><dt>{f.label}</dt><dd className={f.tone ?? ""}>{f.value}</dd></div>
@@ -160,7 +193,6 @@ export function Workspace() {
                   <ul>{c.signals.map((s) => <li key={s}>{s}</li>)}</ul>
                 </div>
               )}
-            </div>
 
             <div className="decide">
               {confirming?.confirm ? (
@@ -169,8 +201,8 @@ export function Workspace() {
                   <dl>{confirming.confirm.lines.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
                   <p>{confirming.confirm.note}</p>
                   <div className="row">
-                    <button className="btn g" onClick={() => setConfirming(null)}>Back</button>
-                    <button className="btn p grow" autoFocus onClick={() => goTo(c.id, confirming.next, confirming.label)}><Icon name="check" size={18} />{confirming.confirm.cta}</button>
+                    <button className="btn p" onClick={() => goTo(c.id, confirming.next, confirming.label)}><Icon name="check" size={18} />{confirming.confirm.cta}</button>
+                    <button className="btn s" onClick={() => setConfirming(null)}>Back</button>
                   </div>
                 </div>
               ) : (
@@ -189,6 +221,7 @@ export function Workspace() {
                 </>
               )}
             </div>
+            </div>
           </section>
         </div>
       </main>
@@ -202,6 +235,7 @@ export function Workspace() {
         </div>
       )}
     </div>
+    </>
   );
 }
 

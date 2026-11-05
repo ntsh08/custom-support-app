@@ -1,0 +1,577 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-05T15:49:43.919925+00:00",
+  "title": "Design System: JusDesk",
+  "extensions": {
+    "colorMeta": {
+      "brand-purple": {
+        "role": "primary",
+        "displayName": "Brand Purple",
+        "tonalRamp": [
+          "#331C78",
+          "#4826AA",
+          "#5B2FD6",
+          "#7040F5",
+          "#8457FF",
+          "#BDA6FF",
+          "#D9CCFF",
+          "#F5F2FF"
+        ]
+      },
+      "brand-purple-deep": {
+        "role": "primary",
+        "displayName": "Deep Purple",
+        "tonalRamp": [
+          "#331C78",
+          "#4826AA",
+          "#5B2FD6",
+          "#7040F5",
+          "#8457FF",
+          "#BDA6FF",
+          "#D9CCFF",
+          "#F5F2FF"
+        ]
+      },
+      "focus-purple": {
+        "role": "primary",
+        "displayName": "Focus Purple",
+        "tonalRamp": [
+          "#331C78",
+          "#4826AA",
+          "#5B2FD6",
+          "#7040F5",
+          "#8457FF",
+          "#BDA6FF",
+          "#D9CCFF",
+          "#F5F2FF"
+        ]
+      },
+      "purple-line": {
+        "role": "primary",
+        "displayName": "Purple Line",
+        "tonalRamp": [
+          "#331C78",
+          "#4826AA",
+          "#5B2FD6",
+          "#7040F5",
+          "#8457FF",
+          "#BDA6FF",
+          "#D9CCFF",
+          "#F5F2FF"
+        ]
+      },
+      "purple-mist": {
+        "role": "primary",
+        "displayName": "Purple Mist",
+        "tonalRamp": [
+          "#331C78",
+          "#4826AA",
+          "#5B2FD6",
+          "#7040F5",
+          "#8457FF",
+          "#BDA6FF",
+          "#D9CCFF",
+          "#F5F2FF"
+        ]
+      },
+      "purple-tint": {
+        "role": "primary",
+        "displayName": "Purple Tint",
+        "tonalRamp": [
+          "#331C78",
+          "#4826AA",
+          "#5B2FD6",
+          "#7040F5",
+          "#8457FF",
+          "#BDA6FF",
+          "#D9CCFF",
+          "#F5F2FF"
+        ]
+      },
+      "night-rail": {
+        "role": "neutral",
+        "displayName": "Night Rail",
+        "tonalRamp": [
+          "#0E0920",
+          "#1B1235",
+          "#2A1F4D",
+          "#3E3366",
+          "#5A5080",
+          "#81799F",
+          "#B3AEC6",
+          "#E6E4EE"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "tonalRamp": [
+          "#0D0D10",
+          "#2C2D33",
+          "#45464D",
+          "#5C5D65",
+          "#6B6C74",
+          "#A3A4AB",
+          "#E4E4E8",
+          "#F7F7F8"
+        ]
+      },
+      "canvas": {
+        "role": "neutral",
+        "displayName": "Canvas",
+        "tonalRamp": [
+          "#0D0D10",
+          "#2C2D33",
+          "#45464D",
+          "#5C5D65",
+          "#6B6C74",
+          "#A3A4AB",
+          "#E4E4E8",
+          "#F7F7F8"
+        ]
+      },
+      "thread-grey": {
+        "role": "neutral",
+        "displayName": "Thread Grey",
+        "tonalRamp": [
+          "#0D0D10",
+          "#2C2D33",
+          "#45464D",
+          "#5C5D65",
+          "#6B6C74",
+          "#A3A4AB",
+          "#E4E4E8",
+          "#F7F7F8"
+        ]
+      },
+      "subtle-grey": {
+        "role": "neutral",
+        "displayName": "Subtle Grey",
+        "tonalRamp": [
+          "#0D0D10",
+          "#2C2D33",
+          "#45464D",
+          "#5C5D65",
+          "#6B6C74",
+          "#A3A4AB",
+          "#E4E4E8",
+          "#F7F7F8"
+        ]
+      },
+      "queue-grey": {
+        "role": "neutral",
+        "displayName": "Queue Grey",
+        "tonalRamp": [
+          "#0D0D10",
+          "#2C2D33",
+          "#45464D",
+          "#5C5D65",
+          "#6B6C74",
+          "#A3A4AB",
+          "#E4E4E8",
+          "#F7F7F8"
+        ]
+      },
+      "muted-grey": {
+        "role": "neutral",
+        "displayName": "Muted Grey",
+        "tonalRamp": [
+          "#0D0D10",
+          "#2C2D33",
+          "#45464D",
+          "#5C5D65",
+          "#6B6C74",
+          "#A3A4AB",
+          "#E4E4E8",
+          "#F7F7F8"
+        ]
+      },
+      "hairline": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "tonalRamp": [
+          "#0D0D10",
+          "#2C2D33",
+          "#45464D",
+          "#5C5D65",
+          "#6B6C74",
+          "#A3A4AB",
+          "#E4E4E8",
+          "#F7F7F8"
+        ]
+      },
+      "border-grey": {
+        "role": "neutral",
+        "displayName": "Border Grey",
+        "tonalRamp": [
+          "#0D0D10",
+          "#2C2D33",
+          "#45464D",
+          "#5C5D65",
+          "#6B6C74",
+          "#A3A4AB",
+          "#E4E4E8",
+          "#F7F7F8"
+        ]
+      },
+      "border-strong": {
+        "role": "neutral",
+        "displayName": "Border Strong",
+        "tonalRamp": [
+          "#0D0D10",
+          "#2C2D33",
+          "#45464D",
+          "#5C5D65",
+          "#6B6C74",
+          "#A3A4AB",
+          "#E4E4E8",
+          "#F7F7F8"
+        ]
+      },
+      "slate-text": {
+        "role": "neutral",
+        "displayName": "Slate Text",
+        "tonalRamp": [
+          "#0D0D10",
+          "#2C2D33",
+          "#45464D",
+          "#5C5D65",
+          "#6B6C74",
+          "#A3A4AB",
+          "#E4E4E8",
+          "#F7F7F8"
+        ]
+      },
+      "quiet-text": {
+        "role": "neutral",
+        "displayName": "Quiet Text",
+        "tonalRamp": [
+          "#0D0D10",
+          "#2C2D33",
+          "#45464D",
+          "#5C5D65",
+          "#6B6C74",
+          "#A3A4AB",
+          "#E4E4E8",
+          "#F7F7F8"
+        ]
+      },
+      "dot-neutral": {
+        "role": "neutral",
+        "displayName": "Neutral Dot",
+        "tonalRamp": [
+          "#0D0D10",
+          "#2C2D33",
+          "#45464D",
+          "#5C5D65",
+          "#6B6C74",
+          "#A3A4AB",
+          "#E4E4E8",
+          "#F7F7F8"
+        ]
+      },
+      "success": {
+        "role": "status",
+        "displayName": "Success",
+        "tonalRamp": [
+          "#0B3D25",
+          "#147A4B",
+          "#1E9E61",
+          "#4DB884",
+          "#80CFA7",
+          "#B3E3CA",
+          "#D4F0E1",
+          "#E9F7EF"
+        ]
+      },
+      "success-text": {
+        "role": "status",
+        "displayName": "Success Text",
+        "tonalRamp": [
+          "#0B3D25",
+          "#147A4B",
+          "#1E9E61",
+          "#4DB884",
+          "#80CFA7",
+          "#B3E3CA",
+          "#D4F0E1",
+          "#E9F7EF"
+        ]
+      },
+      "warning": {
+        "role": "status",
+        "displayName": "Warning",
+        "tonalRamp": [
+          "#4D2E00",
+          "#9A5B00",
+          "#C77E0A",
+          "#F0A01E",
+          "#F5BC5C",
+          "#F9D493",
+          "#FCE6BF",
+          "#FFF4E0"
+        ]
+      },
+      "warning-text": {
+        "role": "status",
+        "displayName": "Warning Text",
+        "tonalRamp": [
+          "#4D2E00",
+          "#9A5B00",
+          "#C77E0A",
+          "#F0A01E",
+          "#F5BC5C",
+          "#F9D493",
+          "#FCE6BF",
+          "#FFF4E0"
+        ]
+      },
+      "danger": {
+        "role": "status",
+        "displayName": "Danger",
+        "tonalRamp": [
+          "#5A130F",
+          "#B3261E",
+          "#D2342B",
+          "#E0645D",
+          "#EB938E",
+          "#F3BCB9",
+          "#F8D9D7",
+          "#FDECEB"
+        ]
+      },
+      "danger-text": {
+        "role": "status",
+        "displayName": "Danger Text",
+        "tonalRamp": [
+          "#5A130F",
+          "#B3261E",
+          "#D2342B",
+          "#E0645D",
+          "#EB938E",
+          "#F3BCB9",
+          "#F8D9D7",
+          "#FDECEB"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Case headline naming the contradiction; one per screen."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Inline confirm step heading."
+      },
+      "section-title": {
+        "displayName": "Section Title",
+        "purpose": "Queue header."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Conversation, facts, AI line; tabular numerals."
+      },
+      "body-strong": {
+        "displayName": "Body Strong",
+        "purpose": "Buttons, customer names."
+      },
+      "small": {
+        "displayName": "Small",
+        "purpose": "Queue secondary lines, group headings, metadata, status line."
+      },
+      "caption": {
+        "displayName": "Caption",
+        "purpose": "Who/time lines, events, evidence captions, composer hints."
+      },
+      "tag": {
+        "displayName": "Tag",
+        "purpose": "The AI tag only."
+      }
+    },
+    "shadows": [
+      {
+        "name": "card",
+        "value": "0 1px 2px rgb(13 13 16 / 0.04), 0 2px 8px rgb(13 13 16 / 0.04)",
+        "purpose": "Composer floating over the thread."
+      },
+      {
+        "name": "selected-row",
+        "value": "0 1px 2px rgb(13 13 16 / .06), inset 0 0 0 1px #D9CCFF",
+        "purpose": "Selected queue row."
+      },
+      {
+        "name": "raised",
+        "value": "0 2px 6px rgb(13 13 16 / 0.06), 0 12px 32px rgb(13 13 16 / 0.12)",
+        "purpose": "Undo toast."
+      }
+    ],
+    "motion": [
+      {
+        "name": "state",
+        "value": "150ms ease",
+        "purpose": "Background/colour transitions on buttons, queue rows, rail icons."
+      },
+      {
+        "name": "press",
+        "value": "transform scale(.98), 100ms",
+        "purpose": "Button press."
+      },
+      {
+        "name": "rise",
+        "value": "200ms cubic-bezier(.16, 1, .3, 1), from opacity 0 translateY(6px)",
+        "purpose": "Inline confirm step entering."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "none",
+        "purpose": "prefers-reduced-motion removes rise and transitions."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "desktop-min",
+        "value": "1100px"
+      },
+      {
+        "name": "shell-min-width",
+        "value": "1200px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one purple action in a decision row.",
+      "html": "<button class=\"ds-btn ds-btn-p\">Reship and file claim</button>",
+      "css": ".ds-btn { font-family: var(--jd-font, Inter, system-ui, sans-serif); display:inline-flex; align-items:center; gap:6px; border:0; border-radius:999px; padding:10px 18px; font-size:14px; line-height:20px; font-weight:600; cursor:pointer; transition: background .15s, transform .1s; } .ds-btn:active { transform: scale(.98); } .ds-btn:focus-visible { outline:2px solid #8457FF; outline-offset:2px; } .ds-btn-p { background:#7040F5; color:#fff; } .ds-btn-p:hover { background:#5B2FD6; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Every alternative action; grey pill beside the primary.",
+      "html": "<button class=\"ds-btn2\">Refund ₹1,800</button>",
+      "css": ".ds-btn2 { font-family: var(--jd-font, Inter, system-ui, sans-serif); display:inline-flex; align-items:center; gap:6px; border:0; border-radius:999px; padding:10px 18px; font-size:14px; line-height:20px; font-weight:600; background:#EFEFF1; color:#0D0D10; cursor:pointer; transition: background .15s, transform .1s; } .ds-btn2:hover { background:#E4E4E8; } .ds-btn2:active { transform: scale(.98); } .ds-btn2:focus-visible { outline:2px solid #8457FF; outline-offset:2px; }"
+    },
+    {
+      "name": "AI Tag",
+      "kind": "chip",
+      "refersTo": "ai-tag",
+      "description": "The only AI marker: leads an AI line, event or draft note.",
+      "html": "<p class=\"ds-ailine\"><i class=\"ds-ai\">AI</i>Photo and GPS both point to another address.</p>",
+      "css": ".ds-ailine { font-family: var(--jd-font, Inter, system-ui, sans-serif); font-size:14px; line-height:21px; color:#0D0D10; margin:0; } .ds-ai { font-style:normal; font-size:11px; line-height:14px; font-weight:600; letter-spacing:.04em; color:#5B2FD6; background:#F5F2FF; border-radius:6px; padding:2px 6px; margin-right:8px; display:inline-block; vertical-align:1px; }"
+    },
+    {
+      "name": "Status Line",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "State as words with a dot, never a pill.",
+      "html": "<p class=\"ds-status\"><span class=\"ds-sd\"></span>Waiting on Ekart · reply due 4 pm</p>",
+      "css": ".ds-status { font-family: var(--jd-font, Inter, system-ui, sans-serif); display:flex; align-items:center; gap:8px; font-size:13px; color:#5C5D65; margin:0; } .ds-sd { width:8px; height:8px; border-radius:50%; background:#F0A01E; }"
+    },
+    {
+      "name": "Queue Row",
+      "kind": "nav",
+      "refersTo": "queue-row",
+      "description": "Customer, item and next step; selected row lifts to white with a purple ring.",
+      "html": "<div class=\"ds-q\"><button class=\"ds-qi ds-on\"><span class=\"ds-qt\"><b>Ananya Mehta</b><span class=\"ds-warn\">40 min</span></span><span class=\"ds-q2\">Block-print kurta · ₹1,800</span><span class=\"ds-q3\">Decide: evidence doesn't match</span></button><button class=\"ds-qi\"><span class=\"ds-qt\"><b>Rohan Shah</b><span>2 h</span></span><span class=\"ds-q2\">Wool jacket · ₹6,500</span><span class=\"ds-q3\">Refund needs your lead</span></button></div>",
+      "css": ".ds-q { font-family: var(--jd-font, Inter, system-ui, sans-serif); background:#F4F4F7; padding:12px; width:300px; font-variant-numeric:tabular-nums; } .ds-qi { font:inherit; display:flex; flex-direction:column; gap:2px; width:100%; text-align:left; border:0; background:transparent; padding:10px 12px; border-radius:12px; cursor:pointer; color:#0D0D10; font-size:14px; line-height:20px; transition:background .15s; } .ds-qi:hover { background:rgb(13 13 16 / .04); } .ds-qi:focus-visible { outline:2px solid #8457FF; outline-offset:2px; } .ds-qi.ds-on { background:#fff; box-shadow:0 1px 2px rgb(13 13 16 / .06), inset 0 0 0 1px #D9CCFF; } .ds-qt { display:flex; justify-content:space-between; gap:8px; } .ds-qt b { font-weight:600; } .ds-qt span { font-size:13px; color:#6B6C74; } .ds-qt .ds-warn { color:#9A5B00; font-weight:600; } .ds-q2 { font-size:13px; color:#5C5D65; } .ds-q3 { font-size:13px; color:#6B6C74; } .ds-on .ds-q3 { color:#0D0D10; }"
+    },
+    {
+      "name": "Message Bubbles",
+      "kind": "custom",
+      "refersTo": "bubble-customer",
+      "description": "Customer in white on the left, the team in ink on the right.",
+      "html": "<div class=\"ds-th\"><div class=\"ds-m\"><p class=\"ds-who\">Customer · chat · 8:52 am</p><div class=\"ds-b\">My order shows delivered but I didn't get anything.</div></div><div class=\"ds-m ds-mine\"><p class=\"ds-who\">JusDesk assistant · 8:52 am</p><div class=\"ds-b\">Sorry about that. I'm checking with the courier now.</div></div></div>",
+      "css": ".ds-th { font-family: var(--jd-font, Inter, system-ui, sans-serif); background:#FBFBFC; padding:24px; display:flex; flex-direction:column; gap:16px; } .ds-m { max-width:82%; } .ds-mine { align-self:flex-end; } .ds-who { font-size:12px; line-height:16px; color:#6B6C74; margin:0 0 4px; } .ds-mine .ds-who { text-align:right; } .ds-b { background:#fff; border:1px solid #EFEFF1; border-radius:16px; padding:12px 14px; font-size:14px; line-height:21px; color:#0D0D10; } .ds-mine .ds-b { background:#0D0D10; color:#fff; border-color:transparent; }"
+    },
+    {
+      "name": "Composer",
+      "kind": "input",
+      "refersTo": "composer",
+      "description": "Reply box pinned under the thread; AI draft is pre-filled and tagged.",
+      "html": "<div class=\"ds-comp\"><textarea aria-label=\"Reply\">Hi Ananya, you're right: the courier's photo shows a different door.</textarea><div class=\"ds-crow\"><span><i class=\"ds-ai2\">AI</i>Drafted for you</span><button class=\"ds-sm\">Send now</button></div></div>",
+      "css": ".ds-comp { font-family: var(--jd-font, Inter, system-ui, sans-serif); border:1px solid #E4E4E8; border-radius:16px; background:#fff; padding:12px 14px; box-shadow:0 1px 2px rgb(13 13 16 / .04), 0 2px 8px rgb(13 13 16 / .04); max-width:460px; } .ds-comp:focus-within { border-color:#8457FF; } .ds-comp textarea { width:100%; border:0; outline:0; resize:none; min-height:64px; font:400 14px/21px Inter, system-ui, sans-serif; color:#0D0D10; background:transparent; } .ds-crow { display:flex; justify-content:space-between; align-items:center; gap:12px; font-size:12px; color:#6B6C74; margin-top:6px; } .ds-ai2 { font-style:normal; font-size:11px; line-height:14px; font-weight:600; letter-spacing:.04em; color:#5B2FD6; background:#F5F2FF; border-radius:6px; padding:2px 6px; margin-right:8px; } .ds-sm { font:inherit; border:0; border-radius:999px; padding:6px 12px; font-size:13px; font-weight:600; background:#EFEFF1; color:#0D0D10; cursor:pointer; } .ds-sm:hover { background:#E4E4E8; }"
+    },
+    {
+      "name": "Facts List",
+      "kind": "card",
+      "refersTo": "",
+      "description": "Evidence facts as hairline-divided rows; verdicts coloured as text.",
+      "html": "<dl class=\"ds-facts\"><div><dt>Delivery OTP</dt><dd>Not collected</dd></div><div><dt>Ananya</dt><dd class=\"ds-good\">14 orders, no past claims</dd></div><div><dt>560034 this week</dt><dd class=\"ds-bad\">3 similar claims, all Shadowfax</dd></div></dl>",
+      "css": ".ds-facts { font-family: var(--jd-font, Inter, system-ui, sans-serif); margin:0; font-size:14px; line-height:20px; max-width:500px; } .ds-facts div { display:flex; justify-content:space-between; gap:16px; padding:11px 0; border-top:1px solid #EFEFF1; } .ds-facts dt { color:#5C5D65; } .ds-facts dd { margin:0; text-align:right; font-weight:500; color:#0D0D10; } .ds-facts .ds-good { color:#147A4B; } .ds-facts .ds-bad { color:#B3261E; }"
+    },
+    {
+      "name": "Rail",
+      "kind": "nav",
+      "refersTo": "rail",
+      "description": "Night-purple navigation rail with logo tile and icon buttons.",
+      "html": "<nav class=\"ds-rail\"><div class=\"ds-logo\">J</div><button class=\"ds-ri ds-on2\" aria-label=\"Queue\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 12h4l2 3h6l2-3h4M5.5 5h13L21 12v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-6z\"/></svg></button><button class=\"ds-ri\" aria-label=\"Search\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14zM20 20l-4-4\"/></svg></button></nav>",
+      "css": ".ds-rail { font-family: var(--jd-font, Inter, system-ui, sans-serif); background:#1B1235; width:64px; display:flex; flex-direction:column; align-items:center; gap:6px; padding:16px 0; } .ds-logo { width:32px; height:32px; border-radius:10px; background:#7040F5; color:#fff; font-weight:800; display:grid; place-items:center; margin-bottom:18px; } .ds-ri { width:40px; height:40px; border:0; border-radius:12px; background:transparent; color:rgb(255 255 255 / .55); display:grid; place-items:center; cursor:pointer; transition:background .15s, color .15s; } .ds-ri:hover { color:#fff; background:rgb(255 255 255 / .08); } .ds-ri:focus-visible { outline:2px solid #8457FF; outline-offset:2px; } .ds-ri.ds-on2 { color:#fff; background:rgb(255 255 255 / .14); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Case File on a Clean Desk",
+    "overview": "JusDesk reads every case as one contradiction (the courier's story against the customer's) and lays out the proof to settle it. The surface is a white desk under a cool grey queue column and a deep night-purple rail. Content does the work: a large plain headline names the contradiction, the conversation sits on the left, the evidence on the right, and a single decision bar closes the column. Nothing is boxed for its own sake; sections are separated by hairlines and quiet tonal shifts, never by cards inside cards.\n\nDensity is that of an all-day work tool: 14px body, 13px secondary lines, tabular numerals everywhere, three fixed columns at desktop width. Colour is held back so it can mean something. Purple appears on the one action the executive is expected to take, on the current selection, on the small \"AI\" tag and on the logo. Red, amber and green only ever describe state, as text or as a single dot. The design language takes cues from the Family wallet app, adapted for desktop, and from Attio's restraint.\n\nThe system refuses the helpdesk default: no ticket-field grids, no side panel of AI cards, no badge on every row, no eyebrow labels above headings.",
+    "keyCharacteristics": [
+      "Three-column shell: 64px rail, 300px queue, flexible work area.",
+      "One purple action per decision; everything else is a grey pill.",
+      "Status is plain text with a dot, not a pill or badge.",
+      "AI is marked by a single small tag, never by a coloured panel.",
+      "Hairline dividers and tonal surfaces instead of shadows and nested cards.",
+      "Inter throughout, tabular numerals, sentence case."
+    ],
+    "rules": [
+      {
+        "name": "The One Voice Rule",
+        "body": "Purple marks exactly four things: the primary action, the current selection (row ring, focus, text selection), the AI tag, and the logo. If purple is on anything else, it is wrong.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Primary Rule",
+        "body": "Any decision row has at most one purple button. Alternatives are grey pills of equal size beside it.",
+        "section": "colors"
+      },
+      {
+        "name": "The Status Is Words Rule",
+        "body": "State is said in text, optionally led by an 8px dot. Status colours never fill a pill, a card or a row background, and are never decoration.",
+        "section": "colors"
+      },
+      {
+        "name": "The No Eyebrow Rule",
+        "body": "Headings stand alone. No small uppercase label above a heading, ever; context goes in the plain metadata line or the heading itself.",
+        "section": "typography"
+      },
+      {
+        "name": "The Sentence Case Rule",
+        "body": "Everything is sentence case, including group headings and buttons. The only tracked text is the two-letter AI tag.",
+        "section": "typography"
+      },
+      {
+        "name": "The No Nested Cards Rule",
+        "body": "A bordered container never sits inside another bordered container. Group with hairlines and whitespace instead.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do keep exactly one primary (brand purple) button per decision row; alternatives are grey pills.",
+      "Do write status as text with an 8px dot, and colour verdict values as text only.",
+      "Do mark AI involvement with the single \"AI\" tag and nothing else.",
+      "Do separate sections with 1px hairlines and surface tone, keeping shadows to the composer, selected row and toast.",
+      "Do confirm money-moving actions inline in the decision bar, then offer an undo toast.",
+      "Do label drawn evidence as illustration and demo data.",
+      "Do honour `prefers-reduced-motion`: drop the confirm rise and button/row transitions."
+    ],
+    "donts": [
+      "Don't put purple on anything other than the primary action, selection, the AI tag or the logo.",
+      "Don't render status as a coloured pill, badge or tinted row.",
+      "Don't add eyebrow or kicker labels above headings.",
+      "Don't nest cards inside cards or add an AI card panel beside the case.",
+      "Don't use status colours for decoration.",
+      "Don't put white text on any purple lighter than brand purple."
+    ]
+  }
+}
