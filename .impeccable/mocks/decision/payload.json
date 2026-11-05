@@ -1,0 +1,46 @@
+{
+  "title": "Choose the workspace structure",
+  "question": "Three structures for the executive workspace, same JusDesk world (Inter, purple, light). Lock one, steer it, or re-roll.",
+  "options": [
+    {
+      "id": "inbox-sheet",
+      "kind": "assigned",
+      "kicker": "THE ROLL",
+      "label": "Inbox with a case sheet",
+      "thesis": "A fast, full-width queue; the case slides over it as a sheet, decision pinned at its foot.",
+      "palette": ["#1B1235", "#7040F5", "#FFFFFF", "#F7F7F8"],
+      "materials": ["deep purple rail", "hairline rows", "evidence strip"],
+      "viewport": "Queue rows with stage and next step; Ananya's case open as a sheet over the right two-thirds.",
+      "risk": "The queue can feel hidden while a case is open.",
+      "html": ".impeccable/mocks/decision/inbox-sheet.html",
+      "comp": ".impeccable/mocks/decision/inbox-sheet.webp"
+    },
+    {
+      "id": "conversation-evidence",
+      "kind": "dealt",
+      "label": "Conversation beside evidence",
+      "thesis": "What the customer said on the left, what the facts say on the right; open cases as tabs.",
+      "palette": ["#1B1235", "#7040F5", "#FFFFFF", "#F7F7F8"],
+      "materials": ["case tabs", "two equal panes", "evidence strip"],
+      "viewport": "Chat and email thread with the bot handoff on the left; evidence, facts and decision on the right.",
+      "risk": "Closest to a familiar helpdesk; needs the evidence pane to carry it.",
+      "html": ".impeccable/mocks/decision/conversation-evidence.html",
+      "comp": ".impeccable/mocks/decision/conversation-evidence.webp"
+    },
+    {
+      "id": "decision-first",
+      "kind": "dealt",
+      "label": "Decision first",
+      "thesis": "The case opens on the choice: three resolutions side by side, each with its cost and promise.",
+      "palette": ["#1B1235", "#7040F5", "#FFFFFF", "#F7F7F8"],
+      "materials": ["resolution columns", "evidence as proof", "narrow queue rail"],
+      "viewport": "Headline contradiction, then Reship + claim, Refund, and Wait 24h as three columns; evidence below.",
+      "risk": "Can feel like the decision is made before the agent has looked.",
+      "html": ".impeccable/mocks/decision/decision-first.html",
+      "comp": ".impeccable/mocks/decision/decision-first.webp"
+    }
+  ],
+  "reroll": { "registers": ["safer", "bolder"] },
+  "buildPath": { "value": "code" },
+  "steer": true
+}

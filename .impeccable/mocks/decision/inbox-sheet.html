@@ -1,0 +1,62 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Inbox with a case sheet</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght@20,400&display=block" rel="stylesheet">
+<style>
+*{box-sizing:border-box}body{margin:0;width:1440px;height:900px;overflow:hidden;font:400 14px/20px Inter,sans-serif;color:#0D0D10;background:#F7F7F8;display:flex;font-variant-numeric:tabular-nums}
+.ic{font-family:"Material Symbols Rounded";font-size:20px;line-height:1}
+.rail{width:64px;background:#1B1235;display:flex;flex-direction:column;align-items:center;padding:16px 0;gap:8px}
+.logo{width:32px;height:32px;border-radius:10px;background:#7040F5;color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.ri{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.55)}.ri.on{background:rgba(255,255,255,.12);color:#fff}
+.q{flex:1;padding:24px 28px;position:relative}
+h1{font:700 22px/28px Inter;letter-spacing:-.02em;margin:0}
+.tabs{display:flex;gap:4px;margin:16px 0 12px}.tab{padding:6px 12px;border-radius:999px;font-weight:600;color:#6B6C74}.tab.on{background:#E4E4E8;color:#0D0D10}.tab b{font-weight:500;margin-left:4px;color:#6B6C74}
+table{width:100%;border-collapse:collapse;background:#fff;border-radius:14px;overflow:hidden}
+th{font:600 11px/14px Inter;letter-spacing:.04em;text-transform:uppercase;color:#6B6C74;text-align:left;padding:12px 16px;border-bottom:1px solid #EFEFF1}
+td{padding:13px 16px;border-bottom:1px solid #F3F3F5;white-space:nowrap}
+tr.sel td{background:#F2EEFF}tr.sel td:first-child{box-shadow:inset 3px 0 #7040F5}
+.mut{color:#6B6C74}.warn{color:#9A5B00;font-weight:500}.bad{color:#B3261E;font-weight:500}
+.st{display:inline-flex;align-items:center;gap:6px}.dot{width:7px;height:7px;border-radius:50%}
+.sheet{position:absolute;top:12px;right:12px;bottom:12px;width:840px;background:#fff;border-radius:20px;box-shadow:0 2px 6px rgba(13,13,16,.06),0 24px 64px rgba(13,13,16,.18);display:flex;flex-direction:column}
+.sh-body{padding:28px 36px;display:flex;flex-direction:column;gap:22px;overflow:hidden;flex:1}
+.top{display:flex;justify-content:space-between;align-items:center;color:#6B6C74;font-size:13px}
+h2{font:700 30px/36px Inter;letter-spacing:-.025em;margin:6px 0 6px}
+.quote{border-left:3px solid #E4E4E8;padding-left:16px}.quote p{margin:4px 0 0;font-size:15px;line-height:22px}
+.ev{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:12px}.ev svg{width:100%;height:132px;border-radius:12px;display:block}
+.cap{font-size:12px;line-height:16px;color:#5C5D65;margin-top:6px}.cap b{color:#0D0D10;font-weight:600}
+.facts div{display:flex;justify-content:space-between;padding:10px 0;border-top:1px solid #EFEFF1}.facts span:first-child{color:#5C5D65}
+.foot{border-top:1px solid #EFEFF1;padding:16px 36px;display:flex;align-items:center;gap:16px}
+.ai{font:600 11px/14px Inter;letter-spacing:.04em;color:#5B2FD6;background:#F5F2FF;border-radius:6px;padding:3px 6px}
+.btn{border:0;border-radius:999px;padding:11px 20px;font:600 14px/20px Inter}.p{background:#7040F5;color:#fff}.g{background:transparent;color:#0D0D10}
+</style></head><body>
+<nav class="rail"><div class="logo">J</div><div class="ri on"><span class="ic">inbox</span></div><div class="ri"><span class="ic">hourglass_empty</span></div><div class="ri"><span class="ic">search</span></div><div class="ri"><span class="ic">insights</span></div></nav>
+<main class="q">
+ <h1>Delivered, not received</h1>
+ <div class="tabs"><span class="tab on">Needs me<b>4</b></span><span class="tab">Waiting on courier<b>3</b></span><span class="tab">With lead<b>1</b></span><span class="tab">AI handled<b>6</b></span><span class="tab">Done today<b>12</b></span></div>
+ <table>
+  <tr><th>Customer</th><th>Item</th><th>Next step</th><th>Time left</th></tr>
+  <tr class="sel"><td><b>Ananya Mehta</b></td><td>Kurta · ₹1,800</td><td>Decide: evidence doesn't match</td><td class="warn">40 min</td></tr>
+  <tr><td><b>Rohan Shah</b></td><td>Jacket · ₹6,500</td><td class="mut">Refund with lead</td><td class="mut">2 h</td></tr>
+  <tr><td><b>Priya Kulkarni</b></td><td>Shirt · ₹1,400</td><td class="mut">Courier reply due 4 pm</td><td class="mut">3 h</td></tr>
+  <tr><td><b>Meera Iyer</b></td><td>Dress · ₹4,500</td><td>Review flagged claim</td><td class="bad">15 min</td></tr>
+  <tr><td><b>Vikram Nair</b></td><td>Tee · ₹1,200</td><td class="mut">AI checking tomorrow</td><td class="mut">—</td></tr>
+  <tr><td><b>Sana Khan</b></td><td>Saree · ₹3,200</td><td>First look</td><td class="mut">1 h</td></tr>
+  <tr><td><b>Arjun Rao</b></td><td>Jeans · ₹2,100</td><td class="mut">Courier claim filed</td><td class="mut">—</td></tr>
+  <tr><td><b>Kavya Pillai</b></td><td>Kurta · ₹1,650</td><td class="mut">Scan came early, waiting</td><td class="mut">—</td></tr>
+ </table>
+ <section class="sheet">
+  <div class="sh-body">
+   <div class="top"><span>FX-48213 · Block-print kurta, M · ₹1,800 prepaid (UPI) · Shadowfax</span><span class="ic">close</span></div>
+   <div><h2>Delivered to the wrong door?</h2><div class="mut">Marked delivered yesterday 6:42 pm. Ananya says it never arrived. She needs it before Saturday.</div></div>
+   <div class="quote"><div class="cap">Ananya · email 9:14 am · also on chat 8:52 (merged)</div><p>I already told your chatbot this. The app says delivered but nothing came to my door.</p></div>
+   <div class="ev">
+    <div><svg viewBox="0 0 200 132"><rect width="200" height="132" fill="#C9B79C"/><rect y="104" width="200" height="28" fill="#A89478"/><rect x="64" y="18" width="72" height="88" rx="3" fill="#2F6B4F"/><rect x="90" y="92" width="32" height="20" rx="2" fill="#D7B88A"/></svg><div class="cap"><b>Courier photo</b> · green door</div></div>
+    <div><svg viewBox="0 0 200 132"><rect width="200" height="132" fill="#D8D4CC"/><rect y="104" width="200" height="28" fill="#B9B3A8"/><rect x="64" y="18" width="72" height="88" rx="3" fill="#F4F2EE" stroke="#C9C4BA"/><rect x="88" y="4" width="24" height="10" rx="2" fill="#5C5D65"/></svg><div class="cap"><b>Last delivery here</b> · white door, B-204</div></div>
+    <div><svg viewBox="0 0 230 132"><rect width="230" height="132" fill="#EFEFF1"/><path d="M0 36H230M0 94H230M60 0V132M150 0V132" stroke="#fff" stroke-width="9"/><path d="M48 104L180 26" stroke="#0D0D10" stroke-dasharray="4 4"/><circle cx="48" cy="104" r="7" fill="#0D0D10"/><circle cx="180" cy="26" r="7" fill="#D2342B"/><rect x="94" y="56" width="42" height="18" rx="9" fill="#fff"/><text x="115" y="69" font-family="Inter" font-size="10" font-weight="700" text-anchor="middle">600 m</text></svg><div class="cap"><b>Rider's GPS</b> · 600 m from address</div></div>
+   </div>
+   <div class="facts"><div><span>Delivery OTP</span><span>Not collected</span></div><div><span>Ananya</span><span>14 orders, no past claims</span></div><div><span>560034 this week</span><span class="bad">3 similar claims, all Shadowfax</span></div></div>
+  </div>
+  <div class="foot"><span class="ai">AI</span><span style="flex:1">Photo and GPS point to another address. Reship + courier claim is within your ₹5,000 limit; size M in stock.</span><button class="btn g">Other options</button><button class="btn p">Reship and file claim</button></div>
+ </section>
+</main>
+</body></html>
