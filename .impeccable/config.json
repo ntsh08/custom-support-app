@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "inter",
+        "createdAt": "2026-11-05T15:01:43.265Z",
+        "reason": "Inter chosen on purpose: renders identically in Figma and Chrome; see decisions/2026-11-05-inter-light-only.md"
+      }
+    ]
+  }
+}
