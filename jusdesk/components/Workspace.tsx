@@ -33,9 +33,6 @@ function FilledInbox() {
   );
 }
 
-function Prop({ icon, children, tone }: { icon: IconName; children: React.ReactNode; tone?: string }) {
-  return <span className={`prop ${tone ?? ""}`}><Icon name={icon} size={14} />{children}</span>;
-}
 
 export function Workspace() {
   const [states, setStates] = useState(initial);
@@ -147,6 +144,13 @@ export function Workspace() {
     setTasks((all) => ({ ...all, [c.id]: fn(all[c.id]) }));
   }
 
+  function msgAction(kind: "copy" | "quote" | "task" | "translate", m: Msg) {
+    if (kind === "copy") { navigator.clipboard?.writeText(m.text); setFlash("Copied"); }
+    if (kind === "quote") { setMode("reply"); setDrafts((d) => ({ ...d, [c.id + st.stage + "reply"]: `> ${m.text}\n\n` })); }
+    if (kind === "task") { updateTasks((ts) => [...ts, { id: `m${Date.now()}`, text: `Follow up: ${m.text.length > 48 ? m.text.slice(0, 48) + "…" : m.text}`, due: "Today" }]); setFlash("Task added to this case"); }
+    if (kind === "translate") setFlash("Translate isn't wired up in the prototype");
+  }
+
   function askAI(q: string) {
     if (!q.trim()) return;
     const known = c.asks?.find((x) => x.q === q);
@@ -154,7 +158,6 @@ export function Workspace() {
     setAsk("");
   }
 
-  const followUp = c.followUp && (c.followUp.startsWith("Today") ? `Follow up today${c.followUp.slice(5)}` : `Follow up ${c.followUp}`);
 
   return (
     <>
@@ -206,34 +209,22 @@ export function Workspace() {
           <header className="head">
             <div className="crumbs">{c.order}<Icon name="arrow" size={12} />{c.customer}</div>
             <h1>{c.headline}</h1>
-            <div className="props">
-              <Prop icon="inbox">{groupLabel(stage)}</Prop>
-              <Prop icon="user">{owner(stage)}</Prop>
-              {open && stage.timeLeft && <Prop icon="clock" tone={stage.urgent}>{stage.timeLeft === "Now" ? "Due now" : `${stage.timeLeft} left`}</Prop>}
-              {open && followUp && <Prop icon="calendar">{followUp}</Prop>}
-              <label className={`prop sel ${reasons[c.id] ? "" : "missing"}`}>
-                <Icon name="flag" size={14} />
-                <select aria-label="Contact reason" value={reasons[c.id] ?? ""} onChange={(e) => setReasons((r) => ({ ...r, [c.id]: e.target.value || undefined }))}>
-                  <option value="">Reason not set</option>
-                  {REASONS.map((r) => <option key={r}>{r}</option>)}
-                </select>
-              </label>
-              <Prop icon={channels(c).includes("merged") ? "merge" : channelIcon(c)}>{channels(c)}</Prop>
-              {c.language && <Prop icon="translate">{c.language}</Prop>}
-            </div>
+            {open && stage.timeLeft && <p className={`due ${stage.urgent ?? ""}`}><Icon name="clock" size={13} />{stage.timeLeft === "Now" ? "Reply due now" : `Reply due in ${stage.timeLeft}`}</p>}
           </header>
 
           <div className="thread" aria-label="Conversation">
+            <div className="inner">
             <section className="handoff">
               <h3><Icon name="spark" size={14} />Before you read · AI summary</h3>
               <ul>{c.handoff.map((h) => <li key={h}>{h}</li>)}</ul>
             </section>
-            {thread.map((m, i) => <Message key={i} m={m} customer={c.customer} />)}
+            {thread.map((m, i) => <Message key={i} m={m} customer={c.customer} onAction={msgAction} />)}
             <div ref={threadEnd} />
+            </div>
           </div>
 
           {open && (
-            <div className={`composer${mode === "note" ? " is-note" : ""}`}>
+            <div className="cwrap"><div className={`composer${mode === "note" ? " is-note" : ""}`}>
               <div className="tabs" role="tablist">
                 <button role="tab" aria-selected={mode === "reply"} className={mode === "reply" ? "on" : ""} onClick={() => setMode("reply")}>Reply</button>
                 <button role="tab" aria-selected={mode === "note"} className={mode === "note" ? "on" : ""} onClick={() => setMode("note")}><Icon name="lock" size={13} />Internal note</button>
@@ -258,7 +249,7 @@ export function Workspace() {
                   <Icon name={mode === "note" ? "note" : "send"} size={14} />{mode === "note" ? "Add note" : "Send"}
                 </button>
               </div>
-            </div>
+            </div></div>
           )}
         </main>
 
@@ -315,6 +306,23 @@ export function Workspace() {
               ) : c.asks && (
                 <div className="chips">{c.asks.map((a) => <button key={a.q} onClick={() => askAI(a.q)}>{a.q}</button>)}</div>
               )}
+            </section>
+
+            <section className="blk">
+              <h4>Properties</h4>
+              <dl className="dkv">
+                <div><dt><Icon name="inbox" size={14} />Status</dt><dd>{groupLabel(stage)}</dd></div>
+                <div><dt><Icon name="user" size={14} />Owner</dt><dd>{owner(stage)}</dd></div>
+                {open && stage.timeLeft && <div><dt><Icon name="clock" size={14} />Reply due</dt><dd className={stage.urgent ?? ""}>{stage.timeLeft === "Now" ? "Now" : `In ${stage.timeLeft}`}</dd></div>}
+                {open && c.followUp && <div><dt><Icon name="calendar" size={14} />Follow up</dt><dd>{c.followUp}</dd></div>}
+                <div><dt><Icon name="flag" size={14} />Reason</dt><dd>
+                  <select className={`pick${reasons[c.id] ? "" : " missing"}`} aria-label="Contact reason" value={reasons[c.id] ?? ""} onChange={(e) => setReasons((r) => ({ ...r, [c.id]: e.target.value || undefined }))}>
+                    <option value="">Not set · needed for due date</option>
+                    {REASONS.map((r) => <option key={r}>{r}</option>)}
+                  </select>
+                </dd></div>
+                <div><dt><Icon name={channels(c).includes("merged") ? "merge" : channelIcon(c)} size={14} />Channel</dt><dd>{channels(c)}</dd></div>
+              </dl>
             </section>
 
             <section className="blk">
@@ -396,7 +404,20 @@ export function Workspace() {
   );
 }
 
-function Message({ m, customer }: { m: Msg; customer: string }) {
+type MsgAction = "copy" | "quote" | "task" | "translate";
+
+function Actions({ m, onAction, translate }: { m: Msg; onAction: (k: MsgAction, m: Msg) => void; translate?: boolean }) {
+  return (
+    <div className="acts" role="toolbar" aria-label="Message actions">
+      <button title="Quote in reply" onClick={() => onAction("quote", m)}><Icon name="undo" size={14} /></button>
+      <button title="Create task from this" onClick={() => onAction("task", m)}><Icon name="tasks" size={14} /></button>
+      {translate && <button title="Translate" onClick={() => onAction("translate", m)}><Icon name="translate" size={14} /></button>}
+      <button title="Copy" onClick={() => onAction("copy", m)}><Icon name="copy" size={14} /></button>
+    </div>
+  );
+}
+
+function Message({ m, customer, onAction }: { m: Msg; customer: string; onAction: (k: MsgAction, m: Msg) => void }) {
   if (m.kind === "event") {
     return (
       <p className="ev">
@@ -409,21 +430,27 @@ function Message({ m, customer }: { m: Msg; customer: string }) {
   if (m.kind === "note") {
     return (
       <article className="msg note">
-        <p className="who"><Icon name="lock" size={14} /><b>Internal note</b><span>{m.who} · {m.time} · only your team sees this</span></p>
+        <p className="who"><span className="tag"><Icon name="lock" size={12} />Internal note</span><b>{m.who}</b><span>{m.time} · customer can&apos;t see this</span></p>
         <div>{m.text}</div>
+        <Actions m={m} onAction={onAction} />
       </article>
     );
   }
-  const mine = m.kind === "agent";
+  if (m.kind === "agent") {
+    const bot = /assistant/i.test(m.who);
+    return (
+      <article className="msg ours">
+        <p className="who">{bot && <span className="ai">AI</span>}<b>{m.who}</b><span>{m.time}</span></p>
+        <div>{m.text}{m.gloss && <span className="gloss">{m.gloss}</span>}</div>
+        <Actions m={m} onAction={onAction} />
+      </article>
+    );
+  }
   return (
-    <article className={`msg${mine ? " mine" : ""}`}>
-      <p className="who">
-        {mine ? <><b>{m.who}</b><span>{m.time}</span></> : <><Icon name={m.channel === "email" ? "mail" : "chat"} size={14} /><b>{customer}</b><span>{m.channel === "email" ? "Email" : "Chat"} · {m.time}</span></>}
-      </p>
-      <div>
-        {m.text}
-        {m.gloss && <span className="gloss">{m.gloss}</span>}
-      </div>
+    <article className="msg theirs">
+      <p className="who"><Icon name={m.channel === "email" ? "mail" : "chat"} size={14} /><b>{customer}</b><span>{m.channel === "email" ? "Email" : "Chat"} · {m.time}</span></p>
+      <div>{m.text}{m.gloss && <span className="gloss">{m.gloss}</span>}</div>
+      <Actions m={m} onAction={onAction} translate />
     </article>
   );
 }
