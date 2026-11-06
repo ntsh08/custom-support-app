@@ -482,3 +482,8 @@ ul { list-style: none; }
 .coempty { max-width: 300px; }
 .cologo { width: auto; height: auto; border: 0; border-radius: 0; background: none; }
 .cologo { width: 72px; height: 72px; display: grid; place-items: center; border-radius: 50%; background: #F1F7F3; }
+
+/* Note mode: Add note button in the note yellow (Nitish, 7 Nov) */
+.composer.is-note .pri { background: #F2C94C; border-color: #E3B53A; color: #5C4300; }
+.composer.is-note .pri:hover:not(:disabled) { background: #E8BC3A; }
+.composer.is-note .pri:disabled { opacity: 1; background: #F7E3A6; border-color: #F0D78E; color: #A08439; }
