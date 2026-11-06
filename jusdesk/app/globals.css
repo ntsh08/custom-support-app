@@ -473,3 +473,6 @@ ul { list-style: none; }
 .cosend { width: 28px; height: 28px; display: grid; place-items: center; border: 0; border-radius: 8px; background: var(--s2); color: var(--ink2); cursor: pointer; }
 .cosend:not(:disabled) { background: var(--acc); color: #fff; }
 .cosend:disabled { cursor: default; }
+/* Copilot: larger text in chips and the text box (Nitish, 7 Nov) */
+.cochips button { font-size: 13px; min-height: 32px; padding: 5px 12px; }
+.cobox textarea { font-size: 14px; line-height: 20px; }
