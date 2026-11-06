@@ -304,3 +304,18 @@ ul { list-style: none; }
 .cnote button:hover { background: var(--s2); }
 
 .rt .l1 em.warn { color: var(--warn); }
+
+/* Queue row: name + time, title, ticket tag + coloured status chip (Nitish, 7 Nov) */
+.row:has(.l3) { height: auto; padding-top: 10px; padding-bottom: 10px; align-items: flex-start; }
+.rt .l3 { display: flex; gap: 4px; margin-top: 6px; }
+.tk, .st { height: 22px; display: inline-flex; align-items: center; padding: 0 7px; border-radius: 6px; font-size: 12px; font-weight: 400; }
+.tk { background: #ECECEF; color: var(--ink2); }
+.row.on .tk { background: var(--s0); }
+.st { font-weight: 510; }
+.tags span.st { font-weight: 510; }
+.st-first     { background: #FDF1E3; color: #B45309; }
+.st-reply     { background: #FDECEB; color: #B42318; }
+.st-escalated { background: #FCE9F1; color: #A3245E; }
+.st-others    { background: #E5F3F0; color: #1F6E63; }
+.st-customer  { background: #EEF0F3; color: #4B5563; }
+.st-closed    { background: #E7F5EC; color: #15803D; }

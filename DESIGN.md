@@ -70,7 +70,7 @@ Colour carries meaning only:
 - Icons: Hugeicons Stroke Rounded, stroke 1.5.
   - 14px inline and in tags and key-value rows, 16px in task rows and the Ask box, 18px in the nav.
   - The selected nav icon is filled.
-- No avatars or icons on queue rows or in front of names in the conversation. A queue row is: customer name (with time left on the right), then ticket number · status (e.g. "#1042 · First response"). The ticket number also leads the header tags. Ticket numbers are demo data. (Nitish, 7 Nov)
+- No avatars or icons on queue rows or in front of names in the conversation. A queue row has three lines: customer name (time left on the right); the ticket title in ink2; then a grey ticket-number tag and a coloured status chip. The ticket number also leads the header tags. Ticket numbers are demo data. (Nitish, 7 Nov)
 
 ## 9. AI signature, notes and the pattern
 - Anything AI wrote or did gets one signature, and nothing else uses it:
@@ -97,7 +97,7 @@ Colour carries meaning only:
 - Bubble borders are very soft: customer `#F0F0F3`, own `#F3F3F6`, AI `#E6F1EA`, note `#FAF1D6`, composer `#EDEDF0`.
 
 ## 10. Don'ts
-- No second accent colour.
+- No second accent colour. Exception: status chips (6px radius, 22px, 12px/510) are colour-coded, in the queue row and the header (Nitish, 7 Nov): First response amber `#FDF1E3`/`#B45309`, Needs reply red `#FDECEB`/`#B42318`, Escalated rose `#FCE9F1`/`#A3245E`, Waiting on others teal `#E5F3F0`/`#1F6E63`, Waiting on customer slate `#EEF0F3`/`#4B5563`, Closed green `#E7F5EC`/`#15803D`.
 - No coloured section backgrounds or tinted cards.
 - No shadows or gradients for hierarchy.
 - No invented names, labels or IDs for real people or research.

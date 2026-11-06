@@ -274,7 +274,8 @@ export function Workspace() {
                       {s.reopened && !states[x.id].status && <i className="reo">Reopened</i>}
                       {s.timeLeft && dueFor(g) ? <em className={s.urgent ?? ""}>{s.timeLeft}</em> : waitingG(g) && x.followUp ? <em className="warn">{x.followUp.replace("Today, ", "")}</em> : null}
                     </span>
-                    <span className="l2">{x.ticket} · {STATUS[g]}</span>
+                    <span className="l2">{TITLE}</span>
+                    <span className="l3"><span className="tk">{x.ticket}</span><span className={`st st-${g}`}>{STATUS[g]}</span></span>
                   </span>
                 </button>
               );
@@ -288,6 +289,7 @@ export function Workspace() {
             <h1>{TITLE}</h1>
             <div className="tags">
               <span>{c.ticket}</span>
+              <span className={`st st-${status}`}>{STATUS[status]}</span>
               <span><Icon name="box" size={14} />{c.order}</span>
               <span><Icon name="user" size={14} />{c.customer}</span>
               {c.email && <span><Icon name="mail" size={14} />{c.email}</span>}
