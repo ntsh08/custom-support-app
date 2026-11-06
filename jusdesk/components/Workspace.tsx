@@ -1,30 +1,55 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { CASES, GROUPS, type Case, type Msg, type Option, type Stage } from "@/lib/cases";
+import { CASES, GROUPS, type Case, type Msg, type Option, type Stage, type Task } from "@/lib/cases";
 import { EvidenceTile } from "./EvidenceTile";
-import { Icon } from "./Icon";
+import { Icon, type IconName } from "./Icon";
 
 type CaseState = { stage: string; extra: Msg[] };
 type Undo = { caseId: string; prev: CaseState; label: string };
 
+const REASONS = ["Wrong address", "Lost in transit", "Disputed delivery", "Early scan", "Left with guard"];
+
 const initial = (): Record<string, CaseState> =>
   Object.fromEntries(CASES.map((c) => [c.id, { stage: c.start, extra: [] }]));
 
-const channelOf = (c: Case) => (c.thread.some((m) => m.kind === "customer" && m.channel === "email") ? "mail" : "chat");
+const hasEmail = (c: Case) => c.thread.some((m) => m.kind === "customer" && m.channel === "email");
+const channelIcon = (c: Case): IconName => (hasEmail(c) ? "mail" : "chat");
 const channels = (c: Case) => {
   const ch = new Set(c.thread.flatMap((m) => (m.kind === "customer" ? [m.channel] : [])));
-  return ch.size > 1 ? "Email + chat" : ch.has("email") ? "Email" : "Chat";
+  return ch.size > 1 ? "Chat + email merged" : ch.has("email") ? "Email" : "Chat";
 };
-const statusTone = (s: Stage) => (s.group === "closed" || s.group === "ai" ? "ok" : s.urgent ?? "");
+const owner = (s: Stage) => (s.group === "lead" ? "Priya" : s.group === "ai" ? "AI" : "You");
+const groupLabel = (s: Stage) => GROUPS.find((g) => g.id === s.group)!.label;
+const linkIcon = (k: string): IconName => (/refund/i.test(k) ? "card" : /courier/i.test(k) ? "truck" : /lead/i.test(k) ? "user" : "box");
+
+// Free Hugeicons are stroke-only, so the selected nav icon is drawn filled here.
+function FilledInbox() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+      <path fill="currentColor" d="M5.2 3.5h13.6c1 0 1.9.7 2.1 1.7L22 12v5.5a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V12l1.1-6.8c.2-1 1.1-1.7 2.1-1.7Z" />
+      <path d="M2.5 12.5h5.2l1.6 2.6h5.4l1.6-2.6h5.2" fill="none" stroke="var(--rail-on)" strokeWidth="1.6" strokeLinejoin="round" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function Prop({ icon, children, tone }: { icon: IconName; children: React.ReactNode; tone?: string }) {
+  return <span className={`prop ${tone ?? ""}`}><Icon name={icon} size={14} />{children}</span>;
+}
 
 export function Workspace() {
   const [states, setStates] = useState(initial);
   const [selected, setSelected] = useState("ananya");
   const [confirming, setConfirming] = useState<Option | null>(null);
   const [drafts, setDrafts] = useState<Record<string, string>>({});
+  const [mode, setMode] = useState<"reply" | "note">("reply");
   const [undo, setUndo] = useState<Undo | null>(null);
-  const [compare, setCompare] = useState(false);
+  const [flash, setFlash] = useState<string | null>(null);
+  const [tasks, setTasks] = useState<Record<string, Task[]>>(() => Object.fromEntries(CASES.map((c) => [c.id, c.tasks])));
+  const [reasons, setReasons] = useState<Record<string, string | undefined>>(() => Object.fromEntries(CASES.map((c) => [c.id, c.reasonTag])));
+  const [answers, setAnswers] = useState<Record<string, { q: string; a: string } | undefined>>({});
+  const [ask, setAsk] = useState("");
+  const [newTask, setNewTask] = useState<string | null>(null);
   const threadEnd = useRef<HTMLDivElement>(null);
 
   const ordered = useMemo(
@@ -34,20 +59,28 @@ export function Workspace() {
   const c = CASES.find((x) => x.id === selected)!;
   const st = states[c.id];
   const stage = c.stages[st.stage];
+  const atStart = st.stage === c.start;
   const thread = [...c.thread, ...st.extra];
-  const draft = drafts[c.id + st.stage] ?? stage.draft ?? "";
-  const canCompare = c.evidence.filter((e) => e.kind === "door").length >= 2;
-  const needs = ordered.filter((x) => x.stages[states[x.id].stage].group === "needs").length;
+  const key = c.id + st.stage + mode;
+  const draft = drafts[key] ?? (mode === "reply" ? stage.draft ?? "" : "");
+  const open = stage.group !== "closed" && stage.group !== "ai";
+  const caseTasks = tasks[c.id];
+  const openTasks = Object.values(tasks).flat().filter((t) => !t.ai && !t.done).length;
+  const linked = stage.linked ?? c.linked;
+  const answer = answers[c.id];
 
   function select(id: string) {
     setSelected(id);
     setConfirming(null);
+    setMode("reply");
+    setAsk("");
+    setNewTask(null);
   }
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       const t = e.target as HTMLElement;
-      if (t.tagName === "TEXTAREA" || t.tagName === "INPUT") return;
+      if (["TEXTAREA", "INPUT", "SELECT"].includes(t.tagName)) return;
       if (e.key !== "j" && e.key !== "k") return;
       const i = ordered.findIndex((x) => x.id === selected);
       select(ordered[Math.min(ordered.length - 1, Math.max(0, i + (e.key === "j" ? 1 : -1)))].id);
@@ -56,13 +89,12 @@ export function Workspace() {
     return () => window.removeEventListener("keydown", onKey);
   }, [ordered, selected]);
 
-  // Deep links for demos and review captures: ?case=rohan&stage=failed&confirm=retry&compare=1
+  // Deep links for demos and review captures: ?case=rohan&stage=failed&confirm=retry
   useEffect(() => {
     const q = new URLSearchParams(window.location.search);
     const cs = CASES.find((x) => x.id === q.get("case"));
     if (!cs) return;
     setSelected(cs.id);
-    if (q.get("compare")) setCompare(true);
     const sk = q.get("stage");
     if (sk && cs.stages[sk]) {
       const path = Object.keys(cs.stages);
@@ -83,6 +115,12 @@ export function Workspace() {
     return () => clearTimeout(t);
   }, [undo]);
 
+  useEffect(() => {
+    if (!flash) return;
+    const t = setTimeout(() => setFlash(null), 3000);
+    return () => clearTimeout(t);
+  }, [flash]);
+
   function goTo(caseId: string, next: string, label?: string) {
     const cs = CASES.find((x) => x.id === caseId)!;
     setStates((s) => {
@@ -100,9 +138,23 @@ export function Workspace() {
 
   function send() {
     if (!draft.trim()) return;
-    setStates((s) => ({ ...s, [c.id]: { ...s[c.id], extra: [...s[c.id].extra, { kind: "agent", who: "You", time: "Now", text: draft }] } }));
-    setDrafts((d) => ({ ...d, [c.id + st.stage]: "" }));
+    const msg: Msg = mode === "note" ? { kind: "note", who: "You", time: "Now", text: draft } : { kind: "agent", who: "You", time: "Now", text: draft };
+    setStates((s) => ({ ...s, [c.id]: { ...s[c.id], extra: [...s[c.id].extra, msg] } }));
+    setDrafts((d) => ({ ...d, [key]: "" }));
   }
+
+  function updateTasks(fn: (t: Task[]) => Task[]) {
+    setTasks((all) => ({ ...all, [c.id]: fn(all[c.id]) }));
+  }
+
+  function askAI(q: string) {
+    if (!q.trim()) return;
+    const known = c.asks?.find((x) => x.q === q);
+    setAnswers((a) => ({ ...a, [c.id]: { q, a: known?.a ?? "In the prototype, only the suggested questions have answers." } }));
+    setAsk("");
+  }
+
+  const followUp = c.followUp && (c.followUp.startsWith("Today") ? `Follow up today${c.followUp.slice(5)}` : `Follow up ${c.followUp}`);
 
   return (
     <>
@@ -115,28 +167,30 @@ export function Workspace() {
       <div className="app">
         <nav className="rail" aria-label="Main">
           <div className="logo" aria-label="JusDesk">J</div>
-          <button className="ri on" aria-label="Queue" aria-current="page"><Icon name="inbox" /></button>
-          <button className="ri" aria-label="Waiting"><Icon name="clock" /></button>
-          <button className="ri" aria-label="Search"><Icon name="search" /></button>
+          <button className="nav on" aria-current="page" title="Queue"><FilledInbox /></button>
+          <button className="nav" title="My tasks"><Icon name="tasks" size={18} />{openTasks > 0 && <i>{openTasks}</i>}</button>
+          <button className="nav" title="Waiting"><Icon name="clock" size={18} /></button>
+          <button className="nav" title="Search"><Icon name="search" size={18} /></button>
         </nav>
 
+        {/* Queue */}
         <aside className="queue" aria-label="Queue">
-          <div className="bar"><span className="ttl">Delivered, not received</span><span className="cnt">{needs} need you</span></div>
-          <div className="qscroll">
+          <header className="bar"><b>Delivered, not received</b><span>{ordered.length}</span></header>
+          <div className="scroll">
             {GROUPS.map((g) => {
               const items = ordered.filter((x) => x.stages[states[x.id].stage].group === g.id);
               if (!items.length) return null;
               return (
                 <section key={g.id}>
-                  <h2 className="grp">{g.label} · {items.length}</h2>
+                  <h2 className="grp">{g.label}<span>{items.length}</span></h2>
                   {items.map((x) => {
                     const s = x.stages[states[x.id].stage];
                     return (
-                      <button key={x.id} className={`qi${x.id === selected ? " on" : ""}`} onClick={() => select(x.id)}>
-                        <span className="ch"><Icon name={channelOf(x)} size={14} /></span>
-                        <span className="txt">
-                          <span className="l1">{x.customer}{s.timeLeft && <span className={s.urgent ?? ""}>{s.timeLeft}</span>}</span>
-                          <span className="l2" style={{ display: "block" }}>{x.item.split(",")[0]} · {x.value} · {s.nextStep}</span>
+                      <button key={x.id} className={`row${x.id === selected ? " on" : ""}`} onClick={() => select(x.id)}>
+                        <span className="ch"><Icon name={channelIcon(x)} size={14} /></span>
+                        <span className="rt">
+                          <span className="l1"><b>{x.customer}</b>{s.timeLeft && <em className={s.urgent ?? ""}>{s.timeLeft}</em>}</span>
+                          <span className="l2">{x.item.split(",")[0]} · {x.value} · {s.nextStep}</span>
                         </span>
                       </button>
                     );
@@ -147,68 +201,165 @@ export function Workspace() {
           </div>
         </aside>
 
+        {/* Case */}
         <main className="case" key={c.id}>
           <header className="head">
-            <span className="tile"><Icon name="box" /></span>
-            <div className="hx">
-              <h1 className="t">{c.headline}</h1>
-              <p className="m">
-                {c.order}<span>·</span><Icon name={channelOf(c)} size={13} />{channels(c)}{c.language ? ` · ${c.language}` : ""}<span>·</span>
-                <span className={`st ${statusTone(stage)}`}>{stage.status ?? (stage.timeLeft ? `${stage.timeLeft} left` : stage.nextStep)}</span>
-              </p>
+            <div className="crumbs">{c.order}<Icon name="arrow" size={12} />{c.customer}</div>
+            <h1>{c.headline}</h1>
+            <div className="props">
+              <Prop icon="inbox">{groupLabel(stage)}</Prop>
+              <Prop icon="user">{owner(stage)}</Prop>
+              {open && stage.timeLeft && <Prop icon="clock" tone={stage.urgent}>{stage.timeLeft === "Now" ? "Due now" : `${stage.timeLeft} left`}</Prop>}
+              {open && followUp && <Prop icon="calendar">{followUp}</Prop>}
+              <label className={`prop sel ${reasons[c.id] ? "" : "missing"}`}>
+                <Icon name="flag" size={14} />
+                <select aria-label="Contact reason" value={reasons[c.id] ?? ""} onChange={(e) => setReasons((r) => ({ ...r, [c.id]: e.target.value || undefined }))}>
+                  <option value="">Reason not set</option>
+                  {REASONS.map((r) => <option key={r}>{r}</option>)}
+                </select>
+              </label>
+              <Prop icon={channels(c).includes("merged") ? "merge" : channelIcon(c)}>{channels(c)}</Prop>
+              {c.language && <Prop icon="translate">{c.language}</Prop>}
             </div>
-            <button className="ob"><Icon name="assign" />Assign</button>
-            <button className="ob" aria-label="More"><Icon name="more" /></button>
           </header>
 
           <div className="thread" aria-label="Conversation">
+            <section className="handoff">
+              <h3><Icon name="spark" size={14} />Before you read · AI summary</h3>
+              <ul>{c.handoff.map((h) => <li key={h}>{h}</li>)}</ul>
+            </section>
             {thread.map((m, i) => <Message key={i} m={m} customer={c.customer} />)}
             <div ref={threadEnd} />
           </div>
 
-          {stage.group !== "closed" && stage.group !== "ai" && (
-            <div className="composer">
+          {open && (
+            <div className={`composer${mode === "note" ? " is-note" : ""}`}>
+              <div className="tabs" role="tablist">
+                <button role="tab" aria-selected={mode === "reply"} className={mode === "reply" ? "on" : ""} onClick={() => setMode("reply")}>Reply</button>
+                <button role="tab" aria-selected={mode === "note"} className={mode === "note" ? "on" : ""} onClick={() => setMode("note")}><Icon name="lock" size={13} />Internal note</button>
+              </div>
               <textarea
-                aria-label={`Reply to ${c.customer}`}
+                aria-label={mode === "note" ? "Internal note" : `Reply to ${c.customer}`}
                 value={draft}
-                placeholder={`Reply to ${c.customer.split(" ")[0]}`}
-                onChange={(e) => setDrafts((d) => ({ ...d, [c.id + st.stage]: e.target.value }))}
+                placeholder={mode === "note" ? "Only your team sees this" : `Reply to ${c.customer.split(" ")[0]}`}
+                onChange={(e) => setDrafts((d) => ({ ...d, [key]: e.target.value }))}
                 onKeyDown={(e) => { if (e.key === "Enter" && e.metaKey) { e.preventDefault(); send(); } }}
               />
-              <div className="row">
-                <span>{stage.draft && draft === stage.draft ? <><i className="ai-tag" style={{ fontStyle: "normal" }}>AI</i>Draft · sends with your decision, or now</> : "⌘↵ to send"}</span>
-                <button className="ob" onClick={send} disabled={!draft.trim()}><Icon name="send" size={14} />Send</button>
+              <div className="crow">
+                <span className="src">
+                  {mode === "reply" && stage.draft && draft === stage.draft ? <><span className="ai">AI</span>Draft from the evidence · sends with your decision, or now</> : "⌘↵ to send"}
+                </span>
+                {mode === "reply" && <>
+                  <button className="gh" onClick={() => setFlash("Rephrase isn't wired up in the prototype")}><Icon name="spark" size={14} />Rephrase</button>
+                  <button className="gh" onClick={() => setFlash("Translate isn't wired up in the prototype")}><Icon name="translate" size={14} />Hindi</button>
+                </>}
+                <button className="gh" aria-label="Attach" onClick={() => setFlash("Attachments aren't wired up in the prototype")}><Icon name="attach" size={14} /></button>
+                <button className="sec" onClick={send} disabled={!draft.trim()}>
+                  <Icon name={mode === "note" ? "note" : "send"} size={14} />{mode === "note" ? "Add note" : "Send"}
+                </button>
               </div>
             </div>
           )}
         </main>
 
-        <aside className="panel" aria-label="Order and evidence">
-          <div className="bar" style={{ justifyContent: "space-between" }}><span className="ttl">Order</span><span className="cnt">{c.order}</span></div>
-          <div className="pscroll">
-            <dl className="sec">
-              <div className="kv"><dt><Icon name="box" />Item</dt><dd>{c.item}</dd></div>
-              <div className="kv"><dt><Icon name="card" />Paid</dt><dd>{c.value} · {c.payment.replace("Prepaid · ", "")}</dd></div>
-              <div className="kv"><dt><Icon name="truck" />Courier</dt><dd>{c.courier}</dd></div>
-            </dl>
-
-            <section className="sec">
-              <h3>
-                Delivery evidence
-                {canCompare && (
-                  <button aria-pressed={compare} onClick={() => setCompare((v) => !v)}>
-                    <Icon name={compare ? "shrink" : "expand"} size={13} />{compare ? "Smaller" : "Compare"}
-                  </button>
+        {/* Right panel: AI first, then tasks, linked work, evidence, order */}
+        <aside className="panel" aria-label="AI and case details">
+          <header className="bar"><b><Icon name="spark" size={14} />AI</b><span>Case details</span></header>
+          <div className="scroll">
+            <section className="blk">
+              <div className="card rec">
+                {confirming?.confirm ? (
+                  <div className="confirm" role="group" aria-label={confirming.confirm.title}>
+                    <h3>{confirming.confirm.title}</h3>
+                    <dl className="dkv">{confirming.confirm.lines.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
+                    <p className="policy">{confirming.confirm.note}</p>
+                    <div className="btns">
+                      <button className="pri" onClick={() => goTo(c.id, confirming.next, confirming.label)}><Icon name="check" size={14} />{confirming.confirm.cta}</button>
+                      <button className="sec" onClick={() => setConfirming(null)}>Back</button>
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    {atStart && c.rec ? (
+                      <>
+                        <p className="eyebrow">Recommended <span className={`conf ${c.rec.confidence.toLowerCase()}`}>{c.rec.confidence} confidence</span></p>
+                        <h3>{c.rec.title}</h3>
+                        <ul className="why">{c.rec.reasons.map((r) => <li key={r.text}><span>{r.text}</span><em>{r.src}</em></li>)}</ul>
+                        <p className="policy"><Icon name="key" size={14} />{c.rec.policy}</p>
+                      </>
+                    ) : (
+                      <>
+                        <p className="eyebrow">{stage.status ?? stage.nextStep}</p>
+                        {stage.ai && <p>{stage.ai}</p>}
+                      </>
+                    )}
+                    {(stage.options.length > 0 || stage.simulate) && (
+                      <div className="btns">
+                        {stage.options.map((o) => <button key={o.id} className={o.primary ? "pri" : "sec"} onClick={() => act(o)}>{o.label}</button>)}
+                        {stage.simulate && (
+                          <button className="proto" onClick={() => goTo(c.id, stage.simulate!.next)} title="Prototype only: simulates an outside event">
+                            <Icon name="play" size={12} />{stage.simulate.label}
+                          </button>
+                        )}
+                      </div>
+                    )}
+                  </>
                 )}
-              </h3>
-              <div className={`thumbs n${c.evidence.length}${compare && canCompare ? " big" : ""}`}>
-                {c.evidence.map((e, i) => <EvidenceTile key={i} e={e} big={compare && canCompare} />)}
               </div>
-              <p className="illus">Illustrations · demo data</p>
-              <dl>
-                {c.facts.map((f) => (
-                  <div className="kv" key={f.label}><dt>{f.icon && <Icon name={f.icon} />}{f.label}</dt><dd className={f.tone ?? ""}>{f.value}</dd></div>
+              <form className="ask" onSubmit={(e) => { e.preventDefault(); askAI(ask); }}>
+                <Icon name="ask" size={16} />
+                <input placeholder="Ask about this case" value={ask} onChange={(e) => setAsk(e.target.value)} />
+              </form>
+              {answer ? (
+                <div className="answer"><b>{answer.q}</b><p>{answer.a}</p></div>
+              ) : c.asks && (
+                <div className="chips">{c.asks.map((a) => <button key={a.q} onClick={() => askAI(a.q)}>{a.q}</button>)}</div>
+              )}
+            </section>
+
+            <section className="blk">
+              <h4>Tasks and follow-ups <button onClick={() => setNewTask("")}><Icon name="plus" size={14} />Add</button></h4>
+              {caseTasks.length === 0 && newTask === null && <p className="hint">No follow-ups on this case.</p>}
+              <ul className="tasks">
+                {caseTasks.map((t) => (
+                  <li key={t.id} className={`${t.ai ? "sug" : ""}${t.done ? " done" : ""}`}>
+                    {t.ai ? <Icon name="spark" size={16} /> : (
+                      <button className="tick" aria-label={t.done ? "Mark not done" : "Mark done"} onClick={() => updateTasks((ts) => ts.map((x) => (x.id === t.id ? { ...x, done: !x.done } : x)))}>
+                        <Icon name={t.done ? "checked" : "unchecked"} size={16} />
+                      </button>
+                    )}
+                    <span>{t.text}</span>
+                    <em>{t.due}</em>
+                    {t.ai && <button className="add" onClick={() => updateTasks((ts) => ts.map((x) => (x.id === t.id ? { ...x, ai: false } : x)))}>Add</button>}
+                  </li>
                 ))}
+                {newTask !== null && (
+                  <li>
+                    <Icon name="unchecked" size={16} />
+                    <form onSubmit={(e) => { e.preventDefault(); if (newTask.trim()) updateTasks((ts) => [...ts, { id: `n${Date.now()}`, text: newTask, due: "Today" }]); setNewTask(null); }}>
+                      <input autoFocus placeholder="New task, due today" value={newTask} onChange={(e) => setNewTask(e.target.value)} onBlur={() => !newTask.trim() && setNewTask(null)} />
+                    </form>
+                  </li>
+                )}
+              </ul>
+              {open && <p className="hint">The case stays open until {c.customer.split(" ")[0]} is told the outcome. Sending a reply doesn&apos;t close it.</p>}
+            </section>
+
+            <section className="blk">
+              <h4>Linked work</h4>
+              <dl className="dkv">
+                {linked.map(([k, v]) => (
+                  <div key={k}><dt><Icon name={linkIcon(k)} size={14} />{k}</dt><dd className={/^(none|not )/i.test(v) ? "mute" : /failed/i.test(v) ? "bad" : ""}>{v}</dd></div>
+                ))}
+              </dl>
+            </section>
+
+            <section className="blk">
+              <h4>Delivery evidence</h4>
+              <div className={`thumbs n${c.evidence.length}`}>{c.evidence.map((e, i) => <EvidenceTile key={i} e={e} />)}</div>
+              <p className="hint">Illustrations · demo data</p>
+              <dl className="dkv">
+                {c.facts.map((f) => <div key={f.label}><dt>{f.icon && <Icon name={f.icon} size={14} />}{f.label}</dt><dd className={f.tone ?? ""}>{f.value}</dd></div>)}
               </dl>
               {c.signals && (
                 <div className="signals">
@@ -217,46 +368,28 @@ export function Workspace() {
                 </div>
               )}
             </section>
-          </div>
 
-          <div className="decide">
-            {confirming?.confirm ? (
-              <div className="confirm" role="group" aria-label={confirming.confirm.title}>
-                <h3>{confirming.confirm.title}</h3>
-                <dl>{confirming.confirm.lines.map(([k, v]) => <div className="kv" key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
-                <p>{confirming.confirm.note}</p>
-                <div className="btns">
-                  <button className="pb" onClick={() => goTo(c.id, confirming.next, confirming.label)}><Icon name="check" size={14} />{confirming.confirm.cta}</button>
-                  <button className="ob" onClick={() => setConfirming(null)}>Back</button>
-                </div>
-              </div>
-            ) : (
-              <>
-                {stage.ai && <p className="ai"><span className="ai-tag">AI</span><span>{stage.ai}</span></p>}
-                {(stage.options.length > 0 || stage.simulate) && (
-                  <div className="btns">
-                    {stage.options.map((o) => (
-                      <button key={o.id} className={o.primary ? "pb" : "ob"} onClick={() => act(o)}>{o.label}</button>
-                    ))}
-                    {stage.simulate && (
-                      <button className="proto" onClick={() => goTo(c.id, stage.simulate!.next)} title="Prototype only: simulates an outside event">
-                        <Icon name="play" size={12} />{stage.simulate.label}
-                      </button>
-                    )}
-                  </div>
-                )}
-              </>
-            )}
+            <section className="blk">
+              <h4>Order</h4>
+              <dl className="dkv">
+                <div><dt><Icon name="box" size={14} />Item</dt><dd>{c.item}</dd></div>
+                <div><dt><Icon name="card" size={14} />Paid</dt><dd>{c.value} · {c.payment.replace("Prepaid · ", "")}</dd></div>
+                <div><dt><Icon name="truck" size={14} />Courier</dt><dd>{c.courier}</dd></div>
+                <div><dt><Icon name="chat" size={14} />Language</dt><dd>{c.language ?? "English"}</dd></div>
+              </dl>
+            </section>
           </div>
         </aside>
       </div>
 
-      {undo && (
+      {(undo || flash) && (
         <div className="toast" role="status">
-          <span>{undo.label} · done</span>
-          <button onClick={() => { setStates((s) => ({ ...s, [undo.caseId]: undo.prev })); select(undo.caseId); setUndo(null); }}>
-            <Icon name="undo" size={14} />Undo
-          </button>
+          <span>{undo ? `${undo.label} · done` : flash}</span>
+          {undo && (
+            <button onClick={() => { setStates((s) => ({ ...s, [undo.caseId]: undo.prev })); select(undo.caseId); setUndo(null); }}>
+              <Icon name="undo" size={14} />Undo
+            </button>
+          )}
         </div>
       )}
     </>
@@ -267,15 +400,23 @@ function Message({ m, customer }: { m: Msg; customer: string }) {
   if (m.kind === "event") {
     return (
       <p className="ev">
-        {m.ai ? <span className="ai-tag">AI</span> : <Icon name="clock" size={14} />}
+        {m.ai ? <span className="ai">AI</span> : <Icon name="clock" size={14} />}
         <span>{m.text}</span>
         <time>{m.time}</time>
       </p>
     );
   }
+  if (m.kind === "note") {
+    return (
+      <article className="msg note">
+        <p className="who"><Icon name="lock" size={14} /><b>Internal note</b><span>{m.who} · {m.time} · only your team sees this</span></p>
+        <div>{m.text}</div>
+      </article>
+    );
+  }
   const mine = m.kind === "agent";
   return (
-    <div className={`msg${mine ? " mine" : ""}`}>
+    <article className={`msg${mine ? " mine" : ""}`}>
       <p className="who">
         {mine ? <><b>{m.who}</b><span>{m.time}</span></> : <><Icon name={m.channel === "email" ? "mail" : "chat"} size={14} /><b>{customer}</b><span>{m.channel === "email" ? "Email" : "Chat"} · {m.time}</span></>}
       </p>
@@ -283,6 +424,6 @@ function Message({ m, customer }: { m: Msg; customer: string }) {
         {m.text}
         {m.gloss && <span className="gloss">{m.gloss}</span>}
       </div>
-    </div>
+    </article>
   );
 }

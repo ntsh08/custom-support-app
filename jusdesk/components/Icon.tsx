@@ -3,7 +3,8 @@ import {
   Alert02Icon, ArrowTurnBackwardIcon, BubbleChatIcon, CheckmarkCircle02Icon, Clock01Icon, CreditCardIcon,
   DeliveryTruck01Icon, GitMergeIcon, InboxIcon, Key01Icon, Location01Icon, Mail01Icon, MaximizeIcon,
   MinimizeIcon, MoreHorizontalIcon, PackageIcon, PlayIcon, Search01Icon, SentIcon, SquareLock02Icon,
-  Tick02Icon, UserAdd01Icon, UserIcon,
+  Tick02Icon, UserAdd01Icon, UserIcon, Note01Icon, CheckListIcon, SparklesIcon, TranslateIcon, Link01Icon,
+  Calendar03Icon, Add01Icon, Flag02Icon, AiChat02Icon, ArrowRight01Icon, CheckmarkSquare02Icon, SquareIcon, Attachment01Icon,
 } from "@hugeicons/core-free-icons";
 
 // Hugeicons, Stroke Rounded (free set).
@@ -31,10 +32,23 @@ const ICONS = {
   check: Tick02Icon,
   assign: UserAdd01Icon,
   user: UserIcon,
+  note: Note01Icon,
+  tasks: CheckListIcon,
+  spark: SparklesIcon,
+  translate: TranslateIcon,
+  link: Link01Icon,
+  calendar: Calendar03Icon,
+  plus: Add01Icon,
+  flag: Flag02Icon,
+  ask: AiChat02Icon,
+  arrow: ArrowRight01Icon,
+  checked: CheckmarkSquare02Icon,
+  unchecked: SquareIcon,
+  attach: Attachment01Icon,
 } as const;
 
 export type IconName = keyof typeof ICONS;
 
-export function Icon({ name, size = 16 }: { name: IconName; size?: number }) {
-  return <HugeiconsIcon icon={ICONS[name]} size={size} strokeWidth={1.5} color="currentColor" aria-hidden="true" />;
+export function Icon({ name, size = 16, stroke = 1.5 }: { name: IconName; size?: number; stroke?: number }) {
+  return <HugeiconsIcon icon={ICONS[name]} size={size} strokeWidth={stroke} color="currentColor" aria-hidden="true" />;
 }

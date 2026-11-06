@@ -8,7 +8,11 @@ export type Group = "needs" | "waiting" | "lead" | "ai" | "closed";
 export type Msg =
   | { kind: "customer"; channel: "chat" | "email"; time: string; text: string; gloss?: string }
   | { kind: "agent"; who: string; time: string; text: string; gloss?: string }
-  | { kind: "event"; time: string; text: string; ai?: boolean };
+  | { kind: "event"; time: string; text: string; ai?: boolean }
+  | { kind: "note"; who: string; time: string; text: string };
+
+export type Task = { id: string; text: string; due: string; ai?: boolean; done?: boolean };
+export type Reason = { text: string; src: string };
 
 export type Evidence =
   | { kind: "door"; title: string; note: string; door: string; parcel?: boolean; plate?: string }
@@ -42,6 +46,8 @@ export type Stage = {
   draft?: string;
   /** A simulated outside event (courier, lead, bank) the prototype can trigger. */
   simulate?: { label: string; next: string };
+  /** Linked work at this stage (courier request, reship, refund). Falls back to the case's. */
+  linked?: [string, string][];
 };
 
 export type Case = {
@@ -60,6 +66,16 @@ export type Case = {
   evidence: Evidence[];
   facts: Fact[];
   signals?: string[];
+  /** What the bot already did, so the executive doesn't ask again. */
+  handoff: string[];
+  /** The AI recommendation on the first stage: title, reasons with sources, policy rule. */
+  rec?: { title: string; confidence: "High" | "Medium" | "Low"; reasons: Reason[]; policy: string };
+  followUp?: string;
+  /** Contact reason tag. Missing means no due date gets set (interview finding). */
+  reasonTag?: string;
+  tasks: Task[];
+  linked: [string, string][];
+  asks?: { q: string; a: string }[];
   start: string;
   stages: Record<string, Stage>;
 };
@@ -83,6 +99,7 @@ export const CASES: Case[] = [
       { kind: "event", time: "8:53 am", text: "AI handed over with the courier photo and GPS attached", ai: true },
       { kind: "customer", channel: "email", time: "9:14 am", text: "I already told your chatbot this. The app says delivered but nothing came to my door. I need it before Saturday." },
       { kind: "event", time: "9:15 am", text: "AI merged this email into the chat case (same order, same customer)", ai: true },
+      { kind: "note", who: "You", time: "9:20 am", text: "Last delivery to this address was to flat B-204 (white door). Today's photo shows a green door. Probably the wrong flat." },
     ],
     evidence: [
       { kind: "door", title: "Courier photo", note: "Green door, parcel on the step", door: "#2F6B4F", parcel: true },
@@ -93,6 +110,32 @@ export const CASES: Case[] = [
       { icon: "key", label: "Delivery OTP", value: "Not collected" },
       { icon: "user", label: "Ananya", value: "14 orders, no past claims", tone: "good" },
       { icon: "alert", label: "560034 this week", value: "3 similar claims, all Shadowfax", tone: "bad" },
+    ],
+    handoff: [
+      "Ananya says nothing reached her door. She wrote twice (chat 8:52, email 9:14). Both are merged here.",
+      "The assistant already showed her the tracking and pulled the courier photo and GPS. Don't ask her for them again.",
+      "She needs it before Saturday.",
+    ],
+    rec: {
+      title: "Reship the kurta and file a courier claim",
+      confidence: "High",
+      reasons: [
+        { text: "Courier photo shows a green door. Her last delivery was a white door, B-204.", src: "Photo" },
+        { text: "Rider's GPS was 600 m from her address.", src: "GPS" },
+        { text: "14 orders, no past claims. Size M is in stock.", src: "Order history" },
+      ],
+      policy: "Wrong-address delivery under ₹5,000. You can approve this.",
+    },
+    followUp: "Today, 1 pm",
+    tasks: [
+      { id: "a1", text: "Call Ananya if she doesn't reply", due: "Today, 1 pm" },
+      { id: "a2", text: "Chase Shadowfax on the claim", due: "Mon", ai: true },
+      { id: "a3", text: "Check the reship reached her", due: "Fri", ai: true },
+    ],
+    linked: [["Courier request", "Photo and GPS received, 8:53"], ["Reship", "Not created"], ["Refund", "None"]],
+    asks: [
+      { q: "Has she claimed before?", a: "No. 14 orders since 2024, no claims, no returns flagged." },
+      { q: "When would a reship arrive?", a: "Packed today, delivered Friday by Shadowfax. That's before her Saturday deadline." },
     ],
     start: "decide",
     stages: {
@@ -140,6 +183,7 @@ export const CASES: Case[] = [
         ],
       },
       reshipped: {
+        linked: [["Courier claim", "CLM-2291 filed"], ["Reship", "FX-48213-R packed"], ["Refund", "None"]],
         group: "waiting",
         nextStep: "Reship in transit, claim filed",
         status: "Waiting on Shadowfax · AI checks the claim on Monday",
@@ -152,6 +196,7 @@ export const CASES: Case[] = [
         simulate: { label: "Simulate: delivered with OTP on Thursday", next: "closed" },
       },
       refunded: {
+        linked: [["Courier claim", "Not filed"], ["Reship", "None"], ["Refund", "₹1,800 sent, waiting for provider"]],
         group: "waiting",
         nextStep: "Refund with payment provider",
         status: "Refund sent · closes when the payment provider confirms",
@@ -194,6 +239,32 @@ export const CASES: Case[] = [
       { icon: "alert", label: "560034 this week", value: "4th similar claim, all Shadowfax", tone: "bad" },
       { icon: "box", label: "Size L", value: "Out of stock until December" },
     ],
+    handoff: [
+      "Rohan wrote once, by email on Tuesday. He wants a replacement.",
+      "Size L is out of stock until December, so a replacement isn't possible.",
+      "The assistant hasn't promised him anything yet.",
+    ],
+    rec: {
+      title: "Refund ₹6,500 to his UPI, with Priya's approval",
+      confidence: "High",
+      reasons: [
+        { text: "No delivery OTP was collected.", src: "Courier record" },
+        { text: "Rider's GPS was 1.1 km from his address.", src: "GPS" },
+        { text: "Size L is out of stock until December.", src: "Stock" },
+      ],
+      policy: "Refunds above ₹5,000 need your lead's approval.",
+    },
+    followUp: "Today, 5 pm",
+    reasonTag: "Lost in transit",
+    tasks: [
+      { id: "r1", text: "Tell Rohan once Priya decides", due: "Today", ai: true },
+      { id: "r2", text: "Check the refund reached him", due: "In 5 days", ai: true },
+    ],
+    linked: [["Courier request", "No photo, GPS 1.1 km off"], ["Replacement", "Size L out of stock"], ["Refund", "Not started"]],
+    asks: [
+      { q: "Can we offer size XL instead?", a: "XL is in stock, but he asked for L. Offer it only if he asks; the refund is the safe default." },
+      { q: "How long will the refund take?", a: "UPI refunds usually land within a day once the provider confirms." },
+    ],
     start: "decide",
     stages: {
       decide: {
@@ -223,6 +294,7 @@ export const CASES: Case[] = [
         ],
       },
       withLead: {
+        linked: [["Courier request", "No photo, GPS 1.1 km off"], ["Replacement", "Size L out of stock"], ["Refund", "₹6,500 with Priya for approval"]],
         group: "lead",
         nextStep: "With Priya for approval",
         status: "Waiting on Priya (team lead) · usually within 1 h",
@@ -234,6 +306,7 @@ export const CASES: Case[] = [
         simulate: { label: "Simulate: Priya approves", next: "failed" },
       },
       failed: {
+        linked: [["Courier request", "No photo, GPS 1.1 km off"], ["Replacement", "Size L out of stock"], ["Refund", "Failed: UPI ID inactive"]],
         group: "needs",
         nextStep: "Refund failed: fix and retry",
         timeLeft: "Now",
@@ -281,6 +354,7 @@ export const CASES: Case[] = [
         ],
       },
       toCard: {
+        linked: [["Courier request", "No photo, GPS 1.1 km off"], ["Replacement", "Size L out of stock"], ["Refund", "Sent to card ending 4417"]],
         group: "waiting",
         nextStep: "Refund with payment provider",
         status: "Refund sent to card · closes when the payment provider confirms",
@@ -289,6 +363,7 @@ export const CASES: Case[] = [
         simulate: { label: "Simulate: provider confirms refund", next: "closed" },
       },
       retrying: {
+        linked: [["Courier request", "No photo, GPS 1.1 km off"], ["Replacement", "Size L out of stock"], ["Refund", "Retrying to new UPI ID"]],
         group: "waiting",
         nextStep: "Refund with payment provider",
         status: "Refund retried · closes when the payment provider confirms",
@@ -300,6 +375,7 @@ export const CASES: Case[] = [
         simulate: { label: "Simulate: provider confirms refund", next: "closed" },
       },
       closed: {
+        linked: [["Courier request", "No photo, GPS 1.1 km off"], ["Replacement", "Size L out of stock"], ["Refund", "Credited, ref 4290 8812 3301"]],
         group: "closed",
         nextStep: "Closed",
         status: "Closed · refund confirmed by the payment provider",
@@ -340,6 +416,25 @@ export const CASES: Case[] = [
       "Another account at the same address made 2 claims",
       "Card used here is linked to 1 chargeback (from payment data)",
     ],
+    handoff: [
+      "Meera wrote once, on chat at 9:40 am.",
+      "The OTP was entered at her door at 1:15 pm.",
+      "The assistant hasn't promised a refund or a reship.",
+    ],
+    rec: {
+      title: "Send to Priya with a note",
+      confidence: "Medium",
+      reasons: [
+        { text: "The OTP was verified at her door.", src: "OTP" },
+        { text: "The courier photo matches her address.", src: "Photo" },
+        { text: "This is her 3rd claim in 2 months.", src: "Order history" },
+      ],
+      policy: "Suspected false claims go to your lead. Never deny the customer yourself.",
+    },
+    followUp: "Today, 6 pm",
+    reasonTag: "Disputed delivery",
+    tasks: [{ id: "m1", text: "Update Meera by 6 pm", due: "Today, 6 pm", ai: true }],
+    linked: [["Courier request", "Photo, GPS and OTP received"], ["Refund", "None"]],
     start: "decide",
     stages: {
       decide: {
@@ -371,6 +466,7 @@ export const CASES: Case[] = [
         ],
       },
       withLead: {
+        linked: [["Courier request", "Photo, GPS and OTP received"], ["Lead review", "With Priya"]],
         group: "lead",
         nextStep: "With Priya",
         status: "Waiting on Priya (team lead) · reply promised by 6 pm tomorrow",
@@ -414,6 +510,14 @@ export const CASES: Case[] = [
       { icon: "clock", label: "Scan", value: "10:12 am, rider 4.2 km away", tone: "bad" },
       { icon: "pin", label: "Route", value: "Your address is stop 14 of 22" },
     ],
+    handoff: [
+      "Kavya wrote on chat at 10:30 am.",
+      "The assistant already explained the early scan and asked Ekart to confirm.",
+    ],
+    followUp: "Today, 4 pm",
+    reasonTag: "Early scan",
+    tasks: [{ id: "k1", text: "Take over if Ekart hasn't confirmed", due: "Today, 4 pm", ai: true }],
+    linked: [["Courier request", "Asked Ekart to confirm"], ["Refund", "None"]],
     start: "waiting",
     stages: {
       waiting: {
@@ -470,6 +574,13 @@ export const CASES: Case[] = [
       { icon: "truck", label: "Courier note", value: "Handed to security guard" },
       { icon: "card", label: "Payment", value: "Cash on delivery, collected", tone: "good" },
     ],
+    handoff: [
+      "Vikram wrote in Hindi on chat at 9:05 am.",
+      "The AI replied in Hindi with the courier's note and photo. He confirmed at 9:22 am.",
+    ],
+    reasonTag: "Left with guard",
+    tasks: [],
+    linked: [["Courier request", "Note and photo received"], ["Refund", "None"]],
     start: "handled",
     stages: {
       handled: {
