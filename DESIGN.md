@@ -74,7 +74,7 @@ Colour carries meaning only:
 
 ## 9. AI signature, notes and the pattern
 - Anything AI wrote or did gets one signature, and nothing else uses it:
-  - no gradient: AI cards are plain white with the hairline border (Nitish removed the gradient on 6 Nov after trying glows, meshes and dither textures); summary card spacing: 8px under the label, 2px between headline and paragraph as an SVG gradient that stretches with the card, like Figma does; hairline border, on the AI summary and the AI recommendation card. The assistant's chat replies stay white with the AI tag (Nitish, 6 Nov).
+  - a green gradient border, 1.5px, 120° (`#3A7C57` → `#7CC4A0` → `#9FD7A8` → `#5EB8A8`), with a barely-there tint inside (`#FBFDFC` → white); used on the AI summary and the recommendation card (B6, Nitish, 6 Nov). While the summary is being written (about 1.8s when a case opens) a single green streak runs around a grey border and the label shimmers "Writing summary…" (E4); then it settles. Reduced motion turns the animation off; summary card spacing: 8px under the label, 2px between headline and paragraph as an SVG gradient that stretches with the card, like Figma does; hairline border, on the AI summary and the AI recommendation card. The assistant's chat replies stay white with the AI tag (Nitish, 6 Nov).
   - a green "AI" tag (`#E3F0E8` bg, `#2F6547` text), on AI events and the assistant's messages
   - the sparkle icon
 - Internal notes are a plain yellow card (`#FFF8E6`, border `#F3E3B5`, label `#8A6512`), with a lock icon and "Internal note". No badge, no dashed border. The composer turns yellow in note mode. (Nitish, 6 Nov: the industry convention wins here.)

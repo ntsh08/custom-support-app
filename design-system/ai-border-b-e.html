@@ -1,0 +1,50 @@
+<!doctype html><html><head><meta charset="utf-8"><title>AI border B and E</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+body{margin:0;padding:28px;background:#fff;font:400 13px/20px Inter,sans-serif;font-feature-settings:"cv01","ss03";color:#1C1D1F}
+h1{font-size:14px;font-weight:600;margin:24px 0 4px}h1:first-child{margin-top:0}.sub{color:#8A8E95;font-size:12px;margin:0 0 16px}
+.grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px}h2{font-size:13px;font-weight:500;margin:0}.d{margin:2px 0 10px;font-size:12px;color:#5F636A;min-height:40px}
+.sum{display:grid;padding:14px 16px;border:1.5px solid transparent;border-radius:12px;--w:#fff}
+.lbl{display:flex;align-items:center;gap:6px;margin-bottom:8px;font-size:12px;line-height:16px;font-weight:500;color:#2F6547}
+h3{font-size:14px;line-height:20px;font-weight:600;margin:0 0 2px}.sum p{margin:0;color:#5F636A}
+.pb{background:linear-gradient(#fff,#fff) padding-box}
+.b1{background:linear-gradient(#fff,#fff) padding-box,linear-gradient(120deg,#3A7C57,#7CC4A0 40%,#9FD7A8 70%,#5EB8A8) border-box}
+.b2{background:linear-gradient(#fff,#fff) padding-box,linear-gradient(90deg,#3A7C57,#5EB8A8 50%,#A8D98A) border-box}
+.b3{border-width:2px;background:linear-gradient(#fff,#fff) padding-box,linear-gradient(135deg,#2F6547,#6FB38A 50%,#9ED3C6) border-box}
+.b4{background:linear-gradient(#fff,#fff) padding-box,linear-gradient(120deg,#3A7C57,#CDEAD9 50%,#3A7C57) border-box}
+.b5{border-width:1px;background:linear-gradient(#fff,#fff) padding-box,linear-gradient(120deg,#3A7C57,#7CC4A0 40%,#9FD7A8 70%,#5EB8A8) border-box}
+.b6{background:linear-gradient(#FBFDFC,#fff) padding-box,linear-gradient(120deg,#3A7C57,#7CC4A0 40%,#9FD7A8 70%,#5EB8A8) border-box}
+@property --a{syntax:'<angle>';initial-value:0deg;inherits:false}
+@property --p{syntax:'<percentage>';initial-value:0%;inherits:false}
+.e1{background:linear-gradient(#fff,#fff) padding-box,conic-gradient(from var(--a),#E8E8EB 0 60%,#8FC4A2 75%,#3A7C57 85%,#E8E8EB 100%) border-box;animation:spin 3.2s linear infinite}
+.e2{background:linear-gradient(#fff,#fff) padding-box,conic-gradient(from var(--a),#E8E8EB 0 25%,#3A7C57 40%,#E8E8EB 50% 75%,#5EB8A8 90%,#E8E8EB 100%) border-box;animation:spin 4s linear infinite}
+.e3{background:linear-gradient(#fff,#fff) padding-box,conic-gradient(from var(--a),#3A7C57,#7CC4A0,#A8D98A,#5EB8A8,#3A7C57) border-box;animation:spin 4s linear infinite}
+.e4{background:linear-gradient(#fff,#fff) padding-box,conic-gradient(from var(--a),#E8E8EB 0 60%,#8FC4A2 75%,#3A7C57 85%,#E8E8EB 100%) border-box;animation:spin 3.2s linear infinite}
+.e4 .lbl span{background:linear-gradient(90deg,#2F6547 0%,#2F6547 40%,#A8D9B9 50%,#2F6547 60%,#2F6547 100%) 0 0/200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shim 1.6s linear infinite}
+.e5{background:linear-gradient(#fff,#fff) padding-box,linear-gradient(120deg,#3A7C57,#7CC4A0 40%,#9FD7A8 70%,#5EB8A8) border-box;animation:breathe 2s ease-in-out infinite}
+.e6{background:linear-gradient(#fff,#fff) padding-box,conic-gradient(from -90deg at 50% 50%,#3A7C57 0 var(--p),#E8E8EB var(--p) 100%) border-box;animation:fill 4s cubic-bezier(.4,0,.2,1) infinite}
+@keyframes spin{to{--a:360deg}}@keyframes shim{to{background-position:-200% 0}}
+@keyframes breathe{50%{box-shadow:0 0 0 4px rgba(124,196,160,.18)}}@keyframes fill{0%{--p:0%}85%,100%{--p:100%}}
+.note{font-size:12px;color:#8A8E95;margin:6px 0 0}
+</style></head><body>
+<h1>B · Gradient border, settled (after the AI has written)</h1><p class="sub">All white inside. Our green with mint, teal and lime.</p>
+<div class="grid">
+<div><h2>B1 · Diagonal, 1.5px (the one you liked)</h2><p class="d">Green top-left into mint and teal.</p><div class="sum b1"></div></div>
+<div><h2>B2 · Horizontal sweep</h2><p class="d">Green → teal → lime, left to right. More colour range.</p><div class="sum b2"></div></div>
+<div><h2>B3 · Thicker, 2px, deeper</h2><p class="d">Darker green into sage. Stronger outline, like Beside.</p><div class="sum b3"></div></div>
+<div><h2>B4 · Shine in the middle</h2><p class="d">Green at both ends, a pale highlight in the middle, like light on metal.</p><div class="sum b4"></div></div>
+<div><h2>B5 · Hairline, 1px</h2><p class="d">B1's colours at 1px. Same feel, quieter.</p><div class="sum b5"></div></div>
+<div><h2>B6 · Border + whisper of tint</h2><p class="d">B1 with a barely-there green inside the card.</p><div class="sum b6"></div></div>
+</div>
+<h1>E · Moving border (while the AI is writing)</h1><p class="sub">Open this page in a browser to see them move. Each one settles into B1 when the summary is ready.</p>
+<div class="grid">
+<div><h2>E1 · One light streak</h2><p class="d">A green streak runs around a grey border. Origin's AI box does this.</p><div class="sum e1"></div></div>
+<div><h2>E2 · Two streaks</h2><p class="d">Green and teal streaks chase each other from opposite sides.</p><div class="sum e2"></div></div>
+<div><h2>E3 · Whole border rotates</h2><p class="d">The full gradient turns slowly. Busiest.</p><div class="sum e3"></div></div>
+<div><h2>E4 · Streak + shimmer label</h2><p class="d">E1 plus a shimmer on "Writing summary…", like INA's thinking state.</p><div class="sum e4" data-label="Writing summary…"></div></div>
+<div><h2>E5 · Breathing glow</h2><p class="d">B1's border with a soft green halo that pulses.</p><div class="sum e5"></div></div>
+<div><h2>E6 · Border fills like progress</h2><p class="d">Green draws around the card as the summary is written.</p><div class="sum e6"></div></div>
+</div>
+<script>const SP='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg>';
+document.querySelectorAll('.sum').forEach(s=>s.innerHTML=`<span class="lbl">${SP}<span>${s.dataset.label||'AI summary'}</span></span><h3>Nothing reached her door. She needs it by Saturday.</h3><p>She wrote twice (chat 8:52, email 9:14). Both are merged here. The assistant already showed her the tracking and pulled the courier photo and GPS.</p>`)</script>
+</body></html>

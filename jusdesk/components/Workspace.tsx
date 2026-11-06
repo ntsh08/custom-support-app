@@ -42,6 +42,8 @@ export function Workspace() {
   const [drafts, setDrafts] = useState<Record<string, string>>({});
   const [mode, setMode] = useState<"reply" | "note">("reply");
   const [hidden, setHidden] = useState<Record<string, boolean>>({});
+  // The summary "writes" for a moment each time a case opens (E4), then settles (B6).
+  const [writing, setWriting] = useState(true);
   const [vote, setVote] = useState<Record<string, "up" | "down" | undefined>>({});
   const [undo, setUndo] = useState<Undo | null>(null);
   const [flash, setFlash] = useState<string | null>(null);
@@ -70,8 +72,8 @@ export function Workspace() {
     <button className="sum-show" onClick={() => setHidden((h) => ({ ...h, [c.id]: false }))}><Icon name="spark" size={14} />Show AI summary</button>
   ) : (
     <div className="sumwrap">
-      <section className="sum" aria-label="AI summary">
-        <span className="lbl"><Icon name="spark" size={14} />AI summary</span>
+      <section className={`sum${writing ? " writing" : ""}`} aria-label="AI summary" aria-busy={writing}>
+        <span className="lbl"><Icon name="spark" size={14} /><span>{writing ? "Writing summary…" : "AI summary"}</span></span>
         <h3>{c.hook}</h3>
         <p>{c.handoff.join(" ")}</p>
       </section>
@@ -95,6 +97,12 @@ export function Workspace() {
     setAsk("");
     setNewTask(null);
   }
+
+  useEffect(() => {
+    setWriting(true);
+    const t = setTimeout(() => setWriting(false), 1800);
+    return () => clearTimeout(t);
+  }, [selected]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
