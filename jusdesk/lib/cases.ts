@@ -8,7 +8,7 @@ export type Group = "first" | "reply" | "customer" | "others" | "escalated" | "c
 
 export type Msg = (
   | { kind: "customer"; channel: "chat" | "email"; time: string; text: string; gloss?: string; /** Email only. */ subject?: string }
-  | { kind: "agent"; who: string; time: string; text: string; gloss?: string; /** What the assistant did before replying (shown as a collapsed trace). */ steps?: string[] }
+  | { kind: "agent"; who: string; time: string; text: string; gloss?: string; /** What the assistant did before replying (shown as a collapsed trace). */ steps?: string[]; /** What the executive should try next, from the investigation. */ next?: string[] }
   | { kind: "event"; time: string; text: string; ai?: boolean; /** A status change, shown as a line in the conversation. */ status?: Group }
   | { kind: "note"; who: string; time: string; text: string }
 ) & { /** Day label for the date separator. Defaults to "Today". */ day?: string };
@@ -124,7 +124,7 @@ export const CASES: Case[] = [
     thread: [
       { kind: "event", time: "Yesterday 6:42 pm", text: "Shadowfax marked delivered" },
       { kind: "customer", channel: "chat", time: "8:52 am", text: "My order shows delivered but I didn't get anything." },
-      { kind: "agent", who: "JusDesk assistant", time: "8:52 am", steps: ["Read her message: nothing reached her door", "Checked tracking: Shadowfax marked it delivered yesterday at 6:42 pm", "Pulled the courier photo and the rider's GPS", "The photo shows a different door, so passed it to the team instead of closing"], text: "Sorry about that. I'm checking with the courier and passing this to our team now." },
+      { kind: "agent", who: "JusDesk assistant", time: "8:52 am", steps: ["Read her message: nothing reached her door", "Checked tracking: Shadowfax marked it delivered yesterday at 6:42 pm", "Pulled the courier photo and the rider's GPS", "The photo shows a different door, so passed it to the team instead of closing"], next: ["Compare the green door in the photo with her last delivery (white door, B-204)", "Ask Shadowfax which flat the rider left it at", "If it isn't found today, reship size M (in stock)"], text: "Sorry about that. I'm checking with the courier and passing this to our team now." },
       { kind: "event", time: "8:53 am", text: "AI handed over with the courier photo and GPS attached", ai: true },
       { kind: "event", time: "8:53 am", text: "AI set status to First response", ai: true, status: "first" },
       { kind: "customer", channel: "email", time: "9:14 am", subject: "Order FX-48213 marked delivered, but not received", text: "Hi,\n\nI already told your chatbot this. The app says delivered but nothing came to my door. I need it before Saturday.\n\nThanks,\nAnanya" },
@@ -442,7 +442,7 @@ export const CASES: Case[] = [
     thread: [
       { kind: "event", time: "Mon 1:15 pm", text: "Delhivery delivered with OTP" },
       { kind: "customer", channel: "chat", time: "9:40 am", text: "My dress never came. I want a refund." },
-      { kind: "agent", who: "JusDesk assistant", time: "9:40 am", steps: ["Read her message: says the dress never came", "Checked tracking: OTP entered at her door at 1:15 pm", "A claim like this needs a person, so promised no refund or reship"], text: "I'm sorry to hear that. I've passed this to our team, who'll update you today." },
+      { kind: "agent", who: "JusDesk assistant", time: "9:40 am", steps: ["Read her message: says the dress never came", "Checked tracking: OTP entered at her door at 1:15 pm", "A claim like this needs a person, so promised no refund or reship"], next: ["Ask Delhivery for the rider's call log at 1:15 pm", "Ask Meera if someone at home could have taken it", "Send to Priya with the signals; don't deny the claim yourself"], text: "I'm sorry to hear that. I've passed this to our team, who'll update you today." },
       { kind: "event", time: "9:40 am", text: "AI set status to First response", ai: true, status: "first" },
     ],
     evidence: [
@@ -541,7 +541,7 @@ export const CASES: Case[] = [
     thread: [
       { kind: "event", time: "10:12 am", text: "Ekart marked delivered" },
       { kind: "customer", channel: "chat", time: "10:30 am", text: "It says delivered but nobody came?" },
-      { kind: "agent", who: "JusDesk assistant", time: "10:31 am", steps: ["Checked tracking: scanned delivered at 10:12 am", "Compared with the rider's GPS: 4.2 km away, stop 14 of 22", "Asked Ekart to confirm the delivery"], text: "It looks like the courier scanned it early: the rider was still 4.2 km away. It should reach you by this evening. I've asked Ekart to confirm and I'll update you by 4 pm." },
+      { kind: "agent", who: "JusDesk assistant", time: "10:31 am", steps: ["Checked tracking: scanned delivered at 10:12 am", "Compared with the rider's GPS: 4.2 km away, stop 14 of 22", "Asked Ekart to confirm the delivery"], next: ["Wait for Ekart's confirmation, due 4 pm", "If Ekart hasn't confirmed by 4 pm, call the rider through the Ekart hub", "Update Kavya by 4 pm either way"], text: "It looks like the courier scanned it early: the rider was still 4.2 km away. It should reach you by this evening. I've asked Ekart to confirm and I'll update you by 4 pm." },
       { kind: "event", time: "10:31 am", text: "AI asked Ekart to confirm the delivery time", ai: true },
       { kind: "event", time: "10:31 am", text: "AI set status to Waiting on others (Ekart)", ai: true, status: "others" },
     ],
