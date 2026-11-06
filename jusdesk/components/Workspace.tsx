@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { CASES, GROUPS, TITLE, type Case, type Msg, type Option, type Stage, type Task } from "@/lib/cases";
+import { CASES, GROUPS, STATUS, TITLE, type Case, type Group, type Msg, type Option, type Stage, type Task } from "@/lib/cases";
 import { EvidenceTile } from "./EvidenceTile";
 import { Icon, type IconName } from "./Icon";
 
-type CaseState = { stage: string; extra: Msg[] };
+type CaseState = { stage: string; extra: Msg[]; status?: Group };
 type Undo = { caseId: string; prev: CaseState; label: string };
 
 const REASONS = ["Wrong address", "Lost in transit", "Disputed delivery", "Early scan", "Left with guard"];
@@ -22,9 +22,11 @@ const channels = (c: Case) => {
   const ch = new Set(c.thread.flatMap((m) => (m.kind === "customer" ? [m.channel] : [])));
   return ch.size > 1 ? "Chat + email merged" : ch.has("email") ? "Email" : "Chat";
 };
-const owner = (s: Stage) => (s.group === "lead" ? "Priya" : s.group === "ai" ? "AI" : "You");
-const STATUS: Record<string, string> = { needs: "New", lead: "With your lead", waiting: "Waiting", ai: "Handled by AI", closed: "Closed" };
-const groupLabel = (s: Stage) => STATUS[s.group];
+const owner = (g: Group, s: Stage) => (g === "escalated" ? "Priya" : s.by === "AI" ? "AI" : "You");
+/** Statuses an agent can pick after sending a reply. */
+const AFTER: Group[] = ["customer", "others", "closed"];
+/** A reply timer only runs while the ball is with the agent. */
+const dueFor = (g: Group) => g === "first" || g === "reply";
 const linkIcon = (k: string): IconName => (/refund/i.test(k) ? "card" : /courier/i.test(k) ? "truck" : /lead/i.test(k) ? "user" : "box");
 
 // Free Hugeicons are stroke-only, so the selected nav icon is drawn filled here.
@@ -44,6 +46,7 @@ export function Workspace() {
   const [confirming, setConfirming] = useState<Option | null>(null);
   const [drafts, setDrafts] = useState<Record<string, string>>({});
   const [mode, setMode] = useState<"reply" | "note">("reply");
+  const [afterSend, setAfterSend] = useState<Record<string, Group>>({});
   const [hidden, setHidden] = useState<Record<string, boolean>>({});
   // The summary "writes" for a moment each time a case opens (E4), then settles (B6).
   const [writing, setWriting] = useState(true);
@@ -59,8 +62,13 @@ export function Workspace() {
   const [newTask, setNewTask] = useState<string | null>(null);
   const threadEnd = useRef<HTMLDivElement>(null);
 
+  const statusOf = (id: string): Group => {
+    const cs = CASES.find((x) => x.id === id)!;
+    return states[id].status ?? cs.stages[states[id].stage].group;
+  };
   const ordered = useMemo(
-    () => GROUPS.flatMap((g) => CASES.filter((c) => c.stages[states[c.id].stage].group === g.id)),
+    () => GROUPS.flatMap((g) => CASES.filter((c) => g.has.includes(statusOf(c.id)))),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [states],
   );
   const c = CASES.find((x) => x.id === selected)!;
@@ -71,7 +79,11 @@ export function Workspace() {
 
   const key = c.id + st.stage + mode;
   const draft = drafts[key] ?? (mode === "reply" ? stage.draft ?? "" : "");
-  const open = stage.group !== "closed" && stage.group !== "ai";
+  const status = statusOf(c.id);
+  const open = status !== "closed";
+  const reopened = stage.reopened && !st.status;
+  const after = afterSend[c.id] ?? "customer";
+  const setStatus = (g: Group) => setStates((s) => ({ ...s, [c.id]: { ...s[c.id], status: g } }));
 
   const summaryCard = hidden[c.id] ? (
     <button className="sum-show" onClick={() => setHidden((h) => ({ ...h, [c.id]: false }))}><Icon name="spark" size={14} />Show AI summary</button>
@@ -171,8 +183,9 @@ export function Workspace() {
   function send() {
     if (!draft.trim()) return;
     const msg: Msg = mode === "note" ? { kind: "note", who: "You", time: "Now", text: draft } : { kind: "agent", who: "You", time: "Now", text: draft };
-    setStates((s) => ({ ...s, [c.id]: { ...s[c.id], extra: [...s[c.id].extra, msg] } }));
+    setStates((s) => ({ ...s, [c.id]: { ...s[c.id], extra: [...s[c.id].extra, msg], ...(mode === "reply" ? { status: after } : {}) } }));
     setDrafts((d) => ({ ...d, [key]: "" }));
+    if (mode === "reply") setFlash(`Sent · ${STATUS[after]}`);
   }
 
   function updateTasks(fn: (t: Task[]) => Task[]) {
@@ -216,7 +229,7 @@ export function Workspace() {
           <header className="bar"><b>All tickets</b><span>{ordered.length}</span></header>
           <div className="scroll">
             {GROUPS.map((g) => {
-              const items = ordered.filter((x) => x.stages[states[x.id].stage].group === g.id);
+              const items = ordered.filter((x) => g.has.includes(statusOf(x.id)));
               if (!items.length) return null;
               return (
                 <section key={g.id}>
@@ -226,8 +239,8 @@ export function Workspace() {
                     return (
                       <button key={x.id} className={`row${x.id === selected ? " on" : ""}`} onClick={() => select(x.id)}>
                         <span className="rt">
-                          <span className="l1"><b>{x.customer}</b>{s.timeLeft && <em className={s.urgent ?? ""}>{s.timeLeft}</em>}</span>
-                          <span className="l2">{x.item.split(",")[0]} · {x.value} · {s.nextStep}</span>
+                          <span className="l1"><b>{x.customer}</b>{s.reopened && !states[x.id].status && <i className="reo">Reopened</i>}{s.timeLeft && dueFor(statusOf(x.id)) && <em className={s.urgent ?? ""}>{s.timeLeft}</em>}</span>
+                          <span className="l2">{x.item.split(",")[0]} · {x.value} · {states[x.id].status ? STATUS[states[x.id].status!] : s.nextStep}</span>
                         </span>
                       </button>
                     );
@@ -248,7 +261,8 @@ export function Workspace() {
               {c.email && <span><Icon name="mail" size={14} />{c.email}</span>}
               {!c.email && <span><Icon name="chat" size={14} />Chat</span>}
               {c.language && <span><Icon name="translate" size={14} />{c.language}</span>}
-              {open && stage.timeLeft && <span className={stage.urgent ?? ""}><Icon name="clock" size={14} />{stage.timeLeft === "Now" ? "Reply due now" : `Reply due in ${stage.timeLeft}`}</span>}
+              {reopened && <span className="reo"><Icon name="undo" size={14} />Reopened</span>}
+              {dueFor(status) && stage.timeLeft && <span className={stage.urgent ?? ""}><Icon name="clock" size={14} />{stage.timeLeft === "Now" ? "Reply due now" : `Reply due in ${stage.timeLeft}`}</span>}
             </div>
           </header>
 
@@ -287,9 +301,19 @@ export function Workspace() {
                   <button className="gh" onClick={() => setFlash("Translate isn't wired up in the prototype")}><Icon name="translate" size={14} />Hindi</button>
                 </>}
                 <button className="gh" aria-label="Attach" onClick={() => setFlash("Attachments aren't wired up in the prototype")}><Icon name="attach" size={14} /></button>
-                <button className="pri" onClick={send} disabled={!draft.trim()}>
-                  <Icon name={mode === "note" ? "note" : "send"} size={14} />{mode === "note" ? "Add note" : "Send"}
-                </button>
+                {mode === "reply" ? (
+                  <span className="sendgrp">
+                    <label className="after" title="Status after sending">
+                      <span>After sending:</span>
+                      <select aria-label="Status after sending" value={after} onChange={(e) => setAfterSend((m) => ({ ...m, [c.id]: e.target.value as Group }))}>
+                        {AFTER.map((g) => <option key={g} value={g}>{STATUS[g]}</option>)}
+                      </select>
+                    </label>
+                    <button className="pri" onClick={send} disabled={!draft.trim()}><Icon name="send" size={14} />Send</button>
+                  </span>
+                ) : (
+                  <button className="pri" onClick={send} disabled={!draft.trim()}><Icon name="note" size={14} />Add note</button>
+                )}
               </div>
             </div></div>
           )}
@@ -362,9 +386,14 @@ export function Workspace() {
             <section className="blk">
               <h4>Properties</h4>
               <dl className="dkv">
-                <div><dt><Icon name="inbox" size={14} />Status</dt><dd>{groupLabel(stage)}</dd></div>
-                <div><dt><Icon name="user" size={14} />Owner</dt><dd>{owner(stage)}</dd></div>
-                {open && stage.timeLeft && <div><dt><Icon name="clock" size={14} />Reply due</dt><dd className={stage.urgent ?? ""}>{stage.timeLeft === "Now" ? "Now" : `In ${stage.timeLeft}`}</dd></div>}
+                <div className={status === "customer" ? "tagrow" : ""}><dt><Icon name="inbox" size={14} />Status</dt><dd className="stat">
+                  <select className="pick" aria-label="Status" value={status} onChange={(e) => setStatus(e.target.value as Group)}>
+                    {(Object.keys(STATUS) as Group[]).map((g) => <option key={g} value={g}>{STATUS[g]}</option>)}
+                  </select>
+                  {status === "customer" && <span>AI nudges on day 3 and 7, closes on day 14 if there&apos;s no reply</span>}
+                </dd></div>
+                <div><dt><Icon name="user" size={14} />Owner</dt><dd>{owner(status, stage)}</dd></div>
+                {dueFor(status) && stage.timeLeft && <div><dt><Icon name="clock" size={14} />Reply due</dt><dd className={stage.urgent ?? ""}>{stage.timeLeft === "Now" ? "Now" : `In ${stage.timeLeft}`}</dd></div>}
                 {open && c.followUp && <div><dt><Icon name="calendar" size={14} />Follow up</dt><dd>{c.followUp}</dd></div>}
                 <div><dt><Icon name="flag" size={14} />Reason</dt><dd>
                   <select className={`pick${reasons[c.id] ? "" : " missing"}`} aria-label="Contact reason" value={reasons[c.id] ?? ""} onChange={(e) => setReasons((r) => ({ ...r, [c.id]: e.target.value || undefined }))}>

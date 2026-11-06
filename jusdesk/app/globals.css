@@ -267,3 +267,13 @@ ul { list-style: none; }
 .risk li svg { margin-top: 2px; color: var(--ink3); } .risk.rev li svg { color: var(--bad); }
 .risk li em { font-style: normal; font-size: 12px; color: var(--ink3); white-space: nowrap; }
 .risk .rnote { margin: 8px 0 0; padding-top: 8px; border-top: 1px solid var(--hair); font-size: 12px; color: var(--ink2); }
+
+/* Statuses (Nitish, 7 Nov) */
+.reo { font-style: normal; font-size: 11px; font-weight: 510; color: var(--warn); margin-left: 6px; margin-right: auto; }
+.tags .reo { margin: 0; font-size: 12px; color: var(--warn); }
+.dkv dd.stat { display: flex; flex-direction: column; line-height: 18px; padding: 6px 0; }
+.dkv dd.stat span { font-size: 12px; font-weight: 400; color: var(--ink3); }
+.sendgrp { display: inline-flex; align-items: center; gap: 8px; }
+.after { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; color: var(--ink3); }
+.after select { border: 0; background: none; padding: 0; font: inherit; font-size: 12px; font-weight: 510; color: var(--ink2); cursor: pointer; outline: 0; }
+.after select:hover { color: var(--ink); }

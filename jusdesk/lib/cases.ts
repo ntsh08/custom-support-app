@@ -3,7 +3,8 @@ import type { IconName } from "@/components/Icon";
 // Fictional demo data for the five agreed cases (process/assignment-task.md).
 // Names, orders, couriers and amounts are invented.
 
-export type Group = "needs" | "waiting" | "lead" | "ai" | "closed";
+/** Ticket status: who has the ball. Reopened is a tag on "reply", not a status. */
+export type Group = "first" | "reply" | "customer" | "others" | "escalated" | "closed";
 
 export type Msg = (
   | { kind: "customer"; channel: "chat" | "email"; time: string; text: string; gloss?: string; /** Email only. */ subject?: string }
@@ -35,6 +36,10 @@ export type Option = {
 
 export type Stage = {
   group: Group;
+  /** The AI owns this step (follows up or closed it). */
+  by?: "AI";
+  /** The customer wrote after the ticket was closed. */
+  reopened?: boolean;
   nextStep: string;
   timeLeft?: string;
   urgent?: "warn" | "bad";
@@ -163,7 +168,7 @@ export const CASES: Case[] = [
     start: "decide",
     stages: {
       decide: {
-        group: "needs",
+        group: "first",
         nextStep: "Decide: evidence doesn't match",
         timeLeft: "40 min",
         urgent: "warn",
@@ -207,7 +212,7 @@ export const CASES: Case[] = [
       },
       reshipped: {
         linked: [["Courier claim", "CLM-2291 filed"], ["Reship", "FX-48213-R packed"], ["Refund", "None"]],
-        group: "waiting",
+        group: "others",
         nextStep: "Reship in transit, claim filed",
         status: "Waiting on Shadowfax · AI checks the claim on Monday",
         ai: "Replacement FX-48213-R is packed. Claim CLM-2291 is filed with Shadowfax. I'll close the case once Ananya's parcel is delivered with an OTP.",
@@ -220,7 +225,7 @@ export const CASES: Case[] = [
       },
       refunded: {
         linked: [["Courier claim", "Not filed"], ["Reship", "None"], ["Refund", "₹1,800 sent, waiting for provider"]],
-        group: "waiting",
+        group: "others",
         nextStep: "Refund with payment provider",
         status: "Refund sent · closes when the payment provider confirms",
         options: [],
@@ -296,7 +301,7 @@ export const CASES: Case[] = [
     start: "decide",
     stages: {
       decide: {
-        group: "needs",
+        group: "first",
         nextStep: "Refund needs your lead",
         timeLeft: "2 h",
         ai: "No proof of delivery and the GPS is 1.1 km off. A replacement isn't possible, so refund ₹6,500 to his UPI. That's above your ₹5,000 limit, so it needs Priya's approval.",
@@ -323,7 +328,7 @@ export const CASES: Case[] = [
       },
       withLead: {
         linked: [["Courier request", "No photo, GPS 1.1 km off"], ["Replacement", "Size L out of stock"], ["Refund", "₹6,500 with Priya for approval"]],
-        group: "lead",
+        group: "escalated",
         nextStep: "With Priya for approval",
         status: "Waiting on Priya (team lead) · usually within 1 h",
         options: [],
@@ -335,7 +340,7 @@ export const CASES: Case[] = [
       },
       failed: {
         linked: [["Courier request", "No photo, GPS 1.1 km off"], ["Replacement", "Size L out of stock"], ["Refund", "Failed: UPI ID inactive"]],
-        group: "needs",
+        group: "reply",
         nextStep: "Refund failed: fix and retry",
         timeLeft: "Now",
         urgent: "bad",
@@ -383,7 +388,7 @@ export const CASES: Case[] = [
       },
       toCard: {
         linked: [["Courier request", "No photo, GPS 1.1 km off"], ["Replacement", "Size L out of stock"], ["Refund", "Sent to card ending 4417"]],
-        group: "waiting",
+        group: "others",
         nextStep: "Refund with payment provider",
         status: "Refund sent to card · closes when the payment provider confirms",
         options: [],
@@ -392,7 +397,7 @@ export const CASES: Case[] = [
       },
       retrying: {
         linked: [["Courier request", "No photo, GPS 1.1 km off"], ["Replacement", "Size L out of stock"], ["Refund", "Retrying to new UPI ID"]],
-        group: "waiting",
+        group: "others",
         nextStep: "Refund with payment provider",
         status: "Refund retried · closes when the payment provider confirms",
         options: [],
@@ -465,7 +470,7 @@ export const CASES: Case[] = [
     start: "decide",
     stages: {
       decide: {
-        group: "needs",
+        group: "first",
         nextStep: "Review flagged claim",
         timeLeft: "15 min",
         urgent: "bad",
@@ -494,7 +499,7 @@ export const CASES: Case[] = [
       },
       withLead: {
         linked: [["Courier request", "Photo, GPS and OTP received"], ["Lead review", "With Priya"]],
-        group: "lead",
+        group: "escalated",
         nextStep: "With Priya",
         status: "Waiting on Priya (team lead) · reply promised by 6 pm tomorrow",
         options: [],
@@ -504,7 +509,7 @@ export const CASES: Case[] = [
         ],
       },
       asked: {
-        group: "waiting",
+        group: "customer",
         nextStep: "Waiting on Meera",
         status: "Waiting on Meera · AI reminds her tomorrow at 10 am",
         options: [],
@@ -552,7 +557,7 @@ export const CASES: Case[] = [
     start: "waiting",
     stages: {
       waiting: {
-        group: "waiting",
+        group: "others", by: "AI",
         nextStep: "Ekart reply due 4 pm",
         status: "Waiting on Ekart · AI checks at 4 pm, then hands to you",
         ai: "Early scan. I've told Kavya and asked Ekart. If Ekart doesn't confirm by 4 pm, it comes to you.",
@@ -560,7 +565,7 @@ export const CASES: Case[] = [
         simulate: { label: "Simulate: delivered at 3:40 pm", next: "closed" },
       },
       taken: {
-        group: "needs",
+        group: "reply",
         nextStep: "You're chasing Ekart",
         status: "Yours · Ekart reply due 4 pm",
         options: [],
@@ -619,14 +624,14 @@ export const CASES: Case[] = [
     start: "handled",
     stages: {
       handled: {
-        group: "ai",
+        group: "closed", by: "AI",
         nextStep: "AI closed · customer confirmed",
         status: "Closed by AI at 9:22 am · nothing for you to do",
         ai: "Evidence was clear and no money had to move, so I handled it in Hindi. Reopen if anything looks off.",
         options: [{ id: "reopen", label: "Reopen", next: "reopened" }],
       },
       reopened: {
-        group: "needs",
+        group: "reply", reopened: true,
         nextStep: "Reopened by you",
         status: "Yours · reopened",
         options: [],
@@ -636,10 +641,20 @@ export const CASES: Case[] = [
   },
 ];
 
-export const GROUPS: { id: Group; label: string }[] = [
-  { id: "needs", label: "New tickets" },
-  { id: "lead", label: "With your lead" },
-  { id: "waiting", label: "Waiting" },
-  { id: "ai", label: "Handled by AI" },
-  { id: "closed", label: "Closed" },
+export const STATUS: Record<Group, string> = {
+  first: "First response",
+  reply: "Needs reply",
+  customer: "Waiting on customer",
+  others: "Waiting on others",
+  escalated: "Escalated",
+  closed: "Closed",
+};
+
+/** Queue sections, most urgent first. Waiting merges customer and others. */
+export const GROUPS: { id: string; label: string; has: Group[] }[] = [
+  { id: "reply", label: "Needs reply", has: ["reply"] },
+  { id: "first", label: "First response", has: ["first"] },
+  { id: "escalated", label: "Escalated", has: ["escalated"] },
+  { id: "waiting", label: "Waiting", has: ["customer", "others"] },
+  { id: "closed", label: "Closed", has: ["closed"] },
 ];
