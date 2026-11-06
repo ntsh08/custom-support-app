@@ -24,9 +24,8 @@ const channels = (c: Case) => {
 };
 const owner = (g: Group, s: Stage) => (g === "escalated" ? "Priya" : s.by === "AI" ? "AI" : "You");
 const waitingG = (g: Group) => g === "customer" || g === "others";
-type SortBy = "urgency" | "due" | "newest" | "oldest";
+type SortBy = "due" | "newest" | "oldest";
 const SORTS: { id: SortBy; label: string; hint: string }[] = [
-  { id: "urgency", label: "Urgency", hint: "Status, then time left" },
   { id: "due", label: "Due time", hint: "Soonest reply or follow-up" },
   { id: "newest", label: "Newest", hint: "Latest tickets first" },
   { id: "oldest", label: "Oldest", hint: "Earliest tickets first" },
@@ -108,7 +107,7 @@ export function Workspace() {
     const cs = CASES.find((x) => x.id === id)!;
     return states[id].status ?? cs.stages[states[id].stage].group;
   };
-  const [sort, setSort] = useState<SortBy>("urgency");
+  const [sort, setSort] = useState<SortBy>("due");
   const [sortMenu, setSortMenu] = useState(false);
   const ordered = useMemo(() => {
     const left = (x: Case) => mins(x.stages[states[x.id].stage].timeLeft);
@@ -116,8 +115,7 @@ export function Workspace() {
     const due = (x: Case) => { const g = statusOf(x.id); return g === "closed" ? 3e9 : dueFor(g) && x.stages[states[x.id].stage].timeLeft ? left(x) : x.followUp ? 1e9 : 2e9; };
     const num = (x: Case) => parseInt(x.ticket.slice(1));
     const cmp: Record<SortBy, (a: Case, b: Case) => number> = {
-      urgency: (a, b) => order(statusOf(a.id)) - order(statusOf(b.id)) || left(a) - left(b),
-      due: (a, b) => due(a) - due(b),
+      due: (a, b) => due(a) - due(b) || order(statusOf(a.id)) - order(statusOf(b.id)),
       newest: (a, b) => num(b) - num(a),
       oldest: (a, b) => num(a) - num(b),
     };
