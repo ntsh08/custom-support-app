@@ -76,14 +76,11 @@ function Scene({ e }: { e: Evidence }) {
   );
 }
 
-export function EvidenceTile({ e }: { e: Evidence }) {
+export function EvidenceTile({ e, big }: { e: Evidence; big?: boolean }) {
   return (
-    <figure className="tile">
+    <figure className="tile-ev">
       <Scene e={e} />
-      <figcaption>
-        <b>{e.title}</b>
-        <span>{e.note}</span>
-      </figcaption>
+      <figcaption>{big ? `${e.title} · ${e.note}` : e.title}</figcaption>
     </figure>
   );
 }

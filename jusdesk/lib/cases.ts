@@ -1,3 +1,5 @@
+import type { IconName } from "@/components/Icon";
+
 // Fictional demo data for the five agreed cases (process/assignment-task.md).
 // Names, orders, couriers and amounts are invented.
 
@@ -14,7 +16,7 @@ export type Evidence =
   | { kind: "map"; title: string; note: string; metres: number }
   | { kind: "missing"; title: string; note: string };
 
-export type Fact = { label: string; value: string; tone?: "bad" | "good" };
+export type Fact = { label: string; value: string; tone?: "bad" | "good"; icon?: IconName };
 
 export type Option = {
   id: string;
@@ -88,9 +90,9 @@ export const CASES: Case[] = [
       { kind: "map", title: "Rider's GPS", note: "600 m from the address", metres: 600 },
     ],
     facts: [
-      { label: "Delivery OTP", value: "Not collected" },
-      { label: "Ananya", value: "14 orders, no past claims", tone: "good" },
-      { label: "560034 this week", value: "3 similar claims, all Shadowfax", tone: "bad" },
+      { icon: "key", label: "Delivery OTP", value: "Not collected" },
+      { icon: "user", label: "Ananya", value: "14 orders, no past claims", tone: "good" },
+      { icon: "alert", label: "560034 this week", value: "3 similar claims, all Shadowfax", tone: "bad" },
     ],
     start: "decide",
     stages: {
@@ -187,10 +189,10 @@ export const CASES: Case[] = [
       { kind: "map", title: "Rider's GPS", note: "1.1 km from the address", metres: 1100 },
     ],
     facts: [
-      { label: "Delivery OTP", value: "Not collected" },
-      { label: "Rohan", value: "9 orders, no past claims", tone: "good" },
-      { label: "560034 this week", value: "4th similar claim, all Shadowfax", tone: "bad" },
-      { label: "Size L", value: "Out of stock until December" },
+      { icon: "key", label: "Delivery OTP", value: "Not collected" },
+      { icon: "user", label: "Rohan", value: "9 orders, no past claims", tone: "good" },
+      { icon: "alert", label: "560034 this week", value: "4th similar claim, all Shadowfax", tone: "bad" },
+      { icon: "box", label: "Size L", value: "Out of stock until December" },
     ],
     start: "decide",
     stages: {
@@ -330,8 +332,8 @@ export const CASES: Case[] = [
       { kind: "map", title: "Rider's GPS", note: "8 m from the address", metres: 8 },
     ],
     facts: [
-      { label: "Delivery OTP", value: "Verified at 1:15 pm", tone: "good" },
-      { label: "Meera", value: "3rd claim in 2 months", tone: "bad" },
+      { icon: "key", label: "Delivery OTP", value: "Verified at 1:15 pm", tone: "good" },
+      { icon: "user", label: "Meera", value: "3rd claim in 2 months", tone: "bad" },
     ],
     signals: [
       "3rd \"not received\" claim on this account in 2 months",
@@ -409,8 +411,8 @@ export const CASES: Case[] = [
       { kind: "map", title: "Rider at the scan", note: "4.2 km away, on the route", metres: 4200 },
     ],
     facts: [
-      { label: "Scan", value: "10:12 am, rider 4.2 km away", tone: "bad" },
-      { label: "Route", value: "Your address is stop 14 of 22" },
+      { icon: "clock", label: "Scan", value: "10:12 am, rider 4.2 km away", tone: "bad" },
+      { icon: "pin", label: "Route", value: "Your address is stop 14 of 22" },
     ],
     start: "waiting",
     stages: {
@@ -465,8 +467,8 @@ export const CASES: Case[] = [
       { kind: "map", title: "Rider's GPS", note: "15 m from the gate", metres: 15 },
     ],
     facts: [
-      { label: "Courier note", value: "Handed to security guard" },
-      { label: "Payment", value: "Cash on delivery, collected", tone: "good" },
+      { icon: "truck", label: "Courier note", value: "Handed to security guard" },
+      { icon: "card", label: "Payment", value: "Cash on delivery, collected", tone: "good" },
     ],
     start: "handled",
     stages: {
