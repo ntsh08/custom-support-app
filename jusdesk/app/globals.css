@@ -442,5 +442,5 @@ ul { list-style: none; }
 .invcard .ihead svg:first-child, .invcard .ihead b { color: var(--acc-h); }
 
 /* Investigation card: evidence found, then the policy that decided (Nitish, 7 Nov) */
-.invcard .isum { display: grid; grid-template-columns: 64px 1fr; gap: 8px; -webkit-line-clamp: unset; overflow: visible; }
-.invcard .isum b { font-size: 12px; font-weight: 510; color: var(--ink3); }
+.invcard .isum { display: block; -webkit-line-clamp: unset; overflow: visible; }
+.invcard .isum b { font-weight: 510; color: var(--ink); }
