@@ -424,8 +424,7 @@ export function Workspace() {
                 {m.kind === "event" && m.investigation ? (
                   <section className="invcard" aria-label="AI investigation">
                     <p className="ihead"><Icon name="aisearch" size={14} /><b>AI investigation</b><span>{m.time}</span><em><Icon name="lock" size={12} />Only your team sees this</em></p>
-                    {m.evidence && <p className="isum"><b>Evidence:</b> {m.evidence}</p>}
-                    {m.policy && <p className="isum"><b>Policy:</b> {m.policy}</p>}
+                    <p className="isum">{m.evidence}{m.policy && <> As per our policy, {m.policy}</>}</p>
                     <Trace steps={m.investigation} />
                   </section>
                 ) : m.kind === "event" ? (
