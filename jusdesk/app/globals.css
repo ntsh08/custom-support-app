@@ -440,3 +440,7 @@ ul { list-style: none; }
 /* Investigation card gets the AI signature: gradient border, green label and icon (Nitish, 7 Nov) */
 .invcard { border: 1.5px solid transparent; background: var(--ai-fill) padding-box, var(--ai-edge) border-box; }
 .invcard .ihead svg:first-child, .invcard .ihead b { color: var(--acc-h); }
+
+/* Investigation card: evidence found, then the policy that decided (Nitish, 7 Nov) */
+.invcard .isum { display: grid; grid-template-columns: 64px 1fr; gap: 8px; -webkit-line-clamp: unset; overflow: visible; }
+.invcard .isum b { font-size: 12px; font-weight: 510; color: var(--ink3); }
