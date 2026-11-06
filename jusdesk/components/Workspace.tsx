@@ -422,11 +422,11 @@ export function Workspace() {
               <div key={i} className="grpmsg">
                 {(i === 0 || (all[i - 1].day ?? "Today") !== (m.day ?? "Today")) && <p className="day"><span>{m.day ?? "Today"}</span></p>}
                 {m.kind === "event" && m.investigation ? (
-                  <article className="msg ours bot inv">
-                    <p className="who"><span className="ai">AI</span><b>JusDesk assistant</b><span>{m.time}</span><em className="team"><Icon name="lock" size={12} />Only your team sees this</em></p>
+                  <section className="invcard" aria-label="AI investigation">
+                    <p className="ihead"><Icon name="search" size={14} /><b>AI investigation</b><span>{m.time}</span><em><Icon name="lock" size={12} />Only your team sees this</em></p>
+                    {m.summary && <p className="isum">{m.summary}</p>}
                     <Trace steps={m.investigation} />
-                    <div className="noreply">No reply sent</div>
-                  </article>
+                  </section>
                 ) : m.kind === "event" ? (
                   <p className="stchg">{m.text}<span>· {m.time}</span></p>
                 ) : <Message m={m} customer={c.customer} email={c.email} language={c.language} onAction={msgAction} />}
@@ -727,7 +727,6 @@ function Message({ m, customer, email, language, onAction }: { m: Msg; customer:
     return (<>
       <article className={`msg ours${bot ? " bot" : ""}`}>
         <p className="who">{bot && <span className="ai">AI</span>}<b>{m.who}</b><span>{m.time}</span></p>
-        {bot && m.steps && <Trace steps={m.steps} />}
         {body(m.gloss)}
         <Actions m={m} onAction={onAction} />
       </article>
