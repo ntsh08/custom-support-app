@@ -98,6 +98,17 @@ ul { list-style: none; }
 .msg.mail hr { border: 0; border-top: 1px solid #ECECEF; margin: 8px 0 10px; }
 .msg.mail .subj { margin: 0 0 8px; font-size: 13px; font-weight: 590; color: var(--ink); }
 .msg.mail .mbody { white-space: pre-line; }
+.trace { margin: -2px 0 6px; }
+.trace > button { margin-left: -6px; display: inline-flex; align-items: center; gap: 6px; height: 24px; padding: 0 6px; border: 0; border-radius: 6px; background: none; font: inherit; font-size: 12px; font-weight: 510; color: var(--ink3); cursor: pointer; }
+.trace > button:hover { background: var(--s2); color: var(--ink2); }
+.trace > button > svg:first-child { color: var(--acc-h); }
+.trace > button > svg:last-child { transition: transform .3s cubic-bezier(.23,1,.32,1); }
+.trace .steps { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows .3s cubic-bezier(.23,1,.32,1), opacity .3s; }
+.trace .steps.open { grid-template-rows: 1fr; opacity: 1; }
+.trace .steps > div { overflow: hidden; }
+.trace ol { list-style: none; margin: 4px 0 6px 7px; padding: 2px 0 2px 16px; border-left: 1px solid var(--hair); display: grid; gap: 2px; }
+.trace li { display: flex; align-items: center; gap: 8px; min-height: 24px; font-size: 12px; line-height: 16px; color: var(--ink3); }
+.trace li svg { flex: none; }
 .msg.note { align-self: stretch; max-width: none; background: var(--note); border: 1px solid #FAF1D6; }
 .msg.note .who, .msg.note .who b { color: var(--note-ink); }
 .acts { position: absolute; top: -14px; right: 8px; display: none; gap: 2px; padding: 2px; background: var(--s0); border: 1px solid var(--hair2); border-radius: 8px; }

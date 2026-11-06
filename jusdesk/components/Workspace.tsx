@@ -470,6 +470,7 @@ function Message({ m, customer, email, language, onAction }: { m: Msg; customer:
     return (
       <article className={`msg ours${bot ? " bot" : ""}`}>
         <p className="who">{bot && <span className="ai">AI</span>}<b>{m.who}</b><span>{m.time}</span>{m.gloss && <em className="tr"><Icon name="translate" size={14} />Sent in {language ?? "another language"}</em>}</p>
+        {bot && m.steps && <Trace steps={m.steps} />}
         <div>{m.text}{m.gloss && <span className="gloss">{m.gloss}</span>}</div>
         <Actions m={m} onAction={onAction} />
       </article>
@@ -492,5 +493,22 @@ function Message({ m, customer, email, language, onAction }: { m: Msg; customer:
       <div>{m.text}{m.gloss && <span className="gloss">{m.gloss}</span>}</div>
       <Actions m={m} onAction={onAction} translate />
     </article>
+  );
+}
+
+/** The assistant's work before a reply, after the INA agent trace: one line, opens to the steps. */
+function Trace({ steps }: { steps: string[] }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="trace">
+      <button type="button" aria-expanded={open} onClick={() => setOpen((v) => !v)}>
+        <Icon name="spark" size={14} />
+        <span>Ran {steps.length} step{steps.length === 1 ? "" : "s"}</span>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ transform: open ? "rotate(180deg)" : "none" }}><path d="M6 9l6 6 6-6" /></svg>
+      </button>
+      <div className={`steps${open ? " open" : ""}`}><div>
+        <ol>{steps.map((t) => <li key={t}><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5" /></svg>{t}</li>)}</ol>
+      </div></div>
+    </div>
   );
 }
