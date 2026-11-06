@@ -169,6 +169,7 @@ export const CASES: Case[] = [
     asks: [
       { q: "Has she claimed before?", a: "No. 14 orders since 2024, no claims, no returns flagged." },
       { q: "When would a reship arrive?", a: "Packed today, delivered Friday by Shadowfax. That's before her Saturday deadline." },
+      { q: "Which flat got the parcel?", a: "Likely the green door on her floor. Her last delivery went to the white door, B-204. Shadowfax can confirm from the rider's log." },
     ],
     start: "decide",
     stages: {
@@ -304,6 +305,7 @@ export const CASES: Case[] = [
     asks: [
       { q: "Can we offer size XL instead?", a: "XL is in stock, but he asked for L. Offer it only if he asks; the refund is the safe default." },
       { q: "How long will the refund take?", a: "UPI refunds usually land within a day once the provider confirms." },
+      { q: "Is Shadowfax having issues in his area?", a: "Yes. This is the 4th similar claim from 560034 this week, all Shadowfax." },
     ],
     start: "decide",
     stages: {
@@ -476,6 +478,11 @@ export const CASES: Case[] = [
     tags: ["Order not received", "Refund requested", "Repeat claim"],
     history: { since: "May 2026", orders: "6", spent: "₹18,200", claims: "3 in 2 months", refunds: "2 · ₹7,300, none reversed", address: "Shared with 1 other account", risk: { level: "Review", checks: [{ text: "3rd “not received” claim on this account in 2 months", src: "Order history" }, { text: "Another account at the same address made 2 claims", src: "Address match" }, { text: "Card used here is linked to 1 chargeback", src: "Payment data" }] }, past: [["Not received, refunded", "Oct"], ["Not received, refunded", "Sep"]] },
     tasks: [],
+    asks: [
+      { q: "Has this address claimed before?", a: "Yes. Another account at the same address made 2 claims in the last 2 months." },
+      { q: "What should I tell Meera now?", a: "Stay neutral: say you're checking with Delhivery and will update her by 6 pm. Don't mention the earlier claims." },
+      { q: "Can I refund her myself?", a: "No. Suspected false claims go to Priya. You can't approve or deny it yourself." },
+    ],
     linked: [["Courier request", "Photo, GPS and OTP received"], ["Refund", "None"]],
     start: "decide",
     stages: {
@@ -567,6 +574,11 @@ export const CASES: Case[] = [
     tags: ["Order not received", "Early scan"],
     history: { since: "July 2025", orders: "4", spent: "₹6,300", claims: "None", refunds: "None", address: "Same since 2025 · 3 deliveries, no issues", risk: { level: "Low", checks: [{ text: "No earlier claims or refunds", src: "Order history" }, { text: "Only her account uses this address", src: "Address match" }, { text: "No chargebacks on her UPI", src: "Payment data" }] }, past: [] },
     tasks: [],
+    asks: [
+      { q: "Where is the rider now?", a: "Stop 14 of 22 on today's route, about 4.2 km from her address." },
+      { q: "What if Ekart doesn't reply by 4 pm?", a: "Call the rider through the Ekart hub, then update Kavya either way." },
+      { q: "Has she ordered before?", a: "4 orders since July 2025, no claims." },
+    ],
     linked: [["Courier request", "Asked Ekart to confirm"], ["Refund", "None"]],
     start: "waiting",
     stages: {
@@ -637,6 +649,11 @@ export const CASES: Case[] = [
     tags: ["Order not received", "Cash on delivery"],
     history: { since: "December 2024", orders: "11", spent: "₹14,800", claims: "None", refunds: "None", address: "Same since 2024 · 10 deliveries, no issues", risk: { level: "Low", checks: [{ text: "No earlier claims or refunds", src: "Order history" }, { text: "Only his account uses this address", src: "Address match" }, { text: "Pays cash on delivery; no payment disputes", src: "Payment data" }] }, past: [["Payment issue, COD", "Jul · solved"]] },
     tasks: [],
+    asks: [
+      { q: "Who confirmed the delivery?", a: "Vikram did, at 9:22 am: the society guard had it." },
+      { q: "Was the cash collected?", a: "Yes. Cash on delivery, ₹1,200, collected by Delhivery." },
+      { q: "Does anything else need doing?", a: "No. The ticket is closed and nothing is pending." },
+    ],
     linked: [["Courier request", "Note and photo received"], ["Refund", "None"]],
     start: "handled",
     stages: {
