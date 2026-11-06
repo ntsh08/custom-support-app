@@ -366,7 +366,7 @@ export function Workspace() {
               <div key={i} className="grpmsg">
                 {(i === 0 || (all[i - 1].day ?? "Today") !== (m.day ?? "Today")) && <p className="day"><span>{m.day ?? "Today"}</span></p>}
                 {m.kind === "event" ? (
-                  <p className="stchg"><i className={`dot st-${m.status}`} />{m.text}<span>· {m.time}</span></p>
+                  <p className="stchg">{m.text}<span>· {m.time}</span></p>
                 ) : <Message m={m} customer={c.customer} email={c.email} language={c.language} onAction={msgAction} />}
                 {i === c.thread.filter(shown).length - 1 && summaryCard}
               </div>
