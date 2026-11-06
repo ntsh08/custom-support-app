@@ -63,8 +63,7 @@ Colour carries meaning only:
 
 ## 8. Components
 - Properties (status, owner, time, reason) are outlined chips, not a sentence.
-- Dashed border means "not real yet" or "private":
-  - internal notes
+- Dashed border means "not real yet":
   - unset fields
   - prototype-only buttons
 - Icons: Hugeicons Stroke Rounded, stroke 1.5.
@@ -72,9 +71,13 @@ Colour carries meaning only:
   - The selected nav icon is filled.
 - Avoid initials avatars. Use a channel icon or an object icon instead.
 
-## 9. AI surfaces and the pattern
-- AI-written context (the "Before you read" summary) sits on a cool grey (`#F1F4F7`, border `#DFE5EC`), so it reads apart from messages.
-- Behind it, a plus-sign pattern: 16px grid, 6px plus, 1px stroke `#C3CDD8`, fading out from the top right. Plus signs only; no other motifs.
+## 9. AI signature, notes and the pattern
+- Anything AI wrote or did gets one signature, and nothing else uses it:
+  - a green wash gradient (`#E6F2EA` → `#F4F9F6` → white, 135°, border `#D5E7DB`), on the AI summary and the AI recommendation card
+  - a green "AI" tag (`#E3F0E8` bg, `#2F6547` text), on AI events and the assistant's messages
+  - the sparkle icon
+- Internal notes are a plain yellow card (`#FFF8E6`, border `#F3E3B5`, label `#8A6512`), with a lock icon and "Internal note". No badge, no dashed border. The composer turns yellow in note mode. (Nitish, 6 Nov: the industry convention wins here.)
+- The middle column has a WhatsApp-style wallpaper: plus signs only, 20px grid, 6px plus, 1px `#DDE1E6` on `#FAFAFB`.
 - The conversation column is capped at 600px.
 
 ## 10. Don'ts

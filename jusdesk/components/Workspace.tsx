@@ -430,7 +430,7 @@ function Message({ m, customer, onAction }: { m: Msg; customer: string; onAction
   if (m.kind === "note") {
     return (
       <article className="msg note">
-        <p className="who"><span className="tag"><Icon name="lock" size={12} />Internal note</span><b>{m.who}</b><span>{m.time} · customer can&apos;t see this</span></p>
+        <p className="who"><Icon name="lock" size={14} /><b>Internal note</b><span>{m.who} · {m.time}</span></p>
         <div>{m.text}</div>
         <Actions m={m} onAction={onAction} />
       </article>
