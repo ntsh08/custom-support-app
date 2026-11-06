@@ -277,3 +277,11 @@ ul { list-style: none; }
 .after { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; color: var(--ink3); }
 .after select { border: 0; background: none; padding: 0; font: inherit; font-size: 12px; font-weight: 510; color: var(--ink2); cursor: pointer; outline: 0; }
 .after select:hover { color: var(--ink); }
+
+/* Panel tabs: Details / Copilot (Nitish, 7 Nov) */
+.panel .bar.ptabs { justify-content: flex-start; gap: 20px; border-bottom: 1px solid var(--hair); align-items: stretch; }
+.ptabs button { position: relative; border: 0; background: none; padding: 0; font: inherit; font-weight: 510; color: var(--ink3); cursor: pointer; }
+.ptabs button:hover { color: var(--ink2); }
+.ptabs button.on { color: var(--ink); }
+.ptabs button.on::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; border-radius: 1px; background: var(--ink); }
+.blk[hidden] { display: none; }

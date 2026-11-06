@@ -46,6 +46,7 @@ export function Workspace() {
   const [confirming, setConfirming] = useState<Option | null>(null);
   const [drafts, setDrafts] = useState<Record<string, string>>({});
   const [mode, setMode] = useState<"reply" | "note">("reply");
+  const [tab, setTab] = useState<"details" | "copilot">("details");
   const [afterSend, setAfterSend] = useState<Record<string, Group>>({});
   const [hidden, setHidden] = useState<Record<string, boolean>>({});
   // The summary "writes" for a moment each time a case opens (E4), then settles (B6).
@@ -321,9 +322,13 @@ export function Workspace() {
 
         {/* Right panel: AI first, then tasks, linked work, evidence, order */}
         <aside className="panel" aria-label="AI and case details">
-          <header className="bar"><b>Details</b></header>
+          <header className="bar ptabs" role="tablist">
+            {(["details", "copilot"] as const).map((t) => (
+              <button key={t} role="tab" aria-selected={tab === t} className={tab === t ? "on" : ""} onClick={() => setTab(t)}>{t === "details" ? "Details" : "Copilot"}</button>
+            ))}
+          </header>
           <div className="scroll">
-            <section className="blk">
+            <section className="blk" hidden={tab !== "details"}>
               <h4>Order details</h4>
               <dl className="dkv">
                 <div><dt><Icon name="box" size={14} />Item</dt><dd>{c.item}</dd></div>
@@ -332,7 +337,7 @@ export function Workspace() {
                 <div><dt><Icon name="chat" size={14} />Language</dt><dd>{c.language ?? "English"}</dd></div>
               </dl>
             </section>
-            <section className="blk">
+            <section className="blk" hidden={tab !== "copilot"}>
               <div className="card rec">
                 {confirming?.confirm ? (
                   <div className="confirm" role="group" aria-label={confirming.confirm.title}>
@@ -383,7 +388,7 @@ export function Workspace() {
               )}
             </section>
 
-            <section className="blk">
+            <section className="blk" hidden={tab !== "details"}>
               <h4>Properties</h4>
               <dl className="dkv">
                 <div className={status === "customer" ? "tagrow" : ""}><dt><Icon name="inbox" size={14} />Status</dt><dd className="stat">
@@ -428,7 +433,7 @@ export function Workspace() {
               </dl>
             </section>
 
-            <section className="blk">
+            <section className="blk" hidden={tab !== "details"}>
               <h4>Customer history</h4>
               <dl className="dkv">
                 <div><dt><Icon name="user" size={14} />Customer since</dt><dd>{c.history.since}</dd></div>
@@ -452,7 +457,7 @@ export function Workspace() {
               ) : <p className="hint">No earlier tickets.</p>}
             </section>
 
-            <section className="blk">
+            <section className="blk" hidden={tab !== "details"}>
               <h4>Linked tickets</h4>
               <dl className="dkv">
                 {linked.map(([k, v]) => (
@@ -461,7 +466,7 @@ export function Workspace() {
               </dl>
             </section>
 
-            <section className="blk">
+            <section className="blk" hidden={tab !== "details"}>
               <h4>Tasks and follow-ups <button onClick={() => setNewTask("")}><Icon name="plus" size={14} />Add</button></h4>
               {caseTasks.length === 0 && newTask === null && <p className="hint">No follow-ups on this case.</p>}
               <ul className="tasks">
@@ -489,7 +494,7 @@ export function Workspace() {
               {open && <p className="hint">The case stays open until {c.customer.split(" ")[0]} is told the outcome. Sending a reply doesn&apos;t close it.</p>}
             </section>
 
-            <section className="blk">
+            <section className="blk" hidden={tab !== "details"}>
               <h4>Delivery evidence</h4>
               <div className={`thumbs n${c.evidence.length}`}>{c.evidence.map((e, i) => <EvidenceTile key={i} e={e} />)}</div>
               <p className="hint">Illustrations · demo data</p>
