@@ -105,8 +105,7 @@ ul { list-style: none; }
 .msg.theirs { align-self: flex-start; background: var(--s2); border: 1px solid #F1F1F4; }
 .msg.ours { align-self: flex-end; background: var(--s0); border: 1px solid #EDEDF0; }
 .msg.mail hr { border: 0; border-top: 1px solid #ECECEF; margin: 8px 0 10px; }
-.msg.mail .subj { margin: 0; font-size: 13px; font-weight: 590; color: var(--ink); }
-.msg.mail .subj span { font-weight: 400; color: var(--ink3); }
+.msg.mail .subj { margin: 0 0 8px; font-size: 13px; font-weight: 590; color: var(--ink); }
 .msg.mail .mbody { white-space: pre-line; }
 .trace { margin: -2px 0 6px; }
 .trace > button { margin-left: -6px; display: inline-flex; align-items: center; gap: 4px; height: 24px; padding: 0 6px; border: 0; border-radius: 6px; background: none; font: inherit; font-size: 12px; font-weight: 510; color: var(--ink2); cursor: pointer; }

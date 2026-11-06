@@ -733,7 +733,7 @@ function Message({ m, customer, email, language, onAction }: { m: Msg; customer:
       <article className="msg theirs mail">
         <p className="who"><b>{customer}</b><span>Email · {m.time}</span></p>
         <hr />
-        {m.subject && <><h4 className="subj"><span>Subject:</span> {m.subject}</h4><hr /></>}
+        {m.subject && <h4 className="subj">{m.subject}</h4>}
         <div className="mbody">{m.text}</div>
         <Actions m={m} onAction={onAction} translate />
       </article>
