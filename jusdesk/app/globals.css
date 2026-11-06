@@ -350,8 +350,14 @@ ul { list-style: none; }
 /* Split button takes the status colour; tighter title-to-tags gap (Nitish, 7 Nov) */
 .head .tags { margin-top: 0; }
 .hrow { min-height: 20px; }
-.hrow .split { margin: -5px 0; }
-.split.st-first, .split.st-reply, .split.st-escalated, .split.st-others, .split.st-customer, .split.st-closed { border-color: transparent; }
 .split button { color: inherit; }
 .split .sp-more { border-left-color: rgb(0 0 0 / .08); color: inherit; }
 .split button:hover, .split .sp-more[aria-expanded="true"] { background: rgb(0 0 0 / .04); }
+
+/* Header: split button centred on the title + tags block, with an outline (Nitish, 7 Nov) */
+.head { grid-template-columns: minmax(0, 1fr) auto; column-gap: 16px; }
+.hrow { display: contents; }
+.head h1 { grid-column: 1; grid-row: 1; }
+.head .tags { grid-column: 1; grid-row: 2; }
+.head .split { grid-column: 2; grid-row: 1 / span 2; align-self: center; border: 1px solid color-mix(in srgb, currentColor 35%, transparent); }
+.split .sp-more { border-left: 1px solid color-mix(in srgb, currentColor 35%, transparent); }

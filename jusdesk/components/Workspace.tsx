@@ -346,6 +346,7 @@ export function Workspace() {
               <span>{c.ticket}</span>
               <span><Icon name="user" size={14} />{c.customer}</span>
               <span><Icon name="translate" size={14} />{c.language ?? "English"}</span>
+              {dueFor(status) && stage.timeLeft && <span className={stage.urgent ?? ""}><Icon name="clock" size={14} />{stage.timeLeft === "Now" ? "Reply now" : `Reply in ${stage.timeLeft}`}</span>}
             </div>
           </header>
 
