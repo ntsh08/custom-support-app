@@ -9,11 +9,11 @@ Apply these to everything designed in this project: the app, static pages, Figma
 - No purple, no blue.
 
 ## 2. Depth from greys, not effects
-- Surfaces: s0 `#FFFFFF`, s1 `#FAFAFB`, s2 `#F4F4F6`, s3 `#EDEDF0`. Don't skip steps.
+- Surfaces: s0 `#FFFFFF`, s1 `#FCFCFD`, s2 `#F7F7F9`, s3 `#F1F1F4`. Don't skip steps.
 - Borders: hairline `#E8E8EB`, strong `#DCDCE1`, both 1px.
 - Selected and hover states are a grey step (s1 or s2).
-- Tonal layering: no divider lines in the queue or the right panel. Panels sit on s1; groups are white cards (12px radius, no border) or grey steps. Lists have no divider lines. Sections are separated by space and grey steps: the queue sits on white (s0), hover is s2, selected is s3, rows are rounded 8px and inset 8px.
-- No shadows, no gradients, no glows. The only exception is the toast.
+- Tonal layering: no divider lines in the queue or the right panel. Panels sit on s1; groups are white cards (12px radius, hairline border and the soft lift) or grey steps. Lists have no divider lines. Sections are separated by space and grey steps: the queue sits on white (s0), hover is s2, selected is s3, rows are rounded 8px and inset 8px.
+- No gradients or glows. Shadows only as a soft lift on white cards in the right panel (Linear's property cards): 1px hairline border plus `0 1px 2px rgb(16 24 40 / .05), 0 1px 3px rgb(16 24 40 / .04)` (Nitish, 6 Nov). The toast is the other exception.
 
 ## 3. Corner radius by role
 | Radius | Use |
@@ -79,7 +79,7 @@ Colour carries meaning only:
   - the sparkle icon
 - Internal notes are a plain yellow card (`#FFF8E6`, border `#F3E3B5`, label `#8A6512`), with a lock icon and "Internal note". No badge, no dashed border. The composer turns yellow in note mode. (Nitish, 6 Nov: the industry convention wins here.)
 - No wallpaper behind the conversation for now; plain `#FAFAFB`.
-- Columns: rail 52px, queue 272px, case flexible (min 460px), details panel 360px. The conversation inside the case column is capped at 552px and centred.
+- Columns: rail 52px, queue 272px, case flexible (min 460px), details panel 420px. The conversation inside the case column is capped at 552px and centred.
 
 ## 10. Don'ts
 - No second accent colour.
