@@ -81,6 +81,8 @@ Colour carries meaning only:
 - No wallpaper behind the conversation for now; plain `#FAFAFB`.
 - Columns: rail 52px, queue 272px, case flexible (min 460px), details panel 420px. The conversation inside the case column is capped at 552px and centred.
 
+- Conversation borders are extra light so cards read by fill, not outline: customer `#F0F0F3`, own green `#E1EEE6`, note `#F7EDCB`, AI wash `#E3F0E8`, composer `#E8E8EC`.
+
 ## 10. Don'ts
 - No second accent colour.
 - No coloured section backgrounds or tinted cards.
