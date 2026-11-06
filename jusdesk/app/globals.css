@@ -12,7 +12,7 @@
   --warn: #B45309; --bad: #B42318; --ok: #15803D;
   --rail-on: #E6E6EA;
   --g50: #F1F7F3; --g200: #CFE3D6;
-  --ai-wash: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1' preserveAspectRatio='none'%3E%3ClinearGradient id='g' x1='-0.0279' y1='-0.0282' x2='0.2357' y2='0.2382'%3E%3Cstop offset='0.0998' stop-color='%23399359'/%3E%3Cstop offset='0.522' stop-color='%23A3D7B8'/%3E%3Cstop offset='0.9925' stop-color='%23FFFFFF'/%3E%3C/linearGradient%3E%3Crect opacity='0.5' width='1' height='1' fill='url%28%23g%29'/%3E%3C/svg%3E") center / 100% 100% no-repeat, #FFFFFF; --ai-line: #E6F1EA;
+  --ai-wash: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1' preserveAspectRatio='none'%3E%3ClinearGradient id='g' x1='0' y1='-0.0586' x2='0' y2='0.5450'%3E%3Cstop offset='0' stop-color='%238FC4A2'/%3E%3Cstop offset='0.351' stop-color='%23CDEAD9'/%3E%3Cstop offset='1' stop-color='%23FFFFFF'/%3E%3C/linearGradient%3E%3Crect width='1' height='1' fill='url%28%23g%29'/%3E%3C/svg%3E") center / 100% 100% no-repeat, #FFFFFF; --ai-line: #E6F1EA;
   --note: #FFF8E6; --note-line: #F3E3B5; --note-ink: #8A6512;
 }
 * { box-sizing: border-box; }
@@ -73,9 +73,9 @@ ul { list-style: none; }
 
 .thread { flex: 1; overflow-y: auto; padding: 24px; display: flex; flex-direction: column; gap: 12px; }
 .sumwrap { align-self: stretch; margin-top: 8px; }
-.sum { display: grid; gap: 4px; padding: 14px 16px; border: 1px solid var(--hair); border-radius: 12px; background: var(--ai-wash); }
-.sum .lbl { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 510; color: var(--acc-h); }
-.sum h3 { font-size: 14px; line-height: 20px; font-weight: 590; color: var(--ink); margin: 2px 0 0; }
+.sum { display: grid; gap: 0; padding: 14px 16px; border: 1px solid var(--hair); border-radius: 12px; background: var(--ai-wash); }
+.sum .lbl { margin-bottom: 8px; line-height: 16px; display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 510; color: var(--acc-h); }
+.sum h3 { font-size: 14px; line-height: 20px; font-weight: 590; color: var(--ink); margin: 0 0 2px; }
 .sum p { color: var(--ink2); }
 .sumwrap .foot { display: flex; align-items: center; gap: 2px; height: 28px; margin-top: 4px; padding: 0 4px; font-size: 12px; color: var(--ink3); opacity: 0; transition: opacity .15s ease; }
 .sumwrap:hover .foot, .sumwrap:focus-within .foot { opacity: 1; }
