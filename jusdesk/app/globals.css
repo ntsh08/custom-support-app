@@ -422,3 +422,10 @@ ul { list-style: none; }
 .sum .sugg button.added:hover { background: rgb(0 0 0 / .04); }
 .addmenu .rm { font-size: 13px; font-weight: 400; color: var(--ink2); }
 .addmenu button svg { color: var(--ink2); }
+
+/* AI investigated but didn't reply: team-only line that opens to the steps (Nitish, 7 Nov) */
+.inv { display: flex; flex-direction: column; align-items: center; }
+.inv .stchg svg { color: var(--ink3); }
+.inv .trace { margin: 2px 0 0; display: flex; flex-direction: column; align-items: center; }
+.inv .trace > button { margin-left: 0; }
+.inv .trace .steps { width: min(100%, 520px); }

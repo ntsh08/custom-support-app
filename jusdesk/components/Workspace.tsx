@@ -52,7 +52,7 @@ const statusLine = (g: Group, by: "You" | "AI"): Msg => ({
   kind: "event", time: "Now", ai: by === "AI", status: g,
   text: g === "escalated" ? `${by === "AI" ? "AI" : "You"} escalated to Priya (team lead)` : g === "closed" ? `${by} closed the ticket` : `${by} changed status to ${STATUS[g]}`,
 });
-const shown = (m: Msg) => m.kind !== "event" || !!m.status || !!m.assign;
+const shown = (m: Msg) => m.kind !== "event" || !!m.status || !!m.assign || !!m.investigation;
 
 /** Check reply: the AI reads the draft against the customer's ask, mood, policy and language. */
 type Note = { text: string; ok?: boolean; fix?: (d: string) => string };
@@ -156,7 +156,7 @@ export function Workspace() {
   const setStatus = (g: Group) => setStates((s) => (g === status ? s : { ...s, [c.id]: { ...s[c.id], status: g, extra: [...s[c.id].extra, statusLine(g, "You")] } }));
 
   // Suggestions for the executive come from the assistant's investigation; shown inside the summary card.
-  const nextSteps = [...thread].reverse().find((m): m is Extract<Msg, { kind: "agent" }> => m.kind === "agent" && !!m.next)?.next ?? (open ? c.suggest ?? [] : []);
+  const nextSteps = [...thread].reverse().map((m) => (m.kind === "agent" || m.kind === "event" ? m.next : undefined)).find((n) => n && n.length) ?? (open ? c.suggest ?? [] : []);
   // One list of AI suggestions: the investigation's next steps, plus the AI-suggested tasks (no longer shown in the panel).
   const suggestions: Sugg[] = [
     ...nextSteps.map((t) => ({ text: t, due: dueOf(t) })),
@@ -421,7 +421,12 @@ export function Workspace() {
             {thread.filter(shown).map((m, i, all) => (
               <div key={i} className="grpmsg">
                 {(i === 0 || (all[i - 1].day ?? "Today") !== (m.day ?? "Today")) && <p className="day"><span>{m.day ?? "Today"}</span></p>}
-                {m.kind === "event" ? (
+                {m.kind === "event" && m.investigation ? (
+                  <div className="inv">
+                    <p className="stchg"><Icon name="lock" size={12} />{m.text}<span>· {m.time}</span></p>
+                    <Trace steps={m.investigation} />
+                  </div>
+                ) : m.kind === "event" ? (
                   <p className="stchg">{m.text}<span>· {m.time}</span></p>
                 ) : <Message m={m} customer={c.customer} email={c.email} language={c.language} onAction={msgAction} />}
                 {i === c.thread.filter(shown).length - 1 && summaryCard}

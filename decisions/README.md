@@ -5,6 +5,7 @@ Read the Active entries before changing a screen they list.
 
 | Date | Decision | Type | Status |
 |------|----------|------|--------|
+| 2026-11-07 | [The AI is first on every ticket and replies only when it can answer](2026-11-07-ai-first-replies-only-when-it-can.md) | Interaction | Active |
 | 2026-11-07 | [Six ticket statuses; Reopened is a tag; auto-close after 14 days](2026-11-07-ticket-statuses.md) | Flow | Active |
 | 2026-11-05 | [Inter, light theme only](2026-11-05-inter-light-only.md) | Visual | Active |
 | 2026-11-05 | [Purple is the brand colour and marks AI actions](2026-11-05-purple-brand-and-ai.md) | Visual | Active |

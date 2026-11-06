@@ -9,7 +9,7 @@ export type Group = "first" | "reply" | "customer" | "others" | "escalated" | "c
 export type Msg = (
   | { kind: "customer"; channel: "chat" | "email"; time: string; text: string; gloss?: string; /** Email only. */ subject?: string }
   | { kind: "agent"; who: string; time: string; text: string; gloss?: string; /** What the assistant did before replying (shown as a collapsed trace). */ steps?: string[]; /** What the executive should try next, from the investigation. */ next?: string[] }
-  | { kind: "event"; time: string; text: string; ai?: boolean; /** A status change, shown as a line in the conversation. */ status?: Group; /** An assignment, shown the same way. */ assign?: string }
+  | { kind: "event"; time: string; text: string; ai?: boolean; /** A status change, shown as a line in the conversation. */ status?: Group; /** An assignment, shown the same way. */ assign?: string; /** The AI investigated but didn't reply: its steps, team-only. */ investigation?: string[]; next?: string[] }
   | { kind: "note"; who: string; time: string; text: string }
 ) & { /** Day label for the date separator. Defaults to "Today". */ day?: string };
 
@@ -126,7 +126,7 @@ export const CASES: Case[] = [
     thread: [
       { kind: "event", time: "Yesterday 6:42 pm", text: "Shadowfax marked delivered" },
       { kind: "customer", channel: "chat", time: "8:52 am", text: "My order shows delivered but I didn't get anything." },
-      { kind: "agent", who: "JusDesk assistant", time: "8:52 am", steps: ["Read her message: nothing reached her door", "Checked tracking: Shadowfax marked it delivered yesterday at 6:42 pm", "Pulled the courier photo and the rider's GPS", "The photo shows a different door, so passed it to the team instead of closing"], next: ["Reship size M today: the photo shows a different door", "Chase Shadowfax on the claim on Monday", "Check the reship reached her by Friday"], text: "Sorry about that. I'm checking with the courier and passing this to our team now." },
+      { kind: "event", time: "8:52 am", text: "AI investigated this ticket", ai: true, investigation: ["Read her message: nothing reached her door", "Checked tracking: Shadowfax marked it delivered yesterday at 6:42 pm", "Pulled the courier photo and the rider's GPS", "The photo shows a different door, so passed it to the team instead of closing"], next: ["Reship size M today: the photo shows a different door", "Chase Shadowfax on the claim on Monday", "Check the reship reached her by Friday"] },
       { kind: "event", time: "8:53 am", text: "AI handed over with the courier photo and GPS attached", ai: true },
       { kind: "event", time: "8:53 am", text: "AI set status to First response", ai: true, status: "first" },
       { kind: "event", time: "8:53 am", text: "AI assigned this ticket to you", ai: true, assign: "you" },
@@ -146,7 +146,7 @@ export const CASES: Case[] = [
     ],
     handoff: [
       "She wrote twice (chat 8:52, email 9:14). Both are merged here.",
-      "The assistant already showed her the tracking and pulled the courier photo and GPS. Don't ask her for them again.",
+      "The AI pulled the tracking, courier photo and GPS. Don't ask her for them again.",
     ],
     rec: {
       title: "Reship the kurta and file a courier claim",
@@ -264,7 +264,7 @@ export const CASES: Case[] = [
     thread: [
       { kind: "event", time: "Tue 7:05 pm", text: "Shadowfax marked delivered" },
       { kind: "customer", channel: "email", time: "10:02 am", subject: "Jacket never arrived", text: "Hi,\n\nMy jacket shows as delivered on Tuesday but it never came. Can you send another one?\n\nRohan" },
-      { kind: "event", time: "10:03 am", text: "AI checked stock: size L is out of stock until December", ai: true },
+      { kind: "event", time: "10:03 am", text: "AI investigated this ticket", ai: true, investigation: ["Read his email: the jacket never came, he wants another", "Checked tracking: Shadowfax marked it delivered on Tuesday, no OTP, no photo", "Compared the rider's GPS: 1.1 km from his address", "Checked stock: size L is out until December, so no replacement", "A ₹6,500 refund needs Priya's approval, so didn't reply or promise anything"] },
       { kind: "event", time: "10:03 am", text: "AI set status to First response", ai: true, status: "first" },
       { kind: "event", time: "10:03 am", text: "AI assigned this ticket to you", ai: true, assign: "you" },
     ],
@@ -281,7 +281,7 @@ export const CASES: Case[] = [
     handoff: [
       "Rohan wrote once, by email on Tuesday. He wants a replacement.",
       "Size L is out of stock until December, so a replacement isn't possible.",
-      "The assistant hasn't promised him anything yet.",
+      "Nobody has replied to him yet; the AI promised nothing.",
     ],
     rec: {
       title: "Refund ₹6,500 to his UPI, with Priya's approval",
@@ -443,7 +443,7 @@ export const CASES: Case[] = [
     thread: [
       { kind: "event", time: "Mon 1:15 pm", text: "Delhivery delivered with OTP" },
       { kind: "customer", channel: "chat", time: "9:40 am", text: "My dress never came. I want a refund." },
-      { kind: "agent", who: "JusDesk assistant", time: "9:40 am", steps: ["Read her message: says the dress never came", "Checked tracking: OTP entered at her door at 1:15 pm", "A claim like this needs a person, so promised no refund or reship"], next: ["Send it to Priya with the signals, and update Meera by 6 pm"], text: "I'm sorry to hear that. I've passed this to our team, who'll update you today." },
+      { kind: "event", time: "9:40 am", text: "AI investigated this ticket", ai: true, investigation: ["Read her message: says the dress never came", "Checked tracking: OTP entered at her door at 1:15 pm", "A claim like this needs a person, so promised no refund or reship"], next: ["Send it to Priya with the signals, and update Meera by 6 pm"] },
       { kind: "event", time: "9:40 am", text: "AI set status to First response", ai: true, status: "first" },
       { kind: "event", time: "9:40 am", text: "AI assigned this ticket to you", ai: true, assign: "you" },
     ],
@@ -458,7 +458,7 @@ export const CASES: Case[] = [
     handoff: [
       "Meera wrote once, on chat at 9:40 am.",
       "The OTP was entered at her door at 1:15 pm.",
-      "The assistant hasn't promised a refund or a reship.",
+      "Nobody has replied to her yet; the AI promised nothing.",
     ],
     rec: {
       title: "Send to Priya with a note",
