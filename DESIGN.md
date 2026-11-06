@@ -83,6 +83,8 @@ Colour carries meaning only:
 
 - Conversation borders are extra light so cards read by fill, not outline: customer `#F0F0F3`, own green `#E1EEE6`, note `#F7EDCB`, AI wash `#E3F0E8`, composer `#E8E8EC`.
 
+- The conversation shows only messages and internal notes. No activity-log lines (courier or AI events); the AI summary and the right panel carry that context. (Nitish, 6 Nov)
+
 ## 10. Don'ts
 - No second accent colour.
 - No coloured section backgrounds or tinted cards.

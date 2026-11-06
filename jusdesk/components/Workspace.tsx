@@ -223,7 +223,7 @@ export function Workspace() {
               <h3><Icon name="spark" size={14} />Before you read · AI summary</h3>
               <ul>{c.handoff.map((h) => <li key={h}>{h}</li>)}</ul>
             </section>
-            {thread.map((m, i) => <Message key={i} m={m} customer={c.customer} onAction={msgAction} />)}
+            {thread.filter((m) => m.kind !== "event").map((m, i) => <Message key={i} m={m} customer={c.customer} onAction={msgAction} />)}
             <div ref={threadEnd} />
             </div>
           </div>
