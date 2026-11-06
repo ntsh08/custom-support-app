@@ -1,0 +1,87 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>AI card treatment</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#1C1D1F; --ink2:#5F636A; --ink3:#8A8E95; --hair:#E8E8EB; --s2:#F7F7F9; --acc:#3A7C57; --acch:#2F6547; --warn:#B45309; }
+  * { box-sizing:border-box; }
+  body { margin:0; padding:28px; background:#fff; font:400 13px/20px Inter,sans-serif; font-feature-settings:"cv01","ss03"; color:var(--ink); }
+  h1 { font-size:14px; font-weight:600; margin:0 0 4px; } .sub { color:var(--ink3); font-size:12px; margin:0 0 20px; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:32px 28px; }
+  .opt > h2 { font-size:13px; font-weight:500; margin:0; } .opt > p { margin:0 0 10px; font-size:12px; color:var(--ink2); }
+  svg { flex:none; }
+  .lbl { display:flex; align-items:center; gap:6px; font-size:12px; font-weight:500; color:var(--acch); }
+  .card h3 { font-size:14px; line-height:20px; font-weight:600; margin:2px 0 0; }
+  .card p { margin:0; color:var(--ink2); }
+  .strip { display:flex; align-items:center; gap:6px; font-size:12px; font-weight:500; color:var(--ink2); }
+  .strip em { margin-left:auto; font-style:normal; color:var(--warn); }
+  .fb { display:flex; align-items:center; gap:2px; margin-top:6px; padding-left:4px; font-size:12px; color:var(--ink3); }
+  .fb b { font-weight:400; margin-right:4px; } .fb i { flex:1; } .fb span { display:inline-flex; width:24px; height:24px; align-items:center; justify-content:center; border-radius:6px; }
+  .body { display:grid; gap:4px; padding:12px 16px 14px; }
+  .top { padding:0 16px; height:32px; }
+
+  /* A gradient stroke, white inside (Apple Intelligence / Gemini) */
+  .a { position:relative; border-radius:12px; background:#fff; }
+  .a::before { content:""; position:absolute; inset:0; border-radius:12px; padding:1px; background:linear-gradient(120deg,#3A7C57,#8CC9A4 35%,#E8E8EB 70%,#E8E8EB); -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask-composite:exclude; }
+  .a .top { border-bottom:1px solid #EFEFF2; }
+
+  /* B AI as the author: mark on the left, no card (Fin, Notion AI) */
+  .b { display:grid; grid-template-columns:28px 1fr; gap:12px; }
+  .b .mark { width:28px; height:28px; border-radius:8px; background:linear-gradient(135deg,#3A7C57,#6FB08A); color:#fff; display:flex; align-items:center; justify-content:center; }
+  .b .who { font-size:12px; color:var(--ink3); } .b .who b { color:var(--ink); font-weight:500; margin-right:6px; }
+  .b .strip { margin-top:8px; }
+
+  /* C white card, green rail on the left */
+  .c { border:1px solid var(--hair); border-left:0; border-radius:12px; background:#fff; position:relative; overflow:hidden; }
+  .c::before { content:""; position:absolute; left:0; top:0; bottom:0; width:3px; background:linear-gradient(#3A7C57,#8CC9A4); }
+  .c .top { border-bottom:1px solid #EFEFF2; }
+
+  /* D soft green glow, white card */
+  .d { border:1px solid #CFE6D7; border-radius:12px; background:#fff; box-shadow:0 0 0 4px #F1F8F4, 0 6px 24px -8px rgba(58,124,87,.25); }
+  .d .top { border-bottom:1px solid #EAF3EE; }
+
+  /* E grey card, sparkle chip + "written by AI" caption (Gorgias / Plain) */
+  .e { border:1px solid #EFEFF2; border-radius:12px; background:var(--s2); }
+  .e .chip { display:inline-flex; align-items:center; gap:4px; height:20px; padding:0 6px; border-radius:4px; background:#E3F0E8; color:var(--acch); font-size:11px; font-weight:500; }
+  .e .cap { font-size:11px; color:var(--ink3); }
+
+  /* F shimmer label: the label text itself is a gradient, card is plain */
+  .f { border:1px solid var(--hair); border-radius:12px; background:#fff; }
+  .f .lbl span { background:linear-gradient(90deg,#2F6547,#6FB08A,#2F6547); -webkit-background-clip:text; background-clip:text; color:transparent; font-weight:600; }
+  .f .top { border-bottom:1px dotted #DCDCE1; }
+</style></head>
+<body>
+<h1>AI summary · treatment round 1</h1>
+<p class="sub">Same card, six ways to say "AI wrote this". Feedback now sits under the card (shown on hover in the app). References: Apple Intelligence and Gemini (gradient stroke), Intercom Fin and Notion AI (AI as author), Gorgias (AI chip), Hilos ("may miss nuance").</p>
+<div class="grid">
+
+<div class="opt"><h2>A · Gradient stroke</h2><p>White inside, green fading into grey on the border. The Apple Intelligence / Gemini cue.</p>
+<div class="card a"><div class="strip top"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Ananya is waiting for your reply<em>40 min left</em></div>
+<div class="body"><span class="lbl"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg>AI summary</span><h3>Nothing reached her door. She needs it by Saturday.</h3><p>She wrote twice (chat 8:52, email 9:14). Both are merged here. The assistant already showed her the tracking and pulled the courier photo and GPS. Don't ask her for them again.</p></div></div>
+<div class="fb"><b>Helpful?</b><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10v11"/><path d="M15 5.9 14 10h5.8a2 2 0 0 1 1.9 2.6l-2.3 7A2 2 0 0 1 17.5 21H4a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1h2.8a2 2 0 0 0 1.8-1.1L12 2a3.1 3.1 0 0 1 3 3.9Z"/></svg></span><span><svg style="transform:scale(1,-1)" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10v11"/><path d="M15 5.9 14 10h5.8a2 2 0 0 1 1.9 2.6l-2.3 7A2 2 0 0 1 17.5 21H4a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1h2.8a2 2 0 0 0 1.8-1.1L12 2a3.1 3.1 0 0 1 3 3.9Z"/></svg></span><i></i><span style="width:auto;padding:0 6px">Hide</span></div></div>
+
+<div class="opt"><h2>B · AI as the author, no card</h2><p>A green AI mark on the left, like a message from JusDesk AI. Fin and Notion AI do this.</p>
+<div class="card b"><div class="mark"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg></div>
+<div><div class="who"><b>JusDesk AI</b>Summary · 9:15 am</div><h3>Nothing reached her door. She needs it by Saturday.</h3><p>She wrote twice (chat 8:52, email 9:14). Both are merged here. The assistant already showed her the tracking and pulled the courier photo and GPS. Don't ask her for them again.</p>
+<div class="strip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Ananya is waiting for your reply · <em style="margin:0">40 min left</em></div>
+<div class="fb" style="padding-left:0"><b>Helpful?</b><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10v11"/><path d="M15 5.9 14 10h5.8a2 2 0 0 1 1.9 2.6l-2.3 7A2 2 0 0 1 17.5 21H4a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1h2.8a2 2 0 0 0 1.8-1.1L12 2a3.1 3.1 0 0 1 3 3.9Z"/></svg></span><span><svg style="transform:scale(1,-1)" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10v11"/><path d="M15 5.9 14 10h5.8a2 2 0 0 1 1.9 2.6l-2.3 7A2 2 0 0 1 17.5 21H4a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1h2.8a2 2 0 0 0 1.8-1.1L12 2a3.1 3.1 0 0 1 3 3.9Z"/></svg></span><i></i><span style="width:auto;padding:0 6px">Hide</span></div></div></div></div>
+
+<div class="opt"><h2>C · Green rail</h2><p>White card, a 3px green gradient rail on the left. Quiet, reads like a callout.</p>
+<div class="card c"><div class="strip top"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Ananya is waiting for your reply<em>40 min left</em></div>
+<div class="body"><span class="lbl"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg>AI summary</span><h3>Nothing reached her door. She needs it by Saturday.</h3><p>She wrote twice (chat 8:52, email 9:14). Both are merged here. The assistant already showed her the tracking and pulled the courier photo and GPS. Don't ask her for them again.</p></div></div>
+<div class="fb"><b>Helpful?</b><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10v11"/><path d="M15 5.9 14 10h5.8a2 2 0 0 1 1.9 2.6l-2.3 7A2 2 0 0 1 17.5 21H4a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1h2.8a2 2 0 0 0 1.8-1.1L12 2a3.1 3.1 0 0 1 3 3.9Z"/></svg></span><span><svg style="transform:scale(1,-1)" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10v11"/><path d="M15 5.9 14 10h5.8a2 2 0 0 1 1.9 2.6l-2.3 7A2 2 0 0 1 17.5 21H4a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1h2.8a2 2 0 0 0 1.8-1.1L12 2a3.1 3.1 0 0 1 3 3.9Z"/></svg></span><i></i><span style="width:auto;padding:0 6px">Hide</span></div></div>
+
+<div class="opt"><h2>D · Soft green glow</h2><p>White card with a faint green halo. The only "lit" object on the page. Bends our no-shadow rule, for AI only.</p>
+<div class="card d"><div class="strip top"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Ananya is waiting for your reply<em>40 min left</em></div>
+<div class="body"><span class="lbl"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg>AI summary</span><h3>Nothing reached her door. She needs it by Saturday.</h3><p>She wrote twice (chat 8:52, email 9:14). Both are merged here. The assistant already showed her the tracking and pulled the courier photo and GPS. Don't ask her for them again.</p></div></div>
+<div class="fb" style="margin-top:12px"><b>Helpful?</b><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10v11"/><path d="M15 5.9 14 10h5.8a2 2 0 0 1 1.9 2.6l-2.3 7A2 2 0 0 1 17.5 21H4a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1h2.8a2 2 0 0 0 1.8-1.1L12 2a3.1 3.1 0 0 1 3 3.9Z"/></svg></span><span><svg style="transform:scale(1,-1)" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10v11"/><path d="M15 5.9 14 10h5.8a2 2 0 0 1 1.9 2.6l-2.3 7A2 2 0 0 1 17.5 21H4a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1h2.8a2 2 0 0 0 1.8-1.1L12 2a3.1 3.1 0 0 1 3 3.9Z"/></svg></span><i></i><span style="width:auto;padding:0 6px">Hide</span></div></div>
+
+<div class="opt"><h2>E · Grey card + AI chip</h2><p>No colour on the card at all. A small green "AI" chip and a "Written by AI" caption do the work (Gorgias).</p>
+<div class="card e"><div class="body"><div style="display:flex;align-items:center;gap:8px"><span class="chip"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg>AI</span><span class="cap">Summary of 2 messages · may miss nuance</span><span class="strip" style="margin-left:auto"><em>40 min left</em></span></div><h3>Nothing reached her door. She needs it by Saturday.</h3><p>She wrote twice (chat 8:52, email 9:14). Both are merged here. The assistant already showed her the tracking and pulled the courier photo and GPS. Don't ask her for them again.</p></div></div>
+<div class="fb"><b>Helpful?</b><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10v11"/><path d="M15 5.9 14 10h5.8a2 2 0 0 1 1.9 2.6l-2.3 7A2 2 0 0 1 17.5 21H4a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1h2.8a2 2 0 0 0 1.8-1.1L12 2a3.1 3.1 0 0 1 3 3.9Z"/></svg></span><span><svg style="transform:scale(1,-1)" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10v11"/><path d="M15 5.9 14 10h5.8a2 2 0 0 1 1.9 2.6l-2.3 7A2 2 0 0 1 17.5 21H4a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1h2.8a2 2 0 0 0 1.8-1.1L12 2a3.1 3.1 0 0 1 3 3.9Z"/></svg></span><i></i><span style="width:auto;padding:0 6px">Hide</span></div></div>
+
+<div class="opt"><h2>F · Shimmer label</h2><p>Plain white card; only the "AI summary" label is a green gradient (it can shimmer once while it's written).</p>
+<div class="card f"><div class="strip top"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Ananya is waiting for your reply<em>40 min left</em></div>
+<div class="body"><span class="lbl"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3A7C57" stroke-width="1.6" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg><span>AI summary</span></span><h3>Nothing reached her door. She needs it by Saturday.</h3><p>She wrote twice (chat 8:52, email 9:14). Both are merged here. The assistant already showed her the tracking and pulled the courier photo and GPS. Don't ask her for them again.</p></div></div>
+<div class="fb"><b>Helpful?</b><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10v11"/><path d="M15 5.9 14 10h5.8a2 2 0 0 1 1.9 2.6l-2.3 7A2 2 0 0 1 17.5 21H4a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1h2.8a2 2 0 0 0 1.8-1.1L12 2a3.1 3.1 0 0 1 3 3.9Z"/></svg></span><span><svg style="transform:scale(1,-1)" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10v11"/><path d="M15 5.9 14 10h5.8a2 2 0 0 1 1.9 2.6l-2.3 7A2 2 0 0 1 17.5 21H4a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1h2.8a2 2 0 0 0 1.8-1.1L12 2a3.1 3.1 0 0 1 3 3.9Z"/></svg></span><i></i><span style="width:auto;padding:0 6px">Hide</span></div></div>
+
+</div></body></html>

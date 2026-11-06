@@ -63,7 +63,7 @@ Colour carries meaning only:
 - Label column: 128px; icons never shrink (flex none).
 
 ## 8. Components
-- Every ticket has the same title, "Marked delivered, but not received". Under it: plain grey tags (s2, 6px radius, no border) for order, customer, email or channel and language. Reply due lives in the AI summary's strip. No breadcrumb. Status, owner, follow-up and reason live in the right panel.
+- Every ticket has the same title, "Marked delivered, but not received". Under it: plain grey tags (s2, 6px radius, no border) for order, customer, email or channel, language and reply due. No breadcrumb. Status, owner, follow-up and reason live in the right panel.
 - Dashed border means "not real yet":
   - unset fields
   - prototype-only buttons
@@ -74,11 +74,11 @@ Colour carries meaning only:
 
 ## 9. AI signature, notes and the pattern
 - Anything AI wrote or did gets one signature, and nothing else uses it:
-  - a green wash gradient (`#E6F2EA` → `#F4F9F6` → white, 135°, border `#DCEBE2`), on the AI summary and the AI recommendation card. The assistant's chat replies stay white with the AI tag (Nitish, 6 Nov).
+  - a green glow from the top edge (`#E3F1E8` → `#F6FBF8` at 48px → white at 110px, 180°, hairline border; from ClickUp's AI card), on the AI summary and the AI recommendation card. The assistant's chat replies stay white with the AI tag (Nitish, 6 Nov).
   - a green "AI" tag (`#E3F0E8` bg, `#2F6547` text), on AI events and the assistant's messages
   - the sparkle icon
 - Internal notes are a plain yellow card (`#FFF8E6`, border `#F3E3B5`, label `#8A6512`), with a lock icon and "Internal note". No badge, no dashed border. The composer turns yellow in note mode. (Nitish, 6 Nov: the industry convention wins here.)
-- AI summary card (Plain-style, Nitish 6 Nov): sits after the customer's messages, not above them. Top strip "{Name} is waiting for your reply · 40 min left"; then "AI summary" label, one bold catchy line (14px/590), and a short grey paragraph. "Helpful?" thumbs and Hide appear only on hover. No "Show sources": the sources are the messages right above it.
+- AI summary card (Nitish 6 Nov): sits after the customer's messages. White card with the top-edge green glow; "AI summary" label with sparkle, one bold catchy line (14px/590), a short grey paragraph. Below the card, outside it: "Helpful?" thumbs and Hide, shown only on hover. No "Show sources" (the sources are the messages above), no status strip.
 - The conversation sits on plain white (s0), no wallpaper.
 - Columns: rail 52px, queue 304px, case flexible (min 460px), details panel 420px. The conversation fills the case column with 24px side padding (no cap).
 

@@ -1,0 +1,118 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>AI summary card</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#1C1D1F; --ink2:#5F636A; --ink3:#8A8E95; --hair:#E8E8EB; --s1:#FCFCFD; --s2:#F7F7F9; --s3:#F1F1F4;
+    --acc:#3A7C57; --acch:#2F6547; --wash: linear-gradient(135deg,#E6F2EA 0%,#F4F9F6 40%,#FFFFFF 80%); --line:#E6F1EA; --warn:#B45309; }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:28px; background:#fff; font:400 13px/20px Inter,sans-serif; font-feature-settings:"cv01","ss03"; color:var(--ink); }
+  h1 { font-size:14px; font-weight:600; margin:0 0 4px; } .sub { color:var(--ink3); font-size:12px; margin:0 0 20px; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:28px 24px; }
+  .opt > h2 { font-size:13px; font-weight:500; margin:0; } .opt > p { margin:0 0 10px; font-size:12px; color:var(--ink2); }
+  .stage { border:1px solid var(--hair); border-radius:12px; padding:20px; display:flex; flex-direction:column; gap:14px; }
+  .msg { align-self:flex-start; max-width:80%; background:var(--s2); border:1px solid #F1F1F4; border-radius:12px; padding:10px 14px 12px; }
+  .msg b { font-weight:500; } .msg span { color:var(--ink3); font-size:12px; margin-left:6px; }
+  svg { flex:none; }
+  .ai-h { display:flex; align-items:center; gap:6px; font-size:12px; font-weight:500; color:var(--acch); }
+  .muted { color:var(--ink3); font-size:12px; }
+  .ghost { border:0; background:none; color:var(--ink3); font:inherit; font-size:12px; display:inline-flex; gap:4px; align-items:center; padding:0; }
+  ul { margin:0; padding:0; list-style:none; }
+
+  /* A current */
+  .a { background:var(--wash); border:1px solid var(--line); border-radius:12px; padding:12px 16px; }
+  .a li { position:relative; padding-left:12px; } .a li::before { content:""; position:absolute; left:0; top:9px; width:4px; height:4px; border-radius:2px; background:var(--ink3); }
+
+  /* B Plain-style: status strip + summary + feedback footer */
+  .b { border:1px solid var(--line); border-radius:12px; overflow:hidden; background:#fff; }
+  .b .strip { display:flex; align-items:center; gap:6px; padding:6px 14px; background:#F3F9F5; color:var(--acch); font-size:12px; font-weight:500; border-bottom:1px solid var(--line); }
+  .b .strip em { margin-left:auto; font-style:normal; color:var(--warn); }
+  .b .body { padding:12px 14px; display:grid; gap:6px; }
+  .b .t { font-weight:600; font-size:13px; display:flex; gap:6px; align-items:center; }
+  .b .foot { display:flex; align-items:center; gap:12px; padding:8px 14px; border-top:1px solid #F1F1F4; }
+  .b .foot .r { margin-left:auto; display:flex; gap:8px; align-items:center; }
+
+  /* C Key facts: headline + labelled rows */
+  .c { background:var(--wash); border:1px solid var(--line); border-radius:12px; padding:14px 16px; display:grid; gap:10px; }
+  .c .head { font-size:14px; line-height:20px; font-weight:600; }
+  .c dl { margin:0; display:grid; gap:6px; } .c dl div { display:grid; grid-template-columns:110px 1fr; gap:8px; }
+  .c dt { color:var(--ink2); } .c dd { margin:0; }
+  .c .foot { display:flex; justify-content:space-between; padding-top:8px; border-top:1px solid var(--line); }
+
+  /* D Inline, no card: green rule on the left */
+  .d { border-left:2px solid var(--acc); padding:2px 0 2px 14px; display:grid; gap:6px; }
+  .d li { position:relative; padding-left:12px; } .d li::before { content:"–"; position:absolute; left:0; color:var(--ink3); }
+
+  /* E Collapsible one-liner */
+  .e { background:var(--wash); border:1px solid var(--line); border-radius:12px; }
+  .e .row { display:flex; align-items:center; gap:8px; padding:10px 14px; }
+  .e .row .txt { flex:1; min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .e .row .txt b { font-weight:600; }
+  .e .more { padding:0 14px 12px 36px; color:var(--ink2); display:grid; gap:2px; }
+
+  /* F Chips for what's already done */
+  .f { background:var(--wash); border:1px solid var(--line); border-radius:12px; padding:14px 16px; display:grid; gap:10px; }
+  .f .lead { font-size:13px; }
+  .f .chips { display:flex; flex-wrap:wrap; gap:6px; }
+  .f .chips span { display:inline-flex; align-items:center; gap:5px; height:24px; padding:0 8px; border-radius:6px; background:#fff; border:1px solid var(--line); font-size:12px; color:var(--ink2); }
+  .f .chips span.due { color:var(--warn); }
+</style></head>
+<body>
+<h1>AI summary card · round 1</h1>
+<p class="sub">Ananya's case. Same facts in each; only the presentation changes. References: Plain (summary with status strip and feedback), Hilos ("Catch up" with "may miss nuance"), Lightfield (labelled facts), Gorgias (summary with updated time).</p>
+
+<div class="grid">
+
+<div class="opt"><h2>A · Current</h2><p>Gradient card, heading, three bullets.</p>
+<div class="stage">
+  <div class="a"><div class="ai-h"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg>Before you read · AI summary</div>
+    <ul style="margin-top:6px"><li>Ananya says nothing reached her door. She wrote twice (chat 8:52, email 9:14). Both are merged here.</li><li>The assistant already showed her the tracking and pulled the courier photo and GPS. Don't ask her for them again.</li><li>She needs it before Saturday.</li></ul></div>
+  <div class="msg"><b>Ananya Mehta</b><span>Chat · 8:52 am</span><div>My order shows delivered but I didn't get anything.</div></div>
+</div></div>
+
+<div class="opt"><h2>B · Status strip + summary + feedback</h2><p>From Plain. Who's waiting on top, a short paragraph, "Helpful?" and Hide at the bottom.</p>
+<div class="stage">
+  <div class="b">
+    <div class="strip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Ananya is waiting for your first reply<em>40 min left</em></div>
+    <div class="body"><div class="t"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2F6547" stroke-width="1.6" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg>Summary</div>
+      <div>Nothing reached Ananya's door. She wrote on chat and email (merged). The assistant already shared tracking, the courier photo and GPS, so don't ask again. She needs it before Saturday.</div></div>
+    <div class="foot"><button class="ghost">Show sources ⌄</button><div class="r"><span class="muted">Helpful?</span><button class="ghost">👍</button><button class="ghost">👎</button><span class="muted">·</span><button class="ghost">Hide</button></div></div>
+  </div>
+  <div class="msg"><b>Ananya Mehta</b><span>Chat · 8:52 am</span><div>My order shows delivered but I didn't get anything.</div></div>
+</div></div>
+
+<div class="opt"><h2>C · Headline + labelled facts</h2><p>From Lightfield. One bold line to read first, then facts with labels.</p>
+<div class="stage">
+  <div class="c">
+    <div class="ai-h"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg>AI summary</div>
+    <div class="head">Nothing reached her door, and she needs it by Saturday.</div>
+    <dl><div><dt>She wrote</dt><dd>Twice: chat 8:52, email 9:14 (merged)</dd></div>
+      <div><dt>Already done</dt><dd>Tracking shared, courier photo and GPS pulled</dd></div>
+      <div><dt>Don't ask for</dt><dd>Tracking, photo or GPS again</dd></div></dl>
+    <div class="foot"><span class="muted">Updated 9:15 am · may miss nuance</span><button class="ghost">Refresh</button></div>
+  </div>
+  <div class="msg"><b>Ananya Mehta</b><span>Chat · 8:52 am</span><div>My order shows delivered but I didn't get anything.</div></div>
+</div></div>
+
+<div class="opt"><h2>D · Inline, no card</h2><p>Like an AI message in Lightfield or Linear. A green rule on the left, no box.</p>
+<div class="stage">
+  <div class="d"><div class="ai-h"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg>Before you read</div>
+    <ul><li>Nothing reached her door. Chat and email are merged.</li><li>Tracking, photo and GPS already shared. Don't ask again.</li><li>Needs it before Saturday.</li></ul></div>
+  <div class="msg"><b>Ananya Mehta</b><span>Chat · 8:52 am</span><div>My order shows delivered but I didn't get anything.</div></div>
+</div></div>
+
+<div class="opt"><h2>E · One line, expands</h2><p>Takes one row until you open it. Saves space on long threads.</p>
+<div class="stage">
+  <div class="e"><div class="row"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2F6547" stroke-width="1.6" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg><span class="txt"><b>Nothing reached her door</b> · needs it by Saturday · photo and GPS already shared</span><button class="ghost">Less ⌃</button></div>
+    <div class="more"><span>She wrote twice: chat 8:52, email 9:14 (merged).</span><span>Don't ask her for tracking, photo or GPS again.</span></div></div>
+  <div class="msg"><b>Ananya Mehta</b><span>Chat · 8:52 am</span><div>My order shows delivered but I didn't get anything.</div></div>
+</div></div>
+
+<div class="opt"><h2>F · Sentence + "already done" chips</h2><p>One sentence for the story, chips for what the bot did and the deadline.</p>
+<div class="stage">
+  <div class="f"><div class="ai-h"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg>AI summary</div>
+    <div class="lead">Ananya says nothing reached her door. She wrote on chat and email; both are merged here.</div>
+    <div class="chips"><span>✓ Tracking shared</span><span>✓ Courier photo pulled</span><span>✓ GPS pulled</span><span class="due">Needs it by Saturday</span></div></div>
+  <div class="msg"><b>Ananya Mehta</b><span>Chat · 8:52 am</span><div>My order shows delivered but I didn't get anything.</div></div>
+</div></div>
+
+</div></body></html>

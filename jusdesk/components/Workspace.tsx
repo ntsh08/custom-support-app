@@ -66,19 +66,15 @@ export function Workspace() {
   const draft = drafts[key] ?? (mode === "reply" ? stage.draft ?? "" : "");
   const open = stage.group !== "closed" && stage.group !== "ai";
 
-  const first = c.customer.split(" ")[0];
   const summaryCard = hidden[c.id] ? (
     <button className="sum-show" onClick={() => setHidden((h) => ({ ...h, [c.id]: false }))}><Icon name="spark" size={14} />Show AI summary</button>
   ) : (
-    <section className="sum" aria-label="AI summary">
-      {open && stage.timeLeft && (
-        <div className={`strip ${stage.urgent ?? ""}`}><Icon name="clock" size={14} />{first} is waiting for your reply<em>{stage.timeLeft === "Now" ? "Due now" : `${stage.timeLeft} left`}</em></div>
-      )}
-      <div className="body">
+    <div className="sumwrap">
+      <section className="sum" aria-label="AI summary">
         <span className="lbl"><Icon name="spark" size={14} />AI summary</span>
         <h3>{c.hook}</h3>
         <p>{c.handoff.join(" ")}</p>
-      </div>
+      </section>
       <div className="foot">
         <span>Helpful?</span>
         <button aria-label="Helpful" aria-pressed={vote[c.id] === "up"} className={vote[c.id] === "up" ? "on" : ""} onClick={() => setVote((v) => ({ ...v, [c.id]: v[c.id] === "up" ? undefined : "up" }))}><Icon name="up" size={14} /></button>
@@ -86,7 +82,7 @@ export function Workspace() {
         <i />
         <button onClick={() => setHidden((h) => ({ ...h, [c.id]: true }))}>Hide</button>
       </div>
-    </section>
+    </div>
   );
   const caseTasks = tasks[c.id];
   const linked = stage.linked ?? c.linked;
@@ -239,6 +235,7 @@ export function Workspace() {
               {c.email && <span><Icon name="mail" size={14} />{c.email}</span>}
               {!c.email && <span><Icon name="chat" size={14} />Chat</span>}
               {c.language && <span><Icon name="translate" size={14} />{c.language}</span>}
+              {open && stage.timeLeft && <span className={stage.urgent ?? ""}><Icon name="clock" size={14} />{stage.timeLeft === "Now" ? "Reply due now" : `Reply due in ${stage.timeLeft}`}</span>}
             </div>
           </header>
 
