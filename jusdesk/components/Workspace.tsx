@@ -187,9 +187,9 @@ export function Workspace() {
                 {addMenu === x.text && (
                   <ul className="sortmenu addmenu" role="menu" onMouseLeave={() => setAddMenu(null)}>
                     <li className="mh">Who does it?</li>
-                    <li role="none"><button role="menuitem" onClick={() => assign(x, "me")}><span><b>Me</b><em>Goes to your tasks</em></span>{t?.owner !== "ai" && t ? <Icon name="check" size={14} /> : <Icon name="user" size={14} />}</button></li>
-                    <li role="none"><button role="menuitem" disabled={!aiCan} onClick={() => assign(x, "ai")}><span><b>AI</b><em>{aiCan ? `Does it ${when(x.due)} and reports back` : "AI can't make calls"}</em></span>{t?.owner === "ai" ? <Icon name="check" size={14} /> : <Icon name="spark" size={14} />}</button></li>
-                    {t && <li role="none"><button role="menuitem" className="rm" onClick={() => assign(x, null)}><span><b>Remove task</b></span><Icon name="x" size={14} /></button></li>}
+                    <li role="none"><button role="menuitem" onClick={() => assign(x, "me")}><span><b>Me</b><em>Goes to your tasks</em></span>{t && t.owner !== "ai" && <Icon name="check" size={14} />}</button></li>
+                    <li role="none"><button role="menuitem" disabled={!aiCan} onClick={() => assign(x, "ai")}><span><b>AI</b><em>{aiCan ? `Does it ${when(x.due)} and reports back` : "AI can't make calls"}</em></span>{t?.owner === "ai" && <Icon name="check" size={14} />}</button></li>
+                    {t && <li role="none"><button role="menuitem" className="rm" onClick={() => assign(x, null)}>Remove task</button></li>}
                   </ul>
                 )}
               </span>

@@ -420,4 +420,5 @@ ul { list-style: none; }
 .tasks li.done .ttext { color: var(--ink3); text-decoration: line-through; }
 .sum .sugg button.added { flex: none; height: 24px; display: inline-flex; align-items: center; gap: 4px; padding: 0 6px; border: 0; border-radius: 6px; background: none; font-size: 12px; font-weight: 510; color: var(--ok); cursor: pointer; }
 .sum .sugg button.added:hover { background: rgb(0 0 0 / .04); }
-.addmenu .rm b { color: var(--bad); }
+.addmenu .rm { font-size: 13px; font-weight: 400; color: var(--ink2); }
+.addmenu button svg { color: var(--ink2); }
