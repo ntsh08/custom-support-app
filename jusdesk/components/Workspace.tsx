@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { CASES, GROUPS, STATUS, TITLE, type Case, type Group, type Msg, type Option, type Stage, type Task } from "@/lib/cases";
+import { CASES, STATUS, TITLE, type Case, type Group, type Msg, type Option, type Stage, type Task } from "@/lib/cases";
 import { EvidenceTile } from "./EvidenceTile";
 import { Icon, type IconName } from "./Icon";
 
@@ -23,6 +23,12 @@ const channels = (c: Case) => {
   return ch.size > 1 ? "Chat + email merged" : ch.has("email") ? "Email" : "Chat";
 };
 const owner = (g: Group, s: Stage) => (g === "escalated" ? "Priya" : s.by === "AI" ? "AI" : "You");
+const waitingG = (g: Group) => g === "customer" || g === "others";
+/** Most urgent statuses first in the single list. */
+const order = (g: Group) => ["reply", "first", "escalated", "others", "customer", "closed"].indexOf(g);
+/** Minutes left on the reply timer, for sorting. */
+const mins = (t?: string) => (!t ? 1e9 : t === "Now" ? 0 : /h/.test(t) ? parseFloat(t) * 60 : parseFloat(t));
+
 /** Check reply: the AI reads the draft against the customer's ask, mood, policy and language. */
 type Note = { text: string; ok?: boolean; fix?: (d: string) => string };
 const todo = (n: Note[]) => n.filter((x) => !x.ok).length;
@@ -96,7 +102,7 @@ export function Workspace() {
     return states[id].status ?? cs.stages[states[id].stage].group;
   };
   const ordered = useMemo(
-    () => GROUPS.flatMap((g) => CASES.filter((c) => g.has.includes(statusOf(c.id)))),
+    () => [...CASES].sort((a, b) => order(statusOf(a.id)) - order(statusOf(b.id)) || mins(a.stages[states[a.id].stage].timeLeft) - mins(b.stages[states[b.id].stage].timeLeft)),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [states],
   );
@@ -257,24 +263,20 @@ export function Workspace() {
         <aside className="queue" aria-label="Queue">
           <header className="bar"><b>All tickets</b><span>{ordered.length}</span></header>
           <div className="scroll">
-            {GROUPS.map((g) => {
-              const items = ordered.filter((x) => g.has.includes(statusOf(x.id)));
-              if (!items.length) return null;
+            {ordered.map((x) => {
+              const s = x.stages[states[x.id].stage];
+              const g = statusOf(x.id);
               return (
-                <section key={g.id}>
-                  <h2 className="grp">{g.label}<span>{items.length}</span></h2>
-                  {items.map((x) => {
-                    const s = x.stages[states[x.id].stage];
-                    return (
-                      <button key={x.id} className={`row${x.id === selected ? " on" : ""}`} onClick={() => select(x.id)}>
-                        <span className="rt">
-                          <span className="l1"><b>{x.customer}</b>{s.reopened && !states[x.id].status && <i className="reo">Reopened</i>}{s.timeLeft && dueFor(statusOf(x.id)) && <em className={s.urgent ?? ""}>{s.timeLeft}</em>}</span>
-                          <span className="l2">{x.item.split(",")[0]} · {x.value} · {states[x.id].status ? STATUS[states[x.id].status!] : s.nextStep}</span>
-                        </span>
-                      </button>
-                    );
-                  })}
-                </section>
+                <button key={x.id} className={`row${x.id === selected ? " on" : ""}`} onClick={() => select(x.id)}>
+                  <span className="rt">
+                    <span className="l1">
+                      <b>{x.customer}</b>
+                      {s.reopened && !states[x.id].status && <i className="reo">Reopened</i>}
+                      {s.timeLeft && dueFor(g) ? <em className={s.urgent ?? ""}>{s.timeLeft}</em> : waitingG(g) && x.followUp ? <em className="warn">{x.followUp.replace("Today, ", "")}</em> : null}
+                    </span>
+                    <span className="l2">{STATUS[g]} · {x.item.split(",")[0]} · {states[x.id].status ? STATUS[states[x.id].status!] : s.nextStep}</span>
+                  </span>
+                </button>
               );
             })}
           </div>

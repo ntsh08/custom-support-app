@@ -650,11 +650,3 @@ export const STATUS: Record<Group, string> = {
   closed: "Closed",
 };
 
-/** Queue sections, most urgent first. Waiting merges customer and others. */
-export const GROUPS: { id: string; label: string; has: Group[] }[] = [
-  { id: "reply", label: "Needs reply", has: ["reply"] },
-  { id: "first", label: "First response", has: ["first"] },
-  { id: "escalated", label: "Escalated", has: ["escalated"] },
-  { id: "waiting", label: "Waiting", has: ["customer", "others"] },
-  { id: "closed", label: "Closed", has: ["closed"] },
-];

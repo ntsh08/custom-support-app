@@ -302,3 +302,5 @@ ul { list-style: none; }
 .cnote svg { color: var(--warn); } .cnote.ok svg { color: var(--ok); }
 .cnote button { height: 24px; padding: 0 8px; border: 1px solid var(--hair2); border-radius: 6px; background: var(--s0); font-size: 12px; font-weight: 510; color: var(--ink); cursor: pointer; }
 .cnote button:hover { background: var(--s2); }
+
+.rt .l1 em.warn { color: var(--warn); }
