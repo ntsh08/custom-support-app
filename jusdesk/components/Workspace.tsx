@@ -663,8 +663,9 @@ function Message({ m, customer, email, language, onAction }: { m: Msg; customer:
     return (<>
       <article className={`msg ours${bot ? " bot" : ""}`}>
         <p className="who">{bot && <span className="ai">AI</span>}<b>{m.who}</b><span>{m.time}</span></p>
-        {bot && m.steps && <Trace steps={m.steps} next={m.next} />}
+        {bot && m.steps && <Trace steps={m.steps} />}
         {body(m.gloss)}
+        {bot && m.next && m.next.length > 0 && <TryNext next={m.next} />}
         <Actions m={m} onAction={onAction} />
       </article>
       {link(m.gloss, "ours", "Sent in")}
@@ -692,7 +693,17 @@ function Message({ m, customer, email, language, onAction }: { m: Msg; customer:
 }
 
 /** The assistant's work before a reply, after the INA agent trace: one line, opens to the steps. */
-function Trace({ steps, next }: { steps: string[]; next?: string[] }) {
+/** What the executive can try next: under the assistant's reply, not inside the investigation. */
+function TryNext({ next }: { next: string[] }) {
+  return (
+    <div className="trynext">
+      <p><Icon name="lock" size={12} />What you can try next</p>
+      <ol>{next.map((t) => <li key={t}><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>{t}</li>)}</ol>
+    </div>
+  );
+}
+
+function Trace({ steps }: { steps: string[] }) {
   const [open, setOpen] = useState(false);
   return (
     <div className="trace">
@@ -702,12 +713,6 @@ function Trace({ steps, next }: { steps: string[]; next?: string[] }) {
       </button>
       <div className={`steps${open ? " open" : ""}`}><div>
         <ol>{steps.map((t) => <li key={t}><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5" /></svg>{t}</li>)}</ol>
-        {next && next.length > 0 && (
-          <div className="trynext">
-            <p>What you can try next</p>
-            <ol>{next.map((t) => <li key={t}><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>{t}</li>)}</ol>
-          </div>
-        )}
       </div></div>
     </div>
   );
