@@ -20,7 +20,8 @@ const channels = (c: Case) => {
   return ch.size > 1 ? "Chat + email merged" : ch.has("email") ? "Email" : "Chat";
 };
 const owner = (s: Stage) => (s.group === "lead" ? "Priya" : s.group === "ai" ? "AI" : "You");
-const groupLabel = (s: Stage) => GROUPS.find((g) => g.id === s.group)!.label;
+const STATUS: Record<string, string> = { needs: "New", lead: "With your lead", waiting: "Waiting", ai: "Handled by AI", closed: "Closed" };
+const groupLabel = (s: Stage) => STATUS[s.group];
 const linkIcon = (k: string): IconName => (/refund/i.test(k) ? "card" : /courier/i.test(k) ? "truck" : /lead/i.test(k) ? "user" : "box");
 
 // Free Hugeicons are stroke-only, so the selected nav icon is drawn filled here.
@@ -177,7 +178,7 @@ export function Workspace() {
 
         {/* Queue */}
         <aside className="queue" aria-label="Queue">
-          <header className="bar"><b>Delivered, not received</b><span>{ordered.length}</span></header>
+          <header className="bar"><b>All tickets</b><span>{ordered.length}</span></header>
           <div className="scroll">
             {GROUPS.map((g) => {
               const items = ordered.filter((x) => x.stages[states[x.id].stage].group === g.id);
@@ -206,9 +207,15 @@ export function Workspace() {
         {/* Case */}
         <main className="case" key={c.id}>
           <header className="head">
-            <div className="crumbs">{c.order}<Icon name="arrow" size={12} />{c.customer}</div>
             <h1>{c.headline}</h1>
-            {open && stage.timeLeft && <p className={`due ${stage.urgent ?? ""}`}><Icon name="clock" size={13} />{stage.timeLeft === "Now" ? "Reply due now" : `Reply due in ${stage.timeLeft}`}</p>}
+            <div className="tags">
+              <span><Icon name="box" size={13} />{c.order}</span>
+              <span><Icon name="user" size={13} />{c.customer}</span>
+              {c.email && <span><Icon name="mail" size={13} />{c.email}</span>}
+              {!c.email && <span><Icon name="chat" size={13} />Chat</span>}
+              {c.language && <span><Icon name="translate" size={13} />{c.language}</span>}
+              {open && stage.timeLeft && <span className={stage.urgent ?? ""}><Icon name="clock" size={13} />{stage.timeLeft === "Now" ? "Reply due now" : `Reply due in ${stage.timeLeft}`}</span>}
+            </div>
           </header>
 
           <div className="thread" aria-label="Conversation">

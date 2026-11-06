@@ -53,6 +53,8 @@ export type Stage = {
 export type Case = {
   id: string;
   customer: string;
+  /** Shown when the customer wrote by email. Demo addresses. */
+  email?: string;
   initials: string;
   item: string;
   value: string;
@@ -84,6 +86,7 @@ export const CASES: Case[] = [
   {
     id: "ananya",
     customer: "Ananya Mehta",
+    email: "ananya.mehta@example.com",
     initials: "AM",
     item: "Block-print kurta, M",
     value: "₹1,800",
@@ -216,6 +219,7 @@ export const CASES: Case[] = [
   {
     id: "rohan",
     customer: "Rohan Shah",
+    email: "rohan.shah@example.com",
     initials: "RS",
     item: "Wool jacket, L",
     value: "₹6,500",
@@ -602,7 +606,7 @@ export const CASES: Case[] = [
 ];
 
 export const GROUPS: { id: Group; label: string }[] = [
-  { id: "needs", label: "Needs you" },
+  { id: "needs", label: "New tickets" },
   { id: "lead", label: "With your lead" },
   { id: "waiting", label: "Waiting" },
   { id: "ai", label: "Handled by AI" },

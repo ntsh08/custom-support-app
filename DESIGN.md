@@ -12,7 +12,7 @@ Apply these to everything designed in this project: the app, static pages, Figma
 - Surfaces: s0 `#FFFFFF`, s1 `#FAFAFB`, s2 `#F4F4F6`, s3 `#EDEDF0`. Don't skip steps.
 - Borders: hairline `#E8E8EB`, strong `#DCDCE1`, both 1px.
 - Selected and hover states are a grey step (s1 or s2).
-- Lists have no divider lines. Sections are separated by space and grey steps: the queue sits on s1, hover is s2, selected is s3, rows are rounded 8px and inset 8px.
+- Tonal layering: no divider lines in the queue or the right panel. Panels sit on s1; groups are white cards (12px radius, no border) or grey steps. Lists have no divider lines. Sections are separated by space and grey steps: the queue sits on s1, hover is s2, selected is s3, rows are rounded 8px and inset 8px.
 - No shadows, no gradients, no glows. The only exception is the toast.
 
 ## 3. Corner radius by role
@@ -63,7 +63,7 @@ Colour carries meaning only:
 - Label column: 136px.
 
 ## 8. Components
-- Properties (status, owner, time, reason) are outlined chips, not a sentence.
+- Under the case title: plain grey tags (s2, 6px radius, no border) for order, customer, email or channel, language and reply due. No breadcrumb. Status, owner, follow-up and reason live in the right panel.
 - Dashed border means "not real yet":
   - unset fields
   - prototype-only buttons
@@ -78,8 +78,8 @@ Colour carries meaning only:
   - a green "AI" tag (`#E3F0E8` bg, `#2F6547` text), on AI events and the assistant's messages
   - the sparkle icon
 - Internal notes are a plain yellow card (`#FFF8E6`, border `#F3E3B5`, label `#8A6512`), with a lock icon and "Internal note". No badge, no dashed border. The composer turns yellow in note mode. (Nitish, 6 Nov: the industry convention wins here.)
-- The middle column has a dot-grid wallpaper: 1px dots `#DFE2E7` every 16px on `#FAFAFB`.
-- The conversation is capped at 560px. Columns: rail 52px, queue 320px, case flexible, panel 380px.
+- No wallpaper behind the conversation for now; plain `#FAFAFB`.
+- Columns: rail 52px, queue min 320px, case 460–600px, panel min 380px. Queue and panel take the extra width; the case column never grows past 600px.
 
 ## 10. Don'ts
 - No second accent colour.
