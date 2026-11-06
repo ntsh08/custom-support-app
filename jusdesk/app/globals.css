@@ -396,7 +396,7 @@ ul { list-style: none; }
 
 /* Add task from an AI suggestion, always visible (Nitish, 7 Nov) */
 .sum .sugg li > span:first-child { flex: 1; min-width: 0; }
-.addtask { flex: none; height: 24px; display: inline-flex; align-items: center; gap: 4px; padding: 0 6px; border: 0; border-radius: 6px; background: none; font-size: 12px; font-weight: 510; color: var(--ink2); cursor: pointer; }
+.addtask { flex: none; height: 24px; display: inline-flex; align-items: center; gap: 4px; padding: 0 8px; border: 1px solid var(--hair2); border-radius: 6px; background: none; font-size: 12px; font-weight: 510; color: var(--ink2); cursor: pointer; }
 .addtask:hover { background: rgb(0 0 0 / .04); color: var(--ink); }
 .sum .sugg em.added { flex: none; display: inline-flex; align-items: center; gap: 4px; font-style: normal; font-size: 12px; color: var(--ok); padding: 0 8px; }
 .sum .sugg li { min-height: 30px; }
