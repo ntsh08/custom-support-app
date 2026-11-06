@@ -380,7 +380,7 @@ ul { list-style: none; }
 .stchg span { color: var(--ink3); }
 
 /* What you can try next: under the assistant's reply, team-only (Nitish, 7 Nov) */
-.trynext { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--hair); }
+.trynext { align-self: flex-end; width: 86%; margin: 0; padding: 0 14px; }
 .trynext p { display: flex; align-items: center; gap: 6px; margin: 0 0 4px; font-size: 12px; font-weight: 510; color: var(--ink2); }
 .trynext p svg { color: var(--ink3); }
 .trynext ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }

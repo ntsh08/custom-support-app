@@ -665,10 +665,10 @@ function Message({ m, customer, email, language, onAction }: { m: Msg; customer:
         <p className="who">{bot && <span className="ai">AI</span>}<b>{m.who}</b><span>{m.time}</span></p>
         {bot && m.steps && <Trace steps={m.steps} />}
         {body(m.gloss)}
-        {bot && m.next && m.next.length > 0 && <TryNext next={m.next} />}
         <Actions m={m} onAction={onAction} />
       </article>
       {link(m.gloss, "ours", "Sent in")}
+      {bot && m.next && m.next.length > 0 && <TryNext next={m.next} />}
     </>);
   }
   if (m.channel === "email") {
