@@ -453,7 +453,7 @@ function Message({ m, customer, onAction }: { m: Msg; customer: string; onAction
   }
   return (
     <article className="msg theirs">
-      <p className="who"><Icon name={m.channel === "email" ? "mail" : "chat"} size={14} /><b>{customer}</b><span>{m.channel === "email" ? "Email" : "Chat"} · {m.time}</span></p>
+      <p className="who"><b>{customer}</b><span>{m.channel === "email" ? "Email" : "Chat"} · {m.time}</span></p>
       <div>{m.text}{m.gloss && <span className="gloss">{m.gloss}</span>}</div>
       <Actions m={m} onAction={onAction} translate />
     </article>

@@ -6,7 +6,6 @@
 :root {
   --font: var(--font-inter), system-ui, sans-serif;
   --s0: #FFFFFF; --s1: #FCFCFD; --s2: #F7F7F9; --s3: #F1F1F4;
-  --lift: 0 1px 2px rgb(16 24 40 / .05), 0 1px 3px rgb(16 24 40 / .04);
   --hair: #E8E8EB; --hair2: #DCDCE1;
   --ink: #1C1D1F; --ink2: #5F636A; --ink3: #8A8E95;
   --acc: #3A7C57; --acc-h: #2F6547;
@@ -129,12 +128,12 @@ ul { list-style: none; }
 .panel .bar { border-bottom: 0; }
 .panel { min-width: 0; }
 .panel .scroll { padding: 0 12px 12px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; align-content: start; }
-.blk { padding: 14px 14px; border-radius: 12px; background: var(--s0); border: 1px solid var(--hair); box-shadow: var(--lift); display: grid; gap: 8px; }
-.blk.bare { background: none; padding: 0; border: 0; box-shadow: none; }
+.blk { padding: 14px 14px; border-radius: 12px; background: var(--s0); display: grid; gap: 8px; }
+.blk.bare { background: none; padding: 0; }
 .blk h4 { display: flex; align-items: center; justify-content: space-between; font-size: 12px; font-weight: 510; color: var(--ink2); }
 .blk h4 button { display: inline-flex; align-items: center; gap: 4px; border: 0; background: none; color: var(--ink2); font-size: 12px; padding: 0; }
 .blk h4 button:hover { color: var(--ink); }
-.card { box-shadow: var(--lift); border: 1px solid var(--hair); border-radius: 12px; padding: 12px 14px 14px; background: var(--s0); display: grid; gap: 8px; }
+.card { border: 1px solid var(--hair); border-radius: 12px; padding: 12px 14px 14px; background: var(--s0); display: grid; gap: 8px; }
 .eyebrow { display: flex; justify-content: space-between; gap: 8px; font-size: 12px; font-weight: 510; color: var(--ink3); }
 .conf.high { color: var(--ok); } .conf.medium { color: var(--warn); } .conf.low { color: var(--bad); }
 .card.rec { background: var(--ai-wash); border-color: var(--ai-line); }
