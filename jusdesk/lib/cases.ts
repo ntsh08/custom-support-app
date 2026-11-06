@@ -126,7 +126,7 @@ export const CASES: Case[] = [
     thread: [
       { kind: "event", time: "Yesterday 6:42 pm", text: "Shadowfax marked delivered" },
       { kind: "customer", channel: "chat", time: "8:52 am", text: "My order shows delivered but I didn't get anything." },
-      { kind: "event", time: "8:52 am", text: "AI investigated this ticket", ai: true, investigation: ["Read her message: nothing reached her door", "Checked tracking: Shadowfax marked it delivered yesterday at 6:42 pm", "Pulled the courier photo and the rider's GPS", "The photo shows a different door, so passed it to the team instead of closing"], next: ["Reship size M today: the photo shows a different door", "Chase Shadowfax on the claim on Monday", "Check the reship reached her by Friday"] },
+      { kind: "event", time: "8:52 am", text: "I investigated this and didn't reply to Ananya: the photo shows a different door, so a person needs to decide.", ai: true, investigation: ["Read her message: nothing reached her door", "Checked tracking: Shadowfax marked it delivered yesterday at 6:42 pm", "Pulled the courier photo and the rider's GPS", "The photo shows a different door, so passed it to the team instead of closing"], next: ["Reship size M today: the photo shows a different door", "Chase Shadowfax on the claim on Monday", "Check the reship reached her by Friday"] },
       { kind: "event", time: "8:53 am", text: "AI handed over with the courier photo and GPS attached", ai: true },
       { kind: "event", time: "8:53 am", text: "AI set status to First response", ai: true, status: "first" },
       { kind: "event", time: "8:53 am", text: "AI assigned this ticket to you", ai: true, assign: "you" },
@@ -264,7 +264,7 @@ export const CASES: Case[] = [
     thread: [
       { kind: "event", time: "Tue 7:05 pm", text: "Shadowfax marked delivered" },
       { kind: "customer", channel: "email", time: "10:02 am", subject: "Jacket never arrived", text: "Hi,\n\nMy jacket shows as delivered on Tuesday but it never came. Can you send another one?\n\nRohan" },
-      { kind: "event", time: "10:03 am", text: "AI investigated this ticket", ai: true, investigation: ["Read his email: the jacket never came, he wants another", "Checked tracking: Shadowfax marked it delivered on Tuesday, no OTP, no photo", "Compared the rider's GPS: 1.1 km from his address", "Checked stock: size L is out until December, so no replacement", "A ₹6,500 refund needs Priya's approval, so didn't reply or promise anything"] },
+      { kind: "event", time: "10:03 am", text: "I investigated this and didn't reply to Rohan: size L is out of stock and a refund needs Priya's approval.", ai: true, investigation: ["Read his email: the jacket never came, he wants another", "Checked tracking: Shadowfax marked it delivered on Tuesday, no OTP, no photo", "Compared the rider's GPS: 1.1 km from his address", "Checked stock: size L is out until December, so no replacement", "A ₹6,500 refund needs Priya's approval, so didn't reply or promise anything"] },
       { kind: "event", time: "10:03 am", text: "AI set status to First response", ai: true, status: "first" },
       { kind: "event", time: "10:03 am", text: "AI assigned this ticket to you", ai: true, assign: "you" },
     ],
@@ -443,7 +443,7 @@ export const CASES: Case[] = [
     thread: [
       { kind: "event", time: "Mon 1:15 pm", text: "Delhivery delivered with OTP" },
       { kind: "customer", channel: "chat", time: "9:40 am", text: "My dress never came. I want a refund." },
-      { kind: "event", time: "9:40 am", text: "AI investigated this ticket", ai: true, investigation: ["Read her message: says the dress never came", "Checked tracking: OTP entered at her door at 1:15 pm", "A claim like this needs a person, so promised no refund or reship"], next: ["Send it to Priya with the signals, and update Meera by 6 pm"] },
+      { kind: "event", time: "9:40 am", text: "I investigated this and didn't reply to Meera: the OTP was entered at her door, so a person needs to review the claim.", ai: true, investigation: ["Read her message: says the dress never came", "Checked tracking: OTP entered at her door at 1:15 pm", "A claim like this needs a person, so promised no refund or reship"], next: ["Send it to Priya with the signals, and update Meera by 6 pm"] },
       { kind: "event", time: "9:40 am", text: "AI set status to First response", ai: true, status: "first" },
       { kind: "event", time: "9:40 am", text: "AI assigned this ticket to you", ai: true, assign: "you" },
     ],

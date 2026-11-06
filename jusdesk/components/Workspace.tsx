@@ -422,10 +422,11 @@ export function Workspace() {
               <div key={i} className="grpmsg">
                 {(i === 0 || (all[i - 1].day ?? "Today") !== (m.day ?? "Today")) && <p className="day"><span>{m.day ?? "Today"}</span></p>}
                 {m.kind === "event" && m.investigation ? (
-                  <div className="inv">
-                    <p className="stchg"><Icon name="lock" size={12} />{m.text}<span>· {m.time}</span></p>
+                  <article className="msg ours bot inv">
+                    <p className="who"><span className="ai">AI</span><b>JusDesk assistant</b><span>{m.time}</span><em className="team"><Icon name="lock" size={12} />Only your team sees this</em></p>
                     <Trace steps={m.investigation} />
-                  </div>
+                    <div>{m.text}</div>
+                  </article>
                 ) : m.kind === "event" ? (
                   <p className="stchg">{m.text}<span>· {m.time}</span></p>
                 ) : <Message m={m} customer={c.customer} email={c.email} language={c.language} onAction={msgAction} />}
