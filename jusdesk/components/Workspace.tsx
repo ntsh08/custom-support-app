@@ -35,6 +35,9 @@ const order = (g: Group) => ["reply", "first", "escalated", "others", "customer"
 /** Minutes left on the reply timer, for sorting. */
 const mins = (t?: string) => (!t ? 1e9 : t === "Now" ? 0 : /h/.test(t) ? parseFloat(t) * 60 : parseFloat(t));
 
+type Sugg = { text: string; due: string; taskId?: string };
+/** Due time read from a suggestion ("due 4 pm", "by 4 pm"), else today. */
+const dueOf = (t: string) => { const m = t.match(/(?:due|by) (\d{1,2}(?::\d\d)? ?[ap]m)/i); return m ? `Today, ${m[1]}` : "Today"; };
 /** A status-change line for the conversation. */
 const statusLine = (g: Group, by: "You" | "AI"): Msg => ({
   kind: "event", time: "Now", ai: by === "AI", status: g,
@@ -144,16 +147,32 @@ export function Workspace() {
 
   // Suggestions for the executive come from the assistant's investigation; shown inside the summary card.
   const nextSteps = [...thread].reverse().find((m): m is Extract<Msg, { kind: "agent" }> => m.kind === "agent" && !!m.next)?.next ?? (open ? c.suggest ?? [] : []);
+  // One list of AI suggestions: the investigation's next steps, plus the AI-suggested tasks (no longer shown in the panel).
+  const suggestions: Sugg[] = [
+    ...nextSteps.map((t) => ({ text: t, due: dueOf(t) })),
+    ...c.tasks.filter((t) => t.ai && !nextSteps.includes(t.text)).map((t) => ({ text: t.text, due: t.due, taskId: t.id })),
+  ];
   // Open tickets get AI suggestions; closed tickets get the AI summary.
   const cardKind = open ? "AI suggestion" : "AI summary";
-  const summaryCard = open && nextSteps.length === 0 ? null : hidden[c.id] ? (
+  const summaryCard = open && suggestions.length === 0 ? null : hidden[c.id] ? (
     <button className="sum-show" onClick={() => setHidden((h) => ({ ...h, [c.id]: false }))}><Icon name="spark" size={14} />Show {cardKind}</button>
   ) : (
     <div className="sumwrap">
       <section className={`sum${writing ? " writing" : ""}`} aria-label={cardKind} aria-busy={writing}>
         <span className="lbl"><Icon name="spark" size={14} /><span>{writing ? (open ? "Thinking…" : "Writing summary…") : cardKind}</span></span>
         {!open && <><h3>{c.hook}</h3><p>{c.handoff.join(" ")}</p></>}
-        {open && <ol className="sugg">{nextSteps.map((t) => <li key={t}><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>{t}</li>)}</ol>}
+        {open && <ol className="sugg">{suggestions.map((x) => {
+          const added = x.taskId ? !tasks[c.id].find((t) => t.id === x.taskId)?.ai : tasks[c.id].some((t) => t.text === x.text);
+          return (
+            <li key={x.text}>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+              <span>{x.text}</span>
+              {added ? <em className="added"><Icon name="check" size={12} />Added</em> : (
+                <button className="addtask" onClick={() => addSuggestion(x)}><Icon name="plus" size={12} />Add task</button>
+              )}
+            </li>
+          );
+        })}</ol>}
       </section>
       <div className="foot">
         <span>Helpful?</span>
@@ -164,7 +183,11 @@ export function Workspace() {
       </div>
     </div>
   );
-  const caseTasks = tasks[c.id];
+  const caseTasks = tasks[c.id].filter((t) => !t.ai);
+  function addSuggestion(x: Sugg) {
+    setTasks((all) => ({ ...all, [c.id]: x.taskId ? all[c.id].map((t) => (t.id === x.taskId ? { ...t, ai: false } : t)) : [...all[c.id], { id: `s${Date.now()}`, text: x.text, due: x.due }] }));
+    setFlash("Added to Tasks and follow-ups");
+  }
   const linked = stage.linked ?? c.linked;
   const answer = answers[c.id];
 

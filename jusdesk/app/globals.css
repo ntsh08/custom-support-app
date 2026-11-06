@@ -393,3 +393,10 @@ ul { list-style: none; }
 .sum .sugg li { display: flex; align-items: center; gap: 8px; min-height: 24px; font-size: 13px; line-height: 18px; color: var(--ink); }
 .sum .sugg li svg { flex: none; color: var(--acc); }
 .sum.writing .sugg { opacity: .35; }
+
+/* Add task from an AI suggestion, always visible (Nitish, 7 Nov) */
+.sum .sugg li span { flex: 1; min-width: 0; }
+.addtask { flex: none; height: 24px; display: inline-flex; align-items: center; gap: 4px; padding: 0 8px; border: 1px solid var(--hair2); border-radius: 6px; background: var(--s0); font-size: 12px; font-weight: 510; color: var(--ink); cursor: pointer; }
+.addtask:hover { background: var(--s2); }
+.sum .sugg em.added { flex: none; display: inline-flex; align-items: center; gap: 4px; font-style: normal; font-size: 12px; color: var(--ok); padding: 0 8px; }
+.sum .sugg li { min-height: 30px; }
