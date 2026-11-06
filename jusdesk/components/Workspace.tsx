@@ -52,7 +52,7 @@ const statusLine = (g: Group, by: "You" | "AI"): Msg => ({
   kind: "event", time: "Now", ai: by === "AI", status: g,
   text: g === "escalated" ? `${by === "AI" ? "AI" : "You"} escalated to Priya (team lead)` : g === "closed" ? `${by} closed the ticket` : `${by} changed status to ${STATUS[g]}`,
 });
-const shown = (m: Msg) => m.kind !== "event" || !!m.status;
+const shown = (m: Msg) => m.kind !== "event" || !!m.status || !!m.assign;
 
 /** Check reply: the AI reads the draft against the customer's ask, mood, policy and language. */
 type Note = { text: string; ok?: boolean; fix?: (d: string) => string };

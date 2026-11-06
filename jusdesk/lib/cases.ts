@@ -9,7 +9,7 @@ export type Group = "first" | "reply" | "customer" | "others" | "escalated" | "c
 export type Msg = (
   | { kind: "customer"; channel: "chat" | "email"; time: string; text: string; gloss?: string; /** Email only. */ subject?: string }
   | { kind: "agent"; who: string; time: string; text: string; gloss?: string; /** What the assistant did before replying (shown as a collapsed trace). */ steps?: string[]; /** What the executive should try next, from the investigation. */ next?: string[] }
-  | { kind: "event"; time: string; text: string; ai?: boolean; /** A status change, shown as a line in the conversation. */ status?: Group }
+  | { kind: "event"; time: string; text: string; ai?: boolean; /** A status change, shown as a line in the conversation. */ status?: Group; /** An assignment, shown the same way. */ assign?: string }
   | { kind: "note"; who: string; time: string; text: string }
 ) & { /** Day label for the date separator. Defaults to "Today". */ day?: string };
 
@@ -129,6 +129,7 @@ export const CASES: Case[] = [
       { kind: "agent", who: "JusDesk assistant", time: "8:52 am", steps: ["Read her message: nothing reached her door", "Checked tracking: Shadowfax marked it delivered yesterday at 6:42 pm", "Pulled the courier photo and the rider's GPS", "The photo shows a different door, so passed it to the team instead of closing"], next: ["Reship size M today: the photo shows a different door", "Chase Shadowfax on the claim on Monday", "Check the reship reached her by Friday"], text: "Sorry about that. I'm checking with the courier and passing this to our team now." },
       { kind: "event", time: "8:53 am", text: "AI handed over with the courier photo and GPS attached", ai: true },
       { kind: "event", time: "8:53 am", text: "AI set status to First response", ai: true, status: "first" },
+      { kind: "event", time: "8:53 am", text: "AI assigned this ticket to you", ai: true, assign: "you" },
       { kind: "customer", channel: "email", time: "9:14 am", subject: "Order FX-48213 marked delivered, but not received", text: "Hi,\n\nI already told your chatbot this. The app says delivered but nothing came to my door. I need it before Saturday.\n\nThanks,\nAnanya" },
       { kind: "event", time: "9:15 am", text: "AI merged this email into the chat case (same order, same customer)", ai: true },
       { kind: "note", who: "You", time: "9:20 am", text: "Last delivery to this address was to flat B-204 (white door). Today's photo shows a green door. Probably the wrong flat." },
@@ -265,6 +266,7 @@ export const CASES: Case[] = [
       { kind: "customer", channel: "email", time: "10:02 am", subject: "Jacket never arrived", text: "Hi,\n\nMy jacket shows as delivered on Tuesday but it never came. Can you send another one?\n\nRohan" },
       { kind: "event", time: "10:03 am", text: "AI checked stock: size L is out of stock until December", ai: true },
       { kind: "event", time: "10:03 am", text: "AI set status to First response", ai: true, status: "first" },
+      { kind: "event", time: "10:03 am", text: "AI assigned this ticket to you", ai: true, assign: "you" },
     ],
     evidence: [
       { kind: "missing", title: "Courier photo", note: "Shadowfax didn't share one" },
@@ -443,6 +445,7 @@ export const CASES: Case[] = [
       { kind: "customer", channel: "chat", time: "9:40 am", text: "My dress never came. I want a refund." },
       { kind: "agent", who: "JusDesk assistant", time: "9:40 am", steps: ["Read her message: says the dress never came", "Checked tracking: OTP entered at her door at 1:15 pm", "A claim like this needs a person, so promised no refund or reship"], next: ["Send it to Priya with the signals, and update Meera by 6 pm"], text: "I'm sorry to hear that. I've passed this to our team, who'll update you today." },
       { kind: "event", time: "9:40 am", text: "AI set status to First response", ai: true, status: "first" },
+      { kind: "event", time: "9:40 am", text: "AI assigned this ticket to you", ai: true, assign: "you" },
     ],
     evidence: [
       { kind: "door", title: "Courier photo", note: "Her door, flat 12C", door: "#7A5236", parcel: true, plate: "12C" },
@@ -542,7 +545,7 @@ export const CASES: Case[] = [
       { kind: "customer", channel: "chat", time: "10:30 am", text: "It says delivered but nobody came?" },
       { kind: "agent", who: "JusDesk assistant", time: "10:31 am", steps: ["Checked tracking: scanned delivered at 10:12 am", "Compared with the rider's GPS: 4.2 km away, stop 14 of 22", "Asked Ekart to confirm the delivery"], next: ["If Ekart hasn't confirmed by 4 pm, call the rider through the Ekart hub and update Kavya"], text: "It looks like the courier scanned it early: the rider was still 4.2 km away. It should reach you by this evening. I've asked Ekart to confirm and I'll update you by 4 pm." },
       { kind: "event", time: "10:31 am", text: "AI asked Ekart to confirm the delivery time", ai: true },
-      { kind: "event", time: "10:31 am", text: "AI set status to Waiting on others (Ekart)", ai: true, status: "others" },
+      { kind: "event", time: "10:31 am", text: "AI set status to Waiting on others", ai: true, status: "others" },
     ],
     evidence: [
       { kind: "missing", title: "Courier photo", note: "None yet: not delivered" },
@@ -578,7 +581,7 @@ export const CASES: Case[] = [
         nextStep: "You're chasing Ekart",
         status: "Yours · Ekart reply due 4 pm",
         options: [],
-        adds: [{ kind: "event", time: "Now", text: "You took over from AI" }],
+        adds: [{ kind: "event", time: "Now", text: "You took over this ticket from AI", assign: "you" }],
       },
       closed: {
         group: "closed",
