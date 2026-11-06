@@ -425,7 +425,7 @@ export function Workspace() {
                   <article className="msg ours bot inv">
                     <p className="who"><span className="ai">AI</span><b>JusDesk assistant</b><span>{m.time}</span><em className="team"><Icon name="lock" size={12} />Only your team sees this</em></p>
                     <Trace steps={m.investigation} />
-                    <div>{m.text}</div>
+                    <div className="noreply">No reply sent</div>
                   </article>
                 ) : m.kind === "event" ? (
                   <p className="stchg">{m.text}<span>· {m.time}</span></p>

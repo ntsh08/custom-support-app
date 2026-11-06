@@ -425,3 +425,4 @@ ul { list-style: none; }
 
 /* AI investigated but didn't reply: a team-only assistant message (Nitish, 7 Nov) */
 .msg.inv .who .team { margin-left: auto; display: inline-flex; align-items: center; gap: 4px; font-style: normal; font-size: 12px; color: var(--ink3); }
+.msg.inv .noreply { font-style: italic; color: var(--ink2); }
