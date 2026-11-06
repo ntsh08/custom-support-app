@@ -5,7 +5,7 @@ Apply these to everything designed in this project: the app, static pages, Figma
 ## 1. One accent, used rarely
 - Green `#3A7C57` (hover `#2F6547`) appears only on the logo, the primary button, the focus ring and links.
 - Green is never a fill, a section background, a selected state or a decoration.
-- Exception (Nitish, 6 Nov): the executive's own messages use a light green tint (`#F1F7F3`, border `#CFE3D6`). Customer messages stay white. The AI assistant's replies use the same green card, marked with the AI tag.
+- The executive's own messages are plain grey (s2). Green appears on AI surfaces only (see section 9).
 - No purple, no blue.
 
 ## 2. Depth from greys, not effects
@@ -74,8 +74,8 @@ Colour carries meaning only:
 
 ## 9. AI signature, notes and the pattern
 - Anything AI wrote or did gets one signature, and nothing else uses it:
-  - a grey wash gradient (`#EDEDF1` → `#F6F6F8` → white, 135°, border `#ECECF0`), on the AI summary and the AI recommendation card (Nitish, 6 Nov: grey, not green)
-  - a grey "AI" tag (`#F1F1F4` bg, `#5F636A` text), on AI events and the assistant's messages
+  - a green wash gradient (`#E6F2EA` → `#F4F9F6` → white, 135°, border `#DCEBE2`), on the AI summary, the AI recommendation card and the assistant's chat replies (Nitish, 6 Nov: back to green for everything AI)
+  - a green "AI" tag (`#E3F0E8` bg, `#2F6547` text), on AI events and the assistant's messages
   - the sparkle icon
 - Internal notes are a plain yellow card (`#FFF8E6`, border `#F3E3B5`, label `#8A6512`), with a lock icon and "Internal note". No badge, no dashed border. The composer turns yellow in note mode. (Nitish, 6 Nov: the industry convention wins here.)
 - The conversation sits on plain white (s0), no wallpaper.
