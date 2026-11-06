@@ -176,18 +176,23 @@ export function Workspace() {
           return (
             <li key={x.text}>
               <span>{x.text}</span>
-              {t ? <em className="added"><Icon name="check" size={12} />{t.owner === "ai" ? "AI will do it" : "Added for you"}</em> : (
-                <span className="addwrap">
+              <span className="addwrap">
+                {t ? (
+                  <button className={`added${t.owner === "ai" ? " ai" : ""}`} aria-haspopup="menu" aria-expanded={addMenu === x.text} onClick={() => setAddMenu(addMenu === x.text ? null : x.text)}>
+                    <Icon name="check" size={12} />{t.owner === "ai" ? "AI will do it" : "Added for you"}<Icon name="chev" size={12} />
+                  </button>
+                ) : (
                   <button className="addtask" aria-haspopup="menu" aria-expanded={addMenu === x.text} onClick={() => setAddMenu(addMenu === x.text ? null : x.text)}><Icon name="plus" size={12} />Add task<Icon name="chev" size={12} /></button>
-                  {addMenu === x.text && (
-                    <ul className="sortmenu addmenu" role="menu" onMouseLeave={() => setAddMenu(null)}>
-                      <li className="mh">Who does it?</li>
-                      <li role="none"><button role="menuitem" onClick={() => addSuggestion(x, "me")}><span><b>Me</b><em>Goes to your tasks</em></span><Icon name="user" size={14} /></button></li>
-                      <li role="none"><button role="menuitem" disabled={!aiCan} onClick={() => addSuggestion(x, "ai")}><span><b>AI</b><em>{aiCan ? `Does it ${when(x.due)} and reports back` : "AI can't make calls"}</em></span><Icon name="spark" size={14} /></button></li>
-                    </ul>
-                  )}
-                </span>
-              )}
+                )}
+                {addMenu === x.text && (
+                  <ul className="sortmenu addmenu" role="menu" onMouseLeave={() => setAddMenu(null)}>
+                    <li className="mh">Who does it?</li>
+                    <li role="none"><button role="menuitem" onClick={() => assign(x, "me")}><span><b>Me</b><em>Goes to your tasks</em></span>{t?.owner !== "ai" && t ? <Icon name="check" size={14} /> : <Icon name="user" size={14} />}</button></li>
+                    <li role="none"><button role="menuitem" disabled={!aiCan} onClick={() => assign(x, "ai")}><span><b>AI</b><em>{aiCan ? `Does it ${when(x.due)} and reports back` : "AI can't make calls"}</em></span>{t?.owner === "ai" ? <Icon name="check" size={14} /> : <Icon name="spark" size={14} />}</button></li>
+                    {t && <li role="none"><button role="menuitem" className="rm" onClick={() => assign(x, null)}><span><b>Remove task</b></span><Icon name="x" size={14} /></button></li>}
+                  </ul>
+                )}
+              </span>
             </li>
           );
         })}</ol>}
@@ -202,10 +207,15 @@ export function Workspace() {
     </div>
   );
   const caseTasks = tasks[c.id].filter((t) => !t.ai);
-  function addSuggestion(x: Sugg, owner: "me" | "ai") {
-    setTasks((all) => ({ ...all, [c.id]: [...all[c.id], { id: `s${Date.now()}`, text: x.text, due: x.due, owner }] }));
+  /** Add, reassign or remove the task for a suggestion. */
+  function assign(x: Sugg, owner: "me" | "ai" | null) {
+    setTasks((all) => {
+      const rest = all[c.id].filter((t) => t.text !== x.text);
+      const prev = all[c.id].find((t) => t.text === x.text);
+      return { ...all, [c.id]: owner ? (prev ? all[c.id].map((t) => (t.text === x.text ? { ...t, owner } : t)) : [...rest, { id: `s${Date.now()}`, text: x.text, due: x.due, owner }]) : rest };
+    });
     setAddMenu(null);
-    setFlash(owner === "ai" ? "AI will do it and report back" : "Added to your tasks");
+    setFlash(owner === "ai" ? "Assigned to AI · it reports back" : owner === "me" ? "Assigned to you" : "Task removed");
   }
   const linked = stage.linked ?? c.linked;
   const answer = answers[c.id];
@@ -622,8 +632,10 @@ export function Workspace() {
                         <Icon name={t.done ? "checked" : "unchecked"} size={16} />
                       </button>
                     )}
-                    <span>{t.text}{t.owner === "ai" && <i className="owner"><Icon name="spark" size={12} />AI</i>}</span>
-                    <em>{t.due}</em>
+                    <span className="tbody">
+                      <span className="ttext">{t.text}</span>
+                      <span className="tmeta">{t.owner === "ai" ? <i className="owner"><Icon name="spark" size={12} />AI</i> : <i className="owner me"><Icon name="user" size={12} />You</i>}<span>{t.due}</span></span>
+                    </span>
                     {t.ai && <button className="add" onClick={() => updateTasks((ts) => ts.map((x) => (x.id === t.id ? { ...x, ai: false } : x)))}>Add</button>}
                   </li>
                 ))}
