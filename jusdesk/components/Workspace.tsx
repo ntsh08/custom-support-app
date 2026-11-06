@@ -144,13 +144,16 @@ export function Workspace() {
 
   // Suggestions for the executive come from the assistant's investigation; shown inside the summary card.
   const nextSteps = [...thread].reverse().find((m): m is Extract<Msg, { kind: "agent" }> => m.kind === "agent" && !!m.next)?.next ?? (open ? c.suggest ?? [] : []);
-  const summaryCard = nextSteps.length === 0 ? null : hidden[c.id] ? (
-    <button className="sum-show" onClick={() => setHidden((h) => ({ ...h, [c.id]: false }))}><Icon name="spark" size={14} />Show AI suggestion</button>
+  // Open tickets get AI suggestions; closed tickets get the AI summary.
+  const cardKind = open ? "AI suggestion" : "AI summary";
+  const summaryCard = open && nextSteps.length === 0 ? null : hidden[c.id] ? (
+    <button className="sum-show" onClick={() => setHidden((h) => ({ ...h, [c.id]: false }))}><Icon name="spark" size={14} />Show {cardKind}</button>
   ) : (
     <div className="sumwrap">
-      <section className={`sum${writing ? " writing" : ""}`} aria-label="AI suggestion" aria-busy={writing}>
-        <span className="lbl"><Icon name="spark" size={14} /><span>{writing ? "Thinking…" : "AI suggestion"}</span></span>
-        <ol className="sugg">{nextSteps.map((t) => <li key={t}><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>{t}</li>)}</ol>
+      <section className={`sum${writing ? " writing" : ""}`} aria-label={cardKind} aria-busy={writing}>
+        <span className="lbl"><Icon name="spark" size={14} /><span>{writing ? (open ? "Thinking…" : "Writing summary…") : cardKind}</span></span>
+        {!open && <><h3>{c.hook}</h3><p>{c.handoff.join(" ")}</p></>}
+        {open && <ol className="sugg">{nextSteps.map((t) => <li key={t}><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>{t}</li>)}</ol>}
       </section>
       <div className="foot">
         <span>Helpful?</span>
