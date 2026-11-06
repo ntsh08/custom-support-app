@@ -271,7 +271,7 @@ export function Workspace() {
                 <div><dt><Icon name="chat" size={14} />Language</dt><dd>{c.language ?? "English"}</dd></div>
               </dl>
             </section>
-            <section className="blk bare">
+            <section className="blk">
               <div className="card rec">
                 {confirming?.confirm ? (
                   <div className="confirm" role="group" aria-label={confirming.confirm.title}>
