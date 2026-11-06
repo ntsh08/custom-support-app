@@ -116,7 +116,8 @@ ul { list-style: none; }
 /* Buttons: 28px, 8px radius, 510 labels */
 .pri, .sec { height: 28px; display: inline-flex; align-items: center; gap: 6px; padding: 0 12px; border-radius: 8px; font-weight: 510; white-space: nowrap; flex: none; }
 .pri { background: var(--acc); color: #fff; border: 1px solid var(--acc); }
-.pri:hover { background: var(--acc-h); }
+.pri:hover:not(:disabled) { background: var(--acc-h); }
+.pri:disabled { opacity: .45; cursor: default; }
 .sec { background: var(--s0); border: 1px solid var(--hair2); }
 .sec:hover:not(:disabled) { background: var(--s1); }
 .sec:disabled { opacity: .45; cursor: default; }

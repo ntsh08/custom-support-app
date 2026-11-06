@@ -250,7 +250,7 @@ export function Workspace() {
                   <button className="gh" onClick={() => setFlash("Translate isn't wired up in the prototype")}><Icon name="translate" size={14} />Hindi</button>
                 </>}
                 <button className="gh" aria-label="Attach" onClick={() => setFlash("Attachments aren't wired up in the prototype")}><Icon name="attach" size={14} /></button>
-                <button className="sec" onClick={send} disabled={!draft.trim()}>
+                <button className="pri" onClick={send} disabled={!draft.trim()}>
                   <Icon name={mode === "note" ? "note" : "send"} size={14} />{mode === "note" ? "Add note" : "Send"}
                 </button>
               </div>
