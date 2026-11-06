@@ -142,6 +142,8 @@ export function Workspace() {
   const open = status !== "closed";
   const setStatus = (g: Group) => setStates((s) => (g === status ? s : { ...s, [c.id]: { ...s[c.id], status: g, extra: [...s[c.id].extra, statusLine(g, "You")] } }));
 
+  // Suggestions for the executive come from the assistant's investigation; shown inside the summary card.
+  const nextSteps = [...thread].reverse().find((m): m is Extract<Msg, { kind: "agent" }> => m.kind === "agent" && !!m.next)?.next ?? [];
   const summaryCard = hidden[c.id] ? (
     <button className="sum-show" onClick={() => setHidden((h) => ({ ...h, [c.id]: false }))}><Icon name="spark" size={14} />Show AI summary</button>
   ) : (
@@ -150,6 +152,7 @@ export function Workspace() {
         <span className="lbl"><Icon name="spark" size={14} /><span>{writing ? "Writing summary…" : "AI summary"}</span></span>
         <h3>{c.hook}</h3>
         <p>{c.handoff.join(" ")}</p>
+        {nextSteps.length > 0 && <TryNext next={nextSteps} />}
       </section>
       <div className="foot">
         <span>Helpful?</span>
@@ -668,7 +671,6 @@ function Message({ m, customer, email, language, onAction }: { m: Msg; customer:
         <Actions m={m} onAction={onAction} />
       </article>
       {link(m.gloss, "ours", "Sent in")}
-      {bot && m.next && m.next.length > 0 && <TryNext next={m.next} />}
     </>);
   }
   if (m.channel === "email") {
