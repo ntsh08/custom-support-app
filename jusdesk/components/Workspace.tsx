@@ -109,6 +109,7 @@ export function Workspace() {
   };
   const [sort, setSort] = useState<SortBy>("due");
   const [sortMenu, setSortMenu] = useState(false);
+  const [statusMenu, setStatusMenu] = useState(false);
   const ordered = useMemo(() => {
     const left = (x: Case) => mins(x.stages[states[x.id].stage].timeLeft);
     // Due: reply timers first, then follow-ups, then the rest; closed last.
@@ -132,7 +133,6 @@ export function Workspace() {
   const draft = drafts[key] ?? (mode === "reply" ? stage.draft ?? "" : "");
   const status = statusOf(c.id);
   const open = status !== "closed";
-  const reopened = stage.reopened && !st.status;
   const setStatus = (g: Group) => setStates((s) => ({ ...s, [c.id]: { ...s[c.id], status: g } }));
 
   const summaryCard = hidden[c.id] ? (
@@ -164,6 +164,7 @@ export function Workspace() {
     setAsk("");
     setNewTask(null);
     setCheck(null);
+    setStatusMenu(false);
   }
 
   useEffect(() => {
@@ -321,17 +322,32 @@ export function Workspace() {
         {/* Case */}
         <main className="case" key={c.id}>
           <header className="head">
-            <h1>{TITLE}</h1>
+            <div className="hrow">
+              <h1>{TITLE}</h1>
+              <div className="split">
+                <button className="sp-main" onClick={() => { setStatus(status === "closed" ? "reply" : "closed"); setFlash(status === "closed" ? "Reopened · Needs reply" : "Ticket closed"); }}>
+                  <Icon name={status === "closed" ? "undo" : "check"} size={14} />{status === "closed" ? "Reopen" : "Close ticket"}
+                </button>
+                <button className="sp-more" aria-label="Change status" aria-haspopup="listbox" aria-expanded={statusMenu} onClick={() => setStatusMenu((o) => !o)}><Icon name="chev" size={14} /></button>
+                {statusMenu && (
+                  <ul className="sortmenu stmenu" role="listbox" aria-label="Change status" onMouseLeave={() => setStatusMenu(false)}>
+                    <li className="mh">Change status</li>
+                    {(Object.keys(STATUS) as Group[]).map((g) => (
+                      <li key={g} role="option" aria-selected={status === g}>
+                        <button onClick={() => { setStatus(g); setStatusMenu(false); }}>
+                          <span className="stline"><i className={`dot st-${g}`} />{STATUS[g]}</span>
+                          {status === g && <Icon name="check" size={14} />}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </div>
             <div className="tags">
               <span>{c.ticket}</span>
-              <span className={`st st-${status}`}>{STATUS[status]}</span>
-              <span><Icon name="box" size={14} />{c.order}</span>
               <span><Icon name="user" size={14} />{c.customer}</span>
-              {c.email && <span><Icon name="mail" size={14} />{c.email}</span>}
-              {!c.email && <span><Icon name="chat" size={14} />Chat</span>}
-              {c.language && <span><Icon name="translate" size={14} />{c.language}</span>}
-              {reopened && <span className="reo"><Icon name="undo" size={14} />Reopened</span>}
-              {dueFor(status) && stage.timeLeft && <span className={stage.urgent ?? ""}><Icon name="clock" size={14} />{stage.timeLeft === "Now" ? "Reply due now" : `Reply due in ${stage.timeLeft}`}</span>}
+              <span><Icon name="translate" size={14} />{c.language ?? "English"}</span>
             </div>
           </header>
 

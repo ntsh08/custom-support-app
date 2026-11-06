@@ -63,7 +63,7 @@ Colour carries meaning only:
 - Label column: 128px; icons never shrink (flex none).
 
 ## 8. Components
-- Every ticket has the same title, "Marked delivered, but not received". Under it: plain grey tags (s2, 6px radius, no border) for order, customer, email or channel, language and reply due. No breadcrumb. Status, owner, follow-up and reason live in the right panel.
+- Every ticket has the same title, "Marked delivered, but not received". Under it only three plain grey tags (s2, 6px radius, no border): ticket number, customer name, language. No order number, channel, status or reply-due tags in the header (Nitish, 7 Nov). On the right of the title, a status split button (28px, hairline-strong border, 8px radius): the main half is the quick action "Close ticket" (or "Reopen" when closed); the chevron half opens "Change status" with all six statuses, each with a coloured dot, and a tick on the current one. No breadcrumb. Status, owner, follow-up and reason live in the right panel.
 - Dashed border means "not real yet":
   - unset fields
   - prototype-only buttons
