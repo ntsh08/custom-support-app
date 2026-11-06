@@ -126,7 +126,7 @@ export const CASES: Case[] = [
     thread: [
       { kind: "event", time: "Yesterday 6:42 pm", text: "Shadowfax marked delivered" },
       { kind: "customer", channel: "chat", time: "8:52 am", text: "My order shows delivered but I didn't get anything." },
-      { kind: "agent", who: "JusDesk assistant", time: "8:52 am", steps: ["Read her message: nothing reached her door", "Checked tracking: Shadowfax marked it delivered yesterday at 6:42 pm", "Pulled the courier photo and the rider's GPS", "The photo shows a different door, so passed it to the team instead of closing"], next: ["Compare the green door in the photo with her last delivery (white door, B-204)", "Ask Shadowfax which flat the rider left it at", "If it isn't found today, reship size M (in stock)"], text: "Sorry about that. I'm checking with the courier and passing this to our team now." },
+      { kind: "agent", who: "JusDesk assistant", time: "8:52 am", steps: ["Read her message: nothing reached her door", "Checked tracking: Shadowfax marked it delivered yesterday at 6:42 pm", "Pulled the courier photo and the rider's GPS", "The photo shows a different door, so passed it to the team instead of closing"], next: ["Reship size M today: the photo shows a different door", "Chase Shadowfax on the claim on Monday", "Check the reship reached her by Friday"], text: "Sorry about that. I'm checking with the courier and passing this to our team now." },
       { kind: "event", time: "8:53 am", text: "AI handed over with the courier photo and GPS attached", ai: true },
       { kind: "event", time: "8:53 am", text: "AI set status to First response", ai: true, status: "first" },
       { kind: "customer", channel: "email", time: "9:14 am", subject: "Order FX-48213 marked delivered, but not received", text: "Hi,\n\nI already told your chatbot this. The app says delivered but nothing came to my door. I need it before Saturday.\n\nThanks,\nAnanya" },
@@ -163,8 +163,6 @@ export const CASES: Case[] = [
     history: { since: "March 2024", orders: "14", spent: "₹31,400", claims: "None", refunds: "None", address: "Same since 2024 · 13 deliveries, no issues", risk: { level: "Low", checks: [{ text: "No earlier claims or refunds", src: "Order history" }, { text: "Only her account uses this address", src: "Address match" }, { text: "No chargebacks on her UPI", src: "Payment data" }] }, past: [["Size exchange, top", "Aug · solved"], ["Order status", "Jun · solved"]] },
     tasks: [
       { id: "a1", text: "Call Ananya if she doesn't reply", due: "Today, 1 pm" },
-      { id: "a2", text: "Chase Shadowfax on the claim", due: "Mon", ai: true },
-      { id: "a3", text: "Check the reship reached her", due: "Fri", ai: true },
     ],
     linked: [["Courier request", "Photo and GPS received, 8:53"], ["Reship", "Not created"], ["Refund", "None"]],
     asks: [
@@ -249,7 +247,7 @@ export const CASES: Case[] = [
   },
   {
     id: "rohan",
-    suggest: ["Ask Priya to approve the ₹6,500 refund to his UPI", "Tell Rohan size L is out of stock until December", "Offer the refund now rather than waiting for stock"],
+    suggest: ["Get Priya's approval for the ₹6,500 refund, then tell Rohan", "Check the refund reached him in 5 days"],
     ticket: "#1039",
     customer: "Rohan Shah",
     email: "rohan.shah@example.com",
@@ -299,8 +297,6 @@ export const CASES: Case[] = [
     tags: ["Order not received", "Replacement requested", "Out of stock"],
     history: { since: "January 2025", orders: "9", spent: "₹27,900", claims: "None", refunds: "1 · ₹2,100 for a return", address: "Same since 2025 · 8 deliveries, no issues", risk: { level: "Low", checks: [{ text: "No earlier claims; 1 refund was a normal return", src: "Order history" }, { text: "Only his account uses this address", src: "Address match" }, { text: "No chargebacks on his UPI", src: "Payment data" }] }, past: [["Refund for a return", "Sep · solved"]] },
     tasks: [
-      { id: "r1", text: "Tell Rohan once Priya decides", due: "Today", ai: true },
-      { id: "r2", text: "Check the refund reached him", due: "In 5 days", ai: true },
     ],
     linked: [["Courier request", "No photo, GPS 1.1 km off"], ["Replacement", "Size L out of stock"], ["Refund", "Not started"]],
     asks: [
@@ -445,7 +441,7 @@ export const CASES: Case[] = [
     thread: [
       { kind: "event", time: "Mon 1:15 pm", text: "Delhivery delivered with OTP" },
       { kind: "customer", channel: "chat", time: "9:40 am", text: "My dress never came. I want a refund." },
-      { kind: "agent", who: "JusDesk assistant", time: "9:40 am", steps: ["Read her message: says the dress never came", "Checked tracking: OTP entered at her door at 1:15 pm", "A claim like this needs a person, so promised no refund or reship"], next: ["Ask Delhivery for the rider's call log at 1:15 pm", "Ask Meera if someone at home could have taken it", "Send to Priya with the signals; don't deny the claim yourself"], text: "I'm sorry to hear that. I've passed this to our team, who'll update you today." },
+      { kind: "agent", who: "JusDesk assistant", time: "9:40 am", steps: ["Read her message: says the dress never came", "Checked tracking: OTP entered at her door at 1:15 pm", "A claim like this needs a person, so promised no refund or reship"], next: ["Send it to Priya with the signals, and update Meera by 6 pm"], text: "I'm sorry to hear that. I've passed this to our team, who'll update you today." },
       { kind: "event", time: "9:40 am", text: "AI set status to First response", ai: true, status: "first" },
     ],
     evidence: [
@@ -476,7 +472,7 @@ export const CASES: Case[] = [
     sentiment: { label: "Angry", why: "Asks for a refund straight away" },
     tags: ["Order not received", "Refund requested", "Repeat claim"],
     history: { since: "May 2026", orders: "6", spent: "₹18,200", claims: "3 in 2 months", refunds: "2 · ₹7,300, none reversed", address: "Shared with 1 other account", risk: { level: "Review", checks: [{ text: "3rd “not received” claim on this account in 2 months", src: "Order history" }, { text: "Another account at the same address made 2 claims", src: "Address match" }, { text: "Card used here is linked to 1 chargeback", src: "Payment data" }] }, past: [["Not received, refunded", "Oct"], ["Not received, refunded", "Sep"]] },
-    tasks: [{ id: "m1", text: "Update Meera by 6 pm", due: "Today, 6 pm", ai: true }],
+    tasks: [],
     linked: [["Courier request", "Photo, GPS and OTP received"], ["Refund", "None"]],
     start: "decide",
     stages: {
@@ -544,7 +540,7 @@ export const CASES: Case[] = [
     thread: [
       { kind: "event", time: "10:12 am", text: "Ekart marked delivered" },
       { kind: "customer", channel: "chat", time: "10:30 am", text: "It says delivered but nobody came?" },
-      { kind: "agent", who: "JusDesk assistant", time: "10:31 am", steps: ["Checked tracking: scanned delivered at 10:12 am", "Compared with the rider's GPS: 4.2 km away, stop 14 of 22", "Asked Ekart to confirm the delivery"], next: ["Wait for Ekart's confirmation, due 4 pm", "If Ekart hasn't confirmed by 4 pm, call the rider through the Ekart hub", "Update Kavya by 4 pm either way"], text: "It looks like the courier scanned it early: the rider was still 4.2 km away. It should reach you by this evening. I've asked Ekart to confirm and I'll update you by 4 pm." },
+      { kind: "agent", who: "JusDesk assistant", time: "10:31 am", steps: ["Checked tracking: scanned delivered at 10:12 am", "Compared with the rider's GPS: 4.2 km away, stop 14 of 22", "Asked Ekart to confirm the delivery"], next: ["If Ekart hasn't confirmed by 4 pm, call the rider through the Ekart hub and update Kavya"], text: "It looks like the courier scanned it early: the rider was still 4.2 km away. It should reach you by this evening. I've asked Ekart to confirm and I'll update you by 4 pm." },
       { kind: "event", time: "10:31 am", text: "AI asked Ekart to confirm the delivery time", ai: true },
       { kind: "event", time: "10:31 am", text: "AI set status to Waiting on others (Ekart)", ai: true, status: "others" },
     ],
@@ -565,7 +561,7 @@ export const CASES: Case[] = [
     sentiment: { label: "Neutral", why: "Asking, not complaining" },
     tags: ["Order not received", "Early scan"],
     history: { since: "July 2025", orders: "4", spent: "₹6,300", claims: "None", refunds: "None", address: "Same since 2025 · 3 deliveries, no issues", risk: { level: "Low", checks: [{ text: "No earlier claims or refunds", src: "Order history" }, { text: "Only her account uses this address", src: "Address match" }, { text: "No chargebacks on her UPI", src: "Payment data" }] }, past: [] },
-    tasks: [{ id: "k1", text: "Take over if Ekart hasn't confirmed", due: "Today, 4 pm", ai: true }],
+    tasks: [],
     linked: [["Courier request", "Asked Ekart to confirm"], ["Refund", "None"]],
     start: "waiting",
     stages: {

@@ -37,7 +37,14 @@ const mins = (t?: string) => (!t ? 1e9 : t === "Now" ? 0 : /h/.test(t) ? parseFl
 
 type Sugg = { text: string; due: string; taskId?: string };
 /** Due time read from a suggestion ("due 4 pm", "by 4 pm"), else today. */
-const dueOf = (t: string) => { const m = t.match(/(?:due|by) (\d{1,2}(?::\d\d)? ?[ap]m)/i); return m ? `Today, ${m[1]}` : "Today"; };
+const dueOf = (t: string) => {
+  const time = t.match(/(?:due|by) (\d{1,2}(?::\d\d)? ?[ap]m)/i);
+  if (time) return `Today, ${time[1]}`;
+  const day = t.match(/(?:on|by) (Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)/i);
+  if (day) return day[1].slice(0, 3);
+  const days = t.match(/in (\d+) days/i);
+  return days ? `In ${days[1]} days` : "Today";
+};
 /** A status-change line for the conversation. */
 const statusLine = (g: Group, by: "You" | "AI"): Msg => ({
   kind: "event", time: "Now", ai: by === "AI", status: g,
@@ -150,7 +157,6 @@ export function Workspace() {
   // One list of AI suggestions: the investigation's next steps, plus the AI-suggested tasks (no longer shown in the panel).
   const suggestions: Sugg[] = [
     ...nextSteps.map((t) => ({ text: t, due: dueOf(t) })),
-    ...c.tasks.filter((t) => t.ai && !nextSteps.includes(t.text)).map((t) => ({ text: t.text, due: t.due, taskId: t.id })),
   ];
   // Open tickets get AI suggestions; closed tickets get the AI summary.
   const cardKind = open ? "AI suggestion" : "AI summary";
