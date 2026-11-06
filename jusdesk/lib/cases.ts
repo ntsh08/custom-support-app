@@ -74,6 +74,8 @@ export type Case = {
   headline: string;
   /** One catchy line at the top of the AI summary. */
   hook: string;
+  /** AI suggestions for the executive when no assistant message carries them. */
+  suggest?: string[];
   summary: string;
   thread: Msg[];
   evidence: Evidence[];
@@ -247,6 +249,7 @@ export const CASES: Case[] = [
   },
   {
     id: "rohan",
+    suggest: ["Ask Priya to approve the ₹6,500 refund to his UPI", "Tell Rohan size L is out of stock until December", "Offer the refund now rather than waiting for stock"],
     ticket: "#1039",
     customer: "Rohan Shah",
     email: "rohan.shah@example.com",

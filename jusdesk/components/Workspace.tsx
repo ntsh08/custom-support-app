@@ -143,16 +143,14 @@ export function Workspace() {
   const setStatus = (g: Group) => setStates((s) => (g === status ? s : { ...s, [c.id]: { ...s[c.id], status: g, extra: [...s[c.id].extra, statusLine(g, "You")] } }));
 
   // Suggestions for the executive come from the assistant's investigation; shown inside the summary card.
-  const nextSteps = [...thread].reverse().find((m): m is Extract<Msg, { kind: "agent" }> => m.kind === "agent" && !!m.next)?.next ?? [];
-  const summaryCard = hidden[c.id] ? (
-    <button className="sum-show" onClick={() => setHidden((h) => ({ ...h, [c.id]: false }))}><Icon name="spark" size={14} />Show AI summary</button>
+  const nextSteps = [...thread].reverse().find((m): m is Extract<Msg, { kind: "agent" }> => m.kind === "agent" && !!m.next)?.next ?? (open ? c.suggest ?? [] : []);
+  const summaryCard = nextSteps.length === 0 ? null : hidden[c.id] ? (
+    <button className="sum-show" onClick={() => setHidden((h) => ({ ...h, [c.id]: false }))}><Icon name="spark" size={14} />Show AI suggestion</button>
   ) : (
     <div className="sumwrap">
-      <section className={`sum${writing ? " writing" : ""}`} aria-label="AI summary" aria-busy={writing}>
-        <span className="lbl"><Icon name="spark" size={14} /><span>{writing ? "Writing summary…" : "AI summary"}</span></span>
-        <h3>{c.hook}</h3>
-        <p>{c.handoff.join(" ")}</p>
-        {nextSteps.length > 0 && <TryNext next={nextSteps} />}
+      <section className={`sum${writing ? " writing" : ""}`} aria-label="AI suggestion" aria-busy={writing}>
+        <span className="lbl"><Icon name="spark" size={14} /><span>{writing ? "Thinking…" : "AI suggestion"}</span></span>
+        <ol className="sugg">{nextSteps.map((t) => <li key={t}><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>{t}</li>)}</ol>
       </section>
       <div className="foot">
         <span>Helpful?</span>
@@ -695,16 +693,6 @@ function Message({ m, customer, email, language, onAction }: { m: Msg; customer:
 }
 
 /** The assistant's work before a reply, after the INA agent trace: one line, opens to the steps. */
-/** What the executive can try next: under the assistant's reply, not inside the investigation. */
-function TryNext({ next }: { next: string[] }) {
-  return (
-    <div className="trynext">
-      <p><Icon name="lock" size={12} />Suggestions for you</p>
-      <ol>{next.map((t) => <li key={t}><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>{t}</li>)}</ol>
-    </div>
-  );
-}
-
 function Trace({ steps }: { steps: string[] }) {
   const [open, setOpen] = useState(false);
   return (
