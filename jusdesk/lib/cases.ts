@@ -5,11 +5,12 @@ import type { IconName } from "@/components/Icon";
 
 export type Group = "needs" | "waiting" | "lead" | "ai" | "closed";
 
-export type Msg =
+export type Msg = (
   | { kind: "customer"; channel: "chat" | "email"; time: string; text: string; gloss?: string }
   | { kind: "agent"; who: string; time: string; text: string; gloss?: string }
   | { kind: "event"; time: string; text: string; ai?: boolean }
-  | { kind: "note"; who: string; time: string; text: string };
+  | { kind: "note"; who: string; time: string; text: string }
+) & { /** Day label for the date separator. Defaults to "Today". */ day?: string };
 
 export type Task = { id: string; text: string; due: string; ai?: boolean; done?: boolean };
 export type Reason = { text: string; src: string };

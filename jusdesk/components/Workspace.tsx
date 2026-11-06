@@ -223,7 +223,12 @@ export function Workspace() {
               <h3><Icon name="spark" size={14} />Before you read · AI summary</h3>
               <ul>{c.handoff.map((h) => <li key={h}>{h}</li>)}</ul>
             </section>
-            {thread.filter((m) => m.kind !== "event").map((m, i) => <Message key={i} m={m} customer={c.customer} language={c.language} onAction={msgAction} />)}
+            {thread.filter((m) => m.kind !== "event").map((m, i, all) => (
+              <div key={i} className="grpmsg">
+                {(i === 0 || (all[i - 1].day ?? "Today") !== (m.day ?? "Today")) && <p className="day"><span>{m.day ?? "Today"}</span></p>}
+                <Message m={m} customer={c.customer} language={c.language} onAction={msgAction} />
+              </div>
+            ))}
             <div ref={threadEnd} />
             </div>
           </div>

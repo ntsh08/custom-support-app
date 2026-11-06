@@ -81,9 +81,11 @@ Colour carries meaning only:
 - The conversation sits on plain white (s0), no wallpaper.
 - Columns: rail 52px, queue 304px, case flexible (min 460px), details panel 420px. The conversation fills the case column with 24px side padding (no cap).
 
-- Conversation borders are extra light so cards read by fill, not outline: customer `#EAEAEE`, own green `#E1EEE6`, note `#F7EDCB`, AI wash `#E3F0E8`, composer `#E8E8EC`.
 
 - The conversation shows only messages and internal notes. No activity-log lines (courier or AI events); the AI summary and the right panel carry that context. (Nitish, 6 Nov)
+
+- Messages are grouped by day with a centred pill (s2 background, 12px grey text, 22px tall), like WhatsApp. Messages default to "Today"; a message can carry its own `day`.
+- Bubble borders are very soft: customer `#F0F0F3`, own `#F3F3F6`, AI `#E6F1EA`, note `#FAF1D6`, composer `#EDEDF0`.
 
 ## 10. Don'ts
 - No second accent colour.

@@ -12,7 +12,7 @@
   --warn: #B45309; --bad: #B42318; --ok: #15803D;
   --rail-on: #E6E6EA;
   --g50: #F1F7F3; --g200: #CFE3D6;
-  --ai-wash: linear-gradient(135deg, #E6F2EA 0%, #F4F9F6 40%, #FFFFFF 80%); --ai-line: #DCEBE2;
+  --ai-wash: linear-gradient(135deg, #E6F2EA 0%, #F4F9F6 40%, #FFFFFF 80%); --ai-line: #E6F1EA;
   --note: #FFF8E6; --note-line: #F3E3B5; --note-ink: #8A6512;
 }
 * { box-sizing: border-box; }
@@ -81,12 +81,15 @@ ul { list-style: none; }
 .ev time { margin-left: auto; color: var(--ink3); white-space: nowrap; }
 /* Messages: customer left on white, our side right on grey, notes full width with a dashed edge and a label */
 .thread .inner { width: 100%; max-width: none; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+.grpmsg { display: flex; flex-direction: column; gap: 12px; }
+.day { display: flex; justify-content: center; margin: 4px 0; }
+.day span { height: 22px; padding: 0 10px; border-radius: 11px; background: var(--s2); color: var(--ink3); font-size: 12px; line-height: 22px; font-weight: 510; }
 .msg { position: relative; max-width: 86%; border-radius: 12px; padding: 10px 14px 12px; }
-.msg.theirs { align-self: flex-start; background: var(--s0); border: 1px solid #EAEAEE; }
+.msg.theirs { align-self: flex-start; background: var(--s0); border: 1px solid #F0F0F3; }
 .msg.ours { align-self: flex-end; background: var(--s2); border: 1px solid transparent; }
-.msg.ours { background: var(--s2); border-color: #EDEDF0; }
+.msg.ours { background: var(--s2); border-color: #F3F3F6; }
 .msg.ours.bot { background: var(--ai-wash); border-color: var(--ai-line); }
-.msg.note { align-self: stretch; max-width: none; background: var(--note); border: 1px solid #F7EDCB; }
+.msg.note { align-self: stretch; max-width: none; background: var(--note); border: 1px solid #FAF1D6; }
 .msg.note .who, .msg.note .who b { color: var(--note-ink); }
 .acts { position: absolute; top: -14px; right: 8px; display: none; gap: 2px; padding: 2px; background: var(--s0); border: 1px solid var(--hair2); border-radius: 8px; }
 .msg:hover .acts, .msg:focus-within .acts { display: flex; }
@@ -103,7 +106,7 @@ ul { list-style: none; }
 .msg .who b { color: var(--ink); font-weight: 510; font-size: 13px; }
 .gloss { display: block; margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--hair); color: var(--ink2); }
 
-.composer { border: 1px solid #E8E8EC; border-radius: 12px; background: var(--s0); padding: 8px 12px 10px; flex: none; }
+.composer { border: 1px solid #EDEDF0; border-radius: 12px; background: var(--s0); padding: 8px 12px 10px; flex: none; }
 .composer:focus-within { border-color: var(--acc); }
 .composer.is-note { background: var(--note); border-color: var(--note-line); }
 .composer .tabs { display: flex; gap: 2px; margin-bottom: 6px; }
