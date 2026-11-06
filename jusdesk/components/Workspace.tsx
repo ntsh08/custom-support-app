@@ -130,7 +130,7 @@ export function Workspace() {
   const thread = [...c.thread, ...st.extra];
 
   const key = c.id + st.stage + mode;
-  const draft = drafts[key] ?? (mode === "reply" ? stage.draft ?? "" : "");
+  const draft = drafts[key] ?? "";
   const status = statusOf(c.id);
   const open = status !== "closed";
   const setStatus = (g: Group) => setStates((s) => ({ ...s, [c.id]: { ...s[c.id], status: g } }));
@@ -372,7 +372,7 @@ export function Workspace() {
               <textarea
                 aria-label={mode === "note" ? "Internal note" : `Reply to ${c.customer}`}
                 value={draft}
-                placeholder={mode === "note" ? "Only your team sees this" : `Reply to ${c.customer.split(" ")[0]}`}
+                placeholder={mode === "note" ? "Only your team sees this" : `Reply to ${c.customer.split(" ")[0]}, or use AI draft to start from the evidence`}
                 onChange={(e) => { setDrafts((d) => ({ ...d, [key]: e.target.value })); setCheck(null); }}
                 onKeyDown={(e) => { if (e.key === "Enter" && e.metaKey) { e.preventDefault(); send(); } }}
               />
