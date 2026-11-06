@@ -451,7 +451,7 @@ function Message({ m, customer, email, language, onAction }: { m: Msg; customer:
   const lang = language ?? "another language";
   const body = (g?: string) => g ? <div>{orig ? <span lang="hi">{m.text}</span> : g}</div> : <div>{m.text}</div>;
   const link = (g: string | undefined, side: string, verb: string) => g && (
-    <p className={`trlink ${side}`}><Icon name="translate" size={14} />{orig ? `Original in ${lang}` : `${verb} ${lang}`} · <button onClick={() => setOrig((v) => !v)}>{orig ? "See translation" : "See original"}</button></p>
+    <p className={`trlink ${side}`}><Icon name="translate" size={14} /><button onClick={() => setOrig((v) => !v)}>{orig ? "See translation" : "See original"}</button></p>
   );
   if (m.kind === "event") {
     return (
