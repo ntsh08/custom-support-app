@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JusDesk · Purple and icons</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&display=swap" rel="stylesheet">
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #F5F5F6; color: #1F2023; font-family: "Inter", system-ui, sans-serif; font-feature-settings: "cv01", "ss03"; font-size: 13px; line-height: 20px; -webkit-font-smoothing: antialiased; }
+  .page { max-width: 1320px; margin: 0 auto; padding: 40px 32px 96px; }
+  h1 { font-size: 16px; line-height: 22px; font-weight: 590; margin: 0 0 4px; }
+  h2 { font-size: 14px; line-height: 20px; font-weight: 590; margin: 40px 0 4px; }
+  .lede { color: #6B6F76; margin: 0 0 16px; max-width: 760px; }
+
+  /* Purple cards */
+  .purples { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .pc { --p: #000; background: #fff; border: 1px solid #E9E9EC; border-radius: 10px; overflow: hidden; }
+  .pc .sw { height: 64px; background: var(--p); }
+  .pc .info { padding: 10px 12px 4px; display: flex; justify-content: space-between; align-items: baseline; }
+  .pc .info b { font-weight: 590; }
+  .pc .info span { color: #6B6F76; font-size: 12px; font-variant-numeric: tabular-nums; }
+  .pc .note { padding: 0 12px; font-size: 12px; line-height: 16px; color: #6B6F76; min-height: 32px; }
+  .demo { padding: 12px; display: grid; gap: 10px; border-top: 1px solid #F1F1F3; margin-top: 8px; }
+  .row { display: flex; align-items: center; gap: 8px; }
+  .btn { height: 28px; padding: 0 12px; border: 0; border-radius: 6px; background: var(--p); color: #fff; font: inherit; font-weight: 510; }
+  .ob { height: 28px; padding: 0 12px; border: 1px solid #E5E5E8; border-radius: 6px; background: #fff; font: inherit; font-weight: 510; color: #1F2023; box-shadow: 0 0 0 2px color-mix(in srgb, var(--p) 35%, transparent); }
+  .sel { height: 36px; display: flex; align-items: center; gap: 8px; padding: 0 10px; border-radius: 6px; background: color-mix(in srgb, var(--p) 8%, white); box-shadow: inset 2px 0 var(--p); font-weight: 510; }
+  .sel span { color: #6B6F76; font-weight: 400; font-size: 12px; margin-left: auto; }
+  .tag { height: 18px; padding: 0 5px; border-radius: 4px; background: color-mix(in srgb, var(--p) 12%, white); color: color-mix(in srgb, var(--p) 80%, black); font-size: 11px; line-height: 18px; font-weight: 590; }
+  .link { color: color-mix(in srgb, var(--p) 85%, black); font-weight: 510; }
+
+  /* Icon sets */
+  .sets { display: grid; gap: 12px; }
+  .set { background: #fff; border: 1px solid #E9E9EC; border-radius: 10px; display: grid; grid-template-columns: 220px 1fr 300px; align-items: center; }
+  .set .name { padding: 14px 16px; border-right: 1px solid #F1F1F3; }
+  .set .name b { display: block; font-weight: 590; }
+  .set .name span { font-size: 12px; line-height: 16px; color: #6B6F76; }
+  .set .icons { display: flex; gap: 18px; padding: 14px 20px; color: #3D3F44; flex-wrap: wrap; }
+  .set .icons iconify-icon { font-size: 20px; }
+  .set .ctx { padding: 10px 16px; border-left: 1px solid #F1F1F3; }
+  .kv { height: 30px; display: grid; grid-template-columns: 104px 1fr; align-items: center; }
+  .kv .k { display: flex; align-items: center; gap: 8px; color: #6B6F76; }
+  .kv .k iconify-icon { font-size: 16px; color: #8A8F98; }
+  .kv .v { font-weight: 510; }
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>Purple and icons · round 1</h1>
+  <p class="lede">Real brand purples, each shown the way JusDesk would use it: the one main button, a selected queue row, the AI tag, a link and a focus ring. The number is contrast with white text (4.5 or more passes for button text).</p>
+
+  <h2>Purples from real brands</h2>
+  <p class="lede">Copying a very famous purple exactly (Stripe, Twitch) can make the product read as that brand; a near-twin avoids that if needed.</p>
+  <div class="purples">
+    <div class="pc" style="--p:#5E6AD2"><div class="sw"></div><div class="info"><b>Linear</b><span>#5E6AD2 · 4.7</span></div><div class="note">Indigo-violet, calm and serious; the tool you said you like.</div><div class="demo"><div class="row"><button class="btn">Reship and file claim</button></div><div class="sel">Ananya Mehta<span>40m</span></div><div class="row"><span class="tag">AI</span><span class="link">View courier photo</span></div><div class="row"><button class="ob">Focus ring</button></div></div></div>
+    <div class="pc" style="--p:#635BFF"><div class="sw"></div><div class="info"><b>Stripe</b><span>#635BFF · 4.7</span></div><div class="note">Stripe's "blurple". Bright and payments-coded, very recognisable.</div><div class="demo"><div class="row"><button class="btn">Reship and file claim</button></div><div class="sel">Ananya Mehta<span>40m</span></div><div class="row"><span class="tag">AI</span><span class="link">View courier photo</span></div><div class="row"><button class="ob">Focus ring</button></div></div></div>
+    <div class="pc" style="--p:#625DF5"><div class="sw"></div><div class="info"><b>Loom</b><span>#625DF5 · 4.8</span></div><div class="note">Close to Stripe, slightly softer; less famous.</div><div class="demo"><div class="row"><button class="btn">Reship and file claim</button></div><div class="sel">Ananya Mehta<span>40m</span></div><div class="row"><span class="tag">AI</span><span class="link">View courier photo</span></div><div class="row"><button class="ob">Focus ring</button></div></div></div>
+    <div class="pc" style="--p:#5865F2"><div class="sw"></div><div class="info"><b>Discord</b><span>#5865F2 · 4.6</span></div><div class="note">Leans blue; friendly, a bit consumer.</div><div class="demo"><div class="row"><button class="btn">Reship and file claim</button></div><div class="sel">Ananya Mehta<span>40m</span></div><div class="row"><span class="tag">AI</span><span class="link">View courier photo</span></div><div class="row"><button class="ob">Focus ring</button></div></div></div>
+    <div class="pc" style="--p:#9146FF"><div class="sw"></div><div class="info"><b>Twitch</b><span>#9146FF · 4.6</span></div><div class="note">True violet, loud and playful. Very recognisable.</div><div class="demo"><div class="row"><button class="btn">Reship and file claim</button></div><div class="sel">Ananya Mehta<span>40m</span></div><div class="row"><span class="tag">AI</span><span class="link">View courier photo</span></div><div class="row"><button class="ob">Focus ring</button></div></div></div>
+    <div class="pc" style="--p:#A259FF"><div class="sw"></div><div class="info"><b>Figma</b><span>#A259FF · 3.9</span></div><div class="note">Lilac-violet. Fails contrast for white button text; would need a darker shade for buttons.</div><div class="demo"><div class="row"><button class="btn">Reship and file claim</button></div><div class="sel">Ananya Mehta<span>40m</span></div><div class="row"><span class="tag">AI</span><span class="link">View courier photo</span></div><div class="row"><button class="ob">Focus ring</button></div></div></div>
+    <div class="pc" style="--p:#5F259F"><div class="sw"></div><div class="info"><b>PhonePe</b><span>#5F259F · 9.3</span></div><div class="note">Deep Indian-payments purple; instantly recognisable in India.</div><div class="demo"><div class="row"><button class="btn">Reship and file claim</button></div><div class="sel">Ananya Mehta<span>40m</span></div><div class="row"><span class="tag">AI</span><span class="link">View courier photo</span></div><div class="row"><button class="ob">Focus ring</button></div></div></div>
+    <div class="pc" style="--p:#6001D2"><div class="sw"></div><div class="info"><b>Yahoo</b><span>#6001D2 · 8.6</span></div><div class="note">Saturated deep violet; strong, high contrast.</div><div class="demo"><div class="row"><button class="btn">Reship and file claim</button></div><div class="sel">Ananya Mehta<span>40m</span></div><div class="row"><span class="tag">AI</span><span class="link">View courier photo</span></div><div class="row"><button class="ob">Focus ring</button></div></div></div>
+  </div>
+
+  <h2>Rounded icon libraries</h2>
+  <p class="lede">Same 12 icons in each set: inbox, clock, search, email, chat, courier, location, OTP, customer, warning, package, payment. On the right, how they sit in our details panel at 16px.</p>
+  <div class="sets">
+    <div class="set"><div class="name"><b>Phosphor</b><span>Soft corners, round caps. Free, 6 weights.</span></div>
+      <div class="icons"><iconify-icon icon="ph:tray"></iconify-icon><iconify-icon icon="ph:clock"></iconify-icon><iconify-icon icon="ph:magnifying-glass"></iconify-icon><iconify-icon icon="ph:envelope-simple"></iconify-icon><iconify-icon icon="ph:chat-circle"></iconify-icon><iconify-icon icon="ph:truck"></iconify-icon><iconify-icon icon="ph:map-pin"></iconify-icon><iconify-icon icon="ph:key"></iconify-icon><iconify-icon icon="ph:user"></iconify-icon><iconify-icon icon="ph:warning"></iconify-icon><iconify-icon icon="ph:package"></iconify-icon><iconify-icon icon="ph:credit-card"></iconify-icon></div>
+      <div class="ctx"><div class="kv"><span class="k"><iconify-icon icon="ph:truck"></iconify-icon>Courier</span><span class="v">Shadowfax</span></div><div class="kv"><span class="k"><iconify-icon icon="ph:map-pin"></iconify-icon>GPS</span><span class="v">600 m from address</span></div><div class="kv"><span class="k"><iconify-icon icon="ph:key"></iconify-icon>OTP</span><span class="v">Not collected</span></div></div></div>
+
+    <div class="set"><div class="name"><b>Solar (Linear)</b><span>Very rounded, friendly. Free.</span></div>
+      <div class="icons"><iconify-icon icon="solar:inbox-linear"></iconify-icon><iconify-icon icon="solar:clock-circle-linear"></iconify-icon><iconify-icon icon="solar:magnifer-linear"></iconify-icon><iconify-icon icon="solar:letter-linear"></iconify-icon><iconify-icon icon="solar:chat-round-linear"></iconify-icon><iconify-icon icon="solar:delivery-linear"></iconify-icon><iconify-icon icon="solar:map-point-linear"></iconify-icon><iconify-icon icon="solar:key-linear"></iconify-icon><iconify-icon icon="solar:user-linear"></iconify-icon><iconify-icon icon="solar:danger-triangle-linear"></iconify-icon><iconify-icon icon="solar:box-linear"></iconify-icon><iconify-icon icon="solar:card-linear"></iconify-icon></div>
+      <div class="ctx"><div class="kv"><span class="k"><iconify-icon icon="solar:delivery-linear"></iconify-icon>Courier</span><span class="v">Shadowfax</span></div><div class="kv"><span class="k"><iconify-icon icon="solar:map-point-linear"></iconify-icon>GPS</span><span class="v">600 m from address</span></div><div class="kv"><span class="k"><iconify-icon icon="solar:key-linear"></iconify-icon>OTP</span><span class="v">Not collected</span></div></div></div>
+
+    <div class="set"><div class="name"><b>Hugeicons (Stroke Rounded)</b><span>Rounded strokes, large set. Free tier.</span></div>
+      <div class="icons"><iconify-icon icon="hugeicons:inbox"></iconify-icon><iconify-icon icon="hugeicons:clock-01"></iconify-icon><iconify-icon icon="hugeicons:search-01"></iconify-icon><iconify-icon icon="hugeicons:mail-01"></iconify-icon><iconify-icon icon="hugeicons:bubble-chat"></iconify-icon><iconify-icon icon="hugeicons:delivery-truck-01"></iconify-icon><iconify-icon icon="hugeicons:location-01"></iconify-icon><iconify-icon icon="hugeicons:key-01"></iconify-icon><iconify-icon icon="hugeicons:user"></iconify-icon><iconify-icon icon="hugeicons:alert-02"></iconify-icon><iconify-icon icon="hugeicons:package"></iconify-icon><iconify-icon icon="hugeicons:credit-card"></iconify-icon></div>
+      <div class="ctx"><div class="kv"><span class="k"><iconify-icon icon="hugeicons:delivery-truck-01"></iconify-icon>Courier</span><span class="v">Shadowfax</span></div><div class="kv"><span class="k"><iconify-icon icon="hugeicons:location-01"></iconify-icon>GPS</span><span class="v">600 m from address</span></div><div class="kv"><span class="k"><iconify-icon icon="hugeicons:key-01"></iconify-icon>OTP</span><span class="v">Not collected</span></div></div></div>
+
+    <div class="set"><div class="name"><b>MingCute (Line)</b><span>Soft, chunky, very curvy. Free.</span></div>
+      <div class="icons"><iconify-icon icon="mingcute:inbox-line"></iconify-icon><iconify-icon icon="mingcute:time-line"></iconify-icon><iconify-icon icon="mingcute:search-line"></iconify-icon><iconify-icon icon="mingcute:mail-line"></iconify-icon><iconify-icon icon="mingcute:chat-1-line"></iconify-icon><iconify-icon icon="mingcute:truck-line"></iconify-icon><iconify-icon icon="mingcute:location-line"></iconify-icon><iconify-icon icon="mingcute:key-2-line"></iconify-icon><iconify-icon icon="mingcute:user-3-line"></iconify-icon><iconify-icon icon="mingcute:alert-line"></iconify-icon><iconify-icon icon="mingcute:box-3-line"></iconify-icon><iconify-icon icon="mingcute:bank-card-line"></iconify-icon></div>
+      <div class="ctx"><div class="kv"><span class="k"><iconify-icon icon="mingcute:truck-line"></iconify-icon>Courier</span><span class="v">Shadowfax</span></div><div class="kv"><span class="k"><iconify-icon icon="mingcute:location-line"></iconify-icon>GPS</span><span class="v">600 m from address</span></div><div class="kv"><span class="k"><iconify-icon icon="mingcute:key-2-line"></iconify-icon>OTP</span><span class="v">Not collected</span></div></div></div>
+
+    <div class="set"><div class="name"><b>Fluent (Microsoft)</b><span>Rounded, light, very polished. Free.</span></div>
+      <div class="icons"><iconify-icon icon="fluent:mail-inbox-20-regular"></iconify-icon><iconify-icon icon="fluent:clock-20-regular"></iconify-icon><iconify-icon icon="fluent:search-20-regular"></iconify-icon><iconify-icon icon="fluent:mail-20-regular"></iconify-icon><iconify-icon icon="fluent:chat-20-regular"></iconify-icon><iconify-icon icon="fluent:vehicle-truck-profile-20-regular"></iconify-icon><iconify-icon icon="fluent:location-20-regular"></iconify-icon><iconify-icon icon="fluent:key-20-regular"></iconify-icon><iconify-icon icon="fluent:person-20-regular"></iconify-icon><iconify-icon icon="fluent:warning-20-regular"></iconify-icon><iconify-icon icon="fluent:box-20-regular"></iconify-icon><iconify-icon icon="fluent:payment-20-regular"></iconify-icon></div>
+      <div class="ctx"><div class="kv"><span class="k"><iconify-icon icon="fluent:vehicle-truck-profile-20-regular"></iconify-icon>Courier</span><span class="v">Shadowfax</span></div><div class="kv"><span class="k"><iconify-icon icon="fluent:location-20-regular"></iconify-icon>GPS</span><span class="v">600 m from address</span></div><div class="kv"><span class="k"><iconify-icon icon="fluent:key-20-regular"></iconify-icon>OTP</span><span class="v">Not collected</span></div></div></div>
+
+    <div class="set"><div class="name"><b>Iconoir</b><span>Round joins, thin and even. Free.</span></div>
+      <div class="icons"><iconify-icon icon="iconoir:mail-in"></iconify-icon><iconify-icon icon="iconoir:clock"></iconify-icon><iconify-icon icon="iconoir:search"></iconify-icon><iconify-icon icon="iconoir:mail"></iconify-icon><iconify-icon icon="iconoir:chat-bubble"></iconify-icon><iconify-icon icon="iconoir:delivery-truck"></iconify-icon><iconify-icon icon="iconoir:map-pin"></iconify-icon><iconify-icon icon="iconoir:key"></iconify-icon><iconify-icon icon="iconoir:user"></iconify-icon><iconify-icon icon="iconoir:warning-triangle"></iconify-icon><iconify-icon icon="iconoir:box-iso"></iconify-icon><iconify-icon icon="iconoir:credit-card"></iconify-icon></div>
+      <div class="ctx"><div class="kv"><span class="k"><iconify-icon icon="iconoir:delivery-truck"></iconify-icon>Courier</span><span class="v">Shadowfax</span></div><div class="kv"><span class="k"><iconify-icon icon="iconoir:map-pin"></iconify-icon>GPS</span><span class="v">600 m from address</span></div><div class="kv"><span class="k"><iconify-icon icon="iconoir:key"></iconify-icon>OTP</span><span class="v">Not collected</span></div></div></div>
+  </div>
+</div>
+</body>
+</html>
