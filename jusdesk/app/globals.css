@@ -444,3 +444,29 @@ ul { list-style: none; }
 /* Investigation card: evidence found, then the policy that decided (Nitish, 7 Nov) */
 .invcard .isum { display: block; -webkit-line-clamp: unset; overflow: visible; }
 .invcard .isum b { font-weight: 510; color: var(--ink); }
+
+/* Copilot tab: chat with suggestion chips above a text box, INA pattern in our design system (Nitish, 7 Nov) */
+.panel .scroll[hidden] { display: none; }
+.copilot { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+.cothread { flex: 1; min-height: 0; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 16px; }
+.coempty { margin: auto 0 0; display: flex; gap: 8px; align-items: flex-start; font-size: 13px; color: var(--ink3); }
+.coempty svg { color: var(--acc); flex: none; margin-top: 2px; }
+.coturn { display: flex; flex-direction: column; gap: 10px; }
+.coq { align-self: flex-end; max-width: 86%; margin: 0; padding: 8px 12px; border-radius: 12px; background: var(--s2); border: 1px solid #F0F0F3; }
+.coa .lbl { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 510; color: var(--acc-h); margin-bottom: 4px; }
+.coa p { margin: 0; }
+.cobottom { flex: none; padding: 8px 16px 16px; display: grid; gap: 10px; }
+.cochips { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+.cochips button { min-height: 28px; display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border: 1px solid var(--hair); border-radius: 8px; background: var(--s0); font-size: 12px; color: var(--ink2); text-align: left; cursor: pointer; }
+.cochips button svg { flex: none; color: var(--ink3); }
+.cochips button:hover { background: var(--s1); color: var(--ink); }
+.cobox { border: 1px solid #EDEDF0; border-radius: 12px; background: var(--s0); padding: 10px 12px 8px; }
+.cobox:focus-within { border-color: var(--acc); }
+.cobox textarea { width: 100%; border: 0; outline: 0; resize: none; background: none; font: inherit; color: var(--ink); }
+.cobox textarea::placeholder { color: var(--ink3); }
+.corow { display: flex; align-items: center; justify-content: space-between; }
+.coattach { width: 28px; height: 28px; display: grid; place-items: center; margin-left: -6px; border: 0; border-radius: 6px; background: none; color: var(--ink3); cursor: pointer; }
+.coattach:hover { background: var(--s2); color: var(--ink2); }
+.cosend { width: 28px; height: 28px; display: grid; place-items: center; border: 0; border-radius: 8px; background: var(--s2); color: var(--ink2); cursor: pointer; }
+.cosend:not(:disabled) { background: var(--acc); color: #fff; }
+.cosend:disabled { cursor: default; }

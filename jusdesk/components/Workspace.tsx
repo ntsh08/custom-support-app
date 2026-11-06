@@ -117,7 +117,7 @@ export function Workspace() {
   const [reasons, setReasons] = useState<Record<string, string | undefined>>(() => Object.fromEntries(CASES.map((c) => [c.id, c.reasonTag])));
   const [tags, setTags] = useState<Record<string, string[]>>(() => Object.fromEntries(CASES.map((c) => [c.id, c.tags])));
   const [tagMenu, setTagMenu] = useState(false);
-  const [answers, setAnswers] = useState<Record<string, { q: string; a: string } | undefined>>({});
+  const [answers, setAnswers] = useState<Record<string, { q: string; a: string }[]>>({});
   const [ask, setAsk] = useState("");
   const [newTask, setNewTask] = useState<string | null>(null);
   const threadEnd = useRef<HTMLDivElement>(null);
@@ -218,7 +218,8 @@ export function Workspace() {
     setFlash(owner === "ai" ? "Assigned to AI · it reports back" : owner === "me" ? "Assigned to you" : "Task removed");
   }
   const linked = stage.linked ?? c.linked;
-  const answer = answers[c.id];
+  const thread_ = answers[c.id] ?? [];
+  const chips = (c.asks ?? []).filter((a) => !thread_.some((x) => x.q === a.q));
 
   function select(id: string) {
     setSelected(id);
@@ -320,7 +321,7 @@ export function Workspace() {
   function askAI(q: string) {
     if (!q.trim()) return;
     const known = c.asks?.find((x) => x.q === q);
-    setAnswers((a) => ({ ...a, [c.id]: { q, a: known?.a ?? "In the prototype, only the suggested questions have answers." } }));
+    setAnswers((a) => ({ ...a, [c.id]: [...(a[c.id] ?? []), { q, a: known?.a ?? "In the prototype, only the suggested questions have answers." }] }));
     setAsk("");
   }
 
@@ -488,7 +489,7 @@ export function Workspace() {
               <button key={t} role="tab" aria-selected={tab === t} className={tab === t ? "on" : ""} onClick={() => setTab(t)}>{t === "details" ? "Details" : "Copilot"}</button>
             ))}
           </header>
-          <div className="scroll">
+          <div className="scroll" hidden={tab !== "details"}>
             <section className={`blk${shut["Order details"] ? " shut" : ""}`} hidden={tab !== "details"}>
               <h4><button className="fold" aria-expanded={!shut["Order details"]} onClick={() => toggle("Order details")}><Icon name="chev" size={14} />Order details</button></h4>
               <dl className="dkv">
@@ -497,56 +498,6 @@ export function Workspace() {
                 <div><dt><Icon name="truck" size={14} />Courier</dt><dd>{c.courier}</dd></div>
                 <div><dt><Icon name="chat" size={14} />Language</dt><dd>{c.language ?? "English"}</dd></div>
               </dl>
-            </section>
-            <section className="blk" hidden={tab !== "copilot"}>
-              <div className="card rec">
-                {confirming?.confirm ? (
-                  <div className="confirm" role="group" aria-label={confirming.confirm.title}>
-                    <h3>{confirming.confirm.title}</h3>
-                    <dl className="dkv">{confirming.confirm.lines.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
-                    <p className="policy">{confirming.confirm.note}</p>
-                    <div className="btns">
-                      <button className="pri" onClick={() => goTo(c.id, confirming.next, confirming.label)}><Icon name="check" size={14} />{confirming.confirm.cta}</button>
-                      <button className="sec" onClick={() => setConfirming(null)}>Back</button>
-                    </div>
-                  </div>
-                ) : (
-                  <>
-                    {atStart && c.rec ? (
-                      <>
-                        <p className="eyebrow">Recommended <span className={`conf ${c.rec.confidence.toLowerCase()}`}>{c.rec.confidence} confidence</span></p>
-                        <h3>{c.rec.title}</h3>
-                        <p className="analysis"><b>AI analysis:</b> {c.rec.reasons.map((r) => r.text).join(" ")}</p>
-                        <p className="policy"><Icon name="key" size={14} />{c.rec.policy}</p>
-                      </>
-                    ) : (
-                      <>
-                        <p className="eyebrow">{stage.status ?? stage.nextStep}</p>
-                        {stage.ai && <p>{stage.ai}</p>}
-                      </>
-                    )}
-                    {(stage.options.length > 0 || stage.simulate) && (
-                      <div className="btns">
-                        {stage.options.map((o) => <button key={o.id} className={o.primary ? "pri" : "sec"} onClick={() => act(o)}>{o.label}</button>)}
-                        {stage.simulate && (
-                          <button className="proto" onClick={() => goTo(c.id, stage.simulate!.next)} title="Prototype only: simulates an outside event">
-                            <Icon name="play" size={12} />{stage.simulate.label}
-                          </button>
-                        )}
-                      </div>
-                    )}
-                  </>
-                )}
-              </div>
-              <form className="ask" onSubmit={(e) => { e.preventDefault(); askAI(ask); }}>
-                <Icon name="ask" size={16} />
-                <input placeholder="Ask about this case" value={ask} onChange={(e) => setAsk(e.target.value)} />
-              </form>
-              {answer ? (
-                <div className="answer"><b>{answer.q}</b><p>{answer.a}</p></div>
-              ) : c.asks && (
-                <div className="chips">{c.asks.map((a) => <button key={a.q} onClick={() => askAI(a.q)}>{a.q}</button>)}</div>
-              )}
             </section>
 
             <section className={`blk${shut["Properties"] ? " shut" : ""}`} hidden={tab !== "details"}>
@@ -667,6 +618,34 @@ export function Workspace() {
             </section>
 
           </div>
+          {tab === "copilot" && (
+            <div className="copilot">
+              <div className="cothread">
+                {thread_.length === 0 ? (
+                  <p className="coempty"><Icon name="spark" size={16} />Ask anything about this ticket: the customer, the evidence or what to do next.</p>
+                ) : thread_.map((x, i) => (
+                  <div key={i} className="coturn">
+                    <p className="coq">{x.q}</p>
+                    <div className="coa"><span className="lbl"><Icon name="spark" size={14} />Copilot</span><p>{x.a}</p></div>
+                  </div>
+                ))}
+              </div>
+              <div className="cobottom">
+                {chips.length > 0 && (
+                  <div className="cochips">{chips.map((a) => (
+                    <button key={a.q} onClick={() => askAI(a.q)}><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M6 4v8a3 3 0 0 0 3 3h10M15 11l4 4-4 4" /></svg>{a.q}</button>
+                  ))}</div>
+                )}
+                <form className="cobox" onSubmit={(e) => { e.preventDefault(); askAI(ask); }}>
+                  <textarea rows={2} placeholder="Ask a follow-up" value={ask} onChange={(e) => setAsk(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); askAI(ask); } }} />
+                  <div className="corow">
+                    <button type="button" className="coattach" aria-label="Attach" onClick={() => setFlash("Attachments aren't wired up in the prototype")}><Icon name="attach" size={16} /></button>
+                    <button type="submit" className="cosend" aria-label="Send" disabled={!ask.trim()}><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 19V5M5 12l7-7 7 7" /></svg></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          )}
         </aside>
       </div>
 
