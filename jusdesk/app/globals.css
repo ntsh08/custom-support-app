@@ -58,7 +58,7 @@ ul { list-style: none; }
 .rt .l2 { display: block; font-size: 12px; line-height: 16px; color: var(--ink2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 /* Case */
-.case { background-color: var(--s1); display: flex; flex-direction: column; min-height: 0; min-width: 0; border-right: 1px solid var(--hair); }
+.case { background-color: var(--s0); display: flex; flex-direction: column; min-height: 0; min-width: 0; border-right: 1px solid var(--hair); }
 .head { background: var(--s0); padding: 12px 24px; border-bottom: 1px solid var(--hair); display: grid; gap: 4px; }
 .tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
 .tags span { height: 22px; display: inline-flex; align-items: center; gap: 5px; padding: 0 7px; border-radius: 6px; background: var(--s2); color: var(--ink2); font-size: 12px; }
@@ -82,7 +82,7 @@ ul { list-style: none; }
 /* Messages: customer left on white, our side right on grey, notes full width with a dashed edge and a label */
 .thread .inner { width: 100%; max-width: none; margin: 0; display: flex; flex-direction: column; gap: 12px; }
 .msg { position: relative; max-width: 86%; border-radius: 12px; padding: 10px 14px 12px; }
-.msg.theirs { align-self: flex-start; background: var(--s0); border: 1px solid #F0F0F3; }
+.msg.theirs { align-self: flex-start; background: var(--s0); border: 1px solid #EAEAEE; }
 .msg.ours { align-self: flex-end; background: var(--s2); border: 1px solid transparent; }
 .msg.ours.me { background: var(--g50); border-color: #E1EEE6; }
 .msg.note { align-self: stretch; max-width: none; background: var(--note); border: 1px solid #F7EDCB; }

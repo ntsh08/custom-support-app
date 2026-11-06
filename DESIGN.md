@@ -78,10 +78,10 @@ Colour carries meaning only:
   - a grey "AI" tag (`#F1F1F4` bg, `#5F636A` text), on AI events and the assistant's messages
   - the sparkle icon
 - Internal notes are a plain yellow card (`#FFF8E6`, border `#F3E3B5`, label `#8A6512`), with a lock icon and "Internal note". No badge, no dashed border. The composer turns yellow in note mode. (Nitish, 6 Nov: the industry convention wins here.)
-- No wallpaper behind the conversation for now; plain `#FAFAFB`.
+- The conversation sits on plain white (s0), no wallpaper.
 - Columns: rail 52px, queue 304px, case flexible (min 460px), details panel 420px. The conversation fills the case column with 24px side padding (no cap).
 
-- Conversation borders are extra light so cards read by fill, not outline: customer `#F0F0F3`, own green `#E1EEE6`, note `#F7EDCB`, AI wash `#E3F0E8`, composer `#E8E8EC`.
+- Conversation borders are extra light so cards read by fill, not outline: customer `#EAEAEE`, own green `#E1EEE6`, note `#F7EDCB`, AI wash `#E3F0E8`, composer `#E8E8EC`.
 
 - The conversation shows only messages and internal notes. No activity-log lines (courier or AI events); the AI summary and the right panel carry that context. (Nitish, 6 Nov)
 
