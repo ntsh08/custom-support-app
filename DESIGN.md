@@ -80,6 +80,8 @@ Colour carries meaning only:
 - Internal notes are a plain yellow card (`#FFF8E6`, border `#F3E3B5`, label `#8A6512`), with a lock icon and "Internal note". No badge, no dashed border. The composer turns yellow in note mode. (Nitish, 6 Nov: the industry convention wins here.)
 - AI summary card (Nitish 6 Nov): sits after the customer's messages. White card with the top-edge green glow; "AI summary" label with sparkle, one bold catchy line (14px/590), a short grey paragraph. Below the card, outside it: "Helpful?" thumbs and Hide, shown only on hover. No "Show sources" (the sources are the messages above), no status strip.
 - The conversation sits on plain white (s0), no wallpaper.
+- Right panel, Properties (Nitish, 7 Nov): Status, Owner, Reply due, Follow up, Reason, Channel, then **Sentiment** (read by AI from the customer's messages: Angry red, Frustrated orange, Neutral ink, Happy green, with a one-line why in ink3) and **Tags** (multi-select; grey s2 chips, 6px radius, 24px, × to remove; dashed "+ Add" opens a checklist menu). Reason stays single-choice because it drives the due date; tags are free and several are allowed.
+- **Customer history** block after Properties: Customer since, Orders · spend, Past claims (green "None", red count), then a "Past tickets" list (title left, month · outcome right in ink3).
 - Columns: rail 52px, queue 304px, case flexible (min 460px), details panel 420px. The conversation fills the case column with 24px side padding (no cap).
 
 

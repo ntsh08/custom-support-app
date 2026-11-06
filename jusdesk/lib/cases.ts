@@ -76,6 +76,12 @@ export type Case = {
   handoff: string[];
   /** The AI recommendation on the first stage: title, reasons with sources, policy rule. */
   rec?: { title: string; confidence: "High" | "Medium" | "Low"; reasons: Reason[]; policy: string };
+  /** Mood the AI read from the customer's messages. */
+  sentiment: { label: "Angry" | "Frustrated" | "Neutral" | "Happy"; why: string };
+  /** Free tags; several allowed. The AI suggests them, the executive can change them. */
+  tags: string[];
+  /** The customer's past with the store. */
+  history: { since: string; orders: string; spent: string; claims: string; past: [string, string][] };
   followUp?: string;
   /** Contact reason tag. Missing means no due date gets set (interview finding). */
   reasonTag?: string;
@@ -136,6 +142,9 @@ export const CASES: Case[] = [
       policy: "Wrong-address delivery under ₹5,000. You can approve this.",
     },
     followUp: "Today, 1 pm",
+    sentiment: { label: "Frustrated", why: "Wrote twice in 20 minutes and needs it by Saturday" },
+    tags: ["Order not received", "Courier dispute", "Urgent"],
+    history: { since: "March 2024", orders: "14", spent: "₹31,400", claims: "None", past: [["Size exchange, top", "Aug · solved"], ["Order status", "Jun · solved"]] },
     tasks: [
       { id: "a1", text: "Call Ananya if she doesn't reply", due: "Today, 1 pm" },
       { id: "a2", text: "Chase Shadowfax on the claim", due: "Mon", ai: true },
@@ -267,6 +276,9 @@ export const CASES: Case[] = [
     },
     followUp: "Today, 5 pm",
     reasonTag: "Lost in transit",
+    sentiment: { label: "Neutral", why: "Calm email asking for a replacement" },
+    tags: ["Order not received", "Replacement requested", "Out of stock"],
+    history: { since: "January 2025", orders: "9", spent: "₹27,900", claims: "None", past: [["Refund for a return", "Sep · solved"]] },
     tasks: [
       { id: "r1", text: "Tell Rohan once Priya decides", due: "Today", ai: true },
       { id: "r2", text: "Check the refund reached him", due: "In 5 days", ai: true },
@@ -445,6 +457,9 @@ export const CASES: Case[] = [
     },
     followUp: "Today, 6 pm",
     reasonTag: "Disputed delivery",
+    sentiment: { label: "Angry", why: "Asks for a refund straight away" },
+    tags: ["Order not received", "Refund requested", "Repeat claim"],
+    history: { since: "May 2026", orders: "6", spent: "₹18,200", claims: "3 in 2 months", past: [["Not received, refunded", "Oct"], ["Not received, refunded", "Sep"]] },
     tasks: [{ id: "m1", text: "Update Meera by 6 pm", due: "Today, 6 pm", ai: true }],
     linked: [["Courier request", "Photo, GPS and OTP received"], ["Refund", "None"]],
     start: "decide",
@@ -529,6 +544,9 @@ export const CASES: Case[] = [
     ],
     followUp: "Today, 4 pm",
     reasonTag: "Early scan",
+    sentiment: { label: "Neutral", why: "Asking, not complaining" },
+    tags: ["Order not received", "Early scan"],
+    history: { since: "July 2025", orders: "4", spent: "₹6,300", claims: "None", past: [] },
     tasks: [{ id: "k1", text: "Take over if Ekart hasn't confirmed", due: "Today, 4 pm", ai: true }],
     linked: [["Courier request", "Asked Ekart to confirm"], ["Refund", "None"]],
     start: "waiting",
@@ -593,6 +611,9 @@ export const CASES: Case[] = [
       "The AI replied in Hindi with the courier's note and photo. He confirmed at 9:22 am.",
     ],
     reasonTag: "Left with guard",
+    sentiment: { label: "Happy", why: "Thanked the assistant once he had it" },
+    tags: ["Order not received", "Cash on delivery"],
+    history: { since: "December 2024", orders: "11", spent: "₹14,800", claims: "None", past: [["Payment issue, COD", "Jul · solved"]] },
     tasks: [],
     linked: [["Courier request", "Note and photo received"], ["Refund", "None"]],
     start: "handled",

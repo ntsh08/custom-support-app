@@ -233,3 +233,26 @@ ul { list-style: none; }
   .narrow h1 { font-size: 14px; font-weight: 590; }
   .narrow p { color: var(--ink2); max-width: 32ch; margin: 0 auto; }
 }
+
+/* Sentiment, tags, customer history (Nitish, 7 Nov) */
+.dkv dd.mood { display: flex; flex-direction: column; line-height: 18px; padding: 6px 0; }
+.dkv dd.mood span { font-size: 12px; font-weight: 400; color: var(--ink3); }
+.dkv dd.mood.bad { color: var(--bad); } .dkv dd.mood.warn { color: var(--warn); } .dkv dd.mood.good { color: var(--ok); }
+.dkv dd.good { color: var(--ok); } .dkv dd.bad { color: var(--bad); }
+.dkv > div.tagrow { align-items: start; } .tagrow dt { height: 30px; }
+.tagrow dd { position: relative; padding: 3px 0; }
+.tags { display: flex; flex-wrap: wrap; gap: 4px; }
+.tg { display: inline-flex; align-items: center; gap: 2px; height: 24px; padding: 0 4px 0 8px; border-radius: 6px; background: var(--s2); font-size: 12px; font-weight: 400; color: var(--ink); }
+.tg button { display: grid; place-items: center; width: 16px; height: 16px; border: 0; border-radius: 4px; background: none; color: var(--ink3); padding: 0; cursor: pointer; }
+.tg button:hover { background: var(--s3); color: var(--ink); }
+.tgadd { display: inline-flex; align-items: center; gap: 4px; height: 24px; padding: 0 8px; border: 1px dashed var(--hair2); border-radius: 6px; background: none; font-size: 12px; color: var(--ink2); cursor: pointer; }
+.tgadd:hover { color: var(--ink); background: var(--s1); }
+.tagmenu { position: absolute; z-index: 5; top: calc(100% + 4px); left: 0; width: 220px; margin: 0; padding: 4px; list-style: none; background: #fff; border: 1px solid var(--hair); border-radius: 8px; }
+.tagmenu button { display: flex; align-items: center; gap: 8px; width: 100%; height: 28px; padding: 0 8px; border: 0; border-radius: 6px; background: none; font-size: 12px; font-weight: 400; color: var(--ink); text-align: left; cursor: pointer; }
+.tagmenu button:hover { background: var(--s2); }
+.tagmenu [aria-selected="true"] svg { color: var(--ink); } .tagmenu [aria-selected="false"] svg { color: var(--ink3); }
+.past { list-style: none; margin: 4px 0 0; padding: 0; }
+.past li { display: flex; justify-content: space-between; gap: 8px; min-height: 30px; align-items: center; font-size: 13px; }
+.past li span { color: var(--ink); } .past li em { font-style: normal; font-size: 12px; color: var(--ink3); }
+.pastlbl { margin: 12px 0 0; font-size: 12px; color: var(--ink3); }
+.past { margin-top: 0; }

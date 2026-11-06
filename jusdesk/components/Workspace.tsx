@@ -10,6 +10,9 @@ type Undo = { caseId: string; prev: CaseState; label: string };
 
 const REASONS = ["Wrong address", "Lost in transit", "Disputed delivery", "Early scan", "Left with guard"];
 
+const TAGS = ["Order not received", "Payment issue", "Refund requested", "Replacement requested", "Courier dispute", "Early scan", "Out of stock", "Repeat claim", "Cash on delivery", "Urgent"];
+const MOOD: Record<string, string> = { Angry: "bad", Frustrated: "warn", Neutral: "", Happy: "good" };
+
 const initial = (): Record<string, CaseState> =>
   Object.fromEntries(CASES.map((c) => [c.id, { stage: c.start, extra: [] }]));
 
@@ -49,6 +52,8 @@ export function Workspace() {
   const [flash, setFlash] = useState<string | null>(null);
   const [tasks, setTasks] = useState<Record<string, Task[]>>(() => Object.fromEntries(CASES.map((c) => [c.id, c.tasks])));
   const [reasons, setReasons] = useState<Record<string, string | undefined>>(() => Object.fromEntries(CASES.map((c) => [c.id, c.reasonTag])));
+  const [tags, setTags] = useState<Record<string, string[]>>(() => Object.fromEntries(CASES.map((c) => [c.id, c.tags])));
+  const [tagMenu, setTagMenu] = useState(false);
   const [answers, setAnswers] = useState<Record<string, { q: string; a: string } | undefined>>({});
   const [ask, setAsk] = useState("");
   const [newTask, setNewTask] = useState<string | null>(null);
@@ -368,7 +373,42 @@ export function Workspace() {
                   </select>
                 </dd></div>
                 <div><dt><Icon name={channels(c).includes("merged") ? "merge" : channelIcon(c)} size={14} />Channel</dt><dd>{channels(c)}</dd></div>
+                <div className="tagrow"><dt><Icon name="smile" size={14} />Sentiment</dt><dd className={`mood ${MOOD[c.sentiment.label]}`} title={`Read by AI: ${c.sentiment.why}`}>{c.sentiment.label}<span>{c.sentiment.why}</span></dd></div>
+                <div className="tagrow"><dt><Icon name="tag" size={14} />Tags</dt><dd>
+                  <div className="tags">
+                    {(tags[c.id] ?? []).map((t) => (
+                      <span key={t} className="tg">{t}<button aria-label={`Remove ${t}`} onClick={() => setTags((m) => ({ ...m, [c.id]: m[c.id].filter((x) => x !== t) }))}><Icon name="x" size={12} /></button></span>
+                    ))}
+                    <button className="tgadd" aria-expanded={tagMenu} onClick={() => setTagMenu((o) => !o)}><Icon name="plus" size={12} />Add</button>
+                  </div>
+                  {tagMenu && (
+                    <ul className="tagmenu" role="listbox" aria-multiselectable="true" onMouseLeave={() => setTagMenu(false)}>
+                      {TAGS.map((t) => {
+                        const on = (tags[c.id] ?? []).includes(t);
+                        return (
+                          <li key={t} role="option" aria-selected={on}>
+                            <button onClick={() => setTags((m) => ({ ...m, [c.id]: on ? m[c.id].filter((x) => x !== t) : [...(m[c.id] ?? []), t] }))}>
+                              <Icon name={on ? "checked" : "unchecked"} size={14} />{t}
+                            </button>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  )}
+                </dd></div>
               </dl>
+            </section>
+
+            <section className="blk">
+              <h4>Customer history</h4>
+              <dl className="dkv">
+                <div><dt><Icon name="user" size={14} />Customer since</dt><dd>{c.history.since}</dd></div>
+                <div><dt><Icon name="bag" size={14} />Orders</dt><dd>{c.history.orders} · {c.history.spent}</dd></div>
+                <div><dt><Icon name="alert" size={14} />Past claims</dt><dd className={c.history.claims === "None" ? "good" : "bad"}>{c.history.claims}</dd></div>
+              </dl>
+              {c.history.past.length > 0 ? (
+                <><p className="pastlbl">Past tickets</p><ul className="past">{c.history.past.map(([t, w]) => <li key={t + w}><span>{t}</span><em>{w}</em></li>)}</ul></>
+              ) : <p className="hint">No earlier tickets.</p>}
             </section>
 
             <section className="blk">
