@@ -13,7 +13,7 @@ export type Msg = (
   | { kind: "note"; who: string; time: string; text: string }
 ) & { /** Day label for the date separator. Defaults to "Today". */ day?: string };
 
-export type Task = { id: string; text: string; due: string; ai?: boolean; done?: boolean };
+export type Task = { id: string; text: string; due: string; ai?: boolean; done?: boolean; /** Who does it: the executive (default) or the AI. */ owner?: "me" | "ai" };
 export type Reason = { text: string; src: string };
 
 export type Evidence =

@@ -395,8 +395,16 @@ ul { list-style: none; }
 .sum.writing .sugg { opacity: .35; }
 
 /* Add task from an AI suggestion, always visible (Nitish, 7 Nov) */
-.sum .sugg li span { flex: 1; min-width: 0; }
+.sum .sugg li > span:first-child { flex: 1; min-width: 0; }
 .addtask { flex: none; height: 24px; display: inline-flex; align-items: center; gap: 4px; padding: 0 6px; border: 0; border-radius: 6px; background: none; font-size: 12px; font-weight: 510; color: var(--ink2); cursor: pointer; }
 .addtask:hover { background: rgb(0 0 0 / .04); color: var(--ink); }
 .sum .sugg em.added { flex: none; display: inline-flex; align-items: center; gap: 4px; font-style: normal; font-size: 12px; color: var(--ok); padding: 0 8px; }
 .sum .sugg li { min-height: 30px; }
+
+/* Add task: Me or AI (Nitish, 7 Nov) */
+.addwrap { position: relative; flex: none; }
+.addmenu { width: 240px; top: calc(100% + 4px); right: 0; }
+.addmenu button:disabled { opacity: .45; cursor: default; }
+.addmenu button:disabled:hover { background: none; }
+.addmenu button svg { color: var(--ink3); }
+.tasks .owner { display: inline-flex; align-items: center; gap: 3px; margin-left: 6px; padding: 0 5px; height: 18px; border-radius: 4px; background: #E3F0E8; color: #2F6547; font-size: 11px; font-weight: 510; font-style: normal; vertical-align: 1px; }

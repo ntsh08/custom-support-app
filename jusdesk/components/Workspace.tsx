@@ -35,6 +35,8 @@ const order = (g: Group) => ["reply", "first", "escalated", "others", "customer"
 /** Minutes left on the reply timer, for sorting. */
 const mins = (t?: string) => (!t ? 1e9 : t === "Now" ? 0 : /h/.test(t) ? parseFloat(t) * 60 : parseFloat(t));
 
+/** "Today, 4 pm" → "at 4 pm", "Mon" → "on Mon", "In 5 days" → "in 5 days", "Today" → "now". */
+const when = (d: string) => (d === "Today" ? "now" : d.startsWith("Today, ") ? `at ${d.slice(7)}` : /^In /.test(d) ? d.toLowerCase() : `on ${d}`);
 type Sugg = { text: string; due: string; taskId?: string };
 /** Due time read from a suggestion ("due 4 pm", "by 4 pm"), else today. */
 const dueOf = (t: string) => {
@@ -127,6 +129,7 @@ export function Workspace() {
   const [sort, setSort] = useState<SortBy>("due");
   const [sortMenu, setSortMenu] = useState(false);
   const [statusMenu, setStatusMenu] = useState(false);
+  const [addMenu, setAddMenu] = useState<string | null>(null);
   const ordered = useMemo(() => {
     const left = (x: Case) => mins(x.stages[states[x.id].stage].timeLeft);
     // Due: reply timers first, then follow-ups, then the rest; closed last.
@@ -168,13 +171,22 @@ export function Workspace() {
         <span className="lbl"><Icon name="spark" size={14} /><span>{writing ? (open ? "Thinking…" : "Writing summary…") : cardKind}</span></span>
         {!open && <><h3>{c.hook}</h3><p>{c.handoff.join(" ")}</p></>}
         {open && <ol className="sugg">{suggestions.map((x) => {
-          const added = x.taskId ? !tasks[c.id].find((t) => t.id === x.taskId)?.ai : tasks[c.id].some((t) => t.text === x.text);
+          const t = tasks[c.id].find((y) => y.text === x.text);
+          const aiCan = !/\bcall\b/i.test(x.text);
           return (
             <li key={x.text}>
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
               <span>{x.text}</span>
-              {added ? <em className="added"><Icon name="check" size={12} />Added</em> : (
-                <button className="addtask" onClick={() => addSuggestion(x)}><Icon name="plus" size={12} />Add task</button>
+              {t ? <em className="added"><Icon name="check" size={12} />{t.owner === "ai" ? "AI will do it" : "Added for you"}</em> : (
+                <span className="addwrap">
+                  <button className="addtask" aria-haspopup="menu" aria-expanded={addMenu === x.text} onClick={() => setAddMenu(addMenu === x.text ? null : x.text)}><Icon name="plus" size={12} />Add task<Icon name="chev" size={12} /></button>
+                  {addMenu === x.text && (
+                    <ul className="sortmenu addmenu" role="menu" onMouseLeave={() => setAddMenu(null)}>
+                      <li className="mh">Who does it?</li>
+                      <li role="none"><button role="menuitem" onClick={() => addSuggestion(x, "me")}><span><b>Me</b><em>Goes to your tasks</em></span><Icon name="user" size={14} /></button></li>
+                      <li role="none"><button role="menuitem" disabled={!aiCan} onClick={() => addSuggestion(x, "ai")}><span><b>AI</b><em>{aiCan ? `Does it ${when(x.due)} and reports back` : "AI can't make calls"}</em></span><Icon name="spark" size={14} /></button></li>
+                    </ul>
+                  )}
+                </span>
               )}
             </li>
           );
@@ -190,9 +202,10 @@ export function Workspace() {
     </div>
   );
   const caseTasks = tasks[c.id].filter((t) => !t.ai);
-  function addSuggestion(x: Sugg) {
-    setTasks((all) => ({ ...all, [c.id]: x.taskId ? all[c.id].map((t) => (t.id === x.taskId ? { ...t, ai: false } : t)) : [...all[c.id], { id: `s${Date.now()}`, text: x.text, due: x.due }] }));
-    setFlash("Added to Tasks and follow-ups");
+  function addSuggestion(x: Sugg, owner: "me" | "ai") {
+    setTasks((all) => ({ ...all, [c.id]: [...all[c.id], { id: `s${Date.now()}`, text: x.text, due: x.due, owner }] }));
+    setAddMenu(null);
+    setFlash(owner === "ai" ? "AI will do it and report back" : "Added to your tasks");
   }
   const linked = stage.linked ?? c.linked;
   const answer = answers[c.id];
@@ -604,12 +617,12 @@ export function Workspace() {
               <ul className="tasks">
                 {caseTasks.map((t) => (
                   <li key={t.id} className={`${t.ai ? "sug" : ""}${t.done ? " done" : ""}`}>
-                    {t.ai ? <Icon name="spark" size={16} /> : (
+                    {t.ai || t.owner === "ai" ? <Icon name="spark" size={16} /> : (
                       <button className="tick" aria-label={t.done ? "Mark not done" : "Mark done"} onClick={() => updateTasks((ts) => ts.map((x) => (x.id === t.id ? { ...x, done: !x.done } : x)))}>
                         <Icon name={t.done ? "checked" : "unchecked"} size={16} />
                       </button>
                     )}
-                    <span>{t.text}</span>
+                    <span>{t.text}{t.owner === "ai" && <i className="owner"><Icon name="spark" size={12} />AI</i>}</span>
                     <em>{t.due}</em>
                     {t.ai && <button className="add" onClick={() => updateTasks((ts) => ts.map((x) => (x.id === t.id ? { ...x, ai: false } : x)))}>Add</button>}
                   </li>
