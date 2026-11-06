@@ -476,3 +476,7 @@ ul { list-style: none; }
 /* Copilot: larger text in chips and the text box (Nitish, 7 Nov) */
 .cochips button { font-size: 13px; min-height: 32px; padding: 5px 12px; }
 .cobox textarea { font-size: 14px; line-height: 20px; }
+
+/* Copilot logo: filled gradient tile with white sparkles; prompt fits two lines (Nitish, 7 Nov) */
+.cologo { border: 0; background: linear-gradient(135deg, #2F6547, #3A7C57 35%, #7CC4A0 75%, #5EB8A8); }
+.coempty { max-width: 300px; }

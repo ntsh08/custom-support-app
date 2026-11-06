@@ -622,7 +622,7 @@ export function Workspace() {
             <div className="copilot">
               <div className="cothread">
                 {thread_.length === 0 ? (
-                  <div className="coempty"><span className="cologo"><Icon name="spark" size={22} /></span><p>Ask anything about this ticket: the customer, the evidence or what to do next.</p></div>
+                  <div className="coempty"><span className="cologo"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M14.5 3c.4 2.9 1.1 4.6 2.2 5.7 1.1 1.1 2.8 1.8 5.3 2.3-2.5.5-4.2 1.2-5.3 2.3-1.1 1.1-1.8 2.8-2.2 5.7-.4-2.9-1.1-4.6-2.2-5.7C11.2 12.2 9.5 11.5 7 11c2.5-.5 4.2-1.2 5.3-2.3C13.4 7.6 14.1 5.9 14.5 3Z"/><path fill="#fff" d="M6.5 13.5c.2 1.5.6 2.4 1.1 2.9.5.5 1.4.9 2.9 1.1-1.5.2-2.4.6-2.9 1.1-.5.5-.9 1.4-1.1 2.9-.2-1.5-.6-2.4-1.1-2.9-.5-.5-1.4-.9-2.9-1.1 1.5-.2 2.4-.6 2.9-1.1.5-.5.9-1.4 1.1-2.9Z"/></svg></span><p>Ask anything about this ticket: the customer, the evidence or what to do next.</p></div>
                 ) : thread_.map((x, i) => (
                   <div key={i} className="coturn">
                     <p className="coq">{x.q}</p>
