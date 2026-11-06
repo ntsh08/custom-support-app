@@ -324,10 +324,8 @@ export function Workspace() {
           <header className="head">
             <div className="hrow">
               <h1>{TITLE}</h1>
-              <div className="split">
-                <button className="sp-main" onClick={() => { setStatus(status === "closed" ? "reply" : "closed"); setFlash(status === "closed" ? "Reopened · Needs reply" : "Ticket closed"); }}>
-                  <Icon name={status === "closed" ? "undo" : "check"} size={14} />{status === "closed" ? "Reopen" : "Close ticket"}
-                </button>
+              <div className={`split st-${status}`}>
+                <button className="sp-main" aria-haspopup="listbox" onClick={() => setStatusMenu((o) => !o)}>{STATUS[status]}</button>
                 <button className="sp-more" aria-label="Change status" aria-haspopup="listbox" aria-expanded={statusMenu} onClick={() => setStatusMenu((o) => !o)}><Icon name="chev" size={14} /></button>
                 {statusMenu && (
                   <ul className="sortmenu stmenu" role="listbox" aria-label="Change status" onMouseLeave={() => setStatusMenu(false)}>

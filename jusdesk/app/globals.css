@@ -336,7 +336,7 @@ ul { list-style: none; }
 
 /* Header: title + status split button; tags = ticket, customer, language (Nitish, 7 Nov) */
 .hrow { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-.split { position: relative; display: inline-flex; flex: none; border: 1px solid var(--hair2); border-radius: 8px; background: var(--s0); }
+.split { position: relative; display: inline-flex; flex: none; border: 1px solid var(--hair2); border-radius: 8px; }
 .split button { height: 28px; display: inline-flex; align-items: center; gap: 6px; border: 0; background: none; font-size: 12px; font-weight: 510; color: var(--ink); cursor: pointer; }
 .split .sp-main { padding: 0 10px; border-radius: 7px 0 0 7px; }
 .split .sp-more { width: 28px; justify-content: center; border-left: 1px solid var(--hair2); border-radius: 0 7px 7px 0; color: var(--ink2); }
@@ -346,3 +346,12 @@ ul { list-style: none; }
 .dot { width: 8px; height: 8px; border-radius: 50%; flex: none; background: currentColor; }
 .dot.st-first { background: #5B84E4; } .dot.st-reply { background: #6B46C9; } .dot.st-escalated { background: #C2410C; }
 .dot.st-others, .dot.st-customer { background: #8A8E95; } .dot.st-closed { background: #C9CBD0; }
+
+/* Split button takes the status colour; tighter title-to-tags gap (Nitish, 7 Nov) */
+.head .tags { margin-top: 0; }
+.hrow { min-height: 20px; }
+.hrow .split { margin: -5px 0; }
+.split.st-first, .split.st-reply, .split.st-escalated, .split.st-others, .split.st-customer, .split.st-closed { border-color: transparent; }
+.split button { color: inherit; }
+.split .sp-more { border-left-color: rgb(0 0 0 / .08); color: inherit; }
+.split button:hover, .split .sp-more[aria-expanded="true"] { background: rgb(0 0 0 / .04); }
