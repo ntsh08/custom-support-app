@@ -124,6 +124,7 @@ ul { list-style: none; }
 .msg .who { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; font-size: 12px; color: var(--ink3); }
 .msg .who .tr { margin-left: auto; display: inline-flex; align-items: center; gap: 4px; font-style: normal; color: var(--ink2); }
 .msg .who b { color: var(--ink); font-weight: 510; font-size: 13px; }
+.orig { margin: 2px 0 6px; padding-left: 8px; border-left: 2px solid var(--hair); font-size: 12px; line-height: 18px; color: var(--ink3); }
 .gloss { display: block; margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--hair); color: var(--ink2); font-style: italic; }
 
 .composer { border: 1px solid #EDEDF0; border-radius: 12px; background: var(--s0); padding: 8px 12px 10px; flex: none; }

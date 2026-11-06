@@ -471,7 +471,7 @@ function Message({ m, customer, email, language, onAction }: { m: Msg; customer:
       <article className={`msg ours${bot ? " bot" : ""}`}>
         <p className="who">{bot && <span className="ai">AI</span>}<b>{m.who}</b><span>{m.time}</span>{m.gloss && <em className="tr"><Icon name="translate" size={14} />Sent in {language ?? "another language"}</em>}</p>
         {bot && m.steps && <Trace steps={m.steps} />}
-        <div>{m.text}{m.gloss && <span className="gloss">{m.gloss}</span>}</div>
+        {m.gloss ? <><div className="orig" lang="hi">{m.text}</div><div>{m.gloss}</div></> : <div>{m.text}</div>}
         <Actions m={m} onAction={onAction} />
       </article>
     );
@@ -490,7 +490,7 @@ function Message({ m, customer, email, language, onAction }: { m: Msg; customer:
   return (
     <article className="msg theirs">
       <p className="who"><b>{customer}</b><span>Chat · {m.time}</span>{m.gloss && <em className="tr"><Icon name="translate" size={14} />Translated from {language ?? "another language"}</em>}</p>
-      <div>{m.text}{m.gloss && <span className="gloss">{m.gloss}</span>}</div>
+      {m.gloss ? <><div className="orig" lang="hi">{m.text}</div><div>{m.gloss}</div></> : <div>{m.text}</div>}
       <Actions m={m} onAction={onAction} translate />
     </article>
   );

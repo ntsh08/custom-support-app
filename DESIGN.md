@@ -86,7 +86,7 @@ Colour carries meaning only:
 - The conversation shows only messages and internal notes. No activity-log lines (courier or AI events); the AI summary and the right panel carry that context. (Nitish, 6 Nov)
 
 - Customer emails keep the normal message header (name, "Email · time"), then a hairline divider, a bold subject, and the body with greeting and sign-off (line breaks kept). (Nitish, 6 Nov)
-- The assistant's replies show how it got there, using the INA agent trace pattern: one line under the name, "Show thinking" / "Hide thinking" with a chevron, no icon, closed by default; it opens to ticked steps along a thin hairline, ink2 text and ink3 ticks (our greys, not INA's). Translations under a message are italic. (Nitish, 6 Nov)
+- The assistant's replies show how it got there, using the INA agent trace pattern: one line under the name, "Show thinking" / "Hide thinking" with a chevron, no icon, closed by default; it opens to ticked steps along a thin hairline, ink2 text and ink3 ticks (our greys, not INA's). Translated messages (both ways): the original sits small and grey above, with a 2px hairline on its left like a quote (12px, ink3); the English is the main text in normal ink. (Nitish chose option E, 6 Nov.) (Nitish, 6 Nov)
 - Messages are 20px apart. They are grouped by day with a centred pill (s2 background, 12px grey text, 22px tall), like WhatsApp. Messages default to "Today"; a message can carry its own `day`.
 - Bubble borders are very soft: customer `#F0F0F3`, own `#F3F3F6`, AI `#E6F1EA`, note `#FAF1D6`, composer `#EDEDF0`.
 
