@@ -611,6 +611,7 @@ export const CASES: Case[] = [
       { kind: "event", time: "Yesterday 5:20 pm", text: "Delhivery: handed to security guard" },
       { kind: "customer", channel: "chat", time: "9:05 am", text: "Mera order delivered dikha raha hai par mujhe nahi mila.", gloss: "My order shows delivered but I didn't get it." },
       { kind: "agent", who: "JusDesk assistant", time: "9:05 am", steps: ["Read his message and replied in Hindi, the language he wrote in", "Checked tracking: delivered yesterday at 5:20 pm", "Read the courier's note: handed to the society guard", "Attached the courier's photo of the gate"], text: "Namaste Vikram ji, courier ne aapka parcel kal shaam 5:20 baje society gate par guard ko diya tha. Photo yahan hai. Kya aap guard se check kar sakte hain?", gloss: "The courier gave your parcel to the guard at the society gate yesterday at 5:20 pm. Here's the photo. Could you check with the guard?" },
+      { kind: "event", time: "9:05 am", text: "AI changed status to Waiting on customer", ai: true, status: "customer" },
       { kind: "customer", channel: "chat", time: "9:22 am", text: "Mil gaya, guard ke paas tha. Thank you!", gloss: "Got it, the guard had it. Thank you!" },
       { kind: "event", time: "9:22 am", text: "AI closed the ticket: customer confirmed", ai: true, status: "closed" },
     ],
