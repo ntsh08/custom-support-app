@@ -256,3 +256,14 @@ ul { list-style: none; }
 .past li span { color: var(--ink); } .past li em { font-style: normal; font-size: 12px; color: var(--ink3); }
 .pastlbl { margin: 12px 0 0; font-size: 12px; color: var(--ink3); }
 .past { margin-top: 0; }
+
+/* Risk signals in customer history: private, neutral, sourced (Nitish, 7 Nov) */
+.risk { margin-top: 12px; background: var(--s1); border: 1px solid var(--hair); border-radius: 8px; padding: 10px 12px; }
+.risk .rhead { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--ink3); margin: 0 0 4px; }
+.risk .rlvl { font-weight: 510; margin: 0 0 6px; }
+.risk.low .rlvl { color: var(--ok); } .risk.rev .rlvl { color: var(--bad); }
+.risk ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.risk li { display: grid; grid-template-columns: 14px 1fr auto; gap: 8px; align-items: start; line-height: 18px; }
+.risk li svg { margin-top: 2px; color: var(--ink3); } .risk.rev li svg { color: var(--bad); }
+.risk li em { font-style: normal; font-size: 12px; color: var(--ink3); white-space: nowrap; }
+.risk .rnote { margin: 8px 0 0; padding-top: 8px; border-top: 1px solid var(--hair); font-size: 12px; color: var(--ink2); }

@@ -405,7 +405,19 @@ export function Workspace() {
                 <div><dt><Icon name="user" size={14} />Customer since</dt><dd>{c.history.since}</dd></div>
                 <div><dt><Icon name="bag" size={14} />Orders</dt><dd>{c.history.orders} · {c.history.spent}</dd></div>
                 <div><dt><Icon name="alert" size={14} />Past claims</dt><dd className={c.history.claims === "None" ? "good" : "bad"}>{c.history.claims}</dd></div>
+                <div><dt><Icon name="card" size={14} />Refunds</dt><dd>{c.history.refunds}</dd></div>
+                <div><dt><Icon name="pin" size={14} />Address</dt><dd className={/Shared/.test(c.history.address) ? "bad" : ""}>{c.history.address}</dd></div>
               </dl>
+              <div className={`risk ${c.history.risk.level === "Review" ? "rev" : "low"}`}>
+                <p className="rhead"><Icon name="lock" size={14} />Only your team sees this</p>
+                <p className="rlvl">{c.history.risk.level === "Low" ? "Low risk · nothing unusual found" : "Worth a look before deciding"}</p>
+                <ul>
+                  {c.history.risk.checks.map((k) => (
+                    <li key={k.text}><Icon name={c.history.risk.level === "Low" ? "check" : "alert"} size={14} /><span>{k.text}</span><em>{k.src}</em></li>
+                  ))}
+                </ul>
+                {c.history.risk.level === "Review" && <p className="rnote">Signals, not a verdict. Never mention them to the customer; your lead decides.</p>}
+              </div>
               {c.history.past.length > 0 ? (
                 <><p className="pastlbl">Past tickets</p><ul className="past">{c.history.past.map(([t, w]) => <li key={t + w}><span>{t}</span><em>{w}</em></li>)}</ul></>
               ) : <p className="hint">No earlier tickets.</p>}
@@ -455,12 +467,6 @@ export function Workspace() {
               <dl className="dkv">
                 {c.facts.map((f) => <div key={f.label}><dt>{f.icon && <Icon name={f.icon} size={14} />}{f.label}</dt><dd className={f.tone ?? ""}>{f.value}</dd></div>)}
               </dl>
-              {c.signals && (
-                <div className="signals">
-                  <p><Icon name="lock" size={14} />Only your team sees this</p>
-                  <ul>{c.signals.map((s) => <li key={s}>{s}</li>)}</ul>
-                </div>
-              )}
             </section>
 
           </div>
