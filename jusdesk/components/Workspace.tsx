@@ -190,7 +190,6 @@ export function Workspace() {
                     const s = x.stages[states[x.id].stage];
                     return (
                       <button key={x.id} className={`row${x.id === selected ? " on" : ""}`} onClick={() => select(x.id)}>
-                        <span className="ch"><Icon name={channelIcon(x)} size={14} /></span>
                         <span className="rt">
                           <span className="l1"><b>{x.customer}</b>{s.timeLeft && <em className={s.urgent ?? ""}>{s.timeLeft}</em>}</span>
                           <span className="l2">{x.item.split(",")[0]} · {x.value} · {s.nextStep}</span>

@@ -70,7 +70,7 @@ Colour carries meaning only:
 - Icons: Hugeicons Stroke Rounded, stroke 1.5.
   - 14–16px inline, 18px in the nav.
   - The selected nav icon is filled.
-- Avoid initials avatars. Use a channel icon or an object icon instead.
+- No avatars or icons on queue rows: name, time and one meta line only.
 
 ## 9. AI signature, notes and the pattern
 - Anything AI wrote or did gets one signature, and nothing else uses it:
@@ -79,7 +79,7 @@ Colour carries meaning only:
   - the sparkle icon
 - Internal notes are a plain yellow card (`#FFF8E6`, border `#F3E3B5`, label `#8A6512`), with a lock icon and "Internal note". No badge, no dashed border. The composer turns yellow in note mode. (Nitish, 6 Nov: the industry convention wins here.)
 - No wallpaper behind the conversation for now; plain `#FAFAFB`.
-- Columns: rail 52px, queue min 320px, case 460–600px, panel min 380px. Queue and panel take the extra width; the case column never grows past 600px.
+- Columns: rail 52px, queue 272px, case 460–600px, panel min 380px. The right panel takes the extra width; the case column never grows past 600px.
 
 ## 10. Don'ts
 - No second accent colour.
