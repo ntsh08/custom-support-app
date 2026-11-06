@@ -79,7 +79,7 @@ Colour carries meaning only:
   - the sparkle icon
 - Internal notes are a plain yellow card (`#FFF8E6`, border `#F3E3B5`, label `#8A6512`), with a lock icon and "Internal note". No badge, no dashed border. The composer turns yellow in note mode. (Nitish, 6 Nov: the industry convention wins here.)
 - No wallpaper behind the conversation for now; plain `#FAFAFB`.
-- Columns: rail 52px, queue 272px, case flexible (min 460px), details panel 420px. The conversation fills the case column with 24px side padding (no cap).
+- Columns: rail 52px, queue 304px, case flexible (min 460px), details panel 420px. The conversation fills the case column with 24px side padding (no cap).
 
 - Conversation borders are extra light so cards read by fill, not outline: customer `#F0F0F3`, own green `#E1EEE6`, note `#F7EDCB`, AI wash `#E3F0E8`, composer `#E8E8EC`.
 
