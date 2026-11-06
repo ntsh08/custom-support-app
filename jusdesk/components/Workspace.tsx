@@ -439,7 +439,7 @@ function Message({ m, customer, onAction }: { m: Msg; customer: string; onAction
   if (m.kind === "agent") {
     const bot = /assistant/i.test(m.who);
     return (
-      <article className="msg ours">
+      <article className={`msg ours${bot ? "" : " me"}`}>
         <p className="who">{bot && <span className="ai">AI</span>}<b>{m.who}</b><span>{m.time}</span></p>
         <div>{m.text}{m.gloss && <span className="gloss">{m.gloss}</span>}</div>
         <Actions m={m} onAction={onAction} />

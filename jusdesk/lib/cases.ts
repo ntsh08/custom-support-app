@@ -90,7 +90,7 @@ export const CASES: Case[] = [
     order: "FX-48213",
     payment: "Prepaid · UPI",
     courier: "Shadowfax",
-    headline: "Delivered to the wrong door?",
+    headline: "Likely delivered to the wrong flat",
     summary: "Marked delivered yesterday at 6:42 pm. Ananya says it never arrived and needs it before Saturday.",
     thread: [
       { kind: "event", time: "Yesterday 6:42 pm", text: "Shadowfax marked delivered" },
@@ -222,7 +222,7 @@ export const CASES: Case[] = [
     order: "FX-47960",
     payment: "Prepaid · UPI",
     courier: "Shadowfax",
-    headline: "Never arrived, and the size is gone",
+    headline: "No proof of delivery, size L out of stock",
     summary: "Marked delivered on Tuesday. Rohan wants a replacement, but size L is out of stock.",
     thread: [
       { kind: "event", time: "Tue 7:05 pm", text: "Shadowfax marked delivered" },
@@ -396,7 +396,7 @@ export const CASES: Case[] = [
     order: "FX-48077",
     payment: "Prepaid · Card",
     courier: "Delhivery",
-    headline: "Proof matches, but the pattern doesn't",
+    headline: "OTP verified, customer says not received",
     summary: "Delivered with an OTP at her door. Meera says it never arrived. This account has made claims before.",
     thread: [
       { kind: "event", time: "Mon 1:15 pm", text: "Delhivery delivered with OTP" },
@@ -494,7 +494,7 @@ export const CASES: Case[] = [
     order: "FX-48302",
     payment: "Prepaid · UPI",
     courier: "Ekart",
-    headline: "Scanned as delivered before it arrived",
+    headline: "Scanned delivered while the rider was 4.2 km away",
     summary: "Ekart scanned it delivered at 10:12 am while the rider was 4.2 km away.",
     thread: [
       { kind: "event", time: "10:12 am", text: "Ekart marked delivered" },
@@ -557,7 +557,7 @@ export const CASES: Case[] = [
     payment: "Cash on delivery",
     courier: "Delhivery",
     language: "Hindi",
-    headline: "Left with the security guard",
+    headline: "Left with the society guard, customer confirmed",
     summary: "Delivered to the society gate. AI found the courier's note and photo and replied in Hindi.",
     thread: [
       { kind: "event", time: "Yesterday 5:20 pm", text: "Delhivery: handed to security guard" },
