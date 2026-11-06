@@ -208,12 +208,12 @@ export function Workspace() {
           <header className="head">
             <h1>{c.headline}</h1>
             <div className="tags">
-              <span><Icon name="box" size={13} />{c.order}</span>
-              <span><Icon name="user" size={13} />{c.customer}</span>
-              {c.email && <span><Icon name="mail" size={13} />{c.email}</span>}
-              {!c.email && <span><Icon name="chat" size={13} />Chat</span>}
-              {c.language && <span><Icon name="translate" size={13} />{c.language}</span>}
-              {open && stage.timeLeft && <span className={stage.urgent ?? ""}><Icon name="clock" size={13} />{stage.timeLeft === "Now" ? "Reply due now" : `Reply due in ${stage.timeLeft}`}</span>}
+              <span><Icon name="box" size={14} />{c.order}</span>
+              <span><Icon name="user" size={14} />{c.customer}</span>
+              {c.email && <span><Icon name="mail" size={14} />{c.email}</span>}
+              {!c.email && <span><Icon name="chat" size={14} />Chat</span>}
+              {c.language && <span><Icon name="translate" size={14} />{c.language}</span>}
+              {open && stage.timeLeft && <span className={stage.urgent ?? ""}><Icon name="clock" size={14} />{stage.timeLeft === "Now" ? "Reply due now" : `Reply due in ${stage.timeLeft}`}</span>}
             </div>
           </header>
 
@@ -232,7 +232,7 @@ export function Workspace() {
             <div className="cwrap"><div className={`composer${mode === "note" ? " is-note" : ""}`}>
               <div className="tabs" role="tablist">
                 <button role="tab" aria-selected={mode === "reply"} className={mode === "reply" ? "on" : ""} onClick={() => setMode("reply")}>Reply</button>
-                <button role="tab" aria-selected={mode === "note"} className={mode === "note" ? "on" : ""} onClick={() => setMode("note")}><Icon name="lock" size={13} />Internal note</button>
+                <button role="tab" aria-selected={mode === "note"} className={mode === "note" ? "on" : ""} onClick={() => setMode("note")}><Icon name="lock" size={14} />Internal note</button>
               </div>
               <textarea
                 aria-label={mode === "note" ? "Internal note" : `Reply to ${c.customer}`}

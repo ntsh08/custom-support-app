@@ -60,7 +60,7 @@ Colour carries meaning only:
 | 28px | Buttons |
 | 24px | Chips |
 
-- Label column: 112px.
+- Label column: 128px; icons never shrink (flex none).
 
 ## 8. Components
 - Under the case title: plain grey tags (s2, 6px radius, no border) for order, customer, email or channel, language and reply due. No breadcrumb. Status, owner, follow-up and reason live in the right panel.
@@ -68,7 +68,7 @@ Colour carries meaning only:
   - unset fields
   - prototype-only buttons
 - Icons: Hugeicons Stroke Rounded, stroke 1.5.
-  - 14–16px inline, 18px in the nav.
+  - 14px inline and in tags and key-value rows, 16px in task rows and the Ask box, 18px in the nav.
   - The selected nav icon is filled.
 - No avatars or icons on queue rows or in front of names in the conversation: name, time and one meta line only.
 
