@@ -77,7 +77,7 @@ Colour carries meaning only:
   - a green "AI" tag (`#E3F0E8` bg, `#2F6547` text), on AI events and the assistant's messages
   - the sparkle icon
 - Internal notes are a plain yellow card (`#FFF8E6`, border `#F3E3B5`, label `#8A6512`), with a lock icon and "Internal note". No badge, no dashed border. The composer turns yellow in note mode. (Nitish, 6 Nov: the industry convention wins here.)
-- The middle column has a WhatsApp-style wallpaper: plus signs only, 20px grid, 6px plus, 1px `#DDE1E6` on `#FAFAFB`.
+- The middle column has a WhatsApp-style wallpaper: plus signs only, 24px grid, 5px plus, 1px `#E9EBEF` on `#FAFAFB`, so it blends into the background.
 - The conversation column is capped at 600px.
 
 ## 10. Don'ts
