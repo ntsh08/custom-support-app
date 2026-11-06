@@ -260,9 +260,18 @@ export function Workspace() {
 
         {/* Right panel: AI first, then tasks, linked work, evidence, order */}
         <aside className="panel" aria-label="AI and case details">
-          <header className="bar"><b><Icon name="spark" size={14} />AI</b><span>Case details</span></header>
+          <header className="bar"><b>Details</b></header>
           <div className="scroll">
             <section className="blk">
+              <h4>Order details</h4>
+              <dl className="dkv">
+                <div><dt><Icon name="box" size={14} />Item</dt><dd>{c.item}</dd></div>
+                <div><dt><Icon name="card" size={14} />Paid</dt><dd>{c.value} · {c.payment.replace("Prepaid · ", "")}</dd></div>
+                <div><dt><Icon name="truck" size={14} />Courier</dt><dd>{c.courier}</dd></div>
+                <div><dt><Icon name="chat" size={14} />Language</dt><dd>{c.language ?? "English"}</dd></div>
+              </dl>
+            </section>
+            <section className="blk bare">
               <div className="card rec">
                 {confirming?.confirm ? (
                   <div className="confirm" role="group" aria-label={confirming.confirm.title}>
@@ -322,11 +331,20 @@ export function Workspace() {
                 {open && c.followUp && <div><dt><Icon name="calendar" size={14} />Follow up</dt><dd>{c.followUp}</dd></div>}
                 <div><dt><Icon name="flag" size={14} />Reason</dt><dd>
                   <select className={`pick${reasons[c.id] ? "" : " missing"}`} aria-label="Contact reason" value={reasons[c.id] ?? ""} onChange={(e) => setReasons((r) => ({ ...r, [c.id]: e.target.value || undefined }))}>
-                    <option value="">Not set · needed for due date</option>
+                    <option value="">Not set</option>
                     {REASONS.map((r) => <option key={r}>{r}</option>)}
                   </select>
                 </dd></div>
                 <div><dt><Icon name={channels(c).includes("merged") ? "merge" : channelIcon(c)} size={14} />Channel</dt><dd>{channels(c)}</dd></div>
+              </dl>
+            </section>
+
+            <section className="blk">
+              <h4>Linked tickets</h4>
+              <dl className="dkv">
+                {linked.map(([k, v]) => (
+                  <div key={k}><dt><Icon name={linkIcon(k)} size={14} />{k}</dt><dd className={/^(none|not )/i.test(v) ? "mute" : /failed/i.test(v) ? "bad" : ""}>{v}</dd></div>
+                ))}
               </dl>
             </section>
 
@@ -359,15 +377,6 @@ export function Workspace() {
             </section>
 
             <section className="blk">
-              <h4>Linked work</h4>
-              <dl className="dkv">
-                {linked.map(([k, v]) => (
-                  <div key={k}><dt><Icon name={linkIcon(k)} size={14} />{k}</dt><dd className={/^(none|not )/i.test(v) ? "mute" : /failed/i.test(v) ? "bad" : ""}>{v}</dd></div>
-                ))}
-              </dl>
-            </section>
-
-            <section className="blk">
               <h4>Delivery evidence</h4>
               <div className={`thumbs n${c.evidence.length}`}>{c.evidence.map((e, i) => <EvidenceTile key={i} e={e} />)}</div>
               <p className="hint">Illustrations · demo data</p>
@@ -382,15 +391,6 @@ export function Workspace() {
               )}
             </section>
 
-            <section className="blk">
-              <h4>Order</h4>
-              <dl className="dkv">
-                <div><dt><Icon name="box" size={14} />Item</dt><dd>{c.item}</dd></div>
-                <div><dt><Icon name="card" size={14} />Paid</dt><dd>{c.value} · {c.payment.replace("Prepaid · ", "")}</dd></div>
-                <div><dt><Icon name="truck" size={14} />Courier</dt><dd>{c.courier}</dd></div>
-                <div><dt><Icon name="chat" size={14} />Language</dt><dd>{c.language ?? "English"}</dd></div>
-              </dl>
-            </section>
           </div>
         </aside>
       </div>

@@ -28,7 +28,7 @@ ul { list-style: none; }
 .ai { height: 16px; padding: 0 4px; border-radius: 4px; background: #E3F0E8; color: var(--acc-h); font-size: 10px; line-height: 16px; font-weight: 590; flex: none; }
 
 /* Shell */
-.app { display: grid; grid-template-columns: 52px 272px minmax(460px, 600px) minmax(380px, 1fr); height: 100vh; min-width: 1100px; }
+.app { display: grid; grid-template-columns: 52px 272px minmax(460px, 1fr) 360px; height: 100vh; min-width: 1100px; }
 .rail { background: var(--s2); border-right: 1px solid var(--hair); display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 12px 0; }
 .logo { width: 24px; height: 24px; border-radius: 6px; background: var(--acc); color: #fff; font-weight: 590; font-size: 13px; display: grid; place-items: center; margin-bottom: 12px; }
 .nav { position: relative; width: 32px; height: 32px; border: 0; border-radius: 8px; background: none; display: grid; place-items: center; color: var(--ink3); }
@@ -93,7 +93,7 @@ ul { list-style: none; }
 .acts button:hover { background: var(--s2); color: var(--ink); }
 .head .due { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--ink2); }
 .head .due.warn { color: var(--warn); } .head .due.bad { color: var(--bad); }
-.pick { border: 0; background: none; padding: 0; font-weight: 510; outline: 0; cursor: pointer; }
+.pick { max-width: 100%; border: 0; background: none; padding: 0; font-weight: 510; outline: 0; cursor: pointer; }
 .pick.missing { color: var(--warn); font-weight: 400; }
 .dkv dd.warn { color: var(--warn); }
 .cwrap { width: 100%; max-width: 600px; margin: 0 auto; padding: 0 24px 24px; flex: none; }
@@ -126,9 +126,10 @@ ul { list-style: none; }
 /* Panel: no dividers. Sits on s1; each block is a white card; AI card keeps the green wash. */
 .panel { display: flex; flex-direction: column; min-height: 0; background: var(--s1); }
 .panel .bar { border-bottom: 0; }
-.panel .scroll { padding: 0 12px 12px; display: grid; gap: 8px; align-content: start; }
+.panel { min-width: 0; }
+.panel .scroll { padding: 0 12px 12px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; align-content: start; }
 .blk { padding: 14px 14px; border-radius: 12px; background: var(--s0); display: grid; gap: 8px; }
-.blk:first-child { background: none; padding: 0; }
+.blk.bare { background: none; padding: 0; }
 .blk h4 { display: flex; align-items: center; justify-content: space-between; font-size: 12px; font-weight: 510; color: var(--ink2); }
 .blk h4 button { display: inline-flex; align-items: center; gap: 4px; border: 0; background: none; color: var(--ink2); font-size: 12px; padding: 0; }
 .blk h4 button:hover { color: var(--ink); }
@@ -166,7 +167,7 @@ ul { list-style: none; }
 .tasks input { width: 100%; border: 0; outline: 0; background: none; }
 .hint { font-size: 12px; line-height: 16px; color: var(--ink3); }
 
-.dkv > div { min-height: 30px; display: grid; grid-template-columns: 136px 1fr; align-items: center; gap: 8px; }
+.dkv > div { min-height: 30px; display: grid; grid-template-columns: 112px minmax(0, 1fr); align-items: center; gap: 8px; }
 .dkv dt { display: flex; align-items: center; gap: 8px; color: var(--ink2); white-space: nowrap; }
 .dkv dd { font-weight: 510; }
 .dkv dd.mute { color: var(--ink3); font-weight: 400; }
