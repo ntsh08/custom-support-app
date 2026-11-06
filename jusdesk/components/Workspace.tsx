@@ -223,7 +223,7 @@ export function Workspace() {
               <h3><Icon name="spark" size={14} />Before you read · AI summary</h3>
               <ul>{c.handoff.map((h) => <li key={h}>{h}</li>)}</ul>
             </section>
-            {thread.filter((m) => m.kind !== "event").map((m, i) => <Message key={i} m={m} customer={c.customer} onAction={msgAction} />)}
+            {thread.filter((m) => m.kind !== "event").map((m, i) => <Message key={i} m={m} customer={c.customer} language={c.language} onAction={msgAction} />)}
             <div ref={threadEnd} />
             </div>
           </div>
@@ -422,7 +422,7 @@ function Actions({ m, onAction, translate }: { m: Msg; onAction: (k: MsgAction, 
   );
 }
 
-function Message({ m, customer, onAction }: { m: Msg; customer: string; onAction: (k: MsgAction, m: Msg) => void }) {
+function Message({ m, customer, language, onAction }: { m: Msg; customer: string; language?: string; onAction: (k: MsgAction, m: Msg) => void }) {
   if (m.kind === "event") {
     return (
       <p className="ev">
@@ -445,7 +445,7 @@ function Message({ m, customer, onAction }: { m: Msg; customer: string; onAction
     const bot = /assistant/i.test(m.who);
     return (
       <article className="msg ours me">
-        <p className="who">{bot && <span className="ai">AI</span>}<b>{m.who}</b><span>{m.time}</span></p>
+        <p className="who">{bot && <span className="ai">AI</span>}<b>{m.who}</b><span>{m.time}</span>{m.gloss && <em className="tr"><Icon name="translate" size={14} />Sent in {language ?? "another language"}</em>}</p>
         <div>{m.text}{m.gloss && <span className="gloss">{m.gloss}</span>}</div>
         <Actions m={m} onAction={onAction} />
       </article>
@@ -453,7 +453,7 @@ function Message({ m, customer, onAction }: { m: Msg; customer: string; onAction
   }
   return (
     <article className="msg theirs">
-      <p className="who"><b>{customer}</b><span>{m.channel === "email" ? "Email" : "Chat"} · {m.time}</span></p>
+      <p className="who"><b>{customer}</b><span>{m.channel === "email" ? "Email" : "Chat"} · {m.time}</span>{m.gloss && <em className="tr"><Icon name="translate" size={14} />Translated from {language ?? "another language"}</em>}</p>
       <div>{m.text}{m.gloss && <span className="gloss">{m.gloss}</span>}</div>
       <Actions m={m} onAction={onAction} translate />
     </article>

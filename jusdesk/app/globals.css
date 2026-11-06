@@ -98,6 +98,7 @@ ul { list-style: none; }
 .dkv dd.warn { color: var(--warn); }
 .cwrap { width: 100%; max-width: none; margin: 0; padding: 8px 24px 24px; flex: none; }
 .msg .who { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; font-size: 12px; color: var(--ink3); }
+.msg .who .tr { margin-left: auto; display: inline-flex; align-items: center; gap: 4px; font-style: normal; color: var(--ink2); }
 .msg .who b { color: var(--ink); font-weight: 510; font-size: 13px; }
 .gloss { display: block; margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--hair); color: var(--ink2); }
 
