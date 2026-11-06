@@ -447,7 +447,7 @@ function Actions({ m, onAction, translate }: { m: Msg; onAction: (k: MsgAction, 
 }
 
 function Message({ m, customer, email, language, onAction }: { m: Msg; customer: string; email?: string; language?: string; onAction: (k: MsgAction, m: Msg) => void }) {
-  const [orig, setOrig] = useState(false);
+  const [orig, setOrig] = useState(true);
   const lang = language ?? "another language";
   const body = (g?: string) => g ? <div>{orig ? <span lang="hi">{m.text}</span> : g}</div> : <div>{m.text}</div>;
   const link = (g: string | undefined, side: string, verb: string) => g && (
