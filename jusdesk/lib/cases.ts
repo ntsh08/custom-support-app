@@ -546,6 +546,7 @@ export const CASES: Case[] = [
       { kind: "agent", who: "JusDesk assistant", time: "10:31 am", steps: ["Checked tracking: scanned delivered at 10:12 am", "Compared with the rider's GPS: 4.2 km away, stop 14 of 22", "Asked Ekart to confirm the delivery"], next: ["If Ekart hasn't confirmed by 4 pm, call the rider through the Ekart hub and update Kavya"], text: "It looks like the courier scanned it early: the rider was still 4.2 km away. It should reach you by this evening. I've asked Ekart to confirm and I'll update you by 4 pm." },
       { kind: "event", time: "10:31 am", text: "AI asked Ekart to confirm the delivery time", ai: true },
       { kind: "event", time: "10:31 am", text: "AI set status to Waiting on others", ai: true, status: "others" },
+      { kind: "event", time: "10:31 am", text: "AI assigned this ticket to you", ai: true, assign: "you" },
     ],
     evidence: [
       { kind: "missing", title: "Courier photo", note: "None yet: not delivered" },
@@ -569,11 +570,11 @@ export const CASES: Case[] = [
     start: "waiting",
     stages: {
       waiting: {
-        group: "others", by: "AI",
+        group: "others",
         nextStep: "Ekart reply due 4 pm",
-        status: "Waiting on Ekart · AI checks at 4 pm, then hands to you",
-        ai: "Early scan. I've told Kavya and asked Ekart. If Ekart doesn't confirm by 4 pm, it comes to you.",
-        options: [{ id: "take", label: "Take over now", next: "taken" }],
+        status: "Waiting on Ekart · yours if Ekart hasn't confirmed by 4 pm",
+        ai: "Early scan. I've told Kavya and asked Ekart. I can't call the rider, so this is with you if Ekart hasn't confirmed by 4 pm.",
+        options: [{ id: "take", label: "Chase Ekart now", next: "taken" }],
         simulate: { label: "Simulate: delivered at 3:40 pm", next: "closed" },
       },
       taken: {
@@ -581,10 +582,10 @@ export const CASES: Case[] = [
         nextStep: "You're chasing Ekart",
         status: "Yours · Ekart reply due 4 pm",
         options: [],
-        adds: [{ kind: "event", time: "Now", text: "You took over this ticket from AI", assign: "you" }],
+        adds: [],
       },
       closed: {
-        group: "closed",
+        group: "closed", by: "AI",
         nextStep: "Closed",
         status: "Closed by AI · delivered at 3:40 pm",
         options: [],
