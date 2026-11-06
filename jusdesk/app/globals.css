@@ -480,3 +480,4 @@ ul { list-style: none; }
 /* Copilot logo: filled gradient tile with white sparkles; prompt fits two lines (Nitish, 7 Nov) */
 .cologo { border: 0; background: linear-gradient(135deg, #2F6547, #3A7C57 35%, #7CC4A0 75%, #5EB8A8); }
 .coempty { max-width: 300px; }
+.cologo { width: auto; height: auto; border: 0; border-radius: 0; background: none; }
