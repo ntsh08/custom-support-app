@@ -5,7 +5,7 @@ import {
   MinimizeIcon, MoreHorizontalIcon, PackageIcon, PlayIcon, Search01Icon, SentIcon, SquareLock02Icon,
   Tick02Icon, UserAdd01Icon, UserIcon, Note01Icon, CheckListIcon, SparklesIcon, TranslateIcon, Link01Icon,
   Calendar03Icon, Add01Icon, Flag02Icon, AiChat02Icon, ArrowRight01Icon, CheckmarkSquare02Icon, SquareIcon, Attachment01Icon, Copy01Icon, ThumbsUpIcon, ThumbsDownIcon,
-  SmileIcon, ArrowDown01Icon, PencilEdit02Icon, TextCheckIcon, Sorting05Icon, FilterHorizontalIcon, Tag01Icon, Cancel01Icon, ShoppingBag01Icon,
+  SmileIcon, ArrowDown01Icon, PencilEdit02Icon, TextCheckIcon, Sorting05Icon, FilterHorizontalIcon, AiSearchIcon, Tag01Icon, Cancel01Icon, ShoppingBag01Icon,
 } from "@hugeicons/core-free-icons";
 
 // Hugeicons, Stroke Rounded (free set).
@@ -53,6 +53,7 @@ const ICONS = {
   chev: ArrowDown01Icon,
   pen: PencilEdit02Icon,
   sort: Sorting05Icon,
+  aisearch: AiSearchIcon,
   filter: FilterHorizontalIcon,
   textcheck: TextCheckIcon,
   tag: Tag01Icon,

@@ -423,7 +423,7 @@ export function Workspace() {
                 {(i === 0 || (all[i - 1].day ?? "Today") !== (m.day ?? "Today")) && <p className="day"><span>{m.day ?? "Today"}</span></p>}
                 {m.kind === "event" && m.investigation ? (
                   <section className="invcard" aria-label="AI investigation">
-                    <p className="ihead"><Icon name="search" size={14} /><b>AI investigation</b><span>{m.time}</span><em><Icon name="lock" size={12} />Only your team sees this</em></p>
+                    <p className="ihead"><Icon name="aisearch" size={14} /><b>AI investigation</b><span>{m.time}</span><em><Icon name="lock" size={12} />Only your team sees this</em></p>
                     {m.summary && <p className="isum">{m.summary}</p>}
                     <Trace steps={m.investigation} />
                   </section>
