@@ -273,10 +273,6 @@ ul { list-style: none; }
 .tags .reo { margin: 0; font-size: 12px; color: var(--warn); }
 .dkv dd.stat { display: flex; flex-direction: column; line-height: 18px; padding: 6px 0; }
 .dkv dd.stat span { font-size: 12px; font-weight: 400; color: var(--ink3); }
-.sendgrp { display: inline-flex; align-items: center; gap: 8px; }
-.after { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; color: var(--ink3); }
-.after select { border: 0; background: none; padding: 0; font: inherit; font-size: 12px; font-weight: 510; color: var(--ink2); cursor: pointer; outline: 0; }
-.after select:hover { color: var(--ink); }
 
 /* Panel tabs: Details / Copilot (Nitish, 7 Nov) */
 .panel .bar.ptabs { justify-content: flex-start; gap: 20px; border-bottom: 1px solid var(--hair); align-items: stretch; }
@@ -292,3 +288,17 @@ ul { list-style: none; }
 .blk.shut .fold svg { transform: rotate(-90deg); }
 .blk.shut > :not(h4) { display: none; }
 @media (prefers-reduced-motion: reduce) { .fold svg { transition: none; } }
+
+/* Composer tools + Check reply (Nitish, 7 Nov) */
+.crow .sp { flex: 1; }
+.gh:disabled { color: var(--ink3); opacity: .6; cursor: default; }
+.gh.on { background: var(--s2); color: var(--ink); }
+.check { margin: 4px 0 2px; padding: 8px 10px; border: 1px solid var(--hair); border-radius: 8px; background: var(--s1); display: grid; gap: 4px; }
+.chead { display: flex; align-items: center; gap: 6px; margin: 0; font-size: 12px; font-weight: 510; color: var(--ink2); }
+.chead svg { color: var(--acc); }
+.chead button { margin-left: auto; display: grid; place-items: center; width: 20px; height: 20px; border: 0; border-radius: 4px; background: none; color: var(--ink3); cursor: pointer; }
+.chead button:hover { background: var(--s3); color: var(--ink); }
+.cnote { display: grid; grid-template-columns: 14px 1fr auto; gap: 8px; align-items: center; min-height: 26px; font-size: 13px; line-height: 18px; }
+.cnote svg { color: var(--warn); } .cnote.ok svg { color: var(--ok); }
+.cnote button { height: 24px; padding: 0 8px; border: 1px solid var(--hair2); border-radius: 6px; background: var(--s0); font-size: 12px; font-weight: 510; color: var(--ink); cursor: pointer; }
+.cnote button:hover { background: var(--s2); }

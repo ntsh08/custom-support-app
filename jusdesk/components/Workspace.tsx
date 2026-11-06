@@ -23,8 +23,33 @@ const channels = (c: Case) => {
   return ch.size > 1 ? "Chat + email merged" : ch.has("email") ? "Email" : "Chat";
 };
 const owner = (g: Group, s: Stage) => (g === "escalated" ? "Priya" : s.by === "AI" ? "AI" : "You");
-/** Statuses an agent can pick after sending a reply. */
-const AFTER: Group[] = ["customer", "others", "closed"];
+/** Check reply: the AI reads the draft against the customer's ask, mood, policy and language. */
+type Note = { text: string; ok?: boolean; fix?: (d: string) => string };
+const todo = (n: Note[]) => n.filter((x) => !x.ok).length;
+function checkReply(c: Case, d: string): Note[] {
+  const notes: Note[] = [];
+  const first = c.customer.split(" ")[0];
+  const t = d.toLowerCase();
+  const asked = c.thread.filter((m) => m.kind === "customer").map((m) => m.text.toLowerCase()).join(" ");
+  if (/saturday/.test(asked)) {
+    notes.push(/friday|saturday|today|tomorrow/.test(t)
+      ? { text: `${first} needs it by Saturday, and your reply gives a date before that.`, ok: true }
+      : { text: `${first} needs it by Saturday. Say when it will reach her.` });
+  }
+  if ((c.sentiment.label === "Frustrated" || c.sentiment.label === "Angry") && !/sorry|apolog/.test(t)) {
+    notes.push({ text: `${first} is ${c.sentiment.label.toLowerCase()}. Open with a short apology.`, fix: (x) => x.replace(/^(Hi [^,]+,\s*)(.)/, (_m, hi: string, ch: string) => `${hi}I'm sorry for the trouble. ${ch.toUpperCase()}`) });
+  }
+  if (/refund/.test(t) && /Priya|lead/.test(c.rec?.title ?? "")) {
+    notes.push({ text: "A refund this size needs Priya's approval. Don't promise it yet.", fix: (x) => x.replace(/(we('| a)?ll|i('| wi)?ll) (refund|send (you )?a refund)[^.]*\./i, "I've asked my team lead to approve your refund and will update you today.") });
+  }
+  if (c.history.risk.level === "Review" && /fraud|claim(ed)? before|suspici/.test(t)) {
+    notes.push({ text: "Don't mention earlier claims or suspicion to the customer." });
+  }
+  if (c.language && c.language !== "English" && /^[\x00-\x7F]*$/.test(d)) {
+    notes.push({ text: `${first} wrote in ${c.language}. Send it in ${c.language}?` });
+  }
+  return notes;
+}
 /** A reply timer only runs while the ball is with the agent. */
 const dueFor = (g: Group) => g === "first" || g === "reply";
 const linkIcon = (k: string): IconName => (/refund/i.test(k) ? "card" : /courier/i.test(k) ? "truck" : /lead/i.test(k) ? "user" : "box");
@@ -50,7 +75,7 @@ export function Workspace() {
   // Collapsed right-panel sections, by title. Stays the same across tickets.
   const [shut, setShut] = useState<Record<string, boolean>>({});
   const toggle = (t: string) => setShut((m) => ({ ...m, [t]: !m[t] }));
-  const [afterSend, setAfterSend] = useState<Record<string, Group>>({});
+  const [check, setCheck] = useState<Note[] | null>(null);
   const [hidden, setHidden] = useState<Record<string, boolean>>({});
   // The summary "writes" for a moment each time a case opens (E4), then settles (B6).
   const [writing, setWriting] = useState(true);
@@ -86,7 +111,6 @@ export function Workspace() {
   const status = statusOf(c.id);
   const open = status !== "closed";
   const reopened = stage.reopened && !st.status;
-  const after = afterSend[c.id] ?? "customer";
   const setStatus = (g: Group) => setStates((s) => ({ ...s, [c.id]: { ...s[c.id], status: g } }));
 
   const summaryCard = hidden[c.id] ? (
@@ -117,6 +141,7 @@ export function Workspace() {
     setMode("reply");
     setAsk("");
     setNewTask(null);
+    setCheck(null);
   }
 
   useEffect(() => {
@@ -187,9 +212,9 @@ export function Workspace() {
   function send() {
     if (!draft.trim()) return;
     const msg: Msg = mode === "note" ? { kind: "note", who: "You", time: "Now", text: draft } : { kind: "agent", who: "You", time: "Now", text: draft };
-    setStates((s) => ({ ...s, [c.id]: { ...s[c.id], extra: [...s[c.id].extra, msg], ...(mode === "reply" ? { status: after } : {}) } }));
+    setStates((s) => ({ ...s, [c.id]: { ...s[c.id], extra: [...s[c.id].extra, msg], ...(mode === "reply" ? { status: "customer" as Group } : {}) } }));
     setDrafts((d) => ({ ...d, [key]: "" }));
-    if (mode === "reply") setFlash(`Sent · ${STATUS[after]}`);
+    if (mode === "reply") { setFlash(`Sent · ${STATUS.customer}`); setCheck(null); }
   }
 
   function updateTasks(fn: (t: Task[]) => Task[]) {
@@ -293,28 +318,32 @@ export function Workspace() {
                 aria-label={mode === "note" ? "Internal note" : `Reply to ${c.customer}`}
                 value={draft}
                 placeholder={mode === "note" ? "Only your team sees this" : `Reply to ${c.customer.split(" ")[0]}`}
-                onChange={(e) => setDrafts((d) => ({ ...d, [key]: e.target.value }))}
+                onChange={(e) => { setDrafts((d) => ({ ...d, [key]: e.target.value })); setCheck(null); }}
                 onKeyDown={(e) => { if (e.key === "Enter" && e.metaKey) { e.preventDefault(); send(); } }}
               />
+              {mode === "reply" && check && (
+                <div className="check" role="status">
+                  <p className="chead"><Icon name="spark" size={14} />{todo(check) ? `${todo(check)} suggestion${todo(check) > 1 ? "s" : ""}` : "Looks good. Nothing to change."}<button aria-label="Close check" onClick={() => setCheck(null)}><Icon name="x" size={12} /></button></p>
+                  {check.map((n) => (
+                    <div key={n.text} className={`cnote ${n.ok ? "ok" : ""}`}>
+                      <Icon name={n.ok ? "check" : "alert"} size={14} />
+                      <span>{n.text}</span>
+                      {n.fix && <button onClick={() => { setDrafts((d) => ({ ...d, [key]: n.fix!(draft) })); setCheck((cs) => cs && cs.filter((x) => x !== n)); }}>Apply</button>}
+                    </div>
+                  ))}
+                </div>
+              )}
               <div className="crow">
-                <span className="src">
-                  {mode === "reply" && stage.draft && draft === stage.draft ? <><span className="ai">AI</span>Draft from the evidence · sends with your decision, or now</> : "⌘↵ to send"}
-                </span>
-                {mode === "reply" && <>
-                  <button className="gh" onClick={() => setFlash("Rephrase isn't wired up in the prototype")}><Icon name="spark" size={14} />Rephrase</button>
-                  <button className="gh" onClick={() => setFlash("Translate isn't wired up in the prototype")}><Icon name="translate" size={14} />Hindi</button>
-                </>}
+                {mode === "reply" ? <>
+                  <button className="gh" onClick={() => { if (stage.draft) { setDrafts((d) => ({ ...d, [key]: stage.draft! })); setCheck(null); } else setFlash("Nothing to draft at this step"); }}><Icon name="spark" size={14} />AI draft</button>
+                  <button className="gh" disabled={!draft.trim()} onClick={() => setFlash("Rephrase isn't wired up in the prototype")}><Icon name="pen" size={14} />Rephrase</button>
+                  <button className="gh" disabled={!draft.trim()} onClick={() => setFlash("Translate isn't wired up in the prototype")}><Icon name="translate" size={14} />Translate</button>
+                  <button className={`gh${check ? " on" : ""}`} disabled={!draft.trim()} onClick={() => setCheck(check ? null : checkReply(c, draft))}><Icon name="textcheck" size={14} />Check reply</button>
+                  <i className="sp" />
+                </> : <i className="sp" />}
                 <button className="gh" aria-label="Attach" onClick={() => setFlash("Attachments aren't wired up in the prototype")}><Icon name="attach" size={14} /></button>
                 {mode === "reply" ? (
-                  <span className="sendgrp">
-                    <label className="after" title="Status after sending">
-                      <span>After sending:</span>
-                      <select aria-label="Status after sending" value={after} onChange={(e) => setAfterSend((m) => ({ ...m, [c.id]: e.target.value as Group }))}>
-                        {AFTER.map((g) => <option key={g} value={g}>{STATUS[g]}</option>)}
-                      </select>
-                    </label>
-                    <button className="pri" onClick={send} disabled={!draft.trim()}><Icon name="send" size={14} />Send</button>
-                  </span>
+                  <button className="pri" onClick={send} disabled={!draft.trim()}><Icon name="send" size={14} />Send</button>
                 ) : (
                   <button className="pri" onClick={send} disabled={!draft.trim()}><Icon name="note" size={14} />Add note</button>
                 )}
