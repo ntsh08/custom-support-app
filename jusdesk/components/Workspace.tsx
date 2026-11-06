@@ -697,7 +697,7 @@ function Message({ m, customer, email, language, onAction }: { m: Msg; customer:
 function TryNext({ next }: { next: string[] }) {
   return (
     <div className="trynext">
-      <p><Icon name="lock" size={12} />What you can try next</p>
+      <p><Icon name="lock" size={12} />Suggestions for you</p>
       <ol>{next.map((t) => <li key={t}><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>{t}</li>)}</ol>
     </div>
   );
