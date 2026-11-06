@@ -85,10 +85,8 @@ ul { list-style: none; }
 .day { display: flex; justify-content: center; margin: 4px 0; }
 .day span { height: 22px; padding: 0 10px; border-radius: 11px; background: var(--s2); color: var(--ink3); font-size: 12px; line-height: 22px; font-weight: 510; }
 .msg { position: relative; max-width: 86%; border-radius: 12px; padding: 10px 14px 12px; }
-.msg.theirs { align-self: flex-start; background: var(--s0); border: 1px solid #F0F0F3; }
-.msg.ours { align-self: flex-end; background: var(--s2); border: 1px solid transparent; }
-.msg.ours { background: var(--s2); border-color: #F3F3F6; }
-.msg.ours.bot { background: var(--ai-wash); border-color: var(--ai-line); }
+.msg.theirs { align-self: flex-start; background: var(--s2); border: 1px solid #F1F1F4; }
+.msg.ours { align-self: flex-end; background: var(--s0); border: 1px solid #EDEDF0; }
 .msg.note { align-self: stretch; max-width: none; background: var(--note); border: 1px solid #FAF1D6; }
 .msg.note .who, .msg.note .who b { color: var(--note-ink); }
 .acts { position: absolute; top: -14px; right: 8px; display: none; gap: 2px; padding: 2px; background: var(--s0); border: 1px solid var(--hair2); border-radius: 8px; }
