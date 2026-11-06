@@ -35,6 +35,13 @@ const order = (g: Group) => ["reply", "first", "escalated", "others", "customer"
 /** Minutes left on the reply timer, for sorting. */
 const mins = (t?: string) => (!t ? 1e9 : t === "Now" ? 0 : /h/.test(t) ? parseFloat(t) * 60 : parseFloat(t));
 
+/** A status-change line for the conversation. */
+const statusLine = (g: Group, by: "You" | "AI"): Msg => ({
+  kind: "event", time: "Now", ai: by === "AI", status: g,
+  text: g === "escalated" ? `${by === "AI" ? "AI" : "You"} escalated to Priya (team lead)` : g === "closed" ? `${by} closed the ticket` : `${by} changed status to ${STATUS[g]}`,
+});
+const shown = (m: Msg) => m.kind !== "event" || !!m.status;
+
 /** Check reply: the AI reads the draft against the customer's ask, mood, policy and language. */
 type Note = { text: string; ok?: boolean; fix?: (d: string) => string };
 const todo = (n: Note[]) => n.filter((x) => !x.ok).length;
@@ -133,7 +140,7 @@ export function Workspace() {
   const draft = drafts[key] ?? "";
   const status = statusOf(c.id);
   const open = status !== "closed";
-  const setStatus = (g: Group) => setStates((s) => ({ ...s, [c.id]: { ...s[c.id], status: g } }));
+  const setStatus = (g: Group) => setStates((s) => (g === status ? s : { ...s, [c.id]: { ...s[c.id], status: g, extra: [...s[c.id].extra, statusLine(g, "You")] } }));
 
   const summaryCard = hidden[c.id] ? (
     <button className="sum-show" onClick={() => setHidden((h) => ({ ...h, [c.id]: false }))}><Icon name="spark" size={14} />Show AI summary</button>
@@ -222,7 +229,10 @@ export function Workspace() {
     setStates((s) => {
       const prev = s[caseId];
       if (label) setUndo({ caseId, prev, label });
-      return { ...s, [caseId]: { stage: next, extra: [...prev.extra, ...(cs.stages[next].adds ?? [])] } };
+      const from = prev.status ?? cs.stages[prev.stage].group;
+      const to = cs.stages[next];
+      const log: Msg[] = from === to.group ? [] : [statusLine(to.group, to.by === "AI" ? "AI" : "You")];
+      return { ...s, [caseId]: { stage: next, extra: [...prev.extra, ...(to.adds ?? []), ...log] } };
     });
     setConfirming(null);
   }
@@ -235,7 +245,7 @@ export function Workspace() {
   function send() {
     if (!draft.trim()) return;
     const msg: Msg = mode === "note" ? { kind: "note", who: "You", time: "Now", text: draft } : { kind: "agent", who: "You", time: "Now", text: draft };
-    setStates((s) => ({ ...s, [c.id]: { ...s[c.id], extra: [...s[c.id].extra, msg], ...(mode === "reply" ? { status: "customer" as Group } : {}) } }));
+    setStates((s) => ({ ...s, [c.id]: { ...s[c.id], extra: [...s[c.id].extra, msg], ...(mode === "reply" ? { status: "customer" as Group } : {}), ...(mode === "reply" && status !== "customer" ? { extra: [...s[c.id].extra, msg, statusLine("customer", "You")] } : {}) } }));
     setDrafts((d) => ({ ...d, [key]: "" }));
     if (mode === "reply") { setFlash(`Sent · ${STATUS.customer}`); setCheck(null); }
   }
@@ -352,11 +362,13 @@ export function Workspace() {
 
           <div className="thread" aria-label="Conversation">
             <div className="inner">
-            {thread.filter((m) => m.kind !== "event").map((m, i, all) => (
+            {thread.filter(shown).map((m, i, all) => (
               <div key={i} className="grpmsg">
                 {(i === 0 || (all[i - 1].day ?? "Today") !== (m.day ?? "Today")) && <p className="day"><span>{m.day ?? "Today"}</span></p>}
-                <Message m={m} customer={c.customer} email={c.email} language={c.language} onAction={msgAction} />
-                {i === c.thread.filter((x) => x.kind !== "event").length - 1 && summaryCard}
+                {m.kind === "event" ? (
+                  <p className="stchg"><i className={`dot st-${m.status}`} />{m.text}<span>· {m.time}</span></p>
+                ) : <Message m={m} customer={c.customer} email={c.email} language={c.language} onAction={msgAction} />}
+                {i === c.thread.filter(shown).length - 1 && summaryCard}
               </div>
             ))}
             <div ref={threadEnd} />

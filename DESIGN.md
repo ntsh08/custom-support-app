@@ -90,11 +90,11 @@ Colour carries meaning only:
 - Columns: rail 52px, queue 328px (380px together), case flexible (min 460px), details panel 380px (Nitish, 7 Nov). The conversation fills the case column with 24px side padding (no cap).
 
 
-- The conversation shows only messages and internal notes. No activity-log lines (courier or AI events); the AI summary and the right panel carry that context. (Nitish, 6 Nov)
+- The conversation shows messages, internal notes and status changes only. Status changes are one centred 12px ink2 line with the status dot: "AI set status to First response · 8:53 am", "You escalated to Priya (team lead) · Now", "You changed status to Waiting on customer". Other activity (courier or AI events) stays out; the AI summary and right panel carry it. (Nitish, 6–7 Nov)
 
 - Customer emails keep the normal message header (name, "Email · time"), then a hairline divider, a bold subject, and the body with greeting and sign-off (line breaks kept). (Nitish, 6 Nov)
 - The assistant's replies show how it got there, using the INA agent trace pattern: one line under the name, "Show thinking" / "Hide thinking" with a chevron, no icon, closed by default; it opens to ticked steps along a thin hairline, ink2 text and ink3 ticks (our greys, not INA's). Messages in another language show the original by default (what was actually received or sent). Under the bubble, 12px ink3: translate icon and "See translation" (ink2, 510, no underline; no language label), which flips the bubble to English and back ("See original"). Wording follows Grab, Facebook and Instagram. (Nitish, 6 Nov) (Nitish, 6 Nov)
-- Messages are 20px apart. They are grouped by day with a centred pill (s2 background, 12px grey text, 22px tall), like WhatsApp. Messages default to "Today"; a message can carry its own `day`.
+- Messages are 20px apart. They are grouped by day with a centred plain-text label (12px, ink2, 510, no pill or background) (Nitish, 7 Nov). Messages default to "Today"; a message can carry its own `day`.
 - Bubble borders are very soft: customer `#F0F0F3`, own `#F3F3F6`, AI `#E6F1EA`, note `#FAF1D6`, composer `#EDEDF0`.
 
 ## 10. Don'ts

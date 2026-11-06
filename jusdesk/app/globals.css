@@ -373,3 +373,8 @@ ul { list-style: none; }
 .head .split .sp-more { border-left: 1px solid rgb(255 255 255 / .28); }
 .head .split button:hover, .head .split .sp-more[aria-expanded="true"] { background: rgb(0 0 0 / .1); }
 .head .split .stmenu { color: var(--ink); }
+
+/* Day label as plain text; status-change lines in the conversation (Nitish, 7 Nov) */
+.day span { height: auto; padding: 0; border-radius: 0; background: none; color: var(--ink2); font-size: 12px; line-height: 16px; font-weight: 510; }
+.stchg { display: flex; align-items: center; justify-content: center; gap: 6px; margin: 0; font-size: 12px; color: var(--ink2); }
+.stchg span { color: var(--ink3); }
