@@ -244,7 +244,7 @@ export function Workspace() {
             {thread.filter((m) => m.kind !== "event").map((m, i, all) => (
               <div key={i} className="grpmsg">
                 {(i === 0 || (all[i - 1].day ?? "Today") !== (m.day ?? "Today")) && <p className="day"><span>{m.day ?? "Today"}</span></p>}
-                <Message m={m} customer={c.customer} language={c.language} onAction={msgAction} />
+                <Message m={m} customer={c.customer} email={c.email} language={c.language} onAction={msgAction} />
                 {i === c.thread.filter((x) => x.kind !== "event").length - 1 && summaryCard}
               </div>
             ))}
@@ -446,7 +446,7 @@ function Actions({ m, onAction, translate }: { m: Msg; onAction: (k: MsgAction, 
   );
 }
 
-function Message({ m, customer, language, onAction }: { m: Msg; customer: string; language?: string; onAction: (k: MsgAction, m: Msg) => void }) {
+function Message({ m, customer, email, language, onAction }: { m: Msg; customer: string; email?: string; language?: string; onAction: (k: MsgAction, m: Msg) => void }) {
   if (m.kind === "event") {
     return (
       <p className="ev">
@@ -475,9 +475,19 @@ function Message({ m, customer, language, onAction }: { m: Msg; customer: string
       </article>
     );
   }
+  if (m.channel === "email") {
+    return (
+      <article className="msg theirs mail">
+        <p className="who"><Icon name="mail" size={14} /><b>{customer}</b>{email && <span>&lt;{email}&gt;</span>}<time>{m.time}</time></p>
+        {m.subject && <h4 className="subj">{m.subject}</h4>}
+        <div className="mbody">{m.text}</div>
+        <Actions m={m} onAction={onAction} translate />
+      </article>
+    );
+  }
   return (
     <article className="msg theirs">
-      <p className="who"><b>{customer}</b><span>{m.channel === "email" ? "Email" : "Chat"} · {m.time}</span>{m.gloss && <em className="tr"><Icon name="translate" size={14} />Translated from {language ?? "another language"}</em>}</p>
+      <p className="who"><b>{customer}</b><span>Chat · {m.time}</span>{m.gloss && <em className="tr"><Icon name="translate" size={14} />Translated from {language ?? "another language"}</em>}</p>
       <div>{m.text}{m.gloss && <span className="gloss">{m.gloss}</span>}</div>
       <Actions m={m} onAction={onAction} translate />
     </article>

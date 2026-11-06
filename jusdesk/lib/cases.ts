@@ -6,7 +6,7 @@ import type { IconName } from "@/components/Icon";
 export type Group = "needs" | "waiting" | "lead" | "ai" | "closed";
 
 export type Msg = (
-  | { kind: "customer"; channel: "chat" | "email"; time: string; text: string; gloss?: string }
+  | { kind: "customer"; channel: "chat" | "email"; time: string; text: string; gloss?: string; /** Email only. */ subject?: string }
   | { kind: "agent"; who: string; time: string; text: string; gloss?: string }
   | { kind: "event"; time: string; text: string; ai?: boolean }
   | { kind: "note"; who: string; time: string; text: string }
@@ -107,7 +107,7 @@ export const CASES: Case[] = [
       { kind: "customer", channel: "chat", time: "8:52 am", text: "My order shows delivered but I didn't get anything." },
       { kind: "agent", who: "JusDesk assistant", time: "8:52 am", text: "Sorry about that. I'm checking with the courier and passing this to our team now." },
       { kind: "event", time: "8:53 am", text: "AI handed over with the courier photo and GPS attached", ai: true },
-      { kind: "customer", channel: "email", time: "9:14 am", text: "I already told your chatbot this. The app says delivered but nothing came to my door. I need it before Saturday." },
+      { kind: "customer", channel: "email", time: "9:14 am", subject: "Order FX-48213 marked delivered, but not received", text: "Hi,\n\nI already told your chatbot this. The app says delivered but nothing came to my door. I need it before Saturday.\n\nThanks,\nAnanya" },
       { kind: "event", time: "9:15 am", text: "AI merged this email into the chat case (same order, same customer)", ai: true },
       { kind: "note", who: "You", time: "9:20 am", text: "Last delivery to this address was to flat B-204 (white door). Today's photo shows a green door. Probably the wrong flat." },
     ],
@@ -237,7 +237,7 @@ export const CASES: Case[] = [
     summary: "Marked delivered on Tuesday. Rohan wants a replacement, but size L is out of stock.",
     thread: [
       { kind: "event", time: "Tue 7:05 pm", text: "Shadowfax marked delivered" },
-      { kind: "customer", channel: "email", time: "10:02 am", text: "Hi, my jacket shows as delivered on Tuesday but it never came. Can you send another one?" },
+      { kind: "customer", channel: "email", time: "10:02 am", subject: "Jacket never arrived", text: "Hi,\n\nMy jacket shows as delivered on Tuesday but it never came. Can you send another one?\n\nRohan" },
       { kind: "event", time: "10:03 am", text: "AI checked stock: size L is out of stock until December", ai: true },
     ],
     evidence: [
@@ -380,7 +380,7 @@ export const CASES: Case[] = [
         status: "Refund retried · closes when the payment provider confirms",
         options: [],
         adds: [
-          { kind: "customer", channel: "email", time: "11:34 am", text: "Please use rohan.shah@okhdfc. Thanks." },
+          { kind: "customer", channel: "email", time: "11:34 am", subject: "Re: Your refund", text: "Please use rohan.shah@okhdfc.\n\nThanks,\nRohan" },
           { kind: "event", time: "11:35 am", text: "Refund of ₹6,500 retried to rohan.shah@okhdfc", ai: true },
         ],
         simulate: { label: "Simulate: provider confirms refund", next: "closed" },
