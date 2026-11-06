@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { CASES, GROUPS, type Case, type Msg, type Option, type Stage, type Task } from "@/lib/cases";
+import { CASES, GROUPS, TITLE, type Case, type Msg, type Option, type Stage, type Task } from "@/lib/cases";
 import { EvidenceTile } from "./EvidenceTile";
 import { Icon, type IconName } from "./Icon";
 
@@ -41,6 +41,8 @@ export function Workspace() {
   const [confirming, setConfirming] = useState<Option | null>(null);
   const [drafts, setDrafts] = useState<Record<string, string>>({});
   const [mode, setMode] = useState<"reply" | "note">("reply");
+  const [hidden, setHidden] = useState<Record<string, boolean>>({});
+  const [vote, setVote] = useState<Record<string, "up" | "down" | undefined>>({});
   const [undo, setUndo] = useState<Undo | null>(null);
   const [flash, setFlash] = useState<string | null>(null);
   const [tasks, setTasks] = useState<Record<string, Task[]>>(() => Object.fromEntries(CASES.map((c) => [c.id, c.tasks])));
@@ -59,9 +61,33 @@ export function Workspace() {
   const stage = c.stages[st.stage];
   const atStart = st.stage === c.start;
   const thread = [...c.thread, ...st.extra];
+
   const key = c.id + st.stage + mode;
   const draft = drafts[key] ?? (mode === "reply" ? stage.draft ?? "" : "");
   const open = stage.group !== "closed" && stage.group !== "ai";
+
+  const first = c.customer.split(" ")[0];
+  const summaryCard = hidden[c.id] ? (
+    <button className="sum-show" onClick={() => setHidden((h) => ({ ...h, [c.id]: false }))}><Icon name="spark" size={14} />Show AI summary</button>
+  ) : (
+    <section className="sum" aria-label="AI summary">
+      {open && stage.timeLeft && (
+        <div className={`strip ${stage.urgent ?? ""}`}><Icon name="clock" size={14} />{first} is waiting for your reply<em>{stage.timeLeft === "Now" ? "Due now" : `${stage.timeLeft} left`}</em></div>
+      )}
+      <div className="body">
+        <span className="lbl"><Icon name="spark" size={14} />AI summary</span>
+        <h3>{c.hook}</h3>
+        <p>{c.handoff.join(" ")}</p>
+      </div>
+      <div className="foot">
+        <span>Helpful?</span>
+        <button aria-label="Helpful" aria-pressed={vote[c.id] === "up"} className={vote[c.id] === "up" ? "on" : ""} onClick={() => setVote((v) => ({ ...v, [c.id]: v[c.id] === "up" ? undefined : "up" }))}><Icon name="up" size={14} /></button>
+        <button aria-label="Not helpful" aria-pressed={vote[c.id] === "down"} className={vote[c.id] === "down" ? "on" : ""} onClick={() => setVote((v) => ({ ...v, [c.id]: v[c.id] === "down" ? undefined : "down" }))}><Icon name="down" size={14} /></button>
+        <i />
+        <button onClick={() => setHidden((h) => ({ ...h, [c.id]: true }))}>Hide</button>
+      </div>
+    </section>
+  );
   const caseTasks = tasks[c.id];
   const linked = stage.linked ?? c.linked;
   const answer = answers[c.id];
@@ -206,27 +232,23 @@ export function Workspace() {
         {/* Case */}
         <main className="case" key={c.id}>
           <header className="head">
-            <h1>{c.headline}</h1>
+            <h1>{TITLE}</h1>
             <div className="tags">
               <span><Icon name="box" size={14} />{c.order}</span>
               <span><Icon name="user" size={14} />{c.customer}</span>
               {c.email && <span><Icon name="mail" size={14} />{c.email}</span>}
               {!c.email && <span><Icon name="chat" size={14} />Chat</span>}
               {c.language && <span><Icon name="translate" size={14} />{c.language}</span>}
-              {open && stage.timeLeft && <span className={stage.urgent ?? ""}><Icon name="clock" size={14} />{stage.timeLeft === "Now" ? "Reply due now" : `Reply due in ${stage.timeLeft}`}</span>}
             </div>
           </header>
 
           <div className="thread" aria-label="Conversation">
             <div className="inner">
-            <section className="handoff">
-              <h3><Icon name="spark" size={14} />Before you read · AI summary</h3>
-              <ul>{c.handoff.map((h) => <li key={h}>{h}</li>)}</ul>
-            </section>
             {thread.filter((m) => m.kind !== "event").map((m, i, all) => (
               <div key={i} className="grpmsg">
                 {(i === 0 || (all[i - 1].day ?? "Today") !== (m.day ?? "Today")) && <p className="day"><span>{m.day ?? "Today"}</span></p>}
                 <Message m={m} customer={c.customer} language={c.language} onAction={msgAction} />
+                {i === c.thread.filter((x) => x.kind !== "event").length - 1 && summaryCard}
               </div>
             ))}
             <div ref={threadEnd} />

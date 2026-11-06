@@ -63,7 +63,10 @@ export type Case = {
   payment: string;
   courier: string;
   language?: string;
+  /** The diagnosis. The ticket title is the same for every case (TITLE). */
   headline: string;
+  /** One catchy line at the top of the AI summary. */
+  hook: string;
   summary: string;
   thread: Msg[];
   evidence: Evidence[];
@@ -83,6 +86,8 @@ export type Case = {
   stages: Record<string, Stage>;
 };
 
+export const TITLE = "Marked delivered, but not received";
+
 export const CASES: Case[] = [
   {
     id: "ananya",
@@ -95,6 +100,7 @@ export const CASES: Case[] = [
     payment: "Prepaid · UPI",
     courier: "Shadowfax",
     headline: "Likely delivered to the wrong flat",
+    hook: "Nothing reached her door. She needs it by Saturday.",
     summary: "Marked delivered yesterday at 6:42 pm. Ananya says it never arrived and needs it before Saturday.",
     thread: [
       { kind: "event", time: "Yesterday 6:42 pm", text: "Shadowfax marked delivered" },
@@ -116,9 +122,8 @@ export const CASES: Case[] = [
       { icon: "alert", label: "560034 this week", value: "3 similar claims, all Shadowfax", tone: "bad" },
     ],
     handoff: [
-      "Ananya says nothing reached her door. She wrote twice (chat 8:52, email 9:14). Both are merged here.",
+      "She wrote twice (chat 8:52, email 9:14). Both are merged here.",
       "The assistant already showed her the tracking and pulled the courier photo and GPS. Don't ask her for them again.",
-      "She needs it before Saturday.",
     ],
     rec: {
       title: "Reship the kurta and file a courier claim",
@@ -228,6 +233,7 @@ export const CASES: Case[] = [
     payment: "Prepaid · UPI",
     courier: "Shadowfax",
     headline: "No proof of delivery, size L out of stock",
+    hook: "No proof it reached him, and size L is gone till December.",
     summary: "Marked delivered on Tuesday. Rohan wants a replacement, but size L is out of stock.",
     thread: [
       { kind: "event", time: "Tue 7:05 pm", text: "Shadowfax marked delivered" },
@@ -402,6 +408,7 @@ export const CASES: Case[] = [
     payment: "Prepaid · Card",
     courier: "Delhivery",
     headline: "OTP verified, customer says not received",
+    hook: "The OTP was entered at her door, yet she says nothing came.",
     summary: "Delivered with an OTP at her door. Meera says it never arrived. This account has made claims before.",
     thread: [
       { kind: "event", time: "Mon 1:15 pm", text: "Delhivery delivered with OTP" },
@@ -500,6 +507,7 @@ export const CASES: Case[] = [
     payment: "Prepaid · UPI",
     courier: "Ekart",
     headline: "Scanned delivered while the rider was 4.2 km away",
+    hook: "Scanned delivered 4.2 km away. Ekart is checking.",
     summary: "Ekart scanned it delivered at 10:12 am while the rider was 4.2 km away.",
     thread: [
       { kind: "event", time: "10:12 am", text: "Ekart marked delivered" },
@@ -563,6 +571,7 @@ export const CASES: Case[] = [
     courier: "Delhivery",
     language: "Hindi",
     headline: "Left with the society guard, customer confirmed",
+    hook: "It was with the society guard. Vikram has it now.",
     summary: "Delivered to the society gate. AI found the courier's note and photo and replied in Hindi.",
     thread: [
       { kind: "event", time: "Yesterday 5:20 pm", text: "Delhivery: handed to security guard" },

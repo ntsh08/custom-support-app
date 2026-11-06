@@ -4,7 +4,7 @@ import {
   DeliveryTruck01Icon, GitMergeIcon, InboxIcon, Key01Icon, Location01Icon, Mail01Icon, MaximizeIcon,
   MinimizeIcon, MoreHorizontalIcon, PackageIcon, PlayIcon, Search01Icon, SentIcon, SquareLock02Icon,
   Tick02Icon, UserAdd01Icon, UserIcon, Note01Icon, CheckListIcon, SparklesIcon, TranslateIcon, Link01Icon,
-  Calendar03Icon, Add01Icon, Flag02Icon, AiChat02Icon, ArrowRight01Icon, CheckmarkSquare02Icon, SquareIcon, Attachment01Icon, Copy01Icon,
+  Calendar03Icon, Add01Icon, Flag02Icon, AiChat02Icon, ArrowRight01Icon, CheckmarkSquare02Icon, SquareIcon, Attachment01Icon, Copy01Icon, ThumbsUpIcon, ThumbsDownIcon,
 } from "@hugeicons/core-free-icons";
 
 // Hugeicons, Stroke Rounded (free set).
@@ -46,6 +46,8 @@ const ICONS = {
   unchecked: SquareIcon,
   attach: Attachment01Icon,
   copy: Copy01Icon,
+  up: ThumbsUpIcon,
+  down: ThumbsDownIcon,
 } as const;
 
 export type IconName = keyof typeof ICONS;
