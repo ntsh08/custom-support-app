@@ -138,6 +138,8 @@ ul { list-style: none; }
 .conf.high { color: var(--ok); } .conf.medium { color: var(--warn); } .conf.low { color: var(--bad); }
 .card.rec { background: var(--ai-wash); border-color: var(--ai-line); }
 .rec h3, .confirm h3 { font-size: 14px; line-height: 20px; font-weight: 590; }
+.analysis { color: var(--ink); }
+.analysis b { font-weight: 510; color: var(--ink2); }
 .why { display: grid; gap: 6px; }
 .why li { display: flex; gap: 8px; align-items: baseline; }
 .why li span { flex: 1; }

@@ -289,7 +289,7 @@ export function Workspace() {
                       <>
                         <p className="eyebrow">Recommended <span className={`conf ${c.rec.confidence.toLowerCase()}`}>{c.rec.confidence} confidence</span></p>
                         <h3>{c.rec.title}</h3>
-                        <ul className="why">{c.rec.reasons.map((r) => <li key={r.text}><span>{r.text}</span><em>{r.src}</em></li>)}</ul>
+                        <p className="analysis"><b>AI analysis:</b> {c.rec.reasons.map((r) => r.text).join(" ")}</p>
                         <p className="policy"><Icon name="key" size={14} />{c.rec.policy}</p>
                       </>
                     ) : (
