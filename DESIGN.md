@@ -12,7 +12,7 @@ Apply these to everything designed in this project: the app, static pages, Figma
 - Surfaces: s0 `#FFFFFF`, s1 `#FAFAFB`, s2 `#F4F4F6`, s3 `#EDEDF0`. Don't skip steps.
 - Borders: hairline `#E8E8EB`, strong `#DCDCE1`, both 1px.
 - Selected and hover states are a grey step (s1 or s2).
-- Tonal layering: no divider lines in the queue or the right panel. Panels sit on s1; groups are white cards (12px radius, no border) or grey steps. Lists have no divider lines. Sections are separated by space and grey steps: the queue sits on s1, hover is s2, selected is s3, rows are rounded 8px and inset 8px.
+- Tonal layering: no divider lines in the queue or the right panel. Panels sit on s1; groups are white cards (12px radius, no border) or grey steps. Lists have no divider lines. Sections are separated by space and grey steps: the queue sits on white (s0), hover is s2, selected is s3, rows are rounded 8px and inset 8px.
 - No shadows, no gradients, no glows. The only exception is the toast.
 
 ## 3. Corner radius by role
