@@ -70,7 +70,7 @@ Colour carries meaning only:
 - Icons: Hugeicons Stroke Rounded, stroke 1.5.
   - 14px inline and in tags and key-value rows, 16px in task rows and the Ask box, 18px in the nav.
   - The selected nav icon is filled.
-- No avatars or icons on queue rows or in front of names in the conversation: name, time and one meta line only.
+- No avatars or icons on queue rows or in front of names in the conversation. A queue row is: customer name (with time left on the right), then ticket number · status (e.g. "#1042 · First response"). The ticket number also leads the header tags. Ticket numbers are demo data. (Nitish, 7 Nov)
 
 ## 9. AI signature, notes and the pattern
 - Anything AI wrote or did gets one signature, and nothing else uses it:

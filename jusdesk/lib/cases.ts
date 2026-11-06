@@ -58,6 +58,8 @@ export type Stage = {
 
 export type Case = {
   id: string;
+  /** Ticket number. Demo data. */
+  ticket: string;
   customer: string;
   /** Shown when the customer wrote by email. Demo addresses. */
   email?: string;
@@ -107,6 +109,7 @@ export const TITLE = "Marked delivered, but not received";
 export const CASES: Case[] = [
   {
     id: "ananya",
+    ticket: "#1042",
     customer: "Ananya Mehta",
     email: "ananya.mehta@example.com",
     initials: "AM",
@@ -243,6 +246,7 @@ export const CASES: Case[] = [
   },
   {
     id: "rohan",
+    ticket: "#1039",
     customer: "Rohan Shah",
     email: "rohan.shah@example.com",
     initials: "RS",
@@ -422,6 +426,7 @@ export const CASES: Case[] = [
   },
   {
     id: "meera",
+    ticket: "#1044",
     customer: "Meera Iyer",
     initials: "MI",
     item: "Linen dress, S",
@@ -519,6 +524,7 @@ export const CASES: Case[] = [
   },
   {
     id: "kavya",
+    ticket: "#1045",
     customer: "Kavya Pillai",
     initials: "KP",
     item: "Cotton kurta, L",
@@ -585,6 +591,7 @@ export const CASES: Case[] = [
   },
   {
     id: "vikram",
+    ticket: "#1041",
     customer: "Vikram Nair",
     initials: "VN",
     item: "Graphic tee, M",
