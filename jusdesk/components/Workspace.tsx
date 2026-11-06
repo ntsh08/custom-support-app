@@ -478,7 +478,8 @@ function Message({ m, customer, email, language, onAction }: { m: Msg; customer:
   if (m.channel === "email") {
     return (
       <article className="msg theirs mail">
-        <p className="who"><Icon name="mail" size={14} /><b>{customer}</b>{email && <span>&lt;{email}&gt;</span>}<time>{m.time}</time></p>
+        <p className="who"><b>{customer}</b><span>Email · {m.time}</span></p>
+        <hr />
         {m.subject && <h4 className="subj">{m.subject}</h4>}
         <div className="mbody">{m.text}</div>
         <Actions m={m} onAction={onAction} translate />

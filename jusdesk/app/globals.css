@@ -95,11 +95,9 @@ ul { list-style: none; }
 .msg { position: relative; max-width: 86%; border-radius: 12px; padding: 10px 14px 12px; }
 .msg.theirs { align-self: flex-start; background: var(--s2); border: 1px solid #F1F1F4; }
 .msg.ours { align-self: flex-end; background: var(--s0); border: 1px solid #EDEDF0; }
-.msg.mail { width: 86%; padding: 0; }
-.msg.mail .who { padding: 10px 14px 0; margin: 0; }
-.msg.mail .who time { margin-left: auto; }
-.msg.mail .subj { margin: 0; padding: 4px 14px 10px; font-size: 13px; font-weight: 590; color: var(--ink); border-bottom: 1px solid #ECECEF; }
-.msg.mail .mbody { padding: 10px 14px 12px; white-space: pre-line; }
+.msg.mail hr { border: 0; border-top: 1px solid #ECECEF; margin: 8px 0 10px; }
+.msg.mail .subj { margin: 0 0 8px; font-size: 13px; font-weight: 590; color: var(--ink); }
+.msg.mail .mbody { white-space: pre-line; }
 .msg.note { align-self: stretch; max-width: none; background: var(--note); border: 1px solid #FAF1D6; }
 .msg.note .who, .msg.note .who b { color: var(--note-ink); }
 .acts { position: absolute; top: -14px; right: 8px; display: none; gap: 2px; padding: 2px; background: var(--s0); border: 1px solid var(--hair2); border-radius: 8px; }
