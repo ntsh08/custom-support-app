@@ -5,13 +5,14 @@ Apply these to everything designed in this project: the app, static pages, Figma
 ## 1. One accent, used rarely
 - Green `#3A7C57` (hover `#2F6547`) appears only on the logo, the primary button, the focus ring and links.
 - Green is never a fill, a section background, a selected state or a decoration.
-- Exception (Nitish, 6 Nov): the executive's own messages use a light green tint (`#F1F7F3`, border `#CFE3D6`). Customer messages stay white; the AI assistant's stay grey.
+- Exception (Nitish, 6 Nov): the executive's own messages use a light green tint (`#F1F7F3`, border `#CFE3D6`). Customer messages stay white. The AI assistant's replies use the same green card, marked with the AI tag.
 - No purple, no blue.
 
 ## 2. Depth from greys, not effects
 - Surfaces: s0 `#FFFFFF`, s1 `#FAFAFB`, s2 `#F4F4F6`, s3 `#EDEDF0`. Don't skip steps.
 - Borders: hairline `#E8E8EB`, strong `#DCDCE1`, both 1px.
 - Selected and hover states are a grey step (s1 or s2).
+- Lists have no divider lines. Sections are separated by space and grey steps: the queue sits on s1, hover is s2, selected is s3, rows are rounded 8px and inset 8px.
 - No shadows, no gradients, no glows. The only exception is the toast.
 
 ## 3. Corner radius by role

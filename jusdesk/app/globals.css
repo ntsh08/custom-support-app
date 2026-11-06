@@ -40,14 +40,16 @@ ul { list-style: none; }
 .bar span { color: var(--ink3); font-size: 12px; }
 .scroll { flex: 1; overflow-y: auto; min-height: 0; }
 
-/* Queue */
-.queue { display: flex; flex-direction: column; min-height: 0; border-right: 1px solid var(--hair); }
-.grp { height: 32px; display: flex; align-items: center; gap: 8px; padding: 0 16px; background: var(--s1); border-bottom: 1px solid var(--hair); font-size: 12px; font-weight: 510; color: var(--ink2); }
-.grp span { color: var(--ink3); font-weight: 400; }
-.row { width: 100%; height: 56px; display: flex; align-items: center; gap: 10px; padding: 0 16px; border: 0; border-bottom: 1px solid var(--hair); background: none; text-align: left; }
-.row:hover { background: var(--s1); }
-.row.on { background: var(--s2); }
-.ch { width: 24px; height: 24px; border-radius: 6px; border: 1px solid var(--hair); background: var(--s0); color: var(--ink2); display: grid; place-items: center; flex: none; }
+/* Queue: no dividers. Depth from greys: panel s1, rows sit on it, selected row s3, rounded and inset. */
+.queue { display: flex; flex-direction: column; min-height: 0; border-right: 1px solid var(--hair); background: var(--s1); }
+.queue .bar { border-bottom: 0; }
+.queue .scroll { padding: 0 8px 12px; }
+.grp { height: 32px; display: flex; align-items: center; gap: 8px; padding: 12px 8px 0; font-size: 12px; font-weight: 510; color: var(--ink3); }
+.grp span { font-weight: 400; }
+.row { width: 100%; height: 56px; display: flex; align-items: center; gap: 10px; padding: 0 8px; border: 0; border-radius: 8px; background: none; text-align: left; }
+.row:hover { background: var(--s2); }
+.row.on { background: var(--s3); }
+.ch { width: 24px; height: 24px; border-radius: 6px; background: var(--s0); color: var(--ink2); display: grid; place-items: center; flex: none; }
 .rt { flex: 1; min-width: 0; }
 .rt .l1 { display: flex; justify-content: space-between; gap: 8px; }
 .rt .l1 b { font-weight: 510; }

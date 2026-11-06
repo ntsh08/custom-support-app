@@ -62,7 +62,6 @@ export function Workspace() {
   const draft = drafts[key] ?? (mode === "reply" ? stage.draft ?? "" : "");
   const open = stage.group !== "closed" && stage.group !== "ai";
   const caseTasks = tasks[c.id];
-  const openTasks = Object.values(tasks).flat().filter((t) => !t.ai && !t.done).length;
   const linked = stage.linked ?? c.linked;
   const answer = answers[c.id];
 
@@ -171,7 +170,7 @@ export function Workspace() {
         <nav className="rail" aria-label="Main">
           <div className="logo" aria-label="JusDesk">J</div>
           <button className="nav on" aria-current="page" title="Queue"><FilledInbox /></button>
-          <button className="nav" title="My tasks"><Icon name="tasks" size={18} />{openTasks > 0 && <i>{openTasks}</i>}</button>
+          <button className="nav" title="My tasks"><Icon name="tasks" size={18} /></button>
           <button className="nav" title="Waiting"><Icon name="clock" size={18} /></button>
           <button className="nav" title="Search"><Icon name="search" size={18} /></button>
         </nav>
@@ -439,7 +438,7 @@ function Message({ m, customer, onAction }: { m: Msg; customer: string; onAction
   if (m.kind === "agent") {
     const bot = /assistant/i.test(m.who);
     return (
-      <article className={`msg ours${bot ? "" : " me"}`}>
+      <article className="msg ours me">
         <p className="who">{bot && <span className="ai">AI</span>}<b>{m.who}</b><span>{m.time}</span></p>
         <div>{m.text}{m.gloss && <span className="gloss">{m.gloss}</span>}</div>
         <Actions m={m} onAction={onAction} />
