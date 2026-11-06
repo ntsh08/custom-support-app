@@ -12,7 +12,7 @@
   --warn: #B45309; --bad: #B42318; --ok: #15803D;
   --rail-on: #E6E6EA;
   --g50: #F1F7F3; --g200: #CFE3D6;
-  --ai-wash: linear-gradient(180deg, #E3F1E8 0, #F6FBF8 48px, #FFFFFF 110px); --ai-line: #E6F1EA;
+  --ai-wash: linear-gradient(174deg, #B5F1CA 0, #DAF5E5 46px, #FFFFFF 75px); --ai-line: #E6F1EA;
   --note: #FFF8E6; --note-line: #F3E3B5; --note-ink: #8A6512;
 }
 * { box-sizing: border-box; }

@@ -74,7 +74,7 @@ Colour carries meaning only:
 
 ## 9. AI signature, notes and the pattern
 - Anything AI wrote or did gets one signature, and nothing else uses it:
-  - a green glow from the top edge (`#E3F1E8` → `#F6FBF8` at 48px → white at 110px, 180°, hairline border; from ClickUp's AI card), on the AI summary and the AI recommendation card. The assistant's chat replies stay white with the AI tag (Nitish, 6 Nov).
+  - a green glow from the top-left edge (`#B5F1CA` → `#DAF5E5` at 46px → white at 75px, 174°, hairline border; tuned by Nitish in Figma node 1338:80), on the AI summary and the AI recommendation card. The assistant's chat replies stay white with the AI tag (Nitish, 6 Nov).
   - a green "AI" tag (`#E3F0E8` bg, `#2F6547` text), on AI events and the assistant's messages
   - the sparkle icon
 - Internal notes are a plain yellow card (`#FFF8E6`, border `#F3E3B5`, label `#8A6512`), with a lock icon and "Internal note". No badge, no dashed border. The composer turns yellow in note mode. (Nitish, 6 Nov: the industry convention wins here.)
