@@ -313,7 +313,7 @@ ul { list-style: none; }
 .row.on .tk { background: var(--s0); }
 .st { font-weight: 510; }
 .tags span.st { font-weight: 510; }
-.st-first { background: #EBF1FE; color: #2F5BD3; }
+.st-first { background: #F0F5FF; color: #5B84E4; }
 .st-reply { background: #F2EEFD; color: #6B46C9; }
 .st-escalated { background: #FFF0E5; color: #C2410C; }
 .st-others { background: #EEEEF1; color: #4B4F57; }

@@ -97,7 +97,7 @@ Colour carries meaning only:
 - Bubble borders are very soft: customer `#F0F0F3`, own `#F3F3F6`, AI `#E6F1EA`, note `#FAF1D6`, composer `#EDEDF0`.
 
 ## 10. Don'ts
-- No second accent colour. Exception: status chips (6px radius, 22px, 12px/510) are colour-coded, in the queue row and the header (Nitish, 7 Nov): First response blue `#EBF1FE`/`#2F5BD3`, Needs reply purple `#F2EEFD`/`#6B46C9`, Escalated orange `#FFF0E5`/`#C2410C`, both Waiting states grey `#EEEEF1`/`#4B4F57`, Closed light grey `#F3F3F5`/`#8A8E95` (Nitish asked for blue, a little purple and grey).
+- No second accent colour. Exception: status chips (6px radius, 22px, 12px/510) are colour-coded, in the queue row and the header (Nitish, 7 Nov): First response light blue `#F0F5FF`/`#5B84E4`, Needs reply purple `#F2EEFD`/`#6B46C9`, Escalated orange `#FFF0E5`/`#C2410C`, both Waiting states grey `#EEEEF1`/`#4B4F57`, Closed light grey `#F3F3F5`/`#8A8E95` (Nitish asked for blue, a little purple and grey).
 - No coloured section backgrounds or tinted cards.
 - No shadows or gradients for hierarchy.
 - No invented names, labels or IDs for real people or research.
