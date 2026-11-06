@@ -447,6 +447,12 @@ function Actions({ m, onAction, translate }: { m: Msg; onAction: (k: MsgAction, 
 }
 
 function Message({ m, customer, email, language, onAction }: { m: Msg; customer: string; email?: string; language?: string; onAction: (k: MsgAction, m: Msg) => void }) {
+  const [orig, setOrig] = useState(false);
+  const lang = language ?? "another language";
+  const body = (g?: string) => g ? <div>{orig ? <span lang="hi">{m.text}</span> : g}</div> : <div>{m.text}</div>;
+  const link = (g: string | undefined, side: string, verb: string) => g && (
+    <p className={`trlink ${side}`}><Icon name="translate" size={14} />{orig ? `Original in ${lang}` : `${verb} ${lang}`} · <button onClick={() => setOrig((v) => !v)}>{orig ? "See translation" : "See original"}</button></p>
+  );
   if (m.kind === "event") {
     return (
       <p className="ev">
@@ -467,14 +473,15 @@ function Message({ m, customer, email, language, onAction }: { m: Msg; customer:
   }
   if (m.kind === "agent") {
     const bot = /assistant/i.test(m.who);
-    return (
+    return (<>
       <article className={`msg ours${bot ? " bot" : ""}`}>
-        <p className="who">{bot && <span className="ai">AI</span>}<b>{m.who}</b><span>{m.time}</span>{m.gloss && <em className="tr"><Icon name="translate" size={14} />Sent in {language ?? "another language"}</em>}</p>
+        <p className="who">{bot && <span className="ai">AI</span>}<b>{m.who}</b><span>{m.time}</span></p>
         {bot && m.steps && <Trace steps={m.steps} />}
-        {m.gloss ? <><div className="orig" lang="hi">{m.text}</div><div>{m.gloss}</div></> : <div>{m.text}</div>}
+        {body(m.gloss)}
         <Actions m={m} onAction={onAction} />
       </article>
-    );
+      {link(m.gloss, "ours", "Sent in")}
+    </>);
   }
   if (m.channel === "email") {
     return (
@@ -487,13 +494,14 @@ function Message({ m, customer, email, language, onAction }: { m: Msg; customer:
       </article>
     );
   }
-  return (
+  return (<>
     <article className="msg theirs">
-      <p className="who"><b>{customer}</b><span>Chat · {m.time}</span>{m.gloss && <em className="tr"><Icon name="translate" size={14} />Translated from {language ?? "another language"}</em>}</p>
-      {m.gloss ? <><div className="orig" lang="hi">{m.text}</div><div>{m.gloss}</div></> : <div>{m.text}</div>}
+      <p className="who"><b>{customer}</b><span>Chat · {m.time}</span></p>
+      {body(m.gloss)}
       <Actions m={m} onAction={onAction} translate />
     </article>
-  );
+    {link(m.gloss, "theirs", "Translated from")}
+  </>);
 }
 
 /** The assistant's work before a reply, after the INA agent trace: one line, opens to the steps. */
