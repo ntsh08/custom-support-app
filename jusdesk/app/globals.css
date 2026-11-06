@@ -96,7 +96,7 @@ ul { list-style: none; }
 .pick { max-width: 100%; border: 0; background: none; padding: 0; font-weight: 510; outline: 0; cursor: pointer; }
 .pick.missing { color: var(--warn); font-weight: 400; }
 .dkv dd.warn { color: var(--warn); }
-.cwrap { width: 100%; max-width: 600px; margin: 0 auto; padding: 16px 24px 24px; flex: none; }
+.cwrap { width: 100%; max-width: 600px; margin: 0 auto; padding: 8px 24px 24px; flex: none; }
 .msg .who { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; font-size: 12px; color: var(--ink3); }
 .msg .who b { color: var(--ink); font-weight: 510; font-size: 13px; }
 .gloss { display: block; margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--hair); color: var(--ink2); }
