@@ -361,3 +361,15 @@ ul { list-style: none; }
 .head .tags { grid-column: 1; grid-row: 2; }
 .head .split { grid-column: 2; grid-row: 1 / span 2; align-self: center; border: 1px solid color-mix(in srgb, currentColor 35%, transparent); }
 .split .sp-more { border-left: 1px solid color-mix(in srgb, currentColor 35%, transparent); }
+
+/* Header status button G3: solid fill in the status colour, white text, split (Nitish, 7 Nov) */
+.head .split { border: 0; color: #fff; overflow: visible; }
+.head .split.st-first { background: #5B84E4; }
+.head .split.st-reply { background: #6B46C9; }
+.head .split.st-escalated { background: #C2410C; }
+.head .split.st-others, .head .split.st-customer { background: #5F636A; }
+.head .split.st-closed { background: #A9ACB2; }
+.head .split .sp-main { padding: 0 12px; }
+.head .split .sp-more { border-left: 1px solid rgb(255 255 255 / .28); }
+.head .split button:hover, .head .split .sp-more[aria-expanded="true"] { background: rgb(0 0 0 / .1); }
+.head .split .stmenu { color: var(--ink); }

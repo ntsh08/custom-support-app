@@ -1,0 +1,48 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Status button options</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1C1D1F;--ink2:#5F636A;--ink3:#8A8E95;--hair:#E8E8EB;--hair2:#DCDCE1;--s2:#F7F7F9;--blue:#5B84E4;--bluebg:#F0F5FF}
+*{box-sizing:border-box}body{margin:0;padding:28px;background:#fff;font:400 13px/20px Inter,sans-serif;font-feature-settings:"cv01","ss03";color:var(--ink)}
+h1{font-size:14px;font-weight:600;margin:0 0 4px}.sub{color:var(--ink3);font-size:12px;margin:0 0 20px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.opt h2{font-size:13px;font-weight:500;margin:0}.opt p{margin:0 0 8px;font-size:12px;color:var(--ink2)}
+.head{border:1px solid var(--hair);border-radius:12px;padding:12px 20px;display:grid;grid-template-columns:1fr auto;column-gap:16px;align-items:center}
+.t{font-size:14px;font-weight:590}.tags{display:flex;gap:4px;margin-top:4px}.tags span{height:22px;display:inline-flex;align-items:center;padding:0 7px;border-radius:6px;background:var(--s2);color:var(--ink2);font-size:12px}.tags .w{color:#B45309}
+button{font:inherit;font-size:12px;font-weight:510;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.chev{width:12px;height:12px}.dot{width:8px;height:8px;border-radius:50%;background:var(--blue);flex:none}
+.ring{width:12px;height:12px;border-radius:50%;border:1.5px solid var(--blue);border-right-color:transparent;transform:rotate(45deg);flex:none}
+/* A */.a{display:inline-flex;border:1px solid #C9D7F6;border-radius:8px;background:var(--bluebg);color:var(--blue)}.a button{height:28px;border:0;background:none;color:inherit;padding:0 10px}.a button+button{border-left:1px solid #C9D7F6;padding:0 8px}
+/* B */.b{height:28px;padding:0 8px 0 10px;border:0;border-radius:8px;background:var(--bluebg);color:var(--blue)}
+/* C */.c{height:28px;padding:0 8px 0 10px;border:1px solid var(--hair2);border-radius:8px;background:#fff;color:var(--ink)}
+/* D */.d{display:flex;gap:6px}.d .st{height:28px;padding:0 8px 0 10px;border:1px solid var(--hair2);border-radius:8px;background:#fff;color:var(--ink)}.d .cl{height:28px;padding:0 10px;border:0;border-radius:8px;background:#3A7C57;color:#fff}
+/* E */.e{height:28px;padding:0 8px;border:0;border-radius:8px;background:none;color:var(--ink)}.e:hover{background:var(--s2)}
+/* F */.f{height:28px;padding:0 8px 0 8px;border:1px solid var(--hair2);border-radius:8px;background:#fff;color:var(--ink)}
+.lbl{font-size:11px;color:var(--ink3);font-weight:400}
+</style></head><body>
+<h1>Status button · options</h1>
+<p class="sub">Same header each time. Only the status control changes. Shown on "First response".</p>
+<div class="grid">
+<div class="opt"><h2>A · Current split</h2><p>Tinted, outlined, divider before the chevron. Two halves that do the same thing, so the split feels pointless.</p>
+<div class="head"><div><div class="t">Marked delivered, but not received</div><div class="tags"><span>#1042</span><span>Ananya Mehta</span><span>English</span><span class="w">Reply in 40 min</span></div></div>
+<div class="a"><button>First response</button><button><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 9l6 6 6-6"/></svg></button></div></div></div>
+
+<div class="opt"><h2>B · One tinted pill-free chip</h2><p>Same colour, no border, no divider. One control, one chevron. Reads as "the status, click to change".</p>
+<div class="head"><div><div class="t">Marked delivered, but not received</div><div class="tags"><span>#1042</span><span>Ananya Mehta</span><span>English</span><span class="w">Reply in 40 min</span></div></div>
+<button class="b">First response<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 9l6 6 6-6"/></svg></button></div></div>
+
+<div class="opt"><h2>C · White button, coloured dot (Linear)</h2><p>Neutral button, the colour lives only in the dot. Calmest; matches our other buttons.</p>
+<div class="head"><div><div class="t">Marked delivered, but not received</div><div class="tags"><span>#1042</span><span>Ananya Mehta</span><span>English</span><span class="w">Reply in 40 min</span></div></div>
+<button class="c"><i class="dot"></i>First response<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="color:#8A8E95"><path d="M6 9l6 6 6-6"/></svg></button></div></div>
+
+<div class="opt"><h2>D · Status + a real action (Zendesk)</h2><p>Status dropdown, then a separate primary "Close ticket". A true split of jobs: see/change status, or finish.</p>
+<div class="head"><div><div class="t">Marked delivered, but not received</div><div class="tags"><span>#1042</span><span>Ananya Mehta</span><span>English</span><span class="w">Reply in 40 min</span></div></div>
+<div class="d"><button class="st"><i class="dot"></i>First response<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="color:#8A8E95"><path d="M6 9l6 6 6-6"/></svg></button><button class="cl">Close ticket</button></div></div></div>
+
+<div class="opt"><h2>E · Ghost, status icon (Linear issue)</h2><p>No box at all until hover. A small progress ring in the status colour. Lightest; can look like text.</p>
+<div class="head"><div><div class="t">Marked delivered, but not received</div><div class="tags"><span>#1042</span><span>Ananya Mehta</span><span>English</span><span class="w">Reply in 40 min</span></div></div>
+<button class="e"><i class="ring"></i>First response<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="color:#8A8E95"><path d="M6 9l6 6 6-6"/></svg></button></div></div>
+
+<div class="opt"><h2>F · Labelled (Intercom / HubSpot)</h2><p>Small "Status" label inside the button, then the value with its dot. Most explicit for a first-time viewer.</p>
+<div class="head"><div><div class="t">Marked delivered, but not received</div><div class="tags"><span>#1042</span><span>Ananya Mehta</span><span>English</span><span class="w">Reply in 40 min</span></div></div>
+<button class="f"><span class="lbl">Status</span><i class="dot"></i>First response<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="color:#8A8E95"><path d="M6 9l6 6 6-6"/></svg></button></div></div>
+</div></body></html>
