@@ -285,3 +285,10 @@ ul { list-style: none; }
 .ptabs button.on { color: var(--ink); }
 .ptabs button.on::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; border-radius: 1px; background: var(--ink); }
 .blk[hidden] { display: none; }
+
+/* Collapsible panel sections (Nitish, 7 Nov) */
+.blk h4 button.fold { gap: 6px; margin-left: -2px; font-weight: 510; color: var(--ink2); cursor: pointer; }
+.fold svg { color: var(--ink3); transition: transform .15s ease; }
+.blk.shut .fold svg { transform: rotate(-90deg); }
+.blk.shut > :not(h4) { display: none; }
+@media (prefers-reduced-motion: reduce) { .fold svg { transition: none; } }

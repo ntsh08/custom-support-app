@@ -47,6 +47,9 @@ export function Workspace() {
   const [drafts, setDrafts] = useState<Record<string, string>>({});
   const [mode, setMode] = useState<"reply" | "note">("reply");
   const [tab, setTab] = useState<"details" | "copilot">("details");
+  // Collapsed right-panel sections, by title. Stays the same across tickets.
+  const [shut, setShut] = useState<Record<string, boolean>>({});
+  const toggle = (t: string) => setShut((m) => ({ ...m, [t]: !m[t] }));
   const [afterSend, setAfterSend] = useState<Record<string, Group>>({});
   const [hidden, setHidden] = useState<Record<string, boolean>>({});
   // The summary "writes" for a moment each time a case opens (E4), then settles (B6).
@@ -328,8 +331,8 @@ export function Workspace() {
             ))}
           </header>
           <div className="scroll">
-            <section className="blk" hidden={tab !== "details"}>
-              <h4>Order details</h4>
+            <section className={`blk${shut["Order details"] ? " shut" : ""}`} hidden={tab !== "details"}>
+              <h4><button className="fold" aria-expanded={!shut["Order details"]} onClick={() => toggle("Order details")}><Icon name="chev" size={14} />Order details</button></h4>
               <dl className="dkv">
                 <div><dt><Icon name="box" size={14} />Item</dt><dd>{c.item}</dd></div>
                 <div><dt><Icon name="card" size={14} />Paid</dt><dd>{c.value} · {c.payment.replace("Prepaid · ", "")}</dd></div>
@@ -388,8 +391,8 @@ export function Workspace() {
               )}
             </section>
 
-            <section className="blk" hidden={tab !== "details"}>
-              <h4>Properties</h4>
+            <section className={`blk${shut["Properties"] ? " shut" : ""}`} hidden={tab !== "details"}>
+              <h4><button className="fold" aria-expanded={!shut["Properties"]} onClick={() => toggle("Properties")}><Icon name="chev" size={14} />Properties</button></h4>
               <dl className="dkv">
                 <div className={status === "customer" ? "tagrow" : ""}><dt><Icon name="inbox" size={14} />Status</dt><dd className="stat">
                   <select className="pick" aria-label="Status" value={status} onChange={(e) => setStatus(e.target.value as Group)}>
@@ -433,8 +436,8 @@ export function Workspace() {
               </dl>
             </section>
 
-            <section className="blk" hidden={tab !== "details"}>
-              <h4>Customer history</h4>
+            <section className={`blk${shut["Customer history"] ? " shut" : ""}`} hidden={tab !== "details"}>
+              <h4><button className="fold" aria-expanded={!shut["Customer history"]} onClick={() => toggle("Customer history")}><Icon name="chev" size={14} />Customer history</button></h4>
               <dl className="dkv">
                 <div><dt><Icon name="user" size={14} />Customer since</dt><dd>{c.history.since}</dd></div>
                 <div><dt><Icon name="bag" size={14} />Orders</dt><dd>{c.history.orders} · {c.history.spent}</dd></div>
@@ -457,8 +460,8 @@ export function Workspace() {
               ) : <p className="hint">No earlier tickets.</p>}
             </section>
 
-            <section className="blk" hidden={tab !== "details"}>
-              <h4>Linked tickets</h4>
+            <section className={`blk${shut["Linked tickets"] ? " shut" : ""}`} hidden={tab !== "details"}>
+              <h4><button className="fold" aria-expanded={!shut["Linked tickets"]} onClick={() => toggle("Linked tickets")}><Icon name="chev" size={14} />Linked tickets</button></h4>
               <dl className="dkv">
                 {linked.map(([k, v]) => (
                   <div key={k}><dt><Icon name={linkIcon(k)} size={14} />{k}</dt><dd className={/^(none|not )/i.test(v) ? "mute" : /failed/i.test(v) ? "bad" : ""}>{v}</dd></div>
@@ -466,8 +469,8 @@ export function Workspace() {
               </dl>
             </section>
 
-            <section className="blk" hidden={tab !== "details"}>
-              <h4>Tasks and follow-ups <button onClick={() => setNewTask("")}><Icon name="plus" size={14} />Add</button></h4>
+            <section className={`blk${shut["Tasks and follow-ups"] ? " shut" : ""}`} hidden={tab !== "details"}>
+              <h4><button className="fold" aria-expanded={!shut["Tasks and follow-ups"]} onClick={() => toggle("Tasks and follow-ups")}><Icon name="chev" size={14} />Tasks and follow-ups</button><button onClick={() => setNewTask("")}><Icon name="plus" size={14} />Add</button></h4>
               {caseTasks.length === 0 && newTask === null && <p className="hint">No follow-ups on this case.</p>}
               <ul className="tasks">
                 {caseTasks.map((t) => (
@@ -494,8 +497,8 @@ export function Workspace() {
               {open && <p className="hint">The case stays open until {c.customer.split(" ")[0]} is told the outcome. Sending a reply doesn&apos;t close it.</p>}
             </section>
 
-            <section className="blk" hidden={tab !== "details"}>
-              <h4>Delivery evidence</h4>
+            <section className={`blk${shut["Delivery evidence"] ? " shut" : ""}`} hidden={tab !== "details"}>
+              <h4><button className="fold" aria-expanded={!shut["Delivery evidence"]} onClick={() => toggle("Delivery evidence")}><Icon name="chev" size={14} />Delivery evidence</button></h4>
               <div className={`thumbs n${c.evidence.length}`}>{c.evidence.map((e, i) => <EvidenceTile key={i} e={e} />)}</div>
               <p className="hint">Illustrations · demo data</p>
               <dl className="dkv">
