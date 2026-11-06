@@ -504,19 +504,14 @@ export function Workspace() {
               <h4><button className="fold" aria-expanded={!shut["Properties"]} onClick={() => toggle("Properties")}><Icon name="chev" size={14} />Properties</button></h4>
               <dl className="dkv">
                 <div className={status === "customer" ? "tagrow" : ""}><dt><Icon name="inbox" size={14} />Status</dt><dd className="stat">
-                  <select className="pick" aria-label="Status" value={status} onChange={(e) => setStatus(e.target.value as Group)}>
-                    {(Object.keys(STATUS) as Group[]).map((g) => <option key={g} value={g}>{STATUS[g]}</option>)}
-                  </select>
+                  <Pick label="Status" value={status} options={(Object.keys(STATUS) as Group[]).map((g) => ({ value: g, label: STATUS[g], dot: g }))} onChange={(v) => setStatus(v as Group)} />
                   {status === "customer" && <span>AI nudges on day 3 and 7, closes on day 14 if there&apos;s no reply</span>}
                 </dd></div>
                 <div><dt><Icon name="user" size={14} />Owner</dt><dd>{owner(status, stage)}</dd></div>
                 {dueFor(status) && stage.timeLeft && <div><dt><Icon name="clock" size={14} />Reply due</dt><dd className={stage.urgent ?? ""}>{stage.timeLeft === "Now" ? "Now" : `In ${stage.timeLeft}`}</dd></div>}
                 {open && c.followUp && <div><dt><Icon name="calendar" size={14} />Follow up</dt><dd>{c.followUp}</dd></div>}
                 <div><dt><Icon name="flag" size={14} />Reason</dt><dd>
-                  <select className={`pick${reasons[c.id] ? "" : " missing"}`} aria-label="Contact reason" value={reasons[c.id] ?? ""} onChange={(e) => setReasons((r) => ({ ...r, [c.id]: e.target.value || undefined }))}>
-                    <option value="">Not set</option>
-                    {REASONS.map((r) => <option key={r}>{r}</option>)}
-                  </select>
+                  <Pick label="Contact reason" missing={!reasons[c.id]} value={reasons[c.id] ?? ""} options={[{ value: "", label: "Not set" }, ...REASONS.map((r) => ({ value: r, label: r }))]} onChange={(v) => setReasons((r) => ({ ...r, [c.id]: v || undefined }))} />
                 </dd></div>
                 <div><dt><Icon name={channels(c).includes("merged") ? "merge" : channelIcon(c)} size={14} />Channel</dt><dd>{channels(c)}</dd></div>
                 <div className="tagrow"><dt><Icon name="smile" size={14} />Sentiment</dt><dd className={`mood ${MOOD[c.sentiment.label]}`} title={`Read by AI: ${c.sentiment.why}`}>{c.sentiment.label}<span>{c.sentiment.why}</span></dd></div>
@@ -734,6 +729,39 @@ function Message({ m, customer, email, language, onAction }: { m: Msg; customer:
 }
 
 /** The assistant's work before a reply, after the INA agent trace: one line, opens to the steps. */
+/** Dropdown in our design system (replaces the OS select): ghost trigger with chevron, white menu, tick on the current option. */
+function Pick({ label, value, options, onChange, missing }: { label: string; value: string; options: { value: string; label: string; dot?: string }[]; onChange: (v: string) => void; missing?: boolean }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLSpanElement>(null);
+  useEffect(() => {
+    if (!open) return;
+    const off = (e: MouseEvent) => { if (!ref.current?.contains(e.target as Node)) setOpen(false); };
+    const esc = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
+    document.addEventListener("mousedown", off); document.addEventListener("keydown", esc);
+    return () => { document.removeEventListener("mousedown", off); document.removeEventListener("keydown", esc); };
+  }, [open]);
+  const cur = options.find((o) => o.value === value);
+  return (
+    <span className="pickwrap" ref={ref}>
+      <button type="button" className={`pick2${missing ? " missing" : ""}`} aria-label={label} aria-haspopup="listbox" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
+        {cur?.label ?? "Not set"}<Icon name="chev" size={12} />
+      </button>
+      {open && (
+        <ul className="sortmenu pickmenu" role="listbox" aria-label={label}>
+          {options.map((o) => (
+            <li key={o.value} role="option" aria-selected={o.value === value}>
+              <button type="button" onClick={() => { onChange(o.value); setOpen(false); }}>
+                <span className="stline">{o.dot && <i className={`dot st-${o.dot}`} />}{o.label}</span>
+                {o.value === value && <Icon name="check" size={14} />}
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </span>
+  );
+}
+
 function Trace({ steps }: { steps: string[] }) {
   const [open, setOpen] = useState(false);
   return (

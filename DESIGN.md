@@ -64,6 +64,7 @@ Colour carries meaning only:
 
 ## 8. Components
 - Every ticket has the same title, "Marked delivered, but not received". Under it, 4px below, plain grey tags (s2, 6px radius, no border): ticket number, customer name, language, and "Reply in 40 min" (clock icon, orange/red when urgent) while a reply is due. No order number, channel or status tags in the header (Nitish, 7 Nov). On the right of the title, a status split button (G3: 28px, 8px radius, vertically centred on the title + tags block, solid fill in the status colour with white 12px/510 text: First response `#5B84E4`, Needs reply `#6B46C9`, Escalated `#C2410C`, Waiting `#5F636A`, Closed `#A9ACB2`; a 28% white divider before the chevron). The main half reads the current status; either half opens "Change status" with all six statuses, each with a coloured dot, and a tick on the current one. No breadcrumb. Status, owner, follow-up and reason live in the right panel.
+- No OS-native dropdowns. Pickers (Status, Reason) use our own menu: a ghost trigger (value + 12px chevron, s2 on hover), a white menu with hairline border and 8px radius, a tick on the current option, coloured dots for statuses; closes on outside click or Esc. (Nitish, 7 Nov)
 - Dashed border means "not real yet":
   - unset fields
   - prototype-only buttons
