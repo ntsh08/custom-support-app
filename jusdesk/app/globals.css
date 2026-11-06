@@ -319,3 +319,17 @@ ul { list-style: none; }
 .st-others { background: #EEEEF1; color: #4B4F57; }
 .st-customer { background: #EEEEF1; color: #4B4F57; }
 .st-closed { background: #F3F3F5; color: #8A8E95; }
+
+/* Queue header: sort + filter (Nitish, 7 Nov) */
+.qbar b span { margin-left: 6px; font-weight: 400; color: var(--ink3); font-size: 12px; }
+.qtools { position: relative; display: flex; align-items: center; gap: 2px; }
+.qsort { height: 28px; display: inline-flex; align-items: center; gap: 6px; padding: 0 8px; border: 0; border-radius: 6px; background: none; font-size: 12px; font-weight: 510; color: var(--ink2); cursor: pointer; }
+.qicon { width: 28px; height: 28px; display: grid; place-items: center; border: 0; border-radius: 6px; background: none; color: var(--ink2); cursor: pointer; }
+.qsort:hover, .qicon:hover, .qsort[aria-expanded="true"] { background: var(--s3); color: var(--ink); }
+.sortmenu { position: absolute; z-index: 10; top: calc(100% + 4px); right: 0; width: 220px; margin: 0; padding: 4px; list-style: none; background: #fff; border: 1px solid var(--hair); border-radius: 8px; }
+.sortmenu .mh { padding: 6px 8px 4px; font-size: 11px; color: var(--ink3); }
+.sortmenu button { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 6px 8px; border: 0; border-radius: 6px; background: none; text-align: left; cursor: pointer; }
+.sortmenu button:hover { background: var(--s2); }
+.sortmenu button span { display: grid; }
+.sortmenu b { font-size: 13px; font-weight: 510; color: var(--ink); }
+.sortmenu em { font-style: normal; font-size: 12px; color: var(--ink3); }

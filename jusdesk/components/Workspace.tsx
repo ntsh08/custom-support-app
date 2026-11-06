@@ -24,6 +24,13 @@ const channels = (c: Case) => {
 };
 const owner = (g: Group, s: Stage) => (g === "escalated" ? "Priya" : s.by === "AI" ? "AI" : "You");
 const waitingG = (g: Group) => g === "customer" || g === "others";
+type SortBy = "urgency" | "due" | "newest" | "oldest";
+const SORTS: { id: SortBy; label: string; hint: string }[] = [
+  { id: "urgency", label: "Urgency", hint: "Status, then time left" },
+  { id: "due", label: "Due time", hint: "Soonest reply or follow-up" },
+  { id: "newest", label: "Newest", hint: "Latest tickets first" },
+  { id: "oldest", label: "Oldest", hint: "Earliest tickets first" },
+];
 /** Most urgent statuses first in the single list. */
 const order = (g: Group) => ["reply", "first", "escalated", "others", "customer", "closed"].indexOf(g);
 /** Minutes left on the reply timer, for sorting. */
@@ -101,11 +108,22 @@ export function Workspace() {
     const cs = CASES.find((x) => x.id === id)!;
     return states[id].status ?? cs.stages[states[id].stage].group;
   };
-  const ordered = useMemo(
-    () => [...CASES].sort((a, b) => order(statusOf(a.id)) - order(statusOf(b.id)) || mins(a.stages[states[a.id].stage].timeLeft) - mins(b.stages[states[b.id].stage].timeLeft)),
+  const [sort, setSort] = useState<SortBy>("urgency");
+  const [sortMenu, setSortMenu] = useState(false);
+  const ordered = useMemo(() => {
+    const left = (x: Case) => mins(x.stages[states[x.id].stage].timeLeft);
+    // Due: reply timers first, then follow-ups, then the rest; closed last.
+    const due = (x: Case) => { const g = statusOf(x.id); return g === "closed" ? 3e9 : dueFor(g) && x.stages[states[x.id].stage].timeLeft ? left(x) : x.followUp ? 1e9 : 2e9; };
+    const num = (x: Case) => parseInt(x.ticket.slice(1));
+    const cmp: Record<SortBy, (a: Case, b: Case) => number> = {
+      urgency: (a, b) => order(statusOf(a.id)) - order(statusOf(b.id)) || left(a) - left(b),
+      due: (a, b) => due(a) - due(b),
+      newest: (a, b) => num(b) - num(a),
+      oldest: (a, b) => num(a) - num(b),
+    };
+    return [...CASES].sort(cmp[sort]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [states],
-  );
+  }, [states, sort]);
   const c = CASES.find((x) => x.id === selected)!;
   const st = states[c.id];
   const stage = c.stages[st.stage];
@@ -261,7 +279,26 @@ export function Workspace() {
 
         {/* Queue */}
         <aside className="queue" aria-label="Queue">
-          <header className="bar"><b>All tickets</b><span>{ordered.length}</span></header>
+          <header className="bar qbar">
+            <b>All tickets<span>{ordered.length}</span></b>
+            <div className="qtools">
+              <button className="qsort" aria-haspopup="listbox" aria-expanded={sortMenu} onClick={() => setSortMenu((o) => !o)}><Icon name="sort" size={14} />{SORTS.find((x) => x.id === sort)!.label}</button>
+              <button className="qicon" aria-label="Filter" title="Filter (not in the prototype)" onClick={() => setFlash("Filters aren't wired up in the prototype")}><Icon name="filter" size={16} /></button>
+              {sortMenu && (
+                <ul className="sortmenu" role="listbox" aria-label="Sort tickets" onMouseLeave={() => setSortMenu(false)}>
+                  <li className="mh">Sort by</li>
+                  {SORTS.map((o) => (
+                    <li key={o.id} role="option" aria-selected={sort === o.id}>
+                      <button onClick={() => { setSort(o.id); setSortMenu(false); }}>
+                        <span><b>{o.label}</b><em>{o.hint}</em></span>
+                        {sort === o.id && <Icon name="check" size={14} />}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </header>
           <div className="scroll">
             {ordered.map((x) => {
               const s = x.stages[states[x.id].stage];
