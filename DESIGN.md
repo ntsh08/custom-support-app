@@ -74,8 +74,8 @@ Colour carries meaning only:
 
 ## 9. AI signature, notes and the pattern
 - Anything AI wrote or did gets one signature, and nothing else uses it:
-  - a green wash gradient (`#E6F2EA` → `#F4F9F6` → white, 135°, border `#D5E7DB`), on the AI summary and the AI recommendation card
-  - a green "AI" tag (`#E3F0E8` bg, `#2F6547` text), on AI events and the assistant's messages
+  - a grey wash gradient (`#EDEDF1` → `#F6F6F8` → white, 135°, border `#ECECF0`), on the AI summary and the AI recommendation card (Nitish, 6 Nov: grey, not green)
+  - a grey "AI" tag (`#F1F1F4` bg, `#5F636A` text), on AI events and the assistant's messages
   - the sparkle icon
 - Internal notes are a plain yellow card (`#FFF8E6`, border `#F3E3B5`, label `#8A6512`), with a lock icon and "Internal note". No badge, no dashed border. The composer turns yellow in note mode. (Nitish, 6 Nov: the industry convention wins here.)
 - No wallpaper behind the conversation for now; plain `#FAFAFB`.
