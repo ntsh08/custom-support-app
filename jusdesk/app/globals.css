@@ -449,8 +449,11 @@ ul { list-style: none; }
 .panel .scroll[hidden] { display: none; }
 .copilot { flex: 1; min-height: 0; display: flex; flex-direction: column; }
 .cothread { flex: 1; min-height: 0; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 16px; }
-.coempty { margin: auto 0 0; display: flex; gap: 8px; align-items: flex-start; font-size: 13px; color: var(--ink3); }
-.coempty svg { color: var(--acc); flex: none; margin-top: 2px; }
+.coempty { margin: auto; max-width: 260px; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
+.coempty p { margin: 0; font-size: 13px; line-height: 20px; color: var(--ink2); }
+.cologo { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 12px; border: 1.5px solid transparent; background: var(--ai-fill) padding-box, var(--ai-edge) border-box; color: var(--acc-h); }
+.ptabs button:focus { outline: none; }
+.ptabs button:focus-visible { outline: 2px solid var(--acc); outline-offset: 2px; border-radius: 4px; }
 .coturn { display: flex; flex-direction: column; gap: 10px; }
 .coq { align-self: flex-end; max-width: 86%; margin: 0; padding: 8px 12px; border-radius: 12px; background: var(--s2); border: 1px solid #F0F0F3; }
 .coa .lbl { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 510; color: var(--acc-h); margin-bottom: 4px; }

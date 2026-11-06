@@ -622,7 +622,7 @@ export function Workspace() {
             <div className="copilot">
               <div className="cothread">
                 {thread_.length === 0 ? (
-                  <p className="coempty"><Icon name="spark" size={16} />Ask anything about this ticket: the customer, the evidence or what to do next.</p>
+                  <div className="coempty"><span className="cologo"><Icon name="spark" size={22} /></span><p>Ask anything about this ticket: the customer, the evidence or what to do next.</p></div>
                 ) : thread_.map((x, i) => (
                   <div key={i} className="coturn">
                     <p className="coq">{x.q}</p>
