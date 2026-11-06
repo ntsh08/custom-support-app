@@ -502,8 +502,7 @@ function Trace({ steps }: { steps: string[] }) {
   return (
     <div className="trace">
       <button type="button" aria-expanded={open} onClick={() => setOpen((v) => !v)}>
-        <Icon name="spark" size={14} />
-        <span>Ran {steps.length} step{steps.length === 1 ? "" : "s"}</span>
+        <span>{open ? "Hide thinking" : "Show thinking"}</span>
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ transform: open ? "rotate(180deg)" : "none" }}><path d="M6 9l6 6 6-6" /></svg>
       </button>
       <div className={`steps${open ? " open" : ""}`}><div>

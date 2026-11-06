@@ -99,15 +99,15 @@ ul { list-style: none; }
 .msg.mail .subj { margin: 0 0 8px; font-size: 13px; font-weight: 590; color: var(--ink); }
 .msg.mail .mbody { white-space: pre-line; }
 .trace { margin: -2px 0 6px; }
-.trace > button { margin-left: -6px; display: inline-flex; align-items: center; gap: 6px; height: 24px; padding: 0 6px; border: 0; border-radius: 6px; background: none; font: inherit; font-size: 12px; font-weight: 510; color: var(--ink3); cursor: pointer; }
+.trace > button { margin-left: -6px; display: inline-flex; align-items: center; gap: 4px; height: 24px; padding: 0 6px; border: 0; border-radius: 6px; background: none; font: inherit; font-size: 12px; font-weight: 510; color: var(--ink3); cursor: pointer; }
 .trace > button:hover { background: var(--s2); color: var(--ink2); }
-.trace > button > svg:first-child { color: var(--acc-h); }
-.trace > button > svg:last-child { transition: transform .3s cubic-bezier(.23,1,.32,1); }
+.trace > button > svg { transition: transform .3s cubic-bezier(.23,1,.32,1); }
 .trace .steps { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows .3s cubic-bezier(.23,1,.32,1), opacity .3s; }
 .trace .steps.open { grid-template-rows: 1fr; opacity: 1; }
 .trace .steps > div { overflow: hidden; }
-.trace ol { list-style: none; margin: 4px 0 6px 7px; padding: 2px 0 2px 16px; border-left: 1px solid var(--hair); display: grid; gap: 2px; }
-.trace li { display: flex; align-items: center; gap: 8px; min-height: 24px; font-size: 12px; line-height: 16px; color: var(--ink3); }
+.trace ol { list-style: none; margin: 4px 0 6px; padding: 2px 0 2px 12px; border-left: 1px solid var(--hair); display: grid; gap: 2px; }
+.trace li { display: flex; align-items: center; gap: 8px; min-height: 24px; font-size: 12px; line-height: 16px; color: var(--ink2); }
+.trace li svg { color: var(--ink3); }
 .trace li svg { flex: none; }
 .msg.note { align-self: stretch; max-width: none; background: var(--note); border: 1px solid #FAF1D6; }
 .msg.note .who, .msg.note .who b { color: var(--note-ink); }
@@ -124,7 +124,7 @@ ul { list-style: none; }
 .msg .who { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; font-size: 12px; color: var(--ink3); }
 .msg .who .tr { margin-left: auto; display: inline-flex; align-items: center; gap: 4px; font-style: normal; color: var(--ink2); }
 .msg .who b { color: var(--ink); font-weight: 510; font-size: 13px; }
-.gloss { display: block; margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--hair); color: var(--ink2); }
+.gloss { display: block; margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--hair); color: var(--ink2); font-style: italic; }
 
 .composer { border: 1px solid #EDEDF0; border-radius: 12px; background: var(--s0); padding: 8px 12px 10px; flex: none; }
 .composer:focus-within { border-color: var(--acc); }
