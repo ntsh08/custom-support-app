@@ -575,3 +575,6 @@ ul { list-style: none; }
 .sum .sugg .sa.pri, .sum .sugg .addtask.pri { background: var(--s0); border: 1px solid var(--hair2); color: var(--ink); }
 .sum .sugg .sa.pri:hover:not(:disabled), .sum .sugg .addtask.pri:hover { background: var(--s2); }
 .sum .sugg .addtask.pri svg { color: var(--ink3); }
+/* Suggestion rows: very light grey band each, with space between (Nitish, 7 Nov) */
+.sum .sugg { gap: 8px; }
+.sum .sugg li:not(.sconfirm) { padding: 8px 8px 8px 12px; border-radius: 8px; background: #F8F8FA; min-height: 40px; }
