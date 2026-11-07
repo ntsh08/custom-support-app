@@ -23,7 +23,7 @@ None.   Confidence: Low
 - Recommendation card with actions in Copilot → removed.
 
 ## Guardrails for the next designer
-- Case-stage actions still exist in the data; they have no entry point in the UI right now.
+- Case-stage actions now run from the AI suggestion card (see 2026-11-07-ai-suggestion-card.md), not from Copilot.
 
 ## Revisit when
 The case actions need a home again.

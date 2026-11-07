@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import { CASES, STATUS, TITLE, type Case, type Group, type Msg, type Option, type Stage, type Task } from "@/lib/cases";
 import { EvidenceTile } from "./EvidenceTile";
 import { Icon, type IconName } from "./Icon";
@@ -177,10 +177,20 @@ export function Workspace() {
         {open && <ol className="sugg">{suggestions.map((x) => {
           const t = tasks[c.id].find((y) => y.text === x.text);
           const aiCan = !/\bcall\b/i.test(x.text);
+          const sa = c.actions?.find((z) => x.text.includes(z.match));
+          const opt = sa?.option ? c.stages[c.start].options.find((o) => o.id === sa.option) : undefined;
+          const optDone = !!sa?.option && st.stage !== c.start;
+          const actionBtn = !sa ? null
+            : sa.option ? (optDone ? <em className="added"><Icon name="check" size={12} />Done</em> : opt && <button className={sa.primary ? "sa pri" : "sa sec"} onClick={() => act(opt)}>{sa.label}</button>)
+            : sa.schedule ? (t?.owner === "ai" ? null : <button className={sa.primary ? "sa pri" : "sa sec"} onClick={() => assign({ ...x, due: sa.schedule! }, "ai")}><Icon name="calendar" size={12} />{sa.label}</button>)
+            : <button className={sa.primary ? "sa pri" : "sa sec"} onClick={() => setFlash("Calling the rider through the Ekart hub (prototype)")}>{sa.label}</button>;
+          const confirmHere = confirming?.confirm && opt && confirming.id === opt.id;
           return (
-            <li key={x.text}>
+            <Fragment key={x.text}>
+            <li>
               <span>{x.text}</span>
-              <span className="addwrap">
+              {actionBtn}
+              {!optDone && <span className="addwrap">
                 {t ? (
                   <button className={`added${t.owner === "ai" ? " ai" : ""}`} aria-haspopup="menu" aria-expanded={addMenu === x.text} onClick={() => setAddMenu(addMenu === x.text ? null : x.text)}>
                     <Icon name="check" size={12} />{t.owner === "ai" ? "AI will do it" : "Added for you"}<Icon name="chev" size={12} />
@@ -196,8 +206,20 @@ export function Workspace() {
                     {t && <li role="none"><button role="menuitem" className="rm" onClick={() => assign(x, null)}>Remove task</button></li>}
                   </ul>
                 )}
-              </span>
+              </span>}
             </li>
+            {confirmHere && (
+              <li className="sconfirm" role="group" aria-label={confirming!.confirm!.title}>
+                <b>{confirming!.confirm!.title}</b>
+                <dl className="dkv">{confirming!.confirm!.lines.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
+                <p className="policy">{confirming!.confirm!.note}</p>
+                <div className="btns">
+                  <button className="pri" onClick={() => goTo(c.id, confirming!.next, confirming!.label)}><Icon name="check" size={14} />{confirming!.confirm!.cta}</button>
+                  <button className="sec" onClick={() => setConfirming(null)}>Cancel</button>
+                </div>
+              </li>
+            )}
+            </Fragment>
           );
         })}</ol>}
       </section>

@@ -15,6 +15,9 @@ The summary repeated what the messages said, and AI next steps were split betwee
 - Each step has "+ Add task ▾": Me or AI ("AI can't make calls" disables AI for phone steps). After adding it reads "Added for you" / "AI will do it" and can be reassigned or removed. Task rows show the assignee.
 - AI-suggested tasks no longer appear in the task panel.
 
+## Update 2026-11-07
+Suggestions with a real action get a button left of "Add task" (Reship, Schedule, Send to Priya, Call rider), one primary per card, with an inline confirm. This brings back the case actions removed from Copilot, next to the step they belong to. Nitish: "give the primary CTA as well, left to the Add Task button, something like Reship, Schedule". (Nitish)
+
 ## Why
 Nitish: "Remove the summary part. Just show the suggestion part only." On closed tickets: "You can still give the AI summary once the ticket is closed… Keep that." On merging steps: "This could be only one suggestion instead of four." Add task: suggested by Claude, Nitish agreed ("show it by default", then "Option A").
 

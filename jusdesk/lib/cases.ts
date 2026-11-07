@@ -76,6 +76,8 @@ export type Case = {
   hook: string;
   /** AI suggestions for the executive when no assistant message carries them. */
   suggest?: string[];
+  /** Direct actions on suggestions, matched by text: run a case option, schedule it for the AI, or start a call. */
+  actions?: { match: string; label: string; primary?: boolean; option?: string; schedule?: string; call?: boolean }[];
   summary: string;
   thread: Msg[];
   evidence: Evidence[];
@@ -111,6 +113,7 @@ export const TITLE = "Marked delivered, but not received";
 export const CASES: Case[] = [
   {
     id: "ananya",
+    actions: [{ match: "Reship size M", label: "Reship", primary: true, option: "reship" }, { match: "Chase Shadowfax", label: "Schedule", schedule: "Mon, 10 am" }],
     ticket: "#1042",
     customer: "Ananya Mehta",
     email: "ananya.mehta@example.com",
@@ -249,6 +252,7 @@ export const CASES: Case[] = [
   },
   {
     id: "rohan",
+    actions: [{ match: "Get Priya's approval", label: "Send to Priya", primary: true, option: "lead" }],
     suggest: ["Get Priya's approval for the ₹6,500 refund, then tell Rohan", "Check the refund reached him in 5 days"],
     ticket: "#1039",
     customer: "Rohan Shah",
@@ -431,6 +435,7 @@ export const CASES: Case[] = [
   },
   {
     id: "meera",
+    actions: [{ match: "Send it to Priya", label: "Send to Priya", primary: true, option: "lead" }],
     ticket: "#1044",
     customer: "Meera Iyer",
     initials: "MI",
@@ -536,6 +541,7 @@ export const CASES: Case[] = [
   },
   {
     id: "kavya",
+    actions: [{ match: "call the rider", label: "Call rider", primary: true, call: true }],
     ticket: "#1045",
     customer: "Kavya Pillai",
     initials: "KP",

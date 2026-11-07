@@ -555,3 +555,11 @@ ul { list-style: none; }
 .cmt dl { padding-bottom: 12px; }
 /* Commentary labels follow the design system: sentence case, 12px/510, no caps or tracking */
 .cmt-n, .cmt dt { text-transform: none; letter-spacing: 0; font-size: 12px; font-weight: 510; }
+
+/* Suggestion actions: one primary per card, left of Add task; inline confirm (Nitish, 7 Nov) */
+.sum .sugg .sa { height: 24px; padding: 0 10px; font-size: 12px; gap: 4px; }
+.sum .sugg li.sconfirm { display: grid; gap: 6px; margin: 4px 0 8px; padding: 10px 12px; border: 1px solid var(--hair); border-radius: 8px; background: var(--s0); }
+.sum .sugg li.sconfirm b { font-weight: 590; }
+.sum .sugg li.sconfirm .dkv > div { min-height: 24px; }
+.sum .sugg li.sconfirm .policy { margin: 0; font-size: 12px; color: var(--ink2); }
+.sum .sugg li.sconfirm .btns { display: flex; gap: 6px; }
