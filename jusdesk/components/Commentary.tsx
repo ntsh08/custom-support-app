@@ -45,13 +45,18 @@ export function Commentary({ caseId, customer, onGo }: { caseId: string; custome
       {!small && <p className="cmt-note">All five tickets are edge cases of one complaint: &ldquo;Marked delivered, but not received&rdquo;. Each shows a different way it can go.</p>}
       {!small && (
         <div className="cmt-nav">
-          <button aria-label="Previous case" disabled={i <= 0} onClick={() => onGo(order[i - 1])}>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 6l-6 6 6 6" /></svg>
-          </button>
-          <span className="cmt-case"><span className="cmt-n">Case {c.n} of {order.length}</span>{customer}</span>
-          <button aria-label="Next case" disabled={i >= order.length - 1} onClick={() => onGo(order[i + 1])}>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 6l6 6-6 6" /></svg>
-          </button>
+          <span className="cmt-case">
+            <span className="cmt-n">Case {c.n} of {order.length} · {customer}</span>
+            <b>{c.title}</b>
+          </span>
+          <span className="cmt-arrows">
+            <button aria-label="Previous case" disabled={i <= 0} onClick={() => onGo(order[i - 1])}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 6l-6 6 6 6" /></svg>
+            </button>
+            <button aria-label="Next case" disabled={i >= order.length - 1} onClick={() => onGo(order[i + 1])}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 6l6 6-6 6" /></svg>
+            </button>
+          </span>
         </div>
       )}
       {!small && (

@@ -546,3 +546,8 @@ ul { list-style: none; }
 .cmt-nav button:disabled { opacity: .3; cursor: default; }
 .cmt-nav + dl { border-top: 0; }
 .cmt-note { margin: 0; padding: 0 14px 10px; font-size: 12px; line-height: 18px; color: #A9ADB3; }
+
+.cmt-case { flex-direction: column; align-items: flex-start; gap: 2px; font-weight: 400; }
+.cmt-case b { font-size: 14px; line-height: 20px; font-weight: 590; color: #fff; }
+.cmt-arrows { display: flex; gap: 4px; align-self: center; }
+.cmt-nav { align-items: flex-start; padding-bottom: 2px; }
