@@ -668,3 +668,4 @@ ul { list-style: none; }
 .sheet.photo .sheet-body .tile, .sheet.photo .sheet-body > *:first-child { width: 100%; }
 .sheet.photo .tile-ev svg { height: 260px; } .sheet.photo .tile-ev figcaption { display: none; }
 .ltval { display: flex; align-items: center; gap: 8px; font-weight: 400; } .ltstate { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; color: var(--ink2); } .ltstate svg { color: var(--ink3); }
+.lt li { min-height: 30px; gap: 8px; }
