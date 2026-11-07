@@ -142,6 +142,7 @@ export function Workspace() {
   const [sortMenu, setSortMenu] = useState(false);
   const [statusMenu, setStatusMenu] = useState(false);
   const [addMenu, setAddMenu] = useState<string | null>(null);
+  const [photo, setPhoto] = useState<Case["evidence"][number] | null>(null);
   const ordered = useMemo(() => {
     const left = (x: Case) => mins(x.stages[states[x.id].stage].timeLeft);
     // Due: reply timers first, then follow-ups, then the rest; closed last.
@@ -551,9 +552,9 @@ export function Workspace() {
               <h4><button className="fold" aria-expanded={!shut["Order details"]} onClick={() => toggle("Order details")}><Icon name="chev" size={14} />Order details</button></h4>
               <dl className="dkv">
                 <div><dt><Icon name="box" size={14} />Item</dt><dd>{c.item}</dd></div>
-                <div><dt><Icon name="card" size={14} />Paid</dt><dd>{c.value} · {c.payment.replace("Prepaid · ", "")}</dd></div>
-                <div><dt><Icon name="truck" size={14} />Courier</dt><dd>{c.courier}</dd></div>
-                <div><dt><Icon name="chat" size={14} />Language</dt><dd>{c.language ?? "English"}</dd></div>
+                <div><dt><Icon name="card" size={14} />Amount</dt><dd>{c.value}</dd></div>
+                <div><dt><Icon name="card" size={14} />Payment type</dt><dd>{/cash on delivery/i.test(c.payment) ? "Cash on delivery (COD)" : "Prepaid"}</dd></div>
+                <div><dt><Icon name="card" size={14} />Payment method</dt><dd>{/cash on delivery/i.test(c.payment) ? "Cash" : c.payment.replace("Prepaid · ", "")}</dd></div>
               </dl>
             </section>
 
@@ -600,25 +601,23 @@ export function Workspace() {
             <section className={`blk${shut["Customer history"] ? " shut" : ""}`} hidden={tab !== "details"}>
               <h4><button className="fold" aria-expanded={!shut["Customer history"]} onClick={() => toggle("Customer history")}><Icon name="chev" size={14} />Customer history</button></h4>
               <dl className="dkv">
-                <div className="tagrow"><dt><Icon name="alert" size={14} />Signals</dt><dd className="sig"><span className={`sigchip sig-${c.history.signal.tone}`}><Icon name={c.history.signal.tone === "high" ? "alert" : "check"} size={12} />{c.history.signal.label}</span><span className="sigwhy">{c.history.signal.note}{c.history.signal.tone === "high" && " · only your team sees this"}</span></dd></div>
+                <div className="tagrow"><dt><Icon name="alert" size={14} />Signals</dt><dd className="sig"><span className={`sigchip sig-${c.history.signal.tone}`}><Icon name={c.history.signal.tone === "high" ? "alert" : "check"} size={12} />{c.history.signal.label}</span></dd></div>
                 <div><dt><Icon name="user" size={14} />Customer since</dt><dd>{c.history.since}</dd></div>
                 <div><dt><Icon name="bag" size={14} />Orders</dt><dd>{c.history.orders} · {c.history.spent}</dd></div>
                 <div><dt><Icon name="alert" size={14} />Past claims</dt><dd className={c.history.claims === "None" ? "good" : "bad"}>{c.history.claims}</dd></div>
                 <div><dt><Icon name="card" size={14} />Refunds</dt><dd>{c.history.refunds}</dd></div>
                 <div><dt><Icon name="pin" size={14} />Address</dt><dd className={/Shared/.test(c.history.address) ? "bad" : ""}>{c.history.address}</dd></div>
               </dl>
-              {c.history.past.length > 0 ? (
-                <><p className="pastlbl">Past tickets</p><ul className="past">{c.history.past.map(([t, w]) => <li key={t + w}><span>{t}</span><em>{w}</em></li>)}</ul></>
-              ) : <p className="hint">No earlier tickets.</p>}
+              <button className="seeprev" onClick={() => setFlash(c.history.past.length ? `${c.history.past.length} previous tickets (prototype)` : "No previous tickets")}>See previous tickets</button>
             </section>
 
             <section className={`blk${shut["Linked tickets"] ? " shut" : ""}`} hidden={tab !== "details"}>
               <h4><button className="fold" aria-expanded={!shut["Linked tickets"]} onClick={() => toggle("Linked tickets")}><Icon name="chev" size={14} />Linked tickets</button></h4>
-              <dl className="dkv">
-                {linked.map(([k, v]) => (
-                  <div key={k}><dt><Icon name={linkIcon(k)} size={14} />{k}</dt><dd className={/^(none|not )/i.test(v) ? "mute" : /failed/i.test(v) ? "bad" : ""}>{v}</dd></div>
-                ))}
-              </dl>
+              {c.linkedTickets?.length ? (
+                <ul className="lt">{c.linkedTickets.map((t) => (
+                  <li key={t.id}><span className="tk"><Icon name="ticket" size={12} />{t.id}</span><span className="ltmain"><b>{t.channel} · {t.when}</b><span>{t.state}</span></span><Icon name="merge" size={14} /></li>
+                ))}</ul>
+              ) : <p className="hint">No linked tickets.</p>}
             </section>
 
             <section className={`blk${shut["Tasks and follow-ups"] ? " shut" : ""}`} hidden={tab !== "details"}>
@@ -648,15 +647,20 @@ export function Workspace() {
                   </li>
                 )}
               </ul>
-              {open && <p className="hint">The case stays open until {c.customer.split(" ")[0]} is told the outcome. Sending a reply doesn&apos;t close it.</p>}
             </section>
 
             <section className={`blk${shut["Delivery evidence"] ? " shut" : ""}`} hidden={tab !== "details"}>
-              <h4><button className="fold" aria-expanded={!shut["Delivery evidence"]} onClick={() => toggle("Delivery evidence")}><Icon name="chev" size={14} />Delivery evidence</button></h4>
-              <div className={`thumbs n${c.evidence.length}`}>{c.evidence.map((e, i) => <EvidenceTile key={i} e={e} />)}</div>
-              <p className="hint">Illustrations · demo data</p>
+              <h4><button className="fold" aria-expanded={!shut["Delivery evidence"]} onClick={() => toggle("Delivery evidence")}><Icon name="chev" size={14} />Delivery details</button></h4>
               <dl className="dkv">
-                {c.facts.map((f) => <div key={f.label}><dt>{f.icon && <Icon name={f.icon} size={14} />}{f.label}</dt><dd className={f.tone ?? ""}>{f.value}</dd></div>)}
+                <div><dt><Icon name="truck" size={14} />Courier</dt><dd>{c.courier}</dd></div>
+                {c.facts.filter((f) => f.label === "Delivery OTP").map((f) => <div key={f.label}><dt><Icon name="key" size={14} />Delivery OTP</dt><dd className={f.tone ?? ""}>{f.value}</dd></div>)}
+                {c.evidence.filter((e) => e.kind !== "map").map((e) => (
+                  <div key={e.title}><dt><Icon name="attach" size={14} />{e.title}</dt><dd>{e.kind === "missing" ? <span className="mute">{e.note}</span> : <button className="viewlink" onClick={() => setPhoto(e)}>View photo</button>}</dd></div>
+                ))}
+                {c.evidence.filter((e): e is Extract<typeof e, { kind: "map" }> => e.kind === "map").map((e) => (
+                  <div key={e.title}><dt><Icon name="pin" size={14} />From address</dt><dd className={e.metres > 100 ? "bad" : ""}>{e.metres >= 1000 ? `${(e.metres / 1000).toFixed(1)} km` : `${e.metres} m`}</dd></div>
+                ))}
+                {c.facts.filter((f) => f.label !== "Delivery OTP").map((f) => <div key={f.label}><dt>{f.icon && <Icon name={f.icon} size={14} />}{f.label}</dt><dd className={f.tone ?? ""}>{f.value}</dd></div>)}
               </dl>
             </section>
 
@@ -724,6 +728,14 @@ export function Workspace() {
               <button className="sec" onClick={() => setConfirming(null)}>Cancel</button>
               <button className="pri" autoFocus onClick={() => goTo(c.id, confirming.next, confirming.label)}>{confirming.confirm.cta}</button>
             </footer>
+          </aside>
+        </div>
+      )}
+      {photo && (
+        <div className="sheet-scrim" onClick={() => setPhoto(null)}>
+          <aside className="sheet photo" role="dialog" aria-modal="true" aria-label={photo.title} onClick={(e) => e.stopPropagation()}>
+            <header><b>{photo.title}</b><button className="sheet-x" aria-label="Close" onClick={() => setPhoto(null)}><Icon name="x" size={14} /></button></header>
+            <div className="sheet-body"><EvidenceTile e={photo} /><p className="hint">{photo.note} · illustration, demo data</p></div>
           </aside>
         </div>
       )}

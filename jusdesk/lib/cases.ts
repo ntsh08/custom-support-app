@@ -106,6 +106,8 @@ export type Case = {
     past: [string, string][];
   };
   followUp?: string;
+  /** Other tickets linked to this one, e.g. a second channel merged in. */
+  linkedTickets?: { id: string; channel: string; when: string; state: string }[];
   /** Contact reason tag. Missing means no due date gets set (interview finding). */
   reasonTag?: string;
   tasks: Task[];
@@ -120,6 +122,7 @@ export const TITLE = "Marked delivered, but not received";
 export const CASES: Case[] = [
   {
     id: "ananya",
+    linkedTickets: [{ id: "#1043", channel: "Email", when: "9:14 am", state: "Merged into this ticket" }],
     actions: [{ match: "Reship size M", label: "Reship", primary: true, option: "reship" }, { match: "Chase Shadowfax", label: "Schedule", schedule: "Mon, 10 am" }],
     ticket: "#1042",
     customer: "Ananya Mehta",
@@ -151,7 +154,6 @@ export const CASES: Case[] = [
     ],
     facts: [
       { icon: "key", label: "Delivery OTP", value: "Not collected" },
-      { icon: "user", label: "Ananya", value: "14 orders, no past claims", tone: "good" },
       { icon: "alert", label: "560034 this week", value: "3 similar claims, all Shadowfax", tone: "bad" },
     ],
     handoff: [
@@ -286,7 +288,6 @@ export const CASES: Case[] = [
     ],
     facts: [
       { icon: "key", label: "Delivery OTP", value: "Not collected" },
-      { icon: "user", label: "Rohan", value: "9 orders, no past claims", tone: "good" },
       { icon: "alert", label: "560034 this week", value: "4th similar claim, all Shadowfax", tone: "bad" },
       { icon: "box", label: "Size L", value: "Out of stock until December" },
     ],
@@ -462,7 +463,7 @@ export const CASES: Case[] = [
       { kind: "event", time: "Mon 1:15 pm", text: "Delhivery delivered with OTP" },
       { kind: "customer", channel: "chat", time: "9:40 am", text: "My dress never came. I want a refund." },
       { kind: "event", time: "9:40 am", text: "AI investigation", ai: true, evidence: "OTP entered at her door, and the photo matches flat 12C. This is her 3rd claim in 2 months.", policy: "suspected false claims go to your team lead and I never deny a claim, so I didn't reply.", investigation: ["Read her message: says the dress never came", "Checked her history: 3rd \"not received\" claim in 2 months, another account at her address claimed twice, card linked to 1 chargeback → flagged for review", "Checked tracking: OTP entered at her door at 1:15 pm", "A claim like this needs a person, so promised no refund or reship"], next: ["Send it to Priya with the signals, and update Meera by 6 pm"] },
-      { kind: "event", time: "9:40 am", text: "AI flagged this as a high-risk claim", ai: true, flag: true },
+      { kind: "event", time: "9:40 am", text: "AI flagged Meera as potential fraud", ai: true, flag: true },
       { kind: "event", time: "9:40 am", text: "AI set status to First response", ai: true, status: "first" },
       { kind: "event", time: "9:40 am", text: "AI assigned this ticket to you", ai: true, assign: "you" },
     ],
@@ -472,7 +473,6 @@ export const CASES: Case[] = [
     ],
     facts: [
       { icon: "key", label: "Delivery OTP", value: "Verified at 1:15 pm", tone: "good" },
-      { icon: "user", label: "Meera", value: "3rd claim in 2 months", tone: "bad" },
     ],
     handoff: [
       "Meera wrote once, on chat at 9:40 am.",
@@ -493,7 +493,7 @@ export const CASES: Case[] = [
     reasonTag: "Disputed delivery",
     sentiment: { label: "Angry", why: "Asks for a refund straight away" },
     tags: ["Order not received", "Refund requested", "Repeat claim"],
-    history: { since: "May 2026", orders: "6", spent: "₹18,200", claims: "3 in 2 months", refunds: "2 · ₹7,300, none reversed", address: "Shared with 1 other account", signal: { label: "High-risk claim", tone: "high", note: "3rd claim in 2 months · shared address · 1 chargeback" }, risk: { level: "Review", checks: [{ text: "3rd “not received” claim on this account in 2 months", src: "Order history" }, { text: "Another account at the same address made 2 claims", src: "Address match" }, { text: "Card used here is linked to 1 chargeback", src: "Payment data" }] }, past: [["Not received, refunded", "Oct"], ["Not received, refunded", "Sep"]] },
+    history: { since: "May 2026", orders: "6", spent: "₹18,200", claims: "3 in 2 months", refunds: "2 · ₹7,300, none reversed", address: "Shared with 1 other account", signal: { label: "Potential fraud", tone: "high", note: "3rd claim in 2 months · shared address · 1 chargeback" }, risk: { level: "Review", checks: [{ text: "3rd “not received” claim on this account in 2 months", src: "Order history" }, { text: "Another account at the same address made 2 claims", src: "Address match" }, { text: "Card used here is linked to 1 chargeback", src: "Payment data" }] }, past: [["Not received, refunded", "Oct"], ["Not received, refunded", "Sep"]] },
     tasks: [],
     asks: [
       { q: "Has this address claimed before?", a: "Yes. Another account at the same address made 2 claims in the last 2 months." },
@@ -660,7 +660,6 @@ export const CASES: Case[] = [
     ],
     facts: [
       { icon: "truck", label: "Courier note", value: "Handed to security guard" },
-      { icon: "card", label: "Payment", value: "Cash on delivery, collected", tone: "good" },
     ],
     handoff: [
       "Vikram wrote in Hindi on chat at 9:05 am.",

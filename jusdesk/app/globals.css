@@ -653,3 +653,17 @@ ul { list-style: none; }
 .sigchip { display: inline-flex; align-items: center; gap: 4px; height: 24px; padding: 0 8px; border-radius: 6px; font-size: 12px; font-weight: 510; }
 .sig-good { background: #E7F5EC; color: #15803D; } .sig-low { background: #F1F1F4; color: #4B4F57; } .sig-high { background: #FDECEB; color: #B42318; }
 .sigwhy { font-size: 12px; line-height: 16px; color: var(--ink3); }
+
+/* Right panel cleanup (Nitish, 7 Nov) */
+.seeprev, .viewlink { justify-self: start; border: 0; background: none; padding: 0; font: inherit; font-size: 12px; font-weight: 510; color: var(--ink2); cursor: pointer; }
+.seeprev { margin-top: 4px; }
+.seeprev:hover, .viewlink:hover { color: var(--ink); text-decoration: underline; }
+.viewlink { font-size: 13px; color: var(--acc); }
+.lt { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.lt li { display: flex; align-items: center; gap: 8px; min-height: 36px; }
+.lt .ltmain { flex: 1; display: grid; line-height: 18px; }
+.lt .ltmain b { font-weight: 510; }
+.lt .ltmain span { font-size: 12px; color: var(--ink3); }
+.lt li > svg { color: var(--ink3); }
+.sheet.photo .sheet-body .tile, .sheet.photo .sheet-body > *:first-child { width: 100%; }
+.sheet.photo .tile-ev svg { height: 260px; } .sheet.photo .tile-ev figcaption { display: none; }
