@@ -563,3 +563,9 @@ ul { list-style: none; }
 .sum .sugg li.sconfirm .dkv > div { min-height: 24px; }
 .sum .sugg li.sconfirm .policy { margin: 0; font-size: 12px; color: var(--ink2); }
 .sum .sugg li.sconfirm .btns { display: flex; gap: 6px; }
+
+/* One button per suggestion, all primary and the same width (Nitish, 7 Nov) */
+.sum .sugg .sa, .sum .sugg .addtask, .sum .sugg .added { width: 116px; justify-content: center; flex: none; }
+.sum .sugg .addtask.pri { height: 24px; padding: 0 8px; border: 1px solid var(--acc); background: var(--acc); color: #fff; font-size: 12px; font-weight: 510; }
+.sum .sugg .addtask.pri:hover { background: var(--acc-h); }
+.sum .sugg .addtask.pri svg { color: #fff; }
