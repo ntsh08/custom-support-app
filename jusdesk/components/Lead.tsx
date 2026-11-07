@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { Icon } from "./Icon";
 
@@ -74,7 +75,7 @@ export function Lead() {
     <div className="ld">
       <nav className="rail" aria-label="Main">
         <div className="logo" aria-label="JusDesk">J</div>
-        <a className="nav" title="Tickets" href="/"><Icon name="inbox" size={18} /></a>
+        <Link className="nav" title="Tickets" href="/"><Icon name="inbox" size={18} /></Link>
         <span className="nav on" aria-current="page" title="Team overview"><Icon name="dashboard" size={18} /></span>
       </nav>
 

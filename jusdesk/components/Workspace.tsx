@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import { CASES, STATUS, TITLE, type Case, type Group, type Msg, type Option, type Stage, type Task } from "@/lib/cases";
 import { EvidenceTile } from "./EvidenceTile";
@@ -399,7 +400,7 @@ export function Workspace() {
           <button className="nav" title="My tasks"><Icon name="tasks" size={18} /></button>
           <button className="nav" title="Waiting"><Icon name="clock" size={18} /></button>
           <button className="nav" title="Search"><Icon name="search" size={18} /></button>
-          <a className="nav" title="Team overview (team lead)" href="/lead"><Icon name="dashboard" size={18} /></a>
+          <Link className="nav" title="Team overview (team lead)" href="/lead"><Icon name="dashboard" size={18} /></Link>
         </nav>
 
         {/* Queue */}
