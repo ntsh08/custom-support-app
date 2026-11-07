@@ -613,3 +613,21 @@ ul { list-style: none; }
 .sum .sugg button.added svg { color: var(--ink3); }
 .sum .sugg .sa, .sum .sugg .addtask, .sum .sugg .added, .sum .sugg .sa.pri, .sum .sugg .addtask.pri { border-radius: 8px; }
 .sum .sugg button.added { border-radius: 8px; }
+
+/* Escalation modal, layout D: addressed to Priya, the ask on a green card, editable note (Nitish, 7 Nov) */
+.sheet-body.esc { gap: 16px; padding: 18px 20px 20px; }
+.esc-to { display: flex; align-items: center; gap: 10px; }
+.esc-av { width: 32px; height: 32px; flex: none; border-radius: 50%; background: #E3F0E8; color: var(--acc-h); display: grid; place-items: center; font-size: 12px; font-weight: 590; }
+.esc-to div { display: grid; }
+.esc-to b { font-weight: 590; }
+.esc-to span { font-size: 12px; color: var(--ink2); }
+.esc-req { border-radius: 10px; background: #F6FAF7; padding: 12px 14px; display: grid; gap: 10px; }
+.esc-req p { margin: 0; display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.esc-req p b { font-size: 22px; line-height: 28px; font-weight: 590; }
+.esc-req p span { color: var(--ink2); }
+.esc-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+.esc-tags span { height: 24px; display: inline-flex; align-items: center; padding: 0 8px; border-radius: 6px; background: var(--s0); border: 1px solid var(--hair); font-size: 12px; color: var(--ink2); }
+.esc-note { display: grid; gap: 6px; }
+.esc-note > span { font-size: 12px; font-weight: 510; color: var(--ink3); }
+.esc-note textarea { width: 100%; resize: none; border: 1px solid var(--hair); border-radius: 8px; padding: 8px 10px; background: var(--s1); font: inherit; color: var(--ink); outline: 0; }
+.esc-note textarea:focus { border-color: var(--acc); background: var(--s0); }

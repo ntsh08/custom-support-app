@@ -29,7 +29,12 @@ export type Option = {
   label: string;
   primary?: boolean;
   /** Lines shown in the inline confirm step. Omit for actions that need no confirm. */
-  confirm?: { title: string; lines: [string, string][]; note: string; cta: string };
+  confirm?: {
+    title: string; lines: [string, string][]; note: string; cta: string;
+    /** Escalation layout (D): who it goes to, the ask, reasons as tags, an editable note. */
+    to?: { name: string; initials: string; role: string };
+    amount?: string; sub?: string; reasons?: string[]; draftNote?: string;
+  };
   /** State the case moves to after the action. */
   next: string;
 };
@@ -326,6 +331,10 @@ export const CASES: Case[] = [
             primary: true,
             confirm: {
               title: "Ask Priya to approve",
+              to: { name: "Priya", initials: "PR", role: "Team lead · approves refunds above ₹5,000" },
+              amount: "₹6,500", sub: "refund to Rohan's UPI",
+              reasons: ["No proof of delivery", "GPS 1.1 km off", "Size L out of stock"],
+              draftNote: "4th Shadowfax claim in 560034 this week",
               lines: [
                 ["Refund", "₹6,500 to Rohan's UPI"],
                 ["Why", "No proof of delivery, GPS 1.1 km off, size L out of stock"],
@@ -504,7 +513,11 @@ export const CASES: Case[] = [
             label: "Send to Priya with note",
             primary: true,
             confirm: {
-              title: "Send to Priya",
+              title: "Ask Priya to review",
+              to: { name: "Priya", initials: "PR", role: "Team lead · decides suspected false claims" },
+              amount: "₹4,500", sub: "claim for a linen dress",
+              reasons: ["OTP verified at her door", "Photo matches flat 12C", "3rd claim in 2 months"],
+              draftNote: "Another account at her address has claimed twice. Meera never sees these signals.",
               lines: [
                 ["Claim", "₹4,500 linen dress"],
                 ["Proof", "OTP verified, photo at her door"],
