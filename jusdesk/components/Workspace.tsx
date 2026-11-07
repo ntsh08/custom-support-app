@@ -172,7 +172,7 @@ export function Workspace() {
   ) : (
     <div className="sumwrap">
       <section className={`sum${writing ? " writing" : ""}`} aria-label={cardKind} aria-busy={writing}>
-        <span className="lbl"><Icon name="spark" size={14} /><span>{writing ? (open ? "Thinking…" : "Writing summary…") : cardKind}</span></span>
+        <span className="lbl"><Icon name="spark" size={14} /><span>{writing ? (open ? "Thinking…" : "Writing summary…") : cardKind}</span><em className="team"><Icon name="lock" size={12} />Only your team sees this</em></span>
         {!open && <><h3>{c.hook}</h3><p>{c.handoff.join(" ")}</p></>}
         {open && <ol className="sugg">{suggestions.map((x) => {
           const t = tasks[c.id].find((y) => y.text === x.text);
@@ -184,7 +184,6 @@ export function Workspace() {
             : sa.option ? (optDone ? <em className="added"><Icon name="check" size={12} />Done</em> : opt && <button className="sa pri" onClick={() => act(opt)}>{sa.label}</button>)
             : sa.schedule ? (t?.owner === "ai" ? <em className="added"><Icon name="check" size={12} />Scheduled</em> : <button className="sa pri" onClick={() => assign({ ...x, due: sa.schedule! }, "ai")}>{sa.label}</button>)
             : <button className="sa pri" onClick={() => setFlash("Calling the rider through the Ekart hub (prototype)")}>{sa.label}</button>;
-          const confirmHere = confirming?.confirm && opt && confirming.id === opt.id;
           return (
             <Fragment key={x.text}>
             <li>
@@ -208,17 +207,6 @@ export function Workspace() {
                 )}
               </span>}
             </li>
-            {confirmHere && (
-              <li className="sconfirm" role="group" aria-label={confirming!.confirm!.title}>
-                <b>{confirming!.confirm!.title}</b>
-                <dl className="dkv">{confirming!.confirm!.lines.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
-                <p className="policy">{confirming!.confirm!.note}</p>
-                <div className="btns">
-                  <button className="pri" onClick={() => goTo(c.id, confirming!.next, confirming!.label)}><Icon name="check" size={14} />{confirming!.confirm!.cta}</button>
-                  <button className="sec" onClick={() => setConfirming(null)}>Cancel</button>
-                </div>
-              </li>
-            )}
             </Fragment>
           );
         })}</ol>}
@@ -711,6 +699,24 @@ export function Workspace() {
           )}
         </aside>
       </div>
+      {confirming?.confirm && (
+        <div className="sheet-scrim" onClick={() => setConfirming(null)}>
+          <aside className="sheet" role="dialog" aria-modal="true" aria-label={confirming.confirm.title} onClick={(e) => e.stopPropagation()} onKeyDown={(e) => { if (e.key === "Escape") setConfirming(null); }}>
+            <header>
+              <b>{confirming.confirm.title}</b>
+              <button className="sheet-x" aria-label="Close" onClick={() => setConfirming(null)}><Icon name="x" size={14} /></button>
+            </header>
+            <div className="sheet-body">
+              <dl className="dkv">{confirming.confirm.lines.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
+              <p className="sheet-note">{confirming.confirm.note}</p>
+            </div>
+            <footer>
+              <button className="sec" onClick={() => setConfirming(null)}>Cancel</button>
+              <button className="pri" autoFocus onClick={() => goTo(c.id, confirming.next, confirming.label)}>{confirming.confirm.cta}</button>
+            </footer>
+          </aside>
+        </div>
+      )}
       <Commentary caseId={c.id} customer={c.customer} onGo={select} />
 
       {(undo || flash) && (
