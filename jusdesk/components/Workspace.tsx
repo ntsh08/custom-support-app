@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { CASES, STATUS, TITLE, type Case, type Group, type Msg, type Option, type Stage, type Task } from "@/lib/cases";
 import { EvidenceTile } from "./EvidenceTile";
 import { Icon, type IconName } from "./Icon";
+import { Commentary } from "./Commentary";
 
 type CaseState = { stage: string; extra: Msg[]; status?: Group };
 type Undo = { caseId: string; prev: CaseState; label: string };
@@ -688,6 +689,7 @@ export function Workspace() {
           )}
         </aside>
       </div>
+      <Commentary caseId={c.id} customer={c.customer} />
 
       {(undo || flash) && (
         <div className="toast" role="status">

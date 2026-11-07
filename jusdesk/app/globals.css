@@ -524,3 +524,17 @@ ul { list-style: none; }
 @keyframes co-spin { to { transform: rotate(360deg); } }
 .coorb { width: 20px; height: 20px; color: var(--acc); animation: co-spin 2.4s linear infinite; }
 .coshimmer { font-size: 13px; line-height: 20px; background: linear-gradient(90deg, #2F6547 0%, #2F6547 30%, #A8D9B9 45%, #A8D9B9 55%, #2F6547 70%, #2F6547 100%); background-size: 300% 100%; -webkit-background-clip: text; background-clip: text; animation: co-shine 1.6s ease-in-out infinite; }
+
+/* Presenter notes: black floating sheet, draggable, shrink or close; back on refresh (Nitish, 7 Nov) */
+.cmt { position: fixed; z-index: 50; width: 340px; background: #111214; color: #E9EAEC; border-radius: 12px; font-size: 13px; line-height: 19px; box-shadow: 0 8px 24px rgb(0 0 0 / .18); }
+.cmt header { display: flex; align-items: center; gap: 8px; height: 40px; padding: 0 8px 0 14px; cursor: grab; user-select: none; touch-action: none; }
+.cmt header:active { cursor: grabbing; }
+.cmt-n { font-size: 11px; font-weight: 510; color: #8A8E95; text-transform: uppercase; letter-spacing: .04em; }
+.cmt header b { font-weight: 590; color: #fff; }
+.cmt-sp { flex: 1; }
+.cmt header button { width: 24px; height: 24px; display: grid; place-items: center; border: 0; border-radius: 6px; background: none; color: #8A8E95; cursor: pointer; }
+.cmt header button:hover { background: rgb(255 255 255 / .08); color: #fff; }
+.cmt dl { margin: 0; padding: 0 14px 14px; display: grid; gap: 4px; border-top: 1px solid rgb(255 255 255 / .08); padding-top: 10px; }
+.cmt dt { font-size: 11px; font-weight: 510; color: #8A8E95; text-transform: uppercase; letter-spacing: .04em; margin-top: 6px; }
+.cmt dt:first-child { margin-top: 0; }
+.cmt dd { margin: 0; color: #E9EAEC; }
