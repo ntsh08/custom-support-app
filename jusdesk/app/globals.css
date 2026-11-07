@@ -612,3 +612,4 @@ ul { list-style: none; }
 .sum .sugg .added, .sum .sugg button.added { width: auto; min-width: 92px; white-space: nowrap; color: var(--ink2); font-weight: 510; }
 .sum .sugg button.added svg { color: var(--ink3); }
 .sum .sugg .sa, .sum .sugg .addtask, .sum .sugg .added, .sum .sugg .sa.pri, .sum .sugg .addtask.pri { border-radius: 8px; }
+.sum .sugg button.added { border-radius: 8px; }
