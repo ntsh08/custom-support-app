@@ -9,7 +9,7 @@ export type Group = "first" | "reply" | "customer" | "others" | "escalated" | "c
 export type Msg = (
   | { kind: "customer"; channel: "chat" | "email"; time: string; text: string; gloss?: string; /** Email only. */ subject?: string }
   | { kind: "agent"; who: string; time: string; text: string; gloss?: string; /** What the assistant did before replying (shown as a collapsed trace). */ steps?: string[]; /** What the executive should try next, from the investigation. */ next?: string[] }
-  | { kind: "event"; time: string; text: string; ai?: boolean; /** A status change, shown as a line in the conversation. */ status?: Group; /** An assignment, shown the same way. */ assign?: string; /** The AI's investigation after the first message: its steps, team-only. */ investigation?: string[]; /** What the AI found, and the policy that decided what it did. */ evidence?: string; policy?: string; next?: string[] }
+  | { kind: "event"; time: string; text: string; ai?: boolean; /** A status change, shown as a line in the conversation. */ status?: Group; /** An assignment, shown the same way. */ assign?: string; /** A merge of two conversations, shown the same way. */ merge?: boolean; /** The AI's investigation after the first message: its steps, team-only. */ investigation?: string[]; /** What the AI found, and the policy that decided what it did. */ evidence?: string; policy?: string; next?: string[] }
   | { kind: "note"; who: string; time: string; text: string }
 ) & { /** Day label for the date separator. Defaults to "Today". */ day?: string };
 
@@ -131,7 +131,7 @@ export const CASES: Case[] = [
       { kind: "event", time: "8:53 am", text: "AI set status to First response", ai: true, status: "first" },
       { kind: "event", time: "8:53 am", text: "AI assigned this ticket to you", ai: true, assign: "you" },
       { kind: "customer", channel: "email", time: "9:14 am", subject: "Order FX-48213 marked delivered, but not received", text: "Hi,\n\nI already told your chatbot this. The app says delivered but nothing came to my door. I need it before Saturday.\n\nThanks,\nAnanya" },
-      { kind: "event", time: "9:15 am", text: "AI merged this email into the chat case (same order, same customer)", ai: true },
+      { kind: "event", time: "9:15 am", text: "AI merged this email into the chat ticket: same order, same customer", ai: true, merge: true },
       { kind: "note", who: "You", time: "9:20 am", text: "Last delivery to this address was to flat B-204 (white door). Today's photo shows a green door. Probably the wrong flat." },
     ],
     evidence: [
