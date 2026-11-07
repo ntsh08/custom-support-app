@@ -708,7 +708,7 @@ export function Workspace() {
             </header>
             <div className="sheet-body">
               <dl className="dkv">{confirming.confirm.lines.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
-              <p className="sheet-note">{confirming.confirm.note}</p>
+              {confirming.confirm.note && <p className="sheet-note">{confirming.confirm.note}</p>}
             </div>
             <footer>
               <button className="sec" onClick={() => setConfirming(null)}>Cancel</button>

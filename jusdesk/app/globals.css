@@ -605,3 +605,6 @@ ul { list-style: none; }
 .sheet-scrim { align-items: center; justify-content: center; padding: 24px; }
 .sheet { width: 480px; max-width: 100%; height: auto; max-height: calc(100vh - 48px); border: 1px solid var(--hair); border-radius: 12px; box-shadow: 0 16px 40px rgb(17 18 20 / .14); overflow: hidden; animation: modal-in .2s cubic-bezier(.22, 1, .36, 1) both; }
 .sheet .sheet-body { flex: none; }
+/* Lighter green rows; the investigation result sits on the same green band (Nitish, 7 Nov) */
+.sum .sugg li:not(.sconfirm) { background: #F6FAF7; }
+.invcard .isum { margin: 4px 0 2px; padding: 10px 12px; border-radius: 8px; background: #F6FAF7; }

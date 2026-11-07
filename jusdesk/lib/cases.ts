@@ -332,7 +332,7 @@ export const CASES: Case[] = [
                 ["Your note", "4th Shadowfax claim in 560034 this week"],
                 ["Rohan", "Gets the reply on the left now"],
               ],
-              note: "Priya usually answers within an hour. You'll see it here.",
+              note: "",
               cta: "Send to Priya",
             },
             next: "withLead",
