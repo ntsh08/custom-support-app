@@ -552,8 +552,8 @@ export function Workspace() {
               <h4><button className="fold" aria-expanded={!shut["Order details"]} onClick={() => toggle("Order details")}><Icon name="chev" size={14} />Order details</button></h4>
               <dl className="dkv">
                 <div><dt><Icon name="box" size={14} />Item</dt><dd>{c.item}</dd></div>
-                <div><dt><Icon name="card" size={14} />Amount</dt><dd>{c.value}</dd></div>
-                <div><dt><Icon name="card" size={14} />Payment type</dt><dd>{/cash on delivery/i.test(c.payment) ? "Cash on delivery (COD)" : "Prepaid"}</dd></div>
+                <div><dt><Icon name="rupee" size={14} />Amount</dt><dd>{c.value}</dd></div>
+                <div><dt><Icon name="wallet" size={14} />Payment type</dt><dd>{/cash on delivery/i.test(c.payment) ? "Cash on delivery (COD)" : "Prepaid"}</dd></div>
                 <div><dt><Icon name="card" size={14} />Payment method</dt><dd>{/cash on delivery/i.test(c.payment) ? "Cash" : c.payment.replace("Prepaid · ", "")}</dd></div>
               </dl>
             </section>
