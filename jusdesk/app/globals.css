@@ -516,3 +516,11 @@ ul { list-style: none; }
 .coskel { display: block; height: 32px; border-radius: 8px; border: 1px solid #EFF2F1; background: linear-gradient(90deg, #F4F6F5 30%, #FBFCFC 50%, #F4F6F5 70%); background-size: 200% 100%; animation: co-sweep 1.4s ease-in-out infinite; }
 .cobox.busy textarea { opacity: .5; }
 @media (prefers-reduced-motion: reduce) { .coq, .coa, .cothink, .cochips, .coorb, .coshimmer, .cocaret, .coskel { animation: none; } .coshimmer { color: var(--ink2); -webkit-text-fill-color: currentColor; background: none; } }
+
+/* Copilot motion simplified: one clear thinking state, everything else a quick fade (Nitish, 7 Nov) */
+.coq { animation: co-fade .15s ease-out both; }
+.coa, .cochips { animation: co-fade .2s ease-out both; }
+.cothink { animation: co-fade .15s ease-out both; gap: 8px; padding: 2px 0; }
+@keyframes co-spin { to { transform: rotate(360deg); } }
+.coorb { width: 20px; height: 20px; color: var(--acc); animation: co-spin 2.4s linear infinite; }
+.coshimmer { font-size: 13px; line-height: 20px; background: linear-gradient(90deg, #2F6547 0%, #2F6547 30%, #A8D9B9 45%, #A8D9B9 55%, #2F6547 70%, #2F6547 100%); background-size: 300% 100%; -webkit-background-clip: text; background-clip: text; animation: co-shine 1.6s ease-in-out infinite; }

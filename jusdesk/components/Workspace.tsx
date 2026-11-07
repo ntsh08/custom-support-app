@@ -274,8 +274,8 @@ export function Workspace() {
   useEffect(() => {
     if (!coRun) return;
     if (coRun.phase === "think") {
-      const a = setTimeout(() => setCoRun((r) => r && { ...r, label: "Checking the evidence" }), 650);
-      const b = setTimeout(() => setCoRun((r) => r && { ...r, phase: "type", n: 0 }), 1300);
+      const a = setTimeout(() => setCoRun((r) => r && { ...r, label: "Checking the evidence" }), 1000);
+      const b = setTimeout(() => setCoRun(null), 2000);
       return () => { clearTimeout(a); clearTimeout(b); };
     }
     if (coRun.phase === "follow") {
@@ -660,20 +660,18 @@ export function Workspace() {
                   <div key={i} className="coturn">
                     <p className="coq">{x.q}</p>
                     {running && running.idx === i && running.phase === "think" ? (
-                      <div className="cothink"><span className="coorb"><Icon name="spark" size={14} /></span><span className="coshimmer">{running.label}</span></div>
+                      <div className="cothink"><span className="coorb"><Icon name="spark" size={16} /></span><span className="coshimmer">{running.label}…</span></div>
                     ) : (
                       <div className="coa">
                         <span className="lbl"><Icon name="spark" size={14} />Copilot</span>
-                        <p>{running && running.idx === i && running.phase === "type" ? <>{x.a.split(" ").slice(0, running.n).join(" ")}<i className="cocaret" /></> : x.a}</p>
+                        <p>{x.a}</p>
                       </div>
                     )}
                   </div>
                 ))}
               </div>
               <div className="cobottom">
-                {running && running.phase !== "follow" ? null : running ? (
-                  <div className="cochips" aria-hidden="true"><span className="coskel" style={{ width: 184 }} /><span className="coskel" style={{ width: 232 }} /></div>
-                ) : chips.length > 0 && (
+                {running ? null : chips.length > 0 && (
                   <div className="cochips" key={thread_.length}>{chips.slice(0, thread_.length ? 2 : 3).map((a) => (
                     <button key={a.q} onClick={() => askAI(a.q)}><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M6 4v8a3 3 0 0 0 3 3h10M15 11l4 4-4 4" /></svg>{a.q}</button>
                   ))}</div>
