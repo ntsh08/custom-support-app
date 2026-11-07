@@ -497,3 +497,22 @@ ul { list-style: none; }
 .pickmenu { left: -6px; right: auto; width: 220px; }
 .pickmenu .stline { font-size: 13px; }
 .dkv dd.stat .pickwrap { align-self: flex-start; }
+
+/* Copilot motion, after the INA agent: question rises in, "Thinking" shimmer, answer streams with a caret, follow-ups load then fade in (Nitish, 7 Nov) */
+@keyframes co-rise { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+@keyframes co-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes co-shine { 0%, 18% { background-position: 100% 0; } 82%, 100% { background-position: 0% 0; } }
+@keyframes co-pulse { 0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; } 50% { transform: scale(.82) rotate(20deg); opacity: .6; } }
+@keyframes co-caret { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+@keyframes co-sweep { from { background-position: 100% 0; } to { background-position: -100% 0; } }
+.coq, .coa, .cothink { animation: co-rise .22s cubic-bezier(.2, 0, 0, 1) both; }
+.cothink { display: flex; align-items: center; gap: 8px; }
+.coorb { display: grid; place-items: center; width: 20px; height: 20px; color: var(--acc); animation: co-pulse 1.2s ease-in-out infinite; }
+.coshimmer { font-size: 12px; line-height: 18px; font-weight: 510; color: transparent; -webkit-text-fill-color: transparent;
+  background: linear-gradient(90deg, #6B7271 0%, #6B7271 30%, rgba(107,114,113,.35) 45%, rgba(107,114,113,.35) 55%, #6B7271 70%, #6B7271 100%);
+  background-size: 300% 100%; -webkit-background-clip: text; background-clip: text; animation: co-shine 2.25s cubic-bezier(.25, .1, .25, 1) infinite; }
+.cocaret { display: inline-block; width: 1px; height: 1em; margin-left: 2px; vertical-align: -.12em; background: currentColor; animation: co-caret .9s steps(1, end) infinite; }
+.cochips { animation: co-fade .18s ease-out both; }
+.coskel { display: block; height: 32px; border-radius: 8px; border: 1px solid #EFF2F1; background: linear-gradient(90deg, #F4F6F5 30%, #FBFCFC 50%, #F4F6F5 70%); background-size: 200% 100%; animation: co-sweep 1.4s ease-in-out infinite; }
+.cobox.busy textarea { opacity: .5; }
+@media (prefers-reduced-motion: reduce) { .coq, .coa, .cothink, .cochips, .coorb, .coshimmer, .cocaret, .coskel { animation: none; } .coshimmer { color: var(--ink2); -webkit-text-fill-color: currentColor; background: none; } }

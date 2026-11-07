@@ -118,6 +118,9 @@ export function Workspace() {
   const [tags, setTags] = useState<Record<string, string[]>>(() => Object.fromEntries(CASES.map((c) => [c.id, c.tags])));
   const [tagMenu, setTagMenu] = useState(false);
   const [answers, setAnswers] = useState<Record<string, { q: string; a: string }[]>>({});
+  // Copilot turn in progress (INA pattern): think (shimmering step labels) → type (answer streams in) → follow (follow-up placeholders) → done.
+  const [coRun, setCoRun] = useState<{ id: string; idx: number; phase: "think" | "type" | "follow"; n: number; label: string } | null>(null);
+  const coScroll = useRef<HTMLDivElement>(null);
   const [ask, setAsk] = useState("");
   const [newTask, setNewTask] = useState<string | null>(null);
   const threadEnd = useRef<HTMLDivElement>(null);
@@ -219,6 +222,7 @@ export function Workspace() {
   }
   const linked = stage.linked ?? c.linked;
   const thread_ = answers[c.id] ?? [];
+  const running = coRun && coRun.id === c.id ? coRun : null;
   const chips = (c.asks ?? []).filter((a) => !thread_.some((x) => x.q === a.q));
 
   function select(id: string) {
@@ -264,6 +268,36 @@ export function Workspace() {
       if (o) setConfirming(o);
     }
   }, []);
+
+  // Drive the Copilot turn. Each phase sets its own timers once; typing advances word by word.
+  const coKey = coRun ? `${coRun.id}:${coRun.idx}:${coRun.phase}` : "";
+  useEffect(() => {
+    if (!coRun) return;
+    if (coRun.phase === "think") {
+      const a = setTimeout(() => setCoRun((r) => r && { ...r, label: "Checking the evidence" }), 650);
+      const b = setTimeout(() => setCoRun((r) => r && { ...r, phase: "type", n: 0 }), 1300);
+      return () => { clearTimeout(a); clearTimeout(b); };
+    }
+    if (coRun.phase === "follow") {
+      const t = setTimeout(() => setCoRun(null), 800);
+      return () => clearTimeout(t);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [coKey]);
+  useEffect(() => {
+    if (!coRun || coRun.phase !== "type") return;
+    const words = (answers[coRun.id]?.[coRun.idx]?.a ?? "").split(" ").length;
+    const t = coRun.n >= words
+      ? setTimeout(() => setCoRun((r) => r && { ...r, phase: "follow" }), 150)
+      : setTimeout(() => setCoRun((r) => r && { ...r, n: r.n + 1 }), 45);
+    return () => clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [coKey, coRun?.n]);
+
+  // Follow the Copilot conversation as it grows.
+  useEffect(() => {
+    coScroll.current?.scrollTo({ top: coScroll.current.scrollHeight, behavior: "smooth" });
+  }, [coRun?.phase, coRun?.n, answers]);
 
   useEffect(() => {
     threadEnd.current?.scrollIntoView({ block: "end" });
@@ -321,7 +355,11 @@ export function Workspace() {
   function askAI(q: string) {
     if (!q.trim()) return;
     const known = c.asks?.find((x) => x.q === q);
+    if (coRun) return;
+    const idx = (answers[c.id] ?? []).length;
     setAnswers((a) => ({ ...a, [c.id]: [...(a[c.id] ?? []), { q, a: known?.a ?? "In the prototype, only the suggested questions have answers." }] }));
+    const reduce = typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    if (!reduce) setCoRun({ id: c.id, idx, phase: "think", n: 0, label: "Reading the ticket" });
     setAsk("");
   }
 
@@ -615,23 +653,32 @@ export function Workspace() {
           </div>
           {tab === "copilot" && (
             <div className="copilot">
-              <div className="cothread">
+              <div className="cothread" ref={coScroll}>
                 {thread_.length === 0 ? (
                   <div className="coempty"><span className="cologo"><svg width="44" height="44" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="cog" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#2F6547" /><stop offset=".35" stopColor="#3A7C57" /><stop offset=".75" stopColor="#7CC4A0" /><stop offset="1" stopColor="#5EB8A8" /></linearGradient></defs><path fill="url(#cog)" d="M14.5 3c.4 2.9 1.1 4.6 2.2 5.7 1.1 1.1 2.8 1.8 5.3 2.3-2.5.5-4.2 1.2-5.3 2.3-1.1 1.1-1.8 2.8-2.2 5.7-.4-2.9-1.1-4.6-2.2-5.7C11.2 12.2 9.5 11.5 7 11c2.5-.5 4.2-1.2 5.3-2.3C13.4 7.6 14.1 5.9 14.5 3Z"/><path fill="url(#cog)" d="M6.5 13.5c.2 1.5.6 2.4 1.1 2.9.5.5 1.4.9 2.9 1.1-1.5.2-2.4.6-2.9 1.1-.5.5-.9 1.4-1.1 2.9-.2-1.5-.6-2.4-1.1-2.9-.5-.5-1.4-.9-2.9-1.1 1.5-.2 2.4-.6 2.9-1.1.5-.5.9-1.4 1.1-2.9Z"/></svg></span><p>Ask anything about this ticket: the customer, the evidence or what to do next.</p></div>
                 ) : thread_.map((x, i) => (
                   <div key={i} className="coturn">
                     <p className="coq">{x.q}</p>
-                    <div className="coa"><span className="lbl"><Icon name="spark" size={14} />Copilot</span><p>{x.a}</p></div>
+                    {running && running.idx === i && running.phase === "think" ? (
+                      <div className="cothink"><span className="coorb"><Icon name="spark" size={14} /></span><span className="coshimmer">{running.label}</span></div>
+                    ) : (
+                      <div className="coa">
+                        <span className="lbl"><Icon name="spark" size={14} />Copilot</span>
+                        <p>{running && running.idx === i && running.phase === "type" ? <>{x.a.split(" ").slice(0, running.n).join(" ")}<i className="cocaret" /></> : x.a}</p>
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
               <div className="cobottom">
-                {chips.length > 0 && (
-                  <div className="cochips">{chips.map((a) => (
+                {running && running.phase !== "follow" ? null : running ? (
+                  <div className="cochips" aria-hidden="true"><span className="coskel" style={{ width: 184 }} /><span className="coskel" style={{ width: 232 }} /></div>
+                ) : chips.length > 0 && (
+                  <div className="cochips" key={thread_.length}>{chips.slice(0, thread_.length ? 2 : 3).map((a) => (
                     <button key={a.q} onClick={() => askAI(a.q)}><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M6 4v8a3 3 0 0 0 3 3h10M15 11l4 4-4 4" /></svg>{a.q}</button>
                   ))}</div>
                 )}
-                <form className="cobox" onSubmit={(e) => { e.preventDefault(); askAI(ask); }}>
+                <form className={`cobox${running ? " busy" : ""}`} onSubmit={(e) => { e.preventDefault(); askAI(ask); }}>
                   <textarea rows={2} placeholder="Ask a follow-up" value={ask} onChange={(e) => setAsk(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); askAI(ask); } }} />
                   <div className="corow">
                     <button type="button" className="coattach" aria-label="Attach" onClick={() => setFlash("Attachments aren't wired up in the prototype")}><Icon name="attach" size={16} /></button>
