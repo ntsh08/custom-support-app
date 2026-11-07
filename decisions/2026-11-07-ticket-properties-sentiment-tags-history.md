@@ -14,6 +14,9 @@ The right panel had no mood cue, only one single-choice reason, and fraud signal
 - Properties: Sentiment (Angry / Frustrated / Neutral / Happy, with a one-line why) and multi-select Tags (chips, "+ Add" checklist). Reason stays single-choice because it drives the due date.
 - Customer history: customer since, orders and spend, past claims, refunds, address sharing, then a private risk box on every case ("Low risk · nothing unusual found" or "Worth a look before deciding") with a source on each signal, then past tickets.
 
+## Update 2026-11-07
+The risk box is replaced by a single "Signals" row at the top of Customer history: Good customer / Low risk / High-risk claim, with a short why. Nitish: "Remove this card. Add a field like signals… Other signals could be like she is a good customer." (Nitish)
+
 ## Why
 Nitish, after the triage research: "We need to add sentiment in the ticket properties section" and tags "where you can select multiple". On fraud: "You should also add fraud signals for the customer. That was the whole point we were talking about: customer history."
 

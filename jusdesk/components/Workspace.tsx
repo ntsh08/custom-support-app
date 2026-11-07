@@ -600,22 +600,13 @@ export function Workspace() {
             <section className={`blk${shut["Customer history"] ? " shut" : ""}`} hidden={tab !== "details"}>
               <h4><button className="fold" aria-expanded={!shut["Customer history"]} onClick={() => toggle("Customer history")}><Icon name="chev" size={14} />Customer history</button></h4>
               <dl className="dkv">
+                <div className="tagrow"><dt><Icon name="alert" size={14} />Signals</dt><dd className="sig"><span className={`sigchip sig-${c.history.signal.tone}`}><Icon name={c.history.signal.tone === "high" ? "alert" : "check"} size={12} />{c.history.signal.label}</span><span className="sigwhy">{c.history.signal.note}{c.history.signal.tone === "high" && " · only your team sees this"}</span></dd></div>
                 <div><dt><Icon name="user" size={14} />Customer since</dt><dd>{c.history.since}</dd></div>
                 <div><dt><Icon name="bag" size={14} />Orders</dt><dd>{c.history.orders} · {c.history.spent}</dd></div>
                 <div><dt><Icon name="alert" size={14} />Past claims</dt><dd className={c.history.claims === "None" ? "good" : "bad"}>{c.history.claims}</dd></div>
                 <div><dt><Icon name="card" size={14} />Refunds</dt><dd>{c.history.refunds}</dd></div>
                 <div><dt><Icon name="pin" size={14} />Address</dt><dd className={/Shared/.test(c.history.address) ? "bad" : ""}>{c.history.address}</dd></div>
               </dl>
-              <div className={`risk ${c.history.risk.level === "Review" ? "rev" : "low"}`}>
-                <p className="rhead"><Icon name="lock" size={14} />Only your team sees this</p>
-                <p className="rlvl">{c.history.risk.level === "Low" ? "Low risk · nothing unusual found" : "Worth a look before deciding"}</p>
-                <ul>
-                  {c.history.risk.checks.map((k) => (
-                    <li key={k.text}><Icon name={c.history.risk.level === "Low" ? "check" : "alert"} size={14} /><span>{k.text}</span><em>{k.src}</em></li>
-                  ))}
-                </ul>
-                {c.history.risk.level === "Review" && <p className="rnote">Signals, not a verdict. Never mention them to the customer; your lead decides.</p>}
-              </div>
               {c.history.past.length > 0 ? (
                 <><p className="pastlbl">Past tickets</p><ul className="past">{c.history.past.map(([t, w]) => <li key={t + w}><span>{t}</span><em>{w}</em></li>)}</ul></>
               ) : <p className="hint">No earlier tickets.</p>}

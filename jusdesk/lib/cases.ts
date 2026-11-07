@@ -101,6 +101,8 @@ export type Case = {
     refunds: string; address: string;
     /** Private to staff. Signals, never a verdict; the AI never denies a claim. */
     risk: { level: "Low" | "Review"; checks: { text: string; src: string }[] };
+    /** One-line signal shown in Customer history: a chip plus a short why. */
+    signal: { label: string; tone: "good" | "low" | "high"; note: string };
     past: [string, string][];
   };
   followUp?: string;
@@ -169,7 +171,7 @@ export const CASES: Case[] = [
     followUp: "Today, 1 pm",
     sentiment: { label: "Frustrated", why: "Wrote twice in 20 minutes and needs it by Saturday" },
     tags: ["Order not received", "Courier dispute", "Urgent"],
-    history: { since: "March 2024", orders: "14", spent: "₹31,400", claims: "None", refunds: "None", address: "Same since 2024 · 13 deliveries, no issues", risk: { level: "Low", checks: [{ text: "No earlier claims or refunds", src: "Order history" }, { text: "Only her account uses this address", src: "Address match" }, { text: "No chargebacks on her UPI", src: "Payment data" }] }, past: [["Size exchange, top", "Aug · solved"], ["Order status", "Jun · solved"]] },
+    history: { since: "March 2024", orders: "14", spent: "₹31,400", claims: "None", refunds: "None", address: "Same since 2024 · 13 deliveries, no issues", signal: { label: "Good customer", tone: "good", note: "14 orders, no claims or chargebacks" }, risk: { level: "Low", checks: [{ text: "No earlier claims or refunds", src: "Order history" }, { text: "Only her account uses this address", src: "Address match" }, { text: "No chargebacks on her UPI", src: "Payment data" }] }, past: [["Size exchange, top", "Aug · solved"], ["Order status", "Jun · solved"]] },
     tasks: [
       { id: "a1", text: "Call Ananya if she doesn't reply", due: "Today, 1 pm" },
     ],
@@ -307,7 +309,7 @@ export const CASES: Case[] = [
     reasonTag: "Lost in transit",
     sentiment: { label: "Neutral", why: "Calm email asking for a replacement" },
     tags: ["Order not received", "Replacement requested", "Out of stock"],
-    history: { since: "January 2025", orders: "9", spent: "₹27,900", claims: "None", refunds: "1 · ₹2,100 for a return", address: "Same since 2025 · 8 deliveries, no issues", risk: { level: "Low", checks: [{ text: "No earlier claims; 1 refund was a normal return", src: "Order history" }, { text: "Only his account uses this address", src: "Address match" }, { text: "No chargebacks on his UPI", src: "Payment data" }] }, past: [["Refund for a return", "Sep · solved"]] },
+    history: { since: "January 2025", orders: "9", spent: "₹27,900", claims: "None", refunds: "1 · ₹2,100 for a return", address: "Same since 2025 · 8 deliveries, no issues", signal: { label: "Good customer", tone: "good", note: "9 orders, no claims or chargebacks" }, risk: { level: "Low", checks: [{ text: "No earlier claims; 1 refund was a normal return", src: "Order history" }, { text: "Only his account uses this address", src: "Address match" }, { text: "No chargebacks on his UPI", src: "Payment data" }] }, past: [["Refund for a return", "Sep · solved"]] },
     tasks: [
     ],
     linked: [["Courier request", "No photo, GPS 1.1 km off"], ["Replacement", "Size L out of stock"], ["Refund", "Not started"]],
@@ -491,7 +493,7 @@ export const CASES: Case[] = [
     reasonTag: "Disputed delivery",
     sentiment: { label: "Angry", why: "Asks for a refund straight away" },
     tags: ["Order not received", "Refund requested", "Repeat claim"],
-    history: { since: "May 2026", orders: "6", spent: "₹18,200", claims: "3 in 2 months", refunds: "2 · ₹7,300, none reversed", address: "Shared with 1 other account", risk: { level: "Review", checks: [{ text: "3rd “not received” claim on this account in 2 months", src: "Order history" }, { text: "Another account at the same address made 2 claims", src: "Address match" }, { text: "Card used here is linked to 1 chargeback", src: "Payment data" }] }, past: [["Not received, refunded", "Oct"], ["Not received, refunded", "Sep"]] },
+    history: { since: "May 2026", orders: "6", spent: "₹18,200", claims: "3 in 2 months", refunds: "2 · ₹7,300, none reversed", address: "Shared with 1 other account", signal: { label: "High-risk claim", tone: "high", note: "3rd claim in 2 months · shared address · 1 chargeback" }, risk: { level: "Review", checks: [{ text: "3rd “not received” claim on this account in 2 months", src: "Order history" }, { text: "Another account at the same address made 2 claims", src: "Address match" }, { text: "Card used here is linked to 1 chargeback", src: "Payment data" }] }, past: [["Not received, refunded", "Oct"], ["Not received, refunded", "Sep"]] },
     tasks: [],
     asks: [
       { q: "Has this address claimed before?", a: "Yes. Another account at the same address made 2 claims in the last 2 months." },
@@ -592,7 +594,7 @@ export const CASES: Case[] = [
     reasonTag: "Early scan",
     sentiment: { label: "Neutral", why: "Asking, not complaining" },
     tags: ["Order not received", "Early scan"],
-    history: { since: "July 2025", orders: "4", spent: "₹6,300", claims: "None", refunds: "None", address: "Same since 2025 · 3 deliveries, no issues", risk: { level: "Low", checks: [{ text: "No earlier claims or refunds", src: "Order history" }, { text: "Only her account uses this address", src: "Address match" }, { text: "No chargebacks on her UPI", src: "Payment data" }] }, past: [] },
+    history: { since: "July 2025", orders: "4", spent: "₹6,300", claims: "None", refunds: "None", address: "Same since 2025 · 3 deliveries, no issues", signal: { label: "Low risk", tone: "low", note: "4 orders, no claims" }, risk: { level: "Low", checks: [{ text: "No earlier claims or refunds", src: "Order history" }, { text: "Only her account uses this address", src: "Address match" }, { text: "No chargebacks on her UPI", src: "Payment data" }] }, past: [] },
     tasks: [],
     asks: [
       { q: "Where is the rider now?", a: "Stop 14 of 22 on today's route, about 4.2 km from her address." },
@@ -667,7 +669,7 @@ export const CASES: Case[] = [
     reasonTag: "Left with guard",
     sentiment: { label: "Happy", why: "Thanked the assistant once he had it" },
     tags: ["Order not received", "Cash on delivery"],
-    history: { since: "December 2024", orders: "11", spent: "₹14,800", claims: "None", refunds: "None", address: "Same since 2024 · 10 deliveries, no issues", risk: { level: "Low", checks: [{ text: "No earlier claims or refunds", src: "Order history" }, { text: "Only his account uses this address", src: "Address match" }, { text: "Pays cash on delivery; no payment disputes", src: "Payment data" }] }, past: [["Payment issue, COD", "Jul · solved"]] },
+    history: { since: "December 2024", orders: "11", spent: "₹14,800", claims: "None", refunds: "None", address: "Same since 2024 · 10 deliveries, no issues", signal: { label: "Good customer", tone: "good", note: "11 orders, no claims or payment disputes" }, risk: { level: "Low", checks: [{ text: "No earlier claims or refunds", src: "Order history" }, { text: "Only his account uses this address", src: "Address match" }, { text: "Pays cash on delivery; no payment disputes", src: "Payment data" }] }, past: [["Payment issue, COD", "Jul · solved"]] },
     tasks: [],
     asks: [
       { q: "Who confirmed the delivery?", a: "Vikram did, at 9:22 am: the society guard had it." },

@@ -647,3 +647,9 @@ ul { list-style: none; }
 .pick2.chip.st-escalated { background: #FFF0E5; color: #C2410C; }
 .pick2.chip.st-others, .pick2.chip.st-customer { background: #EEEEF1; color: #4B4F57; }
 .pick2.chip.st-closed { background: #F3F3F5; color: #8A8E95; }
+
+/* Customer history: one Signals row instead of the risk card (Nitish, 7 Nov) */
+.dkv dd.sig { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; padding: 6px 0; font-weight: 400; }
+.sigchip { display: inline-flex; align-items: center; gap: 4px; height: 24px; padding: 0 8px; border-radius: 6px; font-size: 12px; font-weight: 510; }
+.sig-good { background: #E7F5EC; color: #15803D; } .sig-low { background: #F1F1F4; color: #4B4F57; } .sig-high { background: #FDECEB; color: #B42318; }
+.sigwhy { font-size: 12px; line-height: 16px; color: var(--ink3); }
