@@ -33,6 +33,13 @@ const SORTS: { id: SortBy; label: string; hint: string }[] = [
 ];
 /** Most urgent statuses first in the single list. */
 const order = (g: Group) => ["reply", "first", "escalated", "others", "customer", "closed"].indexOf(g);
+/** The demo's "now" is about 10:30 am. A follow-up at "Today, 4 pm" shows as "5 h", in the same format as reply timers, so the list reads in one unit. */
+const fromNow = (d: string) => {
+  const m = d.match(/(\d{1,2})(?::(\d\d))? ?([ap]m)/i);
+  if (!m || !/^Today/.test(d)) return d.replace("Today, ", "");
+  const mins = ((+m[1] % 12) + (/p/i.test(m[3]) ? 12 : 0)) * 60 + (+(m[2] ?? 0)) - (10 * 60 + 30);
+  return mins < 60 ? `${Math.max(mins, 0)} min` : `${Math.round(mins / 60)} h`;
+};
 /** Minutes left on the reply timer, for sorting. */
 const mins = (t?: string) => (!t ? 1e9 : t === "Now" ? 0 : /h/.test(t) ? parseFloat(t) * 60 : parseFloat(t));
 
@@ -424,10 +431,10 @@ export function Workspace() {
                     <span className="l1">
                       <b>{x.customer}</b>
                       {s.reopened && !states[x.id].status && <i className="reo">Reopened</i>}
-                      {s.timeLeft && dueFor(g) ? <em className={s.urgent ?? ""}>{s.timeLeft}</em> : waitingG(g) && x.followUp ? <em className="warn">{x.followUp.replace("Today, ", "")}</em> : null}
+                      {s.timeLeft && dueFor(g) ? <em className={s.urgent ?? ""}>{s.timeLeft}</em> : waitingG(g) && x.followUp ? <em>{fromNow(x.followUp)}</em> : null}
                     </span>
                     <span className="l2">{TITLE}</span>
-                    <span className="l3"><span className="tk">{x.ticket}</span><span className={`st st-${g}`}>{STATUS[g]}</span></span>
+                    <span className="l3"><span className="tk"><Icon name="ticket" size={12} />{x.ticket}</span><span className={`st st-${g}`}>{STATUS[g]}</span></span>
                   </span>
                 </button>
               );
@@ -459,7 +466,7 @@ export function Workspace() {
               </div>
             </div>
             <div className="tags">
-              <span>{c.ticket}</span>
+              <span><Icon name="ticket" size={14} />{c.ticket}</span>
               <span><Icon name="user" size={14} />{c.customer}</span>
               <span><Icon name="translate" size={14} />{c.language ?? "English"}</span>
               {dueFor(status) && stage.timeLeft && <span className={stage.urgent ?? ""}><Icon name="clock" size={14} />{stage.timeLeft === "Now" ? "Reply now" : `Reply in ${stage.timeLeft}`}</span>}

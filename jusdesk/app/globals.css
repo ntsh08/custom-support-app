@@ -631,3 +631,4 @@ ul { list-style: none; }
 .esc-note > span { font-size: 12px; font-weight: 510; color: var(--ink3); }
 .esc-note textarea { width: 100%; resize: none; border: 1px solid var(--hair); border-radius: 8px; padding: 8px 10px; background: var(--s1); font: inherit; color: var(--ink); outline: 0; }
 .esc-note textarea:focus { border-color: var(--acc); background: var(--s0); }
+.tk { gap: 4px; } .tk svg { color: var(--ink3); flex: none; }

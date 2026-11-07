@@ -73,7 +73,7 @@ Colour carries meaning only:
 - Icons: Hugeicons Stroke Rounded, stroke 1.5.
   - 14px inline and in tags and key-value rows, 16px in task rows and the Ask box, 18px in the nav.
   - The selected nav icon is filled.
-- No avatars or icons on queue rows or in front of names in the conversation. A queue row has three lines: customer name (time left on the right); the ticket title in ink2; then a grey ticket-number tag and a coloured status chip. The ticket number also leads the header tags. Ticket numbers are demo data. (Nitish, 7 Nov)
+- No avatars or icons on queue rows or in front of names in the conversation. A queue row has three lines: customer name (time left on the right, always in the same relative unit: "15 min", "2 h", "6 h"; follow-ups are converted from clock times; only urgent timers are coloured); the ticket title in ink2; then a grey ticket-number tag with a ticket icon and a coloured status chip. The header ticket tag has the same icon. The ticket number also leads the header tags. Ticket numbers are demo data. (Nitish, 7 Nov)
 
 ## 9. AI signature, notes and the pattern
 - Anything AI wrote or did gets one signature, and nothing else uses it:
