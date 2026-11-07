@@ -106,4 +106,4 @@ Colour carries meaning only:
 - No invented names, labels or IDs for real people or research.
 
 ## 11. Presenter notes (prototype only)
-- A black floating sheet (#111214, white text, 12px radius, 340px wide) shows the commentary for the open case: "Case N of 5", the customer's name, "What's happening" and "What it shows". Drag it by its header; "–" shrinks it to the header, "×" closes it; it always comes back on refresh. It's the only element allowed a shadow besides the toast. Text lives in jusdesk/lib/commentary.ts. (Nitish, 7 Nov)
+- A black floating sheet (#111214, white text, 12px radius, 340px wide) is headed "Nitish's commentary". Under it, ‹ "Case N of 5 · name" › buttons step through the cases in ladder order and open that ticket; then "What's happening" and "What it shows". Drag it by its header; "–" shrinks it to the header, "×" closes it; it always comes back on refresh. It's the only element allowed a shadow besides the toast. Text lives in jusdesk/lib/commentary.ts. (Nitish, 7 Nov)

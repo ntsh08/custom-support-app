@@ -689,7 +689,7 @@ export function Workspace() {
           )}
         </aside>
       </div>
-      <Commentary caseId={c.id} customer={c.customer} />
+      <Commentary caseId={c.id} customer={c.customer} onGo={select} />
 
       {(undo || flash) && (
         <div className="toast" role="status">

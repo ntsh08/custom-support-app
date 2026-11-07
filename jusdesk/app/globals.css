@@ -538,3 +538,10 @@ ul { list-style: none; }
 .cmt dt { font-size: 11px; font-weight: 510; color: #8A8E95; text-transform: uppercase; letter-spacing: .04em; margin-top: 6px; }
 .cmt dt:first-child { margin-top: 0; }
 .cmt dd { margin: 0; color: #E9EAEC; }
+
+.cmt-nav { display: flex; align-items: center; gap: 8px; padding: 10px 10px 0 14px; border-top: 1px solid rgb(255 255 255 / .08); }
+.cmt-case { flex: 1; display: flex; align-items: baseline; gap: 8px; font-weight: 590; color: #fff; }
+.cmt-nav button { width: 28px; height: 28px; display: grid; place-items: center; border: 1px solid rgb(255 255 255 / .14); border-radius: 8px; background: none; color: #E9EAEC; cursor: pointer; }
+.cmt-nav button:hover:not(:disabled) { background: rgb(255 255 255 / .08); }
+.cmt-nav button:disabled { opacity: .3; cursor: default; }
+.cmt-nav + dl { border-top: 0; }
