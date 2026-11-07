@@ -614,9 +614,9 @@ export function Workspace() {
             <section className={`blk${shut["Linked tickets"] ? " shut" : ""}`} hidden={tab !== "details"}>
               <h4><button className="fold" aria-expanded={!shut["Linked tickets"]} onClick={() => toggle("Linked tickets")}><Icon name="chev" size={14} />Linked tickets</button></h4>
               {c.linkedTickets?.length ? (
-                <ul className="lt">{c.linkedTickets.map((t) => (
-                  <li key={t.id}><span className="tk"><Icon name="ticket" size={12} />{t.id}</span><span className="ltmain"><b>{t.channel} · {t.when}</b><span>{t.state}</span></span><Icon name="merge" size={14} /></li>
-                ))}</ul>
+                <dl className="dkv">{c.linkedTickets.map((t) => (
+                  <div key={t.id}><dt><Icon name={t.channel === "Email" ? "mail" : "chat"} size={14} />{t.channel} ticket</dt><dd className="ltval"><span className="tk"><Icon name="ticket" size={12} />{t.id}</span><span className="ltstate"><Icon name="merge" size={12} />Merged</span></dd></div>
+                ))}</dl>
               ) : <p className="hint">No linked tickets.</p>}
             </section>
 
