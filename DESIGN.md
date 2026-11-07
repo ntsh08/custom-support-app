@@ -114,3 +114,7 @@ Colour carries meaning only:
   - **Linked tickets** means other tickets joined to this one, one line each: the #1043 ticket chip, then "Merged email ticket"; otherwise "No linked tickets." Courier requests and refunds aren't listed here.
   - **Tasks and follow-ups** has no "case stays open…" hint.
   - **Delivery details** (was Delivery evidence): Courier, Delivery OTP, each photo as a row with a "View photo" link that opens it in a modal, "From address" distance (red if over 100 m), then delivery facts (pincode spikes, stock, scan). No images or map up front, no customer facts.
+
+## 12. Team Lead overview (/lead)
+- One screen, no flows: nothing opens on click (decisions/2026-11-05-team-lead-dashboard-only.md). Same rail as the workspace; the rail's dashboard icon links between the two.
+- Order: four KPI tiles, each pairing speed with an outcome (open / waiting on couriers, first reply P90 / reopened, resolved / came back in 7 days, AI resolved alone / handed to people); then "Needs you now" (each item: type chip in the status colours, ticket chip, title, customer · owner, one-line why, time; urgent times red); beside it "Patterns the AI spotted" on the AI card (leads to investigate, never verdicts) and a single-series bar chart of "not received" tickets per hour with a hover tooltip; then "Team today" (open, first reply P90, reopened, load bar; the AI listed as a team member). Demo data. (Nitish, 7 Nov)

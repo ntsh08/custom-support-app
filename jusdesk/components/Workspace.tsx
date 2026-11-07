@@ -399,6 +399,7 @@ export function Workspace() {
           <button className="nav" title="My tasks"><Icon name="tasks" size={18} /></button>
           <button className="nav" title="Waiting"><Icon name="clock" size={18} /></button>
           <button className="nav" title="Search"><Icon name="search" size={18} /></button>
+          <a className="nav" title="Team overview (team lead)" href="/lead"><Icon name="dashboard" size={18} /></a>
         </nav>
 
         {/* Queue */}
