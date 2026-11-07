@@ -553,3 +553,5 @@ ul { list-style: none; }
 .cmt-nav { align-items: flex-start; padding-bottom: 2px; }
 .cmt-hint { margin: 0; padding: 8px 14px 12px; border-top: 1px solid rgb(255 255 255 / .08); font-size: 11px; line-height: 16px; color: #7C8087; }
 .cmt dl { padding-bottom: 12px; }
+/* Commentary labels follow the design system: sentence case, 12px/510, no caps or tracking */
+.cmt-n, .cmt dt { text-transform: none; letter-spacing: 0; font-size: 12px; font-weight: 510; }
