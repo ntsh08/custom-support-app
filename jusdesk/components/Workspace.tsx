@@ -182,7 +182,7 @@ export function Workspace() {
           const optDone = !!sa?.option && st.stage !== c.start;
           const actionBtn = !sa ? null
             : sa.option ? (optDone ? <em className="added"><Icon name="check" size={12} />Done</em> : opt && <button className="sa pri" onClick={() => act(opt)}>{sa.label}</button>)
-            : sa.schedule ? (t?.owner === "ai" ? <em className="added"><Icon name="check" size={12} />Scheduled</em> : <button className="sa pri" onClick={() => assign({ ...x, due: sa.schedule! }, "ai")}><Icon name="calendar" size={12} />{sa.label}</button>)
+            : sa.schedule ? (t?.owner === "ai" ? <em className="added"><Icon name="check" size={12} />Scheduled</em> : <button className="sa pri" onClick={() => assign({ ...x, due: sa.schedule! }, "ai")}>{sa.label}</button>)
             : <button className="sa pri" onClick={() => setFlash("Calling the rider through the Ekart hub (prototype)")}>{sa.label}</button>;
           const confirmHere = confirming?.confirm && opt && confirming.id === opt.id;
           return (
@@ -196,7 +196,7 @@ export function Workspace() {
                     <Icon name="check" size={12} />{t.owner === "ai" ? "AI will do it" : "Added for you"}<Icon name="chev" size={12} />
                   </button>
                 ) : (
-                  <button className="addtask pri" aria-haspopup="menu" aria-expanded={addMenu === x.text} onClick={() => setAddMenu(addMenu === x.text ? null : x.text)}><Icon name="plus" size={12} />Add task<Icon name="chev" size={12} /></button>
+                  <button className="addtask pri" aria-haspopup="menu" aria-expanded={addMenu === x.text} onClick={() => setAddMenu(addMenu === x.text ? null : x.text)}>Add task<Icon name="chev" size={12} /></button>
                 )}
                 {addMenu === x.text && (
                   <ul className="sortmenu addmenu" role="menu" onMouseLeave={() => setAddMenu(null)}>

@@ -252,7 +252,7 @@ export const CASES: Case[] = [
   },
   {
     id: "rohan",
-    actions: [{ match: "Get Priya's approval", label: "Send to Priya", primary: true, option: "lead" }],
+    actions: [{ match: "Get Priya's approval", label: "Escalate", primary: true, option: "lead" }],
     suggest: ["Get Priya's approval for the ₹6,500 refund, then tell Rohan", "Check the refund reached him in 5 days"],
     ticket: "#1039",
     customer: "Rohan Shah",
@@ -435,7 +435,7 @@ export const CASES: Case[] = [
   },
   {
     id: "meera",
-    actions: [{ match: "Send it to Priya", label: "Send to Priya", primary: true, option: "lead" }],
+    actions: [{ match: "Send it to Priya", label: "Escalate", primary: true, option: "lead" }],
     ticket: "#1044",
     customer: "Meera Iyer",
     initials: "MI",

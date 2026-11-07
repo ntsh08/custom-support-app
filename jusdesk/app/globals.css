@@ -569,3 +569,5 @@ ul { list-style: none; }
 .sum .sugg .addtask.pri { height: 24px; padding: 0 8px; border: 1px solid var(--acc); background: var(--acc); color: #fff; font-size: 12px; font-weight: 510; }
 .sum .sugg .addtask.pri:hover { background: var(--acc-h); }
 .sum .sugg .addtask.pri svg { color: #fff; }
+.sum .sugg .sa, .sum .sugg .addtask, .sum .sugg .added { width: 92px; }
+.sum .sugg .sa, .sum .sugg .addtask, .sum .sugg .added { border-radius: 6px; }
