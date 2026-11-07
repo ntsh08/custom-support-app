@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { COMMENTARY } from "@/lib/commentary";
 
 /**
@@ -12,6 +12,8 @@ export function Commentary({ caseId, customer, onGo }: { caseId: string; custome
   const [small, setSmall] = useState(false);
   const [pos, setPos] = useState({ x: 16, y: -16 }); // from the bottom-left corner
   const drag = useRef<{ dx: number; dy: number } | null>(null);
+  // ?notes=0 hides the sheet, for clean screenshots.
+  useEffect(() => { if (new URLSearchParams(window.location.search).get("notes") === "0") setOpen(false); }, []);
   const c = COMMENTARY[caseId];
   const order = Object.entries(COMMENTARY).sort((a, b) => a[1].n - b[1].n).map(([id]) => id);
   const i = order.indexOf(caseId);
