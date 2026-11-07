@@ -608,3 +608,6 @@ ul { list-style: none; }
 /* Lighter green rows; the investigation result sits on the same green band (Nitish, 7 Nov) */
 .sum .sugg li:not(.sconfirm) { background: #F6FAF7; }
 .invcard .isum { margin: 4px 0 2px; padding: 10px 12px; border-radius: 8px; background: #F6FAF7; }
+/* Assigned state: neutral text, one line, grows past 92px if needed (Nitish, 7 Nov) */
+.sum .sugg .added, .sum .sugg button.added { width: auto; min-width: 92px; white-space: nowrap; color: var(--ink2); font-weight: 510; }
+.sum .sugg button.added svg { color: var(--ink3); }

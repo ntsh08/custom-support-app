@@ -192,7 +192,7 @@ export function Workspace() {
               {!sa && <span className="addwrap">
                 {t ? (
                   <button className={`added${t.owner === "ai" ? " ai" : ""}`} aria-haspopup="menu" aria-expanded={addMenu === x.text} onClick={() => setAddMenu(addMenu === x.text ? null : x.text)}>
-                    <Icon name="check" size={12} />{t.owner === "ai" ? "AI will do it" : "Added for you"}<Icon name="chev" size={12} />
+                    <Icon name="check" size={12} />{t.owner === "ai" ? "Assigned to AI" : "Assigned to you"}<Icon name="chev" size={12} />
                   </button>
                 ) : (
                   <button className="addtask pri" aria-haspopup="menu" aria-expanded={addMenu === x.text} onClick={() => setAddMenu(addMenu === x.text ? null : x.text)}>Add task<Icon name="chev" size={12} /></button>
