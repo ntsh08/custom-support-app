@@ -600,3 +600,8 @@ ul { list-style: none; }
 .sum .sugg li:not(.sconfirm) { background: #F2F8F4; }
 .sum .lbl .team { margin-left: auto; display: inline-flex; align-items: center; gap: 4px; font-style: normal; font-size: 12px; font-weight: 400; color: var(--ink3); }
 .sum.writing .lbl .team { background: none; -webkit-text-fill-color: currentColor; }
+/* Confirm is a centred modal, not a side drawer (Nitish, 7 Nov) */
+@keyframes modal-in { from { transform: translateY(6px) scale(.98); opacity: 0; } to { transform: none; opacity: 1; } }
+.sheet-scrim { align-items: center; justify-content: center; padding: 24px; }
+.sheet { width: 480px; max-width: 100%; height: auto; max-height: calc(100vh - 48px); border: 1px solid var(--hair); border-radius: 12px; box-shadow: 0 16px 40px rgb(17 18 20 / .14); overflow: hidden; animation: modal-in .2s cubic-bezier(.22, 1, .36, 1) both; }
+.sheet .sheet-body { flex: none; }
