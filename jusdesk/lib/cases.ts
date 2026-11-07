@@ -460,7 +460,7 @@ export const CASES: Case[] = [
       { kind: "event", time: "Mon 1:15 pm", text: "Delhivery delivered with OTP" },
       { kind: "customer", channel: "chat", time: "9:40 am", text: "My dress never came. I want a refund." },
       { kind: "event", time: "9:40 am", text: "AI investigation", ai: true, evidence: "OTP entered at her door, and the photo matches flat 12C. This is her 3rd claim in 2 months.", policy: "suspected false claims go to your team lead and I never deny a claim, so I didn't reply.", investigation: ["Read her message: says the dress never came", "Checked her history: 3rd \"not received\" claim in 2 months, another account at her address claimed twice, card linked to 1 chargeback → flagged for review", "Checked tracking: OTP entered at her door at 1:15 pm", "A claim like this needs a person, so promised no refund or reship"], next: ["Send it to Priya with the signals, and update Meera by 6 pm"] },
-      { kind: "event", time: "9:40 am", text: "AI flagged this ticket for review", ai: true, flag: true },
+      { kind: "event", time: "9:40 am", text: "AI flagged this as a high-risk claim", ai: true, flag: true },
       { kind: "event", time: "9:40 am", text: "AI set status to First response", ai: true, status: "first" },
       { kind: "event", time: "9:40 am", text: "AI assigned this ticket to you", ai: true, assign: "you" },
     ],
