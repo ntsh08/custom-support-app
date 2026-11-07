@@ -571,3 +571,7 @@ ul { list-style: none; }
 .sum .sugg .addtask.pri svg { color: #fff; }
 .sum .sugg .sa, .sum .sugg .addtask, .sum .sugg .added { width: 92px; }
 .sum .sugg .sa, .sum .sugg .addtask, .sum .sugg .added { border-radius: 6px; }
+/* Suggestion buttons are secondary: white, hairline border, ink text (Nitish, 7 Nov) */
+.sum .sugg .sa.pri, .sum .sugg .addtask.pri { background: var(--s0); border: 1px solid var(--hair2); color: var(--ink); }
+.sum .sugg .sa.pri:hover:not(:disabled), .sum .sugg .addtask.pri:hover { background: var(--s2); }
+.sum .sugg .addtask.pri svg { color: var(--ink3); }
