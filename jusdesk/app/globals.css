@@ -551,3 +551,5 @@ ul { list-style: none; }
 .cmt-case b { font-size: 14px; line-height: 20px; font-weight: 590; color: #fff; }
 .cmt-arrows { display: flex; gap: 4px; align-self: center; }
 .cmt-nav { align-items: flex-start; padding-bottom: 2px; }
+.cmt-hint { margin: 0; padding: 8px 14px 12px; border-top: 1px solid rgb(255 255 255 / .08); font-size: 11px; line-height: 16px; color: #7C8087; }
+.cmt dl { padding-bottom: 12px; }

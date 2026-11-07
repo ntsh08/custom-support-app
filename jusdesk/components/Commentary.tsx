@@ -67,6 +67,7 @@ export function Commentary({ caseId, customer, onGo }: { caseId: string; custome
           <dd>{c.shows}</dd>
         </dl>
       )}
+      {!small && <p className="cmt-hint">Drag the top bar to move this sheet. – shrinks it, × hides it until you refresh.</p>}
     </aside>
   );
 }
