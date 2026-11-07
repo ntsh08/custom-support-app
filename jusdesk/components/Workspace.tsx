@@ -12,6 +12,7 @@ type Undo = { caseId: string; prev: CaseState; label: string };
 const REASONS = ["Wrong address", "Lost in transit", "Disputed delivery", "Early scan", "Left with guard"];
 
 const TAGS = ["Order not received", "Payment issue", "Refund requested", "Replacement requested", "Courier dispute", "Early scan", "Out of stock", "Repeat claim", "Cash on delivery", "Urgent"];
+const EMOJI: Record<string, string> = { Angry: "😠", Frustrated: "😤", Neutral: "😐", Happy: "🙂" };
 const MOOD: Record<string, string> = { Angry: "bad", Frustrated: "warn", Neutral: "", Happy: "good" };
 
 const initial = (): Record<string, CaseState> =>
@@ -560,7 +561,7 @@ export function Workspace() {
               <h4><button className="fold" aria-expanded={!shut["Properties"]} onClick={() => toggle("Properties")}><Icon name="chev" size={14} />Properties</button></h4>
               <dl className="dkv">
                 <div className={status === "customer" ? "tagrow" : ""}><dt><Icon name="inbox" size={14} />Status</dt><dd className="stat">
-                  <Pick label="Status" value={status} options={(Object.keys(STATUS) as Group[]).map((g) => ({ value: g, label: STATUS[g], dot: g }))} onChange={(v) => setStatus(v as Group)} />
+                  <Pick label="Status" chip={`st st-${status}`} value={status} options={(Object.keys(STATUS) as Group[]).map((g) => ({ value: g, label: STATUS[g], dot: g }))} onChange={(v) => setStatus(v as Group)} />
                   {status === "customer" && <span>AI nudges on day 3 and 7, closes on day 14 if there&apos;s no reply</span>}
                 </dd></div>
                 <div><dt><Icon name="user" size={14} />Owner</dt><dd>{owner(status, stage)}</dd></div>
@@ -570,7 +571,7 @@ export function Workspace() {
                   <Pick label="Contact reason" missing={!reasons[c.id]} value={reasons[c.id] ?? ""} options={[{ value: "", label: "Not set" }, ...REASONS.map((r) => ({ value: r, label: r }))]} onChange={(v) => setReasons((r) => ({ ...r, [c.id]: v || undefined }))} />
                 </dd></div>
                 <div><dt><Icon name={channels(c).includes("merged") ? "merge" : channelIcon(c)} size={14} />Channel</dt><dd>{channels(c)}</dd></div>
-                <div className="tagrow"><dt><Icon name="smile" size={14} />Sentiment</dt><dd className={`mood ${MOOD[c.sentiment.label]}`} title={`Read by AI: ${c.sentiment.why}`}>{c.sentiment.label}<span>{c.sentiment.why}</span></dd></div>
+                <div className="tagrow"><dt><Icon name="smile" size={14} />Sentiment</dt><dd className="mood2" title={`Read by AI: ${c.sentiment.why}`}><span className={`mpill m-${c.sentiment.label.toLowerCase()}`}>{EMOJI[c.sentiment.label]} {c.sentiment.label}</span><span className="mwhy">{c.sentiment.why}</span></dd></div>
                 <div className="tagrow"><dt><Icon name="tag" size={14} />Tags</dt><dd>
                   <div className="tags">
                     {(tags[c.id] ?? []).map((t) => (
@@ -823,7 +824,7 @@ function Message({ m, customer, email, language, onAction }: { m: Msg; customer:
 
 /** The assistant's work before a reply, after the INA agent trace: one line, opens to the steps. */
 /** Dropdown in our design system (replaces the OS select): ghost trigger with chevron, white menu, tick on the current option. */
-function Pick({ label, value, options, onChange, missing }: { label: string; value: string; options: { value: string; label: string; dot?: string }[]; onChange: (v: string) => void; missing?: boolean }) {
+function Pick({ label, value, options, onChange, missing, chip }: { label: string; value: string; options: { value: string; label: string; dot?: string }[]; onChange: (v: string) => void; missing?: boolean; chip?: string }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLSpanElement>(null);
   useEffect(() => {
@@ -836,7 +837,7 @@ function Pick({ label, value, options, onChange, missing }: { label: string; val
   const cur = options.find((o) => o.value === value);
   return (
     <span className="pickwrap" ref={ref}>
-      <button type="button" className={`pick2${missing ? " missing" : ""}`} aria-label={label} aria-haspopup="listbox" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
+      <button type="button" className={`pick2${missing ? " missing" : ""}${chip ? ` chip ${chip}` : ""}`} aria-label={label} aria-haspopup="listbox" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
         {cur?.label ?? "Not set"}<Icon name="chev" size={12} />
       </button>
       {open && (

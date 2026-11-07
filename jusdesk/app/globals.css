@@ -632,3 +632,18 @@ ul { list-style: none; }
 .esc-note textarea { width: 100%; resize: none; border: 1px solid var(--hair); border-radius: 8px; padding: 8px 10px; background: var(--s1); font: inherit; color: var(--ink); outline: 0; }
 .esc-note textarea:focus { border-color: var(--acc); background: var(--s0); }
 .tk { gap: 4px; } .tk svg { color: var(--ink3); flex: none; }
+
+/* Properties: Status as the queue chip; Sentiment as an emoji pill (option B) (Nitish, 7 Nov) */
+.pick2.chip { margin-left: 0; height: 24px; padding: 0 8px; border-radius: 6px; gap: 4px; font-size: 12px; }
+.pick2.chip svg { color: currentColor; opacity: .7; }
+.pick2.chip:hover, .pick2.chip[aria-expanded="true"] { filter: brightness(.97); }
+.dkv dd.mood2 { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; padding: 6px 0; font-weight: 400; }
+.mpill { display: inline-flex; align-items: center; gap: 4px; height: 24px; padding: 0 10px; border-radius: 999px; font-size: 12px; font-weight: 510; }
+.m-angry { background: #FDECEB; color: #B42318; } .m-frustrated { background: #FFF0E5; color: #C2410C; }
+.m-neutral { background: #F1F1F4; color: #4B4F57; } .m-happy { background: #E7F5EC; color: #15803D; }
+.mwhy { font-size: 12px; line-height: 16px; color: var(--ink3); }
+.pick2.chip.st-first { background: #F0F5FF; color: #5B84E4; }
+.pick2.chip.st-reply { background: #F2EEFD; color: #6B46C9; }
+.pick2.chip.st-escalated { background: #FFF0E5; color: #C2410C; }
+.pick2.chip.st-others, .pick2.chip.st-customer { background: #EEEEF1; color: #4B4F57; }
+.pick2.chip.st-closed { background: #F3F3F5; color: #8A8E95; }
