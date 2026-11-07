@@ -18,12 +18,14 @@ export function Commentary({ caseId, customer, onGo }: { caseId: string; custome
   if (!open || !c) return null;
 
   function down(e: React.PointerEvent) {
-    if ((e.target as HTMLElement).closest("button")) return;
+    if (e.button !== 0 || (e.target as HTMLElement).closest("button")) return;
     (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
     drag.current = { dx: e.clientX - pos.x, dy: e.clientY - (window.innerHeight + pos.y) };
   }
   function move(e: React.PointerEvent) {
     if (!drag.current) return;
+    // Only move while the button is held: a missed pointerup must never leave the sheet glued to the cursor.
+    if (e.buttons === 0) { drag.current = null; return; }
     const x = Math.min(Math.max(8, e.clientX - drag.current.dx), window.innerWidth - 120);
     const top = Math.min(Math.max(8, e.clientY - drag.current.dy), window.innerHeight - 40);
     setPos({ x, y: top - window.innerHeight });
@@ -32,7 +34,7 @@ export function Commentary({ caseId, customer, onGo }: { caseId: string; custome
 
   return (
     <aside className="cmt" style={{ left: pos.x, bottom: -pos.y }} aria-label="Presenter notes">
-      <header onPointerDown={down} onPointerMove={move} onPointerUp={up}>
+      <header onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerCancel={up} onLostPointerCapture={up}>
         <b>Nitish&apos;s commentary</b>
         <span className="cmt-sp" />
         <button aria-label={small ? "Expand notes" : "Shrink notes"} onClick={() => setSmall((v) => !v)}>
