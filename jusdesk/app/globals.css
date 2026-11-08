@@ -493,7 +493,7 @@ ul { list-style: none; }
 .pick2 { display: inline-flex; align-items: center; gap: 6px; height: 26px; margin-left: -6px; padding: 0 6px; border: 0; border-radius: 6px; background: none; font: inherit; font-weight: 510; color: var(--ink); cursor: pointer; }
 .pick2 svg { color: var(--ink3); }
 .pick2:hover, .pick2[aria-expanded="true"] { background: var(--s2); }
-.pick2.missing { color: var(--warn); font-weight: 400; }
+.pick2.missing { color: var(--ink3); font-weight: 400; }
 .pickmenu { left: -6px; right: auto; width: 220px; }
 .pickmenu .stline { font-size: 13px; }
 .dkv dd.stat .pickwrap { align-self: flex-start; }
