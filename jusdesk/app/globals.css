@@ -761,3 +761,6 @@ ul { list-style: none; }
 
 /* Labels never run into the value: anything too long is clipped at the column */
 .dkv dt { min-width: 0; overflow: hidden; }
+
+/* Back-to-back status lines sit closer: 8px instead of the 20px between messages */
+.grpmsg:has(> .stchg:first-child) + .grpmsg:has(> .stchg:first-child) { margin-top: -12px; }
