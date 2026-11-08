@@ -4,7 +4,7 @@ Status: Active          Type: Visual
 Date: 2026-11-05        Decided by: Nitish
 Skill version: 1.0.0
 Screens: All
-Link: Figma page "JusDesk · Design System"; ../design-system/README.md
+Link: Figma page "JusDesk · Design System"
 Supersedes: none
 
 ## Problem

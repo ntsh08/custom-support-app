@@ -4,7 +4,7 @@ Status: Active          Type: Visual
 Date: 2026-11-07        Decided by: Nitish
 Skill version: 1.0.0
 Screens: Queue rows, Case header
-Link: ../design-system/status-button-options.html
+Link: ../DESIGN.md
 Supersedes: none
 
 ## Problem
@@ -18,7 +18,7 @@ The first status chip colours didn't look good, and the header split button felt
 Nitish: "Can you use normal colors like blue, a little bit of purple, and gray, because these colors do not look good?" and asked for a lighter blue to match the chip text. Choice of G3 over the other options: Not stated.
 
 ## Evidence
-References on Mobbin: Featurebase, Jira, Klaviyo, Zendesk, Plane, Plain (design-system/status-button-refs.html).   Confidence: Low
+References on Mobbin: Featurebase, Jira, Klaviyo, Zendesk, Plane, Plain.   Confidence: Low
 
 ## Rejected options
 - Amber / red / rose / teal chips → "do not look good".
