@@ -149,12 +149,12 @@ export const CASES: Case[] = [
     ],
     evidence: [
       { kind: "door", title: "Courier photo", note: "Green door, parcel on the step", door: "#2F6B4F", parcel: true },
-      { kind: "door", title: "Last delivery, 12 Oct", note: "White door, flat B-204", door: "#F4F2EE", plate: "B-204" },
+      { kind: "door", title: "Last delivery", note: "12 Oct · white door, flat B-204", door: "#F4F2EE", plate: "B-204" },
       { kind: "map", title: "Rider's GPS", note: "600 m from the address", metres: 600 },
     ],
     facts: [
       { icon: "key", label: "Delivery OTP", value: "Not collected" },
-      { icon: "alert", label: "560034 this week", value: "3 similar claims, all Shadowfax", tone: "bad" },
+      { icon: "alert", label: "Same pincode", value: "3 claims this week, all Shadowfax", tone: "bad" },
     ],
     handoff: [
       "She wrote twice (chat 8:52, email 9:14). Both are merged here.",
@@ -288,7 +288,7 @@ export const CASES: Case[] = [
     ],
     facts: [
       { icon: "key", label: "Delivery OTP", value: "Not collected" },
-      { icon: "alert", label: "560034 this week", value: "4th similar claim, all Shadowfax", tone: "bad" },
+      { icon: "alert", label: "Same pincode", value: "4th claim this week, all Shadowfax", tone: "bad" },
       { icon: "box", label: "Size L", value: "Out of stock until December" },
     ],
     handoff: [
