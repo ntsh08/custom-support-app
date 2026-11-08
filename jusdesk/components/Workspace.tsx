@@ -523,13 +523,13 @@ export function Workspace() {
                 </div></div></div>
               )}
               <div className="crow">
-                {mode === "reply" ? <>
+                <span className="tools" inert={mode === "note"}>
                   <button className="gh" onClick={() => { if (stage.draft) { setDrafts((d) => ({ ...d, [key]: stage.draft! })); setCheck(null); } else setFlash("Nothing to draft at this step"); }}><Icon name="spark" size={14} />AI draft</button>
                   <button className="gh" disabled={!draft.trim()} onClick={() => setFlash("Rephrase isn't wired up in the prototype")}><Icon name="pen" size={14} />Rephrase</button>
                   <button className="gh" disabled={!draft.trim()} onClick={() => setFlash("Translate isn't wired up in the prototype")}><Icon name="translate" size={14} />Translate</button>
                   <button className={`gh${check ? " on" : ""}`} disabled={!draft.trim()} onClick={() => setCheck(check ? null : checkReply(c, draft))}><Icon name="textcheck" size={14} />Check reply</button>
-                  <i className="sp" />
-                </> : <i className="sp" />}
+                </span>
+                <i className="sp" />
                 <button className="gh" aria-label="Attach" onClick={() => setFlash("Attachments aren't wired up in the prototype")}><Icon name="attach" size={14} /></button>
                 <button className="pri sendbtn" onClick={send} disabled={!draft.trim()}>
                   <span key={mode} className="swap"><Icon name={mode === "reply" ? "send" : "note"} size={14} />{mode === "reply" ? "Send" : "Add note"}</span>

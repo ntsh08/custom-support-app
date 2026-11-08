@@ -109,7 +109,7 @@ Only where it helps (Emil Kowalski's gate: frequency, purpose, speed, function).
 - Suggestion button → "Done" / "Assigned to AI": the chip fades in from 97%, 180ms.
 - Check-reply notes open with a 200ms height reveal instead of jumping.
 - Menus are plain: white, no row fills; a small ink3 title, items with a bold label and a grey subtitle. The Add task menu scrolls into view when opened.
-- Composer Reply ↔ Internal note: the box fades to yellow (220ms); one pill slides to the selected tab (240ms; grey on Reply, white with a #F0DFAE ring on the note); the text box fades in; Send ↔ Add note is one 104px button whose colour fades and label rises in (6px, slight blur, 220ms). Back on Reply, the AI tools rise 6px and fade in, 240ms, 30ms apart.
+- Composer Reply ↔ Internal note: the box fades to yellow (220ms); one pill slides to the selected tab (240ms; grey on Reply, white with a #F0DFAE ring on the note); the text box fades in; Send ↔ Add note is one 104px button whose colour fades and label rises in (6px, slight blur, 220ms). The AI tools rise 6px and fade in on Reply (240ms, 30ms apart) and sink and fade out on Internal note (160ms); they stay in place, inert, while hidden.
 - No motion on switching tickets, folding sections or the Team Lead chart. Reduced motion keeps only a short fade.
 (Nitish, 8 Nov)
 
