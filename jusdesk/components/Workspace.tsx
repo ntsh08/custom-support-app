@@ -507,7 +507,7 @@ export function Workspace() {
               <textarea
                 aria-label={mode === "note" ? "Internal note" : `Reply to ${c.customer}`}
                 value={draft}
-                placeholder={mode === "note" ? "Only your team sees this" : `Reply to ${c.customer.split(" ")[0]}, or use AI draft to start from the evidence`}
+                placeholder={mode === "note" ? "Only your team sees this" : "Write a reply, or start with an AI draft"}
                 onChange={(e) => { setDrafts((d) => ({ ...d, [key]: e.target.value })); setCheck(null); }}
                 onKeyDown={(e) => { if (e.key === "Enter" && e.metaKey) { e.preventDefault(); send(); } }}
               />

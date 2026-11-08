@@ -1,5 +1,6 @@
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
+  MailReply01Icon,
   Alert02Icon, ArrowTurnBackwardIcon, BubbleChatIcon, CheckmarkCircle02Icon, Clock01Icon, CreditCardIcon,
   DeliveryTruck01Icon, GitMergeIcon, InboxIcon, Key01Icon, Location01Icon, Mail01Icon, MaximizeIcon,
   MinimizeIcon, MoreHorizontalIcon, PackageIcon, PlayIcon, Search01Icon, SentIcon, SquareLock02Icon,
@@ -12,7 +13,7 @@ import {
 const ICONS = {
   alert: Alert02Icon,
   undo: ArrowTurnBackwardIcon,
-  reply: ArrowTurnBackwardIcon,
+  reply: MailReply01Icon,
   chat: BubbleChatIcon,
   done: CheckmarkCircle02Icon,
   clock: Clock01Icon,
