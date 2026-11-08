@@ -177,7 +177,11 @@ export function Workspace() {
   const draft = drafts[key] ?? "";
   const status = statusOf(c.id);
   const open = status !== "closed";
-  const setStatus = (g: Group) => setStates((s) => (g === status ? s : { ...s, [c.id]: { ...s[c.id], status: g, extra: [...s[c.id].extra, statusLine(g, "You")] } }));
+  const setStatus = (g: Group) => {
+    if (g === status) return;
+    setStates((s) => ({ ...s, [c.id]: { ...s[c.id], status: g, extra: [...s[c.id].extra, statusLine(g, "You")] } }));
+    const t = autoFollowUp(c.id, g); if (t) setFlash(t);
+  };
 
   // Suggestions for the executive come from the assistant's investigation; shown inside the summary card.
   const nextSteps = [...thread].reverse().map((m) => (m.kind === "agent" || m.kind === "event" ? m.next : undefined)).find((n) => n && n.length) ?? (open ? c.suggest ?? [] : []);
@@ -346,6 +350,19 @@ export function Workspace() {
     return () => clearTimeout(t);
   }, [flash]);
 
+  /** When a ticket starts waiting on someone, the AI sets a follow-up from the SLA and owns it. Returns the toast line. */
+  function autoFollowUp(caseId: string, g: Group): string | null {
+    const cs = CASES.find((x) => x.id === caseId)!;
+    const first = cs.customer.split(" ")[0];
+    const fu = g === "others" ? { text: `Check ${cs.courier} replied; chase if not`, due: "Tomorrow, 10 am", toast: `AI will follow up with ${cs.courier} tomorrow at 10 am` }
+      : g === "customer" ? { text: `Nudge ${first} if there's no reply`, due: "In 3 days", toast: `AI will nudge ${first} in 3 days if there's no reply` }
+      : g === "escalated" ? { text: "Check Priya replied; remind her if not", due: "In 2 hours", toast: "AI will check on Priya in 2 hours" }
+      : null;
+    if (!fu) return null;
+    setTasks((all) => all[caseId].some((t) => t.text === fu.text) ? all : { ...all, [caseId]: [...all[caseId], { id: `fu${Date.now()}`, text: fu.text, due: fu.due, owner: "ai" }] });
+    return fu.toast;
+  }
+
   function goTo(caseId: string, next: string, label?: string) {
     const cs = CASES.find((x) => x.id === caseId)!;
     setStates((s) => {
@@ -356,6 +373,8 @@ export function Workspace() {
       const log: Msg[] = from === to.group ? [] : [statusLine(to.group, to.by === "AI" ? "AI" : "You")];
       return { ...s, [caseId]: { stage: next, extra: [...prev.extra, ...(to.adds ?? []), ...log] } };
     });
+    const st = states[caseId], from = st.status ?? cs.stages[st.stage].group, toG = cs.stages[next].group;
+    if (from !== toG) { const t = autoFollowUp(caseId, toG); if (t) setFlash(t); }
     setConfirming(null);
   }
 
@@ -369,7 +388,7 @@ export function Workspace() {
     const msg: Msg = mode === "note" ? { kind: "note", who: "You", time: "Now", text: draft } : { kind: "agent", who: "You", time: "Now", text: draft };
     setStates((s) => ({ ...s, [c.id]: { ...s[c.id], extra: [...s[c.id].extra, msg], ...(mode === "reply" ? { status: "customer" as Group } : {}), ...(mode === "reply" && status !== "customer" ? { extra: [...s[c.id].extra, msg, statusLine("customer", "You")] } : {}) } }));
     setDrafts((d) => ({ ...d, [key]: "" }));
-    if (mode === "reply") { setFlash(`Sent · ${STATUS.customer}`); setCheck(null); }
+    if (mode === "reply") { const t = status !== "customer" ? autoFollowUp(c.id, "customer") : null; setFlash(t ? `Sent · ${t}` : `Sent · ${STATUS.customer}`); setCheck(null); }
   }
 
   function updateTasks(fn: (t: Task[]) => Task[]) {

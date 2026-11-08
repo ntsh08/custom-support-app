@@ -595,7 +595,7 @@ export const CASES: Case[] = [
     sentiment: { label: "Neutral", why: "Asking, not complaining" },
     tags: ["Order not received", "Early scan"],
     history: { since: "July 2025", orders: "4", spent: "₹6,300", claims: "None", refunds: "None", address: "Same since 2025 · 3 deliveries, no issues", signal: { label: "Low risk", tone: "low", note: "4 orders, no claims" }, risk: { level: "Low", checks: [{ text: "No earlier claims or refunds", src: "Order history" }, { text: "Only her account uses this address", src: "Address match" }, { text: "No chargebacks on her UPI", src: "Payment data" }] }, past: [] },
-    tasks: [],
+    tasks: [{ id: "k-fu", text: "Check Ekart confirmed the early scan; chase if not", due: "Today, 4 pm", owner: "ai" }],
     asks: [
       { q: "Where is the rider now?", a: "Stop 14 of 22 on today's route, about 4.2 km from her address." },
       { q: "What if Ekart doesn't reply by 4 pm?", a: "Call the rider through the Ekart hub, then update Kavya either way." },
