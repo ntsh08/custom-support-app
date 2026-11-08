@@ -17,7 +17,7 @@ AI shows fraud signals (repeat claims, linked accounts, payment links) privately
 Not stated. Nitish asked for the fraud case to be covered and accepted this handling.
 
 ## Evidence
-Desk research: matching proof can still be theft after a correct delivery (research/Desk Research.md, Part 2).   Confidence: Medium
+Desk research: matching proof can still be theft after a correct delivery (research/Desk Research.md, §2).   Confidence: Medium
 
 ## Rejected options
 - AI denies automatically when signals are strong → not proposed or chosen.

@@ -1,390 +1,83 @@
 # Desk Research
 
-Public research for the Juspay assignment, in two parts: pain points gathered from public sources, then a Reddit follow-up on support and disputed deliveries.
-
-- [Part 1: User pain points](#part-1-user-pain-points)
-- [Part 2: Reddit follow-up](#part-2-reddit-follow-up)
-
-## Part 1: User pain points
-Desk research, Nov 2026. Covers support executives, team leads, and customers, with a focus on e-commerce and the "marked delivered, not received" case.
-
-### How this was gathered (read first)
-
-- **Access update, 4 Nov 2026:** The initial research could not access Reddit, Quora, Glassdoor, AmbitionBox, Indeed or Medium. A follow-up retrieved indexed Reddit posts and comments through web search; see [Part 2: Reddit follow-up](#part-2-reddit-follow-up). Direct Reddit page fetching still failed, and browser access stopped at a CAPTCHA. The original quotes below remain unchanged and do not come from those blocked sources. The follow-up covers selected discussions in r/talesfromcallcenters, r/CustomerService and r/AmazonDSPDrivers, plus relevant adjacent communities; r/FlipkartSeller remains unverified.
-- **Sources used:** Hacker News comments, Zendesk Community, Shopify Community, Amazon Seller Forums (UK and India), TechEnclave (an Indian tech forum), Voxya and ConsumerComplaints.in (Indian complaint sites), Rest of World via Scroll.in, Reuters via the Irish Times, an arXiv interview study of call-centre reps, CX Dive, and two vendor or seller blogs, which are labelled.
-- **How quotes were checked:** HN quotes were copied from the raw comment text through the HN API, so they are exact. All other quotes were pulled with a page-fetch tool that was told to copy text word for word. Spot-check any quote before you put it on a slide.
-- **Bias warning:** the HN commenters are mostly Western and often former agents, so treat their quotes as signal, not as Indian data. Indian complaint sites lean toward cases that were never resolved.
-
----
-
-### A. Support executive's daily pain
-
-**A1. Handle-time targets punish agents for problems they don't cause, like slow tools and complex cases.**
-> "Call center metrics are all about average call length. However, the slowness of the software is largely ignored, in my experience." (LocalH)
-
-https://news.ycombinator.com/item?id=28258300
-
-**A2. Agents are measured on several conflicting metrics at once. Handle time, wrap (after-call) time and data capture pull against each other.**
-> "If you spend too much time in wrap, you're in trouble. If you don't collect all the information you need to after a call, you're in trouble." (reificator)
-
-https://news.ycombinator.com/item?id=19514622
-
-**A3. Metric pressure makes agents game the system by transferring, needling or deflecting hard cases. The KPI looks fine while the customer suffers.**
-> "deliberately upset the customers so that they would demand a supervisor and you could transfer them." (HN, ex call-centre agent)
-
-https://news.ycombinator.com/item?id=16893036
-
-> "the most logical thing to do is find some within-the-rules way to transfer the customer to someone else" (HN, ex call-centre agent)
-
-https://news.ycombinator.com/item?id=15241494
-
-**A4. Context lives in different places. Agents scroll and click to rebuild the history, such as an address the customer gave earlier or the customer panel.**
-> "So I scroll up to see the address they mentioned earlier." (P4, call-centre rep)
-
-https://arxiv.org/html/2507.00513
-
-> "Is there a way to default that back to Customer Information when opening a ticket?" (Victor19, Zendesk agent)
-
-https://community.zendesk.com/fid-8/tid-15292
-
-**A5. Small layout decisions cost real time across hundreds of tickets, for example where the reply box sits.**
-> "they hate having to scroll down to the bottom of the page to get to the reply section." (Geran, Zendesk admin)
-
-https://community.zendesk.com/fid-0/tid-5222
-
-**A6. The emotional load is constant, and denying it leads to burnout.**
-> "pretending that people aren't mean is a one-way ticket to burnout" (dqv, support worker)
-
-https://news.ycombinator.com/item?id=41751624
-
-> "You quickly develop an emotional rhino hide or you won’t make it." (HN, ex call-centre agent)
-
-https://news.ycombinator.com/item?id=48036886
-
-### B. "Delivered but not received"
-
-**B1. The standard playbook is to get proof of delivery first and refund later. Proof means photo, GPS, time and OTP. Then check neighbours, then raise a courier investigation using the AWB number.** (Indian seller-logistics blog, vendor source)
-> "Request the POD—this should include delivery photo, GPS coordinates, delivery time, and OTP/signature confirmation."
-
-> "Do not refund immediately in most cases—wait for the POD and investigation result first."
-
-https://www.shipmozo.com/blog/order-marked-delivered-but-not-received
-
-**B2. Proof of delivery is often not enough to settle it. Marketplaces side with the customer even when there is a photo, GPS or a signature, and sellers resent it.**
-> "does not matter if you hand deliver the item yourself, if the customer claims non-delivery you don't stand a chance." (Amazon UK seller)
-
-https://sellercentral.amazon.co.uk/seller-forums/discussions/t/abe7fe33-a681-4a25-97e4-193b2244d590
-
-> "Neither tracking nor photographs are considered proof of delivery. Only Signature constitutes proof." (Amazon India seller)
-
-https://sellercentral.amazon.in/seller-forums/discussions/t/82299b3d-8e74-479c-a60c-27ced7832b9b
-
-**B3. Merchants assume fraud by default ("refund or scam?"). Customers, on the other side, get treated as suspects.**
-> "Should I just refund them or is it a scam?" (Allison_Dow, Shopify merchant)
-
-> "I would not recommend refunding the order" (Victor_5, Shopify community)
-
-https://community.shopify.com/c/payments-shipping-and/are-you-getting-scammers-claiming-packages-not-delivered/m-p/1920808
-
-**B4. In India, "delivered" is often the courier's word against the customer's. Agents repeat the courier's status back to the customer, which feels like blame.**
-> "i called to customer care they r telling it is my mistake and it is auto generated message." (Voxya complaint, 2019)
-
-https://voxya.com/consumer-complaints/package-not-delivered-but-in-the-status-it-showing-delivered/33769
-
-> "the seller confirmed with the courier partner that order was intact" (Flipkart refund cancelled repeatedly, Voxya 2023)
-
-https://voxya.com/consumer-complaints/missing-product-inside-packaging-but-flipkart-refusing-refund-request-again-and-again/182877
-
-**B5. Rigid time windows shut out real cases. A complaint gets refused because it arrived after N days, even when the customer never got an OTP.**
-> "we never received the order, any delivery message, call or otp from their end." (Meesho, Voxya 2023)
-
-> "They wouldn't file our complain as it's above * days" (same complaint)
-
-https://voxya.com/consumer-complaints/prepaid-order-not-delivered-/215571
-
-**B6. Customers get asked for heavy proof, such as police reports, and agents rarely get the authority to judge.**
-> "My item was marked as “delivered” but isn’t actually here, contacted Amazon and they’re asking for a police report" (quoted on HN)
-
-https://news.ycombinator.com/item?id=36425896
-
-**B7. Repeat claimers exist, and the platform's response can swing to blanket refusal.**
-> "Meesho initially refunded for 15-20 orders and then said return rates are very high and stopped refunding" (mehtaarjun, TechEnclave)
-
-https://techenclave.com/t/meesho-and-shadowfax-are-scammers-stay-away/263320
-
-### C. AI in support, from the agent's side
-
-**C1. Copilot suggestions need editing before they can be sent. If the agent has to trim a draft, it can take longer than writing the reply.**
-> "Using the template takes more time—we have to trim it, cut unnecessary parts," (P2, call-centre rep)
-
-> "If we don't manually verify and adjust it, and just go with the system's default suggestion, there will be many errors," (P2)
-
-https://arxiv.org/html/2507.00513
-
-**C2. Sentiment and emotion alerts misfire, and agents lose trust in the AI quickly.**
-> "it merely judges by volume level, often misinterpreting normal volume as attitude problems." (P3, call-centre rep)
-
-https://arxiv.org/html/2507.00513
-
-**C3. AI can work as a boss that watches the agent instead of a helper. Real-time scoring adds pressure.**
-> "AI is supposed to make our lives easier, but I just see it as my boss," (Renzo Bahala, Concentrix agent)
-
-> "I have to please the AI." (same agent)
-
-https://scroll.in/article/1076373
-
-**C4. Bots take the easy tickets, so humans get only the hard and angry ones, often without the context they need.**
-> "There are no easy calls anymore," (Jeannie Walters, CX consultant)
-
-> "filter complexity towards the agents instead of eliminating it." (Jonathan Schmidt, Gartner)
-
-https://www.customerexperiencedive.com/news/agents-are-overloaded-ai-often-makes-it-worse-experts-say/819123/
-
-> "You need a very small number of people to just handle negative experiences." (Nikhil Gupta, LimeChat co-founder)
-
-https://www.irishtimes.com/business/work/2025/10/20/artificial-intelligence-chatbots-replacing-indias-call-centre-workers
-
-**C5. Fear of replacement is real in Indian support jobs.**
-> "I was told I am the first one who has been replaced by AI," (Megha, former Bengaluru support worker)
-
-https://www.irishtimes.com/business/work/2025/10/20/artificial-intelligence-chatbots-replacing-indias-call-centre-workers
-
-**C6. Agents value AI that helps them understand the customer. AI glitches inside the tool, like wrong signatures or broken macros, cost trust.**
-> "I have used ChatGPT to tell me what the customer is actually asking of me, when I didn't understand their emails." (LoveMortuus, support agent)
-
-https://news.ycombinator.com/item?id=36824725
-
-> "we sometimes noticed the signature from the auto-assist adding another agent's signature from previous interactions" (Premium11, Zendesk admin)
-
-https://community.zendesk.com/fid-0/tid-6310
-
-### D. Team lead and supervisor pain
-
-**D1. Dashboards used for policing push agents to game the numbers and burn out. Leads need a way to coach.** (vendor blog)
-> "Real-time dashboards used exclusively for policing, never for support"
-
-> "Lead with the questions. Use the numbers as context, not as ammunition."
-
-https://vicistack.com/blog/call-center-agent-burnout/
-
-**D2. Real-time micromanagement by handle time hurts morale and does nothing for quality.**
-> "Then he will publicly berate you for 15 minutes if your average handle time deviates from the last hour." (devopsproject, ex agent)
-
-https://news.ycombinator.com/item?id=14108525
-
-**D3. Metrics mislead. Tickets closed fast can mean tickets closed without a fix, and pay tied to closure speed makes it worse.**
-> "there are a bunch of incentives in the support contract around how quickly support can close out tickets" (HN, enterprise user)
-
-https://news.ycombinator.com/item?id=24694706
-
-> "it's very easy to measure cost ... and very hard to measure any outcome the customer actually cares about." (HN)
-
-https://news.ycombinator.com/item?id=44975160
-
-**D4. Supervisor nudges written as accusations make agents defensive. Coaching prompts should be neutral and carry context.**
-> "Hey, I see that you closed out Ticket #XYZ without any resolution or response sent to the requester." ... "it would make me furious" (ex tech-support agent)
-
-https://news.ycombinator.com/item?id=19492608
-
-**D5. When AI auto-scores every interaction, leads drift away from coaching, and agents feel judged by a machine.**
-> "tells me if I need to slow down, speed up, or deliver a statement with empathy" (Concentrix employee, on AI co-pilot)
-
-> "Managers would keep reminding us to finish. It was never-ending." (Manila BPO employee)
-
-https://scroll.in/article/1076373
-
-### E. India-specific
-
-**E1. Refund-to-source on UPI leaves a gap between "refund initiated" and "money in my bank". Agents can only say "check with your bank".**
-> "Your team have given me a standard reply to check with the bank." (Swiggy customer)
-
-> "Everytime they say it will be refunded within 2, 5, 7 days and nothing has changed" (Swiggy customer)
-
-https://www.consumercomplaints.in/swiggy-didnt-receive-refund-of-a-failed-transaction-c1812624
-
-**E2. The merchant and the bank both say "not our problem". The customer needs a UTR or reference number to chase the refund, and agents often don't show it.**
-> "as per swiggy the refund has already done on 26th jan." (Jupiter user)
-
-> "they are saying that transaction was made using different bank account in Jupiter" (same)
-
-https://community.jupiter.money/t/upi-refund-not-credited/49827
-
-**E3. Wallet credits instead of cash refunds, and wallet promises that never land, cause disputes. Escalation teams repeat policy instead of solving.**
-> "I was told that the amount would be credited to Flipkart wallet after 15 days and that didn't happen." (sama, TechEnclave)
-
-> "their escalation team just called to again give the same drab reply on it being non-refundable" (sama)
-
-https://techenclave.com/t/flipkart-feedback-thread/194222?page=17
-
-**E4. L1 support is seen as a dead end. Customers re-explain the problem to many agents, and issues get closed without a fix.**
-> "after about a dozen attempts repeating the same issue to multiple persons" (logistopath, TechEnclave)
-
-> "they casually closed all issues opened by me and rejected the return." (Santy, TechEnclave)
-
-https://techenclave.com/t/i-have-been-scammed-by-flipkart-and-amd/256259
-
-**E5. OTP-based delivery is both proof and a point of friction. Pushy delivery partners and missing OTPs muddy the evidence.**
-> "the delivery person kept pressing for OTP" (sama, TechEnclave, Flipkart)
-
-https://techenclave.com/t/flipkart-feedback-thread/194222?page=17
-
-**E6. Vernacular, mostly tier-2 users and AI-plus-human setups are the norm at Meesho.**
-> "high use of vernacular language has been detected on both buyer and seller sides" (Business Today on Meesho)
-
-> "humans are working hand-in-hand with AI-enabled bots wherever need for human intervention is felt."
-
-https://www.businesstoday.in/amp/technology/news/story/heres-how-e-commerce-unicorn-meesho-is-deploying-ai-for-ease-of-business-432051-2024-06-04
-
-### F. Customer side
-
-**F1. Bot loops and walls make customers angry before a human ever joins, so the human starts at a disadvantage.**
-> "I can act ruder when talking to a customer service agent after frustratingly trying to get through a dumb chat bot" (AznHisoka)
-
-https://news.ycombinator.com/item?id=39141338
-
-> "the quickest way to get out of the loop and talk to a real human was to become insulting." (almatabata)
-
-https://news.ycombinator.com/item?id=39442677
-
-**F2. Customers swear at bots on purpose to get a human. A vendor saw this in real chat logs.**
-> "people will straight up say slurs in chats because they know it's the quickest way of escalating to an actual human" (employee at a support-software company)
-
-https://news.ycombinator.com/item?id=44675045
-
-**F3. Customers have to repeat everything after a bot-to-human handoff. They want the history carried over.**
-> "It remains important to eventually escalate to humans - including the history from all of these interactions to avoid frustrations" (HN)
-
-https://news.ycombinator.com/item?id=39376552
-
-**F4. A bot that knows its limits and hands off fast is acceptable. A bot that pretends to help is not.**
-> "I was surprised by how quickly it knew its own limitations and handed me to an actual human who helped me out." (ex support worker)
-
-https://news.ycombinator.com/item?id=40935870
-
-**F5. Agents who "resolve" a case to please the survey break trust when the promise fails a week later.**
-> "a week later you realize everything you have been told was a lie." (HN, on CSAT-driven agents)
-
-https://news.ycombinator.com/item?id=39405589
-
-**F6. Refund timelines keep moving and nobody owns the follow-up.**
-> "It's been more than 30 bloody business days and they still haven't received my refund." (Swiggy customer)
-
-https://www.consumercomplaints.in/swiggy-didnt-receive-refund-of-a-failed-transaction-c1812624
-
----
-
-### Top 10 insights for the design (ranked)
-
-1. **Agents rebuild context across tools for every ticket** (A4, A5, C4). The design should put order, payment, courier proof of delivery and conversation history on one screen when the ticket opens. AI pre-assembles a case brief, so the agent never scrolls back to find an address or a reference number.
-2. **For delivered-not-received, the case turns on evidence** (B1, B2, B4). The design should show a single proof-of-delivery card with the photo, GPS distance from the address, delivery time, OTP status and the rider's history. AI flags any mismatch, for example "GPS 600 m from address".
-3. **Policy, not the agent's gut, decides refund vs. replacement vs. courier claim** (B1, B5, E3). The design should have AI recommend a resolution with the policy rule and the reasoning visible, such as order value, customer's claim history and POD strength. The agent stays the decision-maker, with one-click accept or override.
-4. **AI drafts are only useful if they're quick to edit and easy to trust** (C1, C2, C6). The design should keep drafts short and editable, cite their sources, never auto-send, and show a confidence level. Sentiment cues should be shown as hints, not as scores.
-5. **Customers arrive angry and repeating themselves after the bot** (F1, F2, F3, C4). The design should start each human handoff with a summary of what the bot already tried and what the customer said, including a mood cue, so the agent's first line acknowledges it.
-6. **Fraud suspicion and customer trust are in tension** (B3, B6, B7). The design should surface repeat-claim risk to the agent privately, as a neutral risk signal, and never in customer-facing text. Low-risk customers should get a fast path.
-7. **UPI refunds don't end when the agent clicks "refund"** (E1, E2, F6). The design should treat the refund as tracked status: initiated, then the bank's reference number (ARN/UTR), then credited. It should give the agent a ready-to-send message with the reference number and an SLA date, and reopen the ticket automatically if the money isn't credited.
-8. **Metrics push agents toward bad behaviour** (A1, A2, A3, D3). The design should keep a raw handle-time timer out of the agent's way. The team-lead screen should pair speed metrics with outcome metrics: reopen rate, repeat contacts, refunds reversed.
-9. **Team leads need early warnings and coaching material, not a policing view** (D1, D2, D4, D5). The design should give the TL screen spike detection, such as a surge of "delivered not received" tickets from one courier hub or pincode. It should add an SLA-breach forecast and agent load and burnout signals, with coaching prompts that carry context.
-10. **India means vernacular, OTP, COD and wallets** (E4, E5, E6). The design should show the customer's language and payment mode (COD, UPI, card, wallet) up front. AI translates and drafts in the customer's language. Refund options should reflect the payment mode: bank details for COD, source for UPI, wallet as opt-in only.
-
-### Questions to ask real support agents in interviews
-
-1. Walk me through the last "delivered but not received" ticket you handled. Which screens or tabs did you open, and in what order?
-2. What proof of delivery can you actually see today (photo, GPS, OTP, rider notes)? How long does it take to get it from the courier?
-3. Who decides between refund, replacement and courier claim? When do you need a TL's approval?
-4. How do you tell a genuine customer from a repeat claimer? What signals do you trust?
-5. Which metrics are you measured on (AHT, FCR, CSAT, QA)? Which one changes how you behave on a call or chat?
-6. What happens after you close a ticket? How much after-call work is there, such as notes, tags and dispositions?
-7. When a refund goes to UPI or a wallet and the customer says it hasn't arrived, what can you tell them? What can you see?
-8. If you use AI or macros today, when do you trust a suggested reply, and when do you rewrite it?
-9. What does a bot handoff look like when a chat reaches you? What do you wish you knew in the first 10 seconds?
-10. Which languages do your customers use? What do you do when you can't speak a customer's language?
-11. (For TLs) How do you notice a spike or a problem agent today? What do you check first thing each shift?
-12. (For TLs) Tell me about the last time a metric looked good but the team was actually struggling.
-
-## Part 2: Reddit follow-up
-Researched 4 November 2026 for the Juspay assignment. Supplements Part 1 above.
-
-### Access and evidence limits
-
-Web search returned indexed post and comment text, sometimes substantial discussion excerpts. These are search-provider copies, not live verification of complete threads. Direct page fetches failed; opening Reddit in the browser showed a CAPTCHA, which was not completed. Indexed content can be incomplete or stale. Quotes below are exact text returned by search, pending a live-page check before presentation use.
-
-This is a purposive sample of seven discussions, not an exhaustive subreddit review or a prevalence study. Contributors' jobs, identities and accounts of events are unverified. Several discussions concern US/Western services; they do not establish Indian workflows, legal requirements, platform policies or the prevalence of fraud. Product implications below are hypotheses, not approved design decisions. r/FlipkartSeller yielded no useful verified discussion in this pass; do not count it as covered.
-
-### 1. Executives investigate more than delivery status
-
-Source: [“delivered but not received”, r/CustomerService](https://www.reddit.com/r/CustomerService/comments/101okr3), post 2 January 2023; relevant reply 5 January 2023.
-
-A respondent describes checking delivery photos, package weight when an empty package is alleged, and account/address history before deciding how to assist. Another reports internal escalation of repeated claims and says leadership follows up with carriers. These are different self-reported workflows, not one standard policy.
-
-> “We do some research and look for things like photos of the delivery (some carriers take them) to see if they delivered to the correct address”
-
-Hypothesis to test: assemble evidence with provenance and missing-data states. Repeated claims should prompt investigation, not become an automatic fraud verdict. Package weight is relevant to an empty-package branch, not necessarily the assignment's missing-package scenario.
-
-### 2. A delivery label may hide a different handover
-
-Source: [Why does package get marked as delivered to resident when it's not?, r/AmazonDSPDrivers](https://www.reddit.com/r/AmazonDSPDrivers/comments/17r5jee), 9 November 2023.
-
-Comments propose several possible explanations: handover to reception or another person, a wrong address, or selection of a status that protects a driver's score. These explanations were not verified against the delivery in question.
-
-Hypothesis to test: keep the recorded status, actual available proof, and customer's account distinct. Show contradictions for investigation rather than letting AI assert what happened.
-
-### 3. Delayed metrics are hard to act on
-
-Source: [Customer Feedback, r/AmazonDSPDrivers](https://www.reddit.com/r/AmazonDSPDrivers/comments/16h15ra), post 12 September 2023; relevant reply 13 September 2023.
-
-A commenter says feedback arrives after multiple delivery days and asks to see the delivery instructions and their photo. They also distinguish negative non-receipt feedback from an official DNR metric. Other comments disagree on metric thresholds.
-
-> “If I deliver for four days, and then next week I get the report, how am I going to learn from it?”
-
-Hypothesis to test: a Team Lead alert should link to specific cases, dates and evidence. Validate metric definitions rather than borrowing Reddit's thresholds or treating a complaint as a confirmed loss.
-
-### 4. Bot friction can make the human's job harder
-
-Source: [AI in Customer Support, r/CustomerService](https://www.reddit.com/r/CustomerService/comments/1m43j4i/ai_in_customer_support/), discussion beginning 19 July 2025.
-
-Comments describe repeated requests to reach a human, context not carrying over, and AI QA marking agents down incorrectly. There are also favorable views about narrow automation and reviewing more interactions. The original poster discloses their company is experimenting with AI support; some replies promote tools, so vendor recommendations were not used as evidence.
-
-> “And they don't seem to share the long complicated information I tell them with the human either.”
-
-Hypothesis to test: the executive should see what the customer already explained and what automation attempted. Evaluate handoff accuracy and correction effort. Do not infer universal opposition to AI from this self-selected discussion.
-
-### 5. Refund workflows involve identity and cross-team handoffs
-
-Source: [In-Store Credit refund request from Hell, r/talesfromcallcenters](https://www.reddit.com/r/talesfromcallcenters/comments/103gqsb), 4 January 2023.
-
-A self-described former Team Lead recounts back-office follow-ups, accounting requests, an original-purchaser versus requester mismatch, and an agent contacting the wrong party. The author explicitly says some details are secondhand. A legal assertion in the post is disputed in the comments and must not be treated as law.
-
-Hypothesis to test: distinguish requester, purchaser, contact recipient and refund beneficiary. Show the responsible team and pending handoff rather than allowing a click to imply that accounting has completed a refund.
-
-### 6. Conflicting location evidence leaves merchants unsure
-
-Source: [Customer saying package wasn't delivered, USPS not helpful, should I ignore or just refund them?, r/smallbusiness](https://www.reddit.com/r/smallbusiness/comments/1hcnjwe), 12 December 2024.
-
-The merchant reports a delivery location of front desk/mail room for a customer living in a house, a service request closed without an explanation, and an insurance claim denied. The writer also suspects the customer; neither suspicion nor the delivery account is independently established.
-
-Hypothesis to test: surface address/location mismatches and investigation outcomes. A courier case being closed should not silently mean the customer's issue is resolved.
-
-### 7. Customers cannot easily prove an absence
-
-Source: [Proof of something not delivered, r/Aliexpress](https://www.reddit.com/r/Aliexpress/comments/1hrpouh), 2 January 2025.
-
-The customer reports a refused refund, a demand for non-receipt evidence, and no identifiable last-mile carrier. Replies suggest evidence options but cannot establish what the platform actually accepts.
-
-> “How can I add proof of something that didn't happen.”
-
-Hypothesis to test: request specific obtainable evidence and explain what it helps establish. Track information the business must obtain itself instead of repeatedly asking the customer to prove non-receipt.
-
-### What this adds to the existing research
-
-- Supports further investigation of evidence gathering, bot-to-human context transfer, and unresolved follow-ups.
-- Adds specific workflow risks: wrong contact recipient, ambiguous delivery-location labels, delayed metric feedback, and a closed courier case without a customer resolution.
-- Does not validate any universal refund rule, fraud classifier, GPS cutoff or AI confidence score. The existing ranked design insights remain proposals to test.
-
-### Questions for interviews
-
-1. Which proof-of-delivery fields are visible to the executive, which require a courier request, and which are never available?
-2. What happens when the delivery label, photo, address and customer account contradict each other?
-3. Who owns a pending courier investigation or accounting request, and what event actually resolves the customer ticket?
-4. Can you distinguish purchaser, requester, contact recipient and refund beneficiary in the current tool?
-5. Which bot history is reliably transferred, and what do you still have to ask again?
-6. Can a lead trace an alert to a specific ticket and event, or is it only an aggregate score?
+What support executives, team leads and customers say about support work, with a focus on e-commerce and "marked delivered, but not received". Gathered 4 November 2026 for the Juspay assignment.
+
+## How it was gathered
+
+- **Sources:** Hacker News, Zendesk Community, Shopify Community, Amazon Seller Forums (UK, India), TechEnclave, Voxya and ConsumerComplaints.in, Rest of World via Scroll.in, Reuters via the Irish Times, CX Dive, an arXiv interview study of call-centre reps, two vendor or seller blogs (labelled), and seven Reddit discussions.
+- **Quotes:** HN quotes are exact (copied from the HN API). Other quotes were copied word for word by a page-fetch tool. Reddit quotes come from search-engine copies; Reddit itself was blocked by a CAPTCHA. Spot-check a quote before it goes on a slide.
+- **Limits:** HN commenters are mostly Western, often ex-agents, so treat them as signal, not Indian data. Indian complaint sites lean toward unresolved cases. The Reddit pass is a small, hand-picked sample of self-reported stories, not a prevalence study. None of this proves a refund rule, a fraud rate or a GPS cutoff.
+
+## Key insights for the design
+
+1. **Agents rebuild context across tools on every ticket** (§1, §3). Put order, payment, courier proof and the conversation on one screen when the ticket opens, with an AI brief so nobody scrolls back for an address.
+2. **"Delivered but not received" turns on evidence** (§2). One proof card: photo, GPS distance from the address, time, OTP and rider history. The AI flags mismatches like "GPS 600 m from address" but doesn't decide what happened.
+3. **Policy, not gut, decides refund, reship or courier claim** (§2, §5). The AI recommends with the rule and the reasons visible (value, claim history, proof strength). The agent accepts or overrides.
+4. **AI drafts only help if they're quick to edit and easy to trust** (§3). Short, editable, sourced, never auto-sent. Mood shown as a hint, not a score.
+5. **Customers reach a person angry and repeating themselves** (§3, §6). Every handover starts with what the bot tried and what the customer said, with a mood cue.
+6. **Fraud suspicion and customer trust pull against each other** (§2). Show repeat-claim risk privately as a neutral signal, never in customer-facing text, and give low-risk customers a fast path.
+7. **A UPI refund doesn't end at "refund"** (§5, §6). Track it: initiated, reference number (ARN/UTR), credited. Give the agent a ready message with the reference and date, and reopen if the money doesn't arrive.
+8. **Metrics push agents toward bad behaviour** (§1, §4). Keep a raw handle-time timer out of the agent's way. Pair speed with outcomes on the lead's screen: reopens, repeat contacts, refunds reversed.
+9. **Team leads need early warnings and coaching, not policing** (§4). Spike detection (one courier, one area), SLA-breach warnings, load and burnout signals, each linked to the actual tickets.
+10. **India means vernacular, OTP, COD and wallets** (§5). Show language and payment mode up front, draft in the customer's language, and match refund options to the payment mode.
+
+## What we found
+
+### 1. The executive's day
+
+- **Handle-time targets punish agents for things they don't control.** "Call center metrics are all about average call length. However, the slowness of the software is largely ignored, in my experience." ([HN](https://news.ycombinator.com/item?id=28258300))
+- **Metrics conflict.** "If you spend too much time in wrap, you're in trouble. If you don't collect all the information you need to after a call, you're in trouble." ([HN](https://news.ycombinator.com/item?id=19514622))
+- **Pressure leads to gaming: transfers, deflection, needling.** "the most logical thing to do is find some within-the-rules way to transfer the customer to someone else" ([HN](https://news.ycombinator.com/item?id=15241494), also [here](https://news.ycombinator.com/item?id=16893036))
+- **Context is scattered.** "So I scroll up to see the address they mentioned earlier." ([arXiv study](https://arxiv.org/html/2507.00513), also [Zendesk](https://community.zendesk.com/fid-8/tid-15292))
+- **Small layout choices cost time across hundreds of tickets.** "they hate having to scroll down to the bottom of the page to get to the reply section." ([Zendesk](https://community.zendesk.com/fid-0/tid-5222))
+- **The emotional load is constant.** "pretending that people aren't mean is a one-way ticket to burnout" ([HN](https://news.ycombinator.com/item?id=41751624), also [here](https://news.ycombinator.com/item?id=48036886))
+
+### 2. "Delivered but not received"
+
+- **The playbook: proof first, refund later.** Photo, GPS, time and OTP, then neighbours, then a courier investigation. "Do not refund immediately in most cases—wait for the POD and investigation result first." ([seller blog, vendor source](https://www.shipmozo.com/blog/order-marked-delivered-but-not-received))
+- **Agents check more than the status:** delivery photos, account and address history, and they escalate repeat claims. "We do some research and look for things like photos of the delivery (some carriers take them) to see if they delivered to the correct address" ([r/CustomerService](https://www.reddit.com/r/CustomerService/comments/101okr3))
+- **Proof often doesn't settle it.** Marketplaces side with the customer even with a photo or GPS. "Neither tracking nor photographs are considered proof of delivery. Only Signature constitutes proof." ([Amazon India sellers](https://sellercentral.amazon.in/seller-forums/discussions/t/82299b3d-8e74-479c-a60c-27ced7832b9b), also [UK](https://sellercentral.amazon.co.uk/seller-forums/discussions/t/abe7fe33-a681-4a25-97e4-193b2244d590))
+- **A "delivered" label can hide a different handover:** reception, a neighbour, a wrong address, or a status picked to protect a driver's score. ([r/AmazonDSPDrivers](https://www.reddit.com/r/AmazonDSPDrivers/comments/17r5jee))
+- **Location evidence conflicts, and a closed courier case isn't a resolved customer.** A house delivery marked "front desk/mail room", the carrier's case closed without explanation, the claim denied. ([r/smallbusiness](https://www.reddit.com/r/smallbusiness/comments/1hcnjwe))
+- **Merchants assume fraud; customers get treated as suspects.** "Should I just refund them or is it a scam?" ([Shopify](https://community.shopify.com/c/payments-shipping-and/are-you-getting-scammers-claiming-packages-not-delivered/m-p/1920808))
+- **In India it's often the courier's word against the customer's,** and agents repeat the courier's status back. "i called to customer care they r telling it is my mistake and it is auto generated message." ([Voxya](https://voxya.com/consumer-complaints/package-not-delivered-but-in-the-status-it-showing-delivered/33769), also [here](https://voxya.com/consumer-complaints/missing-product-inside-packaging-but-flipkart-refusing-refund-request-again-and-again/182877))
+- **Rigid windows shut out real cases.** "They wouldn't file our complain as it's above * days" ([Voxya](https://voxya.com/consumer-complaints/prepaid-order-not-delivered-/215571))
+- **Customers are asked to prove an absence,** sometimes with a police report. "How can I add proof of something that didn't happen." ([r/Aliexpress](https://www.reddit.com/r/Aliexpress/comments/1hrpouh), also [HN](https://news.ycombinator.com/item?id=36425896))
+- **Repeat claimers exist, and platforms can swing to blanket refusal.** "Meesho initially refunded for 15-20 orders and then said return rates are very high and stopped refunding" ([TechEnclave](https://techenclave.com/t/meesho-and-shadowfax-are-scammers-stay-away/263320))
+
+### 3. AI in support, from the agent's side
+
+- **Suggested replies need trimming and checking.** "Using the template takes more time—we have to trim it, cut unnecessary parts," ([arXiv study](https://arxiv.org/html/2507.00513))
+- **Mood detection misfires, and trust goes fast.** "it merely judges by volume level, often misinterpreting normal volume as attitude problems." ([arXiv study](https://arxiv.org/html/2507.00513))
+- **AI can feel like a boss, not a helper.** "AI is supposed to make our lives easier, but I just see it as my boss," ([Scroll.in](https://scroll.in/article/1076373))
+- **Bots take the easy tickets, so people get only the hard ones, often without context.** "filter complexity towards the agents instead of eliminating it." ([CX Dive](https://www.customerexperiencedive.com/news/agents-are-overloaded-ai-often-makes-it-worse-experts-say/819123/), also [Irish Times](https://www.irishtimes.com/business/work/2025/10/20/artificial-intelligence-chatbots-replacing-indias-call-centre-workers))
+- **What the customer told the bot often doesn't reach the person.** "And they don't seem to share the long complicated information I tell them with the human either." ([r/CustomerService](https://www.reddit.com/r/CustomerService/comments/1m43j4i/ai_in_customer_support/))
+- **Fear of replacement is real in Indian support jobs.** "I was told I am the first one who has been replaced by AI," ([Irish Times](https://www.irishtimes.com/business/work/2025/10/20/artificial-intelligence-chatbots-replacing-indias-call-centre-workers))
+- **Agents value AI that helps them understand the customer; glitches cost trust.** "I have used ChatGPT to tell me what the customer is actually asking of me, when I didn't understand their emails." ([HN](https://news.ycombinator.com/item?id=36824725), glitches: [Zendesk](https://community.zendesk.com/fid-0/tid-6310))
+
+### 4. Team leads
+
+- **Dashboards used for policing push gaming and burnout.** "Lead with the questions. Use the numbers as context, not as ammunition." ([vendor blog](https://vicistack.com/blog/call-center-agent-burnout/))
+- **Live handle-time micromanagement hurts morale, not quality.** "Then he will publicly berate you for 15 minutes if your average handle time deviates from the last hour." ([HN](https://news.ycombinator.com/item?id=14108525))
+- **Fast closure can mean closed without a fix.** "it's very easy to measure cost ... and very hard to measure any outcome the customer actually cares about." ([HN](https://news.ycombinator.com/item?id=44975160), also [here](https://news.ycombinator.com/item?id=24694706))
+- **Nudges written as accusations make agents defensive.** ([HN](https://news.ycombinator.com/item?id=19492608))
+- **Late feedback can't be acted on.** "If I deliver for four days, and then next week I get the report, how am I going to learn from it?" ([r/AmazonDSPDrivers](https://www.reddit.com/r/AmazonDSPDrivers/comments/16h15ra))
+- **When AI scores every interaction, leads drift from coaching.** "Managers would keep reminding us to finish. It was never-ending." ([Scroll.in](https://scroll.in/article/1076373))
+
+### 5. Refunds and India
+
+- **UPI refunds leave a gap between "initiated" and "in my bank",** and agents can only say "check with your bank". "Everytime they say it will be refunded within 2, 5, 7 days and nothing has changed" ([ConsumerComplaints.in](https://www.consumercomplaints.in/swiggy-didnt-receive-refund-of-a-failed-transaction-c1812624))
+- **Merchant and bank both say "not our problem";** the customer needs a reference number agents rarely show. ([Jupiter community](https://community.jupiter.money/t/upi-refund-not-credited/49827))
+- **Refunds cross teams and people:** purchaser and requester can differ, back-office follow-ups stall, and the wrong person gets contacted. ([r/talesfromcallcenters](https://www.reddit.com/r/talesfromcallcenters/comments/103gqsb))
+- **Wallet credits instead of cash, and promises that never land.** "I was told that the amount would be credited to Flipkart wallet after 15 days and that didn't happen." ([TechEnclave](https://techenclave.com/t/flipkart-feedback-thread/194222?page=17))
+- **L1 support feels like a dead end:** re-explaining to many agents, issues closed without a fix. ([TechEnclave](https://techenclave.com/t/i-have-been-scammed-by-flipkart-and-amd/256259))
+- **OTP is both proof and friction.** "the delivery person kept pressing for OTP" ([TechEnclave](https://techenclave.com/t/flipkart-feedback-thread/194222?page=17))
+- **Vernacular users and AI-plus-human setups are normal.** "high use of vernacular language has been detected on both buyer and seller sides" ([Business Today on Meesho](https://www.businesstoday.in/amp/technology/news/story/heres-how-e-commerce-unicorn-meesho-is-deploying-ai-for-ease-of-business-432051-2024-06-04))
+
+### 6. The customer's side
+
+- **Bot loops make customers angry before a person joins.** "the quickest way to get out of the loop and talk to a real human was to become insulting." ([HN](https://news.ycombinator.com/item?id=39442677), also [here](https://news.ycombinator.com/item?id=39141338) and [here](https://news.ycombinator.com/item?id=44675045))
+- **They want the history carried over.** ([HN](https://news.ycombinator.com/item?id=39376552))
+- **A bot that knows its limits and hands over fast is fine.** "I was surprised by how quickly it knew its own limitations and handed me to an actual human who helped me out." ([HN](https://news.ycombinator.com/item?id=40935870))
+- **"Resolved" for the survey breaks trust when the promise fails.** "a week later you realize everything you have been told was a lie." ([HN](https://news.ycombinator.com/item?id=39405589))
+- **Refund dates keep moving and nobody owns the follow-up.** "It's been more than 30 bloody business days and they still haven't received my refund." ([ConsumerComplaints.in](https://www.consumercomplaints.in/swiggy-didnt-receive-refund-of-a-failed-transaction-c1812624))
