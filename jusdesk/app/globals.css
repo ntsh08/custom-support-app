@@ -815,3 +815,13 @@ ul { list-style: none; }
 .sheet .esc-note span { font-size: 12px; color: var(--ink2); }
 .sheet .esc-note textarea { width: 100%; border: 1px solid var(--hair2); border-radius: 8px; padding: 8px 10px; font: inherit; font-size: 13px; line-height: 20px; color: var(--ink); background: var(--s0); resize: none; outline: 0; }
 .sheet .esc-note textarea:focus { border-color: var(--acc); }
+
+/* Owner pick with avatars, unmerge icon, task due on the right (Nitish, 8 Nov) */
+.av { flex: none; width: 18px; height: 18px; border-radius: 50%; display: inline-grid; place-items: center; background: var(--s3); color: var(--ink2); font-size: 8px; font-weight: 600; font-style: normal; letter-spacing: .02em; }
+.av.ai { background: #E3F0E8; color: #2F6547; }
+.pick2 .av, .pickmenu .av { margin-right: 6px; }
+.pickmenu .stline { display: inline-flex; align-items: center; }
+.lt li { display: flex; align-items: center; gap: 8px; }
+.lt .unlink { margin-left: auto; width: 24px; height: 24px; display: grid; place-items: center; border: 0; border-radius: 6px; background: none; color: var(--ink3); cursor: pointer; }
+.lt .unlink:hover { background: var(--s2); color: var(--ink); }
+.tasks li .tdue { margin-left: auto; align-self: flex-start; padding-top: 1px; font-size: 12px; font-style: normal; color: var(--ink3); white-space: nowrap; }

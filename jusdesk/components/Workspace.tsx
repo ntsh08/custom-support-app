@@ -26,6 +26,14 @@ const channels = (c: Case) => {
   return ch.size > 1 ? "Chat + email merged" : ch.has("email") ? "Email" : "Chat";
 };
 const owner = (g: Group, s: Stage) => (g === "escalated" ? "Priya" : s.by === "AI" ? "AI" : "You");
+const OWNERS = [
+  { value: "You", label: "You", av: "NB" },
+  { value: "AI", label: "AI assistant", av: "ai" },
+  { value: "Ritika", label: "Ritika", av: "RI" },
+  { value: "Arjun", label: "Arjun", av: "AR" },
+  { value: "Neha", label: "Neha", av: "NE" },
+  { value: "Priya", label: "Priya, team lead", av: "PR" },
+];
 const waitingG = (g: Group) => g === "customer" || g === "others";
 type SortBy = "due" | "newest" | "oldest";
 const SORTS: { id: SortBy; label: string; hint: string }[] = [
@@ -125,6 +133,8 @@ export function Workspace() {
   const [flash, setFlash] = useState<string | null>(null);
   const [tasks, setTasks] = useState<Record<string, Task[]>>(() => Object.fromEntries(CASES.map((c) => [c.id, c.tasks])));
   const [reasons, setReasons] = useState<Record<string, string | undefined>>(() => Object.fromEntries(CASES.map((c) => [c.id, c.reasonTag])));
+  const [owners, setOwners] = useState<Record<string, string>>({});
+  const [unlinked, setUnlinked] = useState<Record<string, string[]>>({});
   const [tags, setTags] = useState<Record<string, string[]>>(() => Object.fromEntries(CASES.map((c) => [c.id, c.tags])));
   const [tagMenu, setTagMenu] = useState(false);
   const [answers, setAnswers] = useState<Record<string, { q: string; a: string }[]>>({});
@@ -472,7 +482,6 @@ export function Workspace() {
             <div className="tags">
               <span><Icon name="ticket" size={14} />{c.ticket}</span>
               <span><Icon name="user" size={14} />{c.customer}</span>
-              <span><Icon name="translate" size={14} />{c.language ?? "English"}</span>
               {dueFor(status) && stage.timeLeft && <span className={stage.urgent ?? ""}><Icon name="clock" size={14} />{stage.timeLeft === "Now" ? "Reply now" : `Reply in ${stage.timeLeft}`}</span>}
             </div>
           </header>
@@ -564,9 +573,8 @@ export function Workspace() {
                   <Pick label="Status" chip={`st st-${status}`} value={status} options={(Object.keys(STATUS) as Group[]).map((g) => ({ value: g, label: STATUS[g], dot: g }))} onChange={(v) => setStatus(v as Group)} />
                   {status === "customer" && <span>AI nudges on day 3 and 7, closes on day 14 if there&apos;s no reply</span>}
                 </dd></div>
-                <div><dt><Icon name="user" size={14} />Owner</dt><dd>{owner(status, stage)}</dd></div>
+                <div><dt><Icon name="user" size={14} />Owner</dt><dd><Pick label="Owner" value={owners[c.id] ?? owner(status, stage)} options={OWNERS} onChange={(v) => { setOwners((o) => ({ ...o, [c.id]: v })); setFlash(v === "You" ? "Assigned to you" : `Assigned to ${v}`); }} /></dd></div>
                 {dueFor(status) && stage.timeLeft && <div><dt><Icon name="clock" size={14} />Reply due</dt><dd className={stage.urgent ?? ""}>{stage.timeLeft === "Now" ? "Now" : `In ${stage.timeLeft}`}</dd></div>}
-                {open && c.followUp && <div><dt><Icon name="calendar" size={14} />Follow up</dt><dd>{c.followUp}</dd></div>}
                 <div><dt><Icon name="flag" size={14} />Reason</dt><dd>
                   <Pick label="Contact reason" missing={!reasons[c.id]} value={reasons[c.id] ?? ""} options={[{ value: "", label: "Select reason" }, ...REASONS.map((r) => ({ value: r, label: r }))]} onChange={(v) => setReasons((r) => ({ ...r, [c.id]: v || undefined }))} />
                 </dd></div>
@@ -612,9 +620,9 @@ export function Workspace() {
 
             <section className={`blk${shut["Linked tickets"] ? " shut" : ""}`} hidden={tab !== "details"}>
               <h4><button className="fold" aria-expanded={!shut["Linked tickets"]} onClick={() => toggle("Linked tickets")}><Icon name="chev" size={14} />Linked tickets</button></h4>
-              {c.linkedTickets?.length ? (
-                <ul className="lt">{c.linkedTickets.map((t) => (
-                  <li key={t.id}><span className="tk"><Icon name="ticket" size={12} />{t.id}</span>Merged {t.channel.toLowerCase()} ticket</li>
+              {c.linkedTickets?.filter((t) => !unlinked[c.id]?.includes(t.id)).length ? (
+                <ul className="lt">{c.linkedTickets.filter((t) => !unlinked[c.id]?.includes(t.id)).map((t) => (
+                  <li key={t.id}><span className="tk"><Icon name="ticket" size={12} />{t.id}</span>Merged {t.channel.toLowerCase()} ticket<button className="unlink" title="Unmerge ticket" aria-label={`Unmerge ${t.id}`} onClick={() => { setUnlinked((u) => ({ ...u, [c.id]: [...(u[c.id] ?? []), t.id] })); setFlash(`Unmerged ${t.id}`); }}><Icon name="unlink" size={14} /></button></li>
                 ))}</ul>
               ) : <p className="hint">No linked tickets.</p>}
             </section>
@@ -632,8 +640,9 @@ export function Workspace() {
                     )}
                     <span className="tbody">
                       <span className="ttext">{t.text}</span>
-                      <span className="tmeta">{t.owner === "ai" ? <i className="owner"><Icon name="spark" size={12} />AI</i> : <i className="owner me"><Icon name="user" size={12} />You</i>}<span>{t.due}</span></span>
+                      <span className="tmeta">{t.owner === "ai" ? <i className="owner"><Icon name="spark" size={12} />AI</i> : <i className="owner me"><Icon name="user" size={12} />You</i>}</span>
                     </span>
+                    <em className="tdue">{t.due}</em>
                     {t.ai && <button className="add" onClick={() => updateTasks((ts) => ts.map((x) => (x.id === t.id ? { ...x, ai: false } : x)))}>Add</button>}
                   </li>
                 ))}
@@ -822,7 +831,7 @@ function Message({ m, customer, email, language, onAction }: { m: Msg; customer:
 
 /** The assistant's work before a reply, after the INA agent trace: one line, opens to the steps. */
 /** Dropdown in our design system (replaces the OS select): ghost trigger with chevron, white menu, tick on the current option. */
-function Pick({ label, value, options, onChange, missing, chip }: { label: string; value: string; options: { value: string; label: string; dot?: string }[]; onChange: (v: string) => void; missing?: boolean; chip?: string }) {
+function Pick({ label, value, options, onChange, missing, chip }: { label: string; value: string; options: { value: string; label: string; dot?: string; av?: string }[]; onChange: (v: string) => void; missing?: boolean; chip?: string }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLSpanElement>(null);
   useEffect(() => {
@@ -836,14 +845,14 @@ function Pick({ label, value, options, onChange, missing, chip }: { label: strin
   return (
     <span className="pickwrap" ref={ref}>
       <button type="button" className={`pick2${missing ? " missing" : ""}${chip ? ` chip ${chip}` : ""}`} aria-label={label} aria-haspopup="listbox" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
-        {cur?.label ?? "Select reason"}<Icon name="chev" size={12} />
+        {cur?.av && <Av v={cur.av} />}{cur?.av && cur.value === "AI" ? "AI" : cur?.av ? cur.value : cur?.label ?? "Select reason"}<Icon name="chev" size={12} />
       </button>
       {open && (
         <ul className="sortmenu pickmenu" role="listbox" aria-label={label}>
           {options.map((o) => (
             <li key={o.value} role="option" aria-selected={o.value === value}>
               <button type="button" onClick={() => { onChange(o.value); setOpen(false); }}>
-                <span className="stline">{o.dot && <i className={`dot st-${o.dot}`} />}{o.label}</span>
+                <span className="stline">{o.dot && <i className={`dot st-${o.dot}`} />}{o.av && <Av v={o.av} />}{o.label}</span>
                 {o.value === value && <Icon name="check" size={14} />}
               </button>
             </li>
@@ -884,4 +893,9 @@ function ComposerTabs({ mode, onChange }: { mode: "reply" | "note"; onChange: (m
       <button role="tab" data-m="note" aria-selected={mode === "note"} className={mode === "note" ? "on" : ""} onClick={() => onChange("note")}><Icon name="lock" size={14} />Internal note</button>
     </div>
   );
+}
+
+/** Small round avatar: initials, or the AI sparkle. */
+function Av({ v }: { v: string }) {
+  return <i className={`av${v === "ai" ? " ai" : ""}`} aria-hidden>{v === "ai" ? <Icon name="spark" size={10} /> : v}</i>;
 }
