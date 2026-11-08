@@ -4,7 +4,7 @@ Status: Active          Type: Scope
 Date: 2026-11-04        Decided by: Nitish
 Skill version: 1.0.0
 Screens: All (sets the whole assignment)
-Link: https://www.figma.com/design/kqO24W36v19LyhCkSP4pH5/Login-Screen?node-id=1225-80
+Link: https://www.figma.com/design/cfRDciFE94XNlCsyyshvrp/Juspay-Assignment---Nitish-Bhardwaj?node-id=1-27
 Supersedes: none
 
 ## Problem

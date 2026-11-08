@@ -1,6 +1,6 @@
 # JusDesk design system v1
 
-Lives in Figma on the **"JusDesk · Design System"** page of the [working file](https://www.figma.com/design/kqO24W36v19LyhCkSP4pH5/Login-Screen). `tokens.css` mirrors the Figma variables for the web build.
+Lives in Figma on the **"JusDesk · Design System"** page of the [working file](https://www.figma.com/design/cfRDciFE94XNlCsyyshvrp/Juspay-Assignment---Nitish-Bhardwaj?node-id=1-27). `tokens.css` mirrors the Figma variables for the web build.
 
 - **Inspired by:** Family (iOS crypto wallet) via Mobbin: black-and-white base, big numbers, pill buttons, soft grey rows, calm confirmations.
 - **Brand colour:** purple (`--jd-bg-brand` #7040F5). Also marks anything the AI suggested or did.

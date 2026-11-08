@@ -2,7 +2,7 @@
 
 Purpose: show what Nitish did, what each activity taught him, and how that informed the assignment. This is a process record, not a list of approved product decisions.
 
-Working design and references: [Figma](https://www.figma.com/design/kqO24W36v19LyhCkSP4pH5/Login-Screen?node-id=1225-80).
+Working design and references: [Figma](https://www.figma.com/design/cfRDciFE94XNlCsyyshvrp/Juspay-Assignment---Nitish-Bhardwaj?node-id=1-27).
 
 Dates below reflect documented activity or when evidence was shared. They are not estimates of time spent.
 

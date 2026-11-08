@@ -11,4 +11,4 @@ Juspay product design assignment: an AI-powered customer support workspace for a
 - [Interactive lifecycle page](diagrams/lifecycle-explorer/index.html): expandable stages and ownership comparison; editable source alongside it
 - [Design scope proposal](process/design-scope-proposal.md): recommended scenario, branches, screens and exclusions, pending review
 
-Figma: https://www.figma.com/design/kqO24W36v19LyhCkSP4pH5/Login-Screen?node-id=1225-80
+Figma: https://www.figma.com/design/cfRDciFE94XNlCsyyshvrp/Juspay-Assignment---Nitish-Bhardwaj?node-id=1-27
