@@ -288,12 +288,15 @@ export function Workspace() {
     return () => window.removeEventListener("keydown", onKey);
   }, [ordered, selected]);
 
-  // Deep links for demos and review captures: ?case=rohan&stage=failed&confirm=retry
+  // Deep links for demos and review captures: ?case=rohan&stage=failed&confirm=retry, ?tab=copilot&ask=1
   useEffect(() => {
     const q = new URLSearchParams(window.location.search);
     const cs = CASES.find((x) => x.id === q.get("case"));
     if (!cs) return;
     setSelected(cs.id);
+    if (q.get("tab") === "copilot") setTab("copilot");
+    const n = Number(q.get("ask") ?? 0);
+    if (n > 0 && cs.asks?.length) setAnswers((x) => ({ ...x, [cs.id]: cs.asks!.slice(0, n).map((k) => ({ q: k.q, a: k.a })) }));
     const sk = q.get("stage");
     if (sk && cs.stages[sk]) {
       const path = Object.keys(cs.stages);
