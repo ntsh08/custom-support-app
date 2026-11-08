@@ -149,7 +149,6 @@ export const CASES: Case[] = [
     ],
     evidence: [
       { kind: "door", title: "Delivery proof", note: "Green door, parcel on the step", door: "#2F6B4F", parcel: true },
-      { kind: "door", title: "Last delivery", note: "12 Oct · white door, flat B-204", door: "#F4F2EE", plate: "B-204" },
       { kind: "map", title: "Rider's GPS", note: "600 m from the address", metres: 600 },
     ],
     facts: [
