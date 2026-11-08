@@ -704,25 +704,21 @@ export function Workspace() {
       {confirming?.confirm && (
         <div className="sheet-scrim" onClick={() => setConfirming(null)}>
           <aside className="sheet" role="dialog" aria-modal="true" aria-label={confirming.confirm.title} onClick={(e) => e.stopPropagation()} onKeyDown={(e) => { if (e.key === "Escape") setConfirming(null); }}>
-            <header>
-              <b>{confirming.confirm.title}</b>
-              <button className="sheet-x" aria-label="Close" onClick={() => setConfirming(null)}><Icon name="x" size={14} /></button>
-            </header>
             {confirming.confirm.to ? (
               <div className="sheet-body esc">
-                <div className="esc-to"><span className="esc-av">{confirming.confirm.to.initials}</span><div><b>{confirming.confirm.to.name}</b><span>{confirming.confirm.to.role}</span></div></div>
-                <div className="esc-req">
-                  <p><b>{confirming.confirm.amount}</b><span>{confirming.confirm.sub}</span></p>
-                  <div className="esc-tags">{confirming.confirm.reasons?.map((r) => <span key={r}>{r}</span>)}</div>
-                </div>
-                <label className="esc-note"><span>Your note</span><textarea rows={2} defaultValue={confirming.confirm.draftNote} /></label>
+                <b className="sheet-q">{confirming.confirm.title}</b>
+                <label className="esc-note"><span>Note to {confirming.confirm.to.name}</span><textarea rows={4} defaultValue={confirming.confirm.draftNote} /></label>
               </div>
-            ) : (
+            ) : (<>
+              <header>
+                <b>{confirming.confirm.title}</b>
+                <button className="sheet-x" aria-label="Close" onClick={() => setConfirming(null)}><Icon name="x" size={14} /></button>
+              </header>
               <div className="sheet-body">
-                <dl className="dkv">{confirming.confirm.lines.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
+                <dl className="rows">{confirming.confirm.lines.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
                 {confirming.confirm.note && <p className="sheet-note">{confirming.confirm.note}</p>}
               </div>
-            )}
+            </>)}
             <footer>
               <button className="sec" onClick={() => setConfirming(null)}>Cancel</button>
               <button className="pri" autoFocus onClick={() => goTo(c.id, confirming.next, confirming.label)}>{confirming.confirm.cta}</button>

@@ -794,3 +794,24 @@ ul { list-style: none; }
 .composer:not(.is-note) .crow .tools > .gh:nth-child(4) { transition-delay: 90ms; }
 .composer.is-note .crow .tools > .gh { opacity: 0; transform: translateY(6px); transition-duration: .16s; }
 @media (prefers-reduced-motion: reduce) { .crow .tools > .gh { transform: none !important; transition-property: opacity, color; } }
+
+/* Modals, Linear-style (Nitish, 8 Nov): no dividers, 13px, 28px buttons, soft shadow.
+   Confirmations: small title + ×, facts in one hairline box. Escalations: the question as title, then the AI's note. */
+.sheet { width: 440px; box-shadow: 0 8px 24px rgb(17 18 20 / .08); }
+.sheet header { height: auto; padding: 16px 16px 0; border-bottom: 0; }
+.sheet header b { font-size: 14px; font-weight: 590; }
+.sheet .sheet-body { padding: 14px 16px 0; gap: 12px; }
+.sheet footer { border-top: 0; padding: 16px; }
+.sheet .rows { margin: 0; border: 1px solid var(--hair); border-radius: 8px; background: var(--s1); }
+.sheet .rows > div { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 8px; padding: 8px 12px; line-height: 18px; }
+.sheet .rows > div + div { border-top: 1px solid var(--hair); }
+.sheet .rows dt { color: var(--ink2); }
+.sheet .rows dd { margin: 0; }
+.sheet .sheet-note { padding: 0; border-top: 0; font-size: 12px; }
+.sheet .sheet-body.esc { padding: 20px 20px 0; gap: 16px; }
+.sheet .sheet-body.esc + footer { padding: 16px 20px 20px; }
+.sheet-q { font-size: 15px; font-weight: 590; line-height: 20px; }
+.sheet .esc-note { display: grid; gap: 6px; }
+.sheet .esc-note span { font-size: 12px; color: var(--ink2); }
+.sheet .esc-note textarea { width: 100%; border: 1px solid var(--hair2); border-radius: 8px; padding: 8px 10px; font: inherit; font-size: 13px; line-height: 20px; color: var(--ink); background: var(--s0); resize: none; outline: 0; }
+.sheet .esc-note textarea:focus { border-color: var(--acc); }
