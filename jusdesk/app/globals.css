@@ -754,3 +754,7 @@ ul { list-style: none; }
   .pri, .sec, .sum .sugg .sa, .sum .sugg .addtask { transition: none; }
   .pri:active, .sec:active, .sum .sugg .sa:active, .sum .sugg .addtask:active { scale: none; }
 }
+
+/* Add task menu: suggestion-row styles must not leak into the menu */
+.sum .sugg .addmenu li:not(.sconfirm) { padding: 0; min-height: 0; background: none; border-radius: 0; display: block; }
+.sum .sugg .addmenu li.mh { padding: 6px 8px 4px; font-size: 12px; line-height: 16px; color: var(--ink3); }

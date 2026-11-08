@@ -208,7 +208,7 @@ export function Workspace() {
                   <button className="addtask pri" aria-haspopup="menu" aria-expanded={addMenu === x.text} onClick={() => setAddMenu(addMenu === x.text ? null : x.text)}>Add task<Icon name="chev" size={12} /></button>
                 )}
                 {addMenu === x.text && (
-                  <ul className="sortmenu addmenu" role="menu" onMouseLeave={() => setAddMenu(null)}>
+                  <ul className="sortmenu addmenu" role="menu" ref={(el) => { el?.scrollIntoView({ block: "nearest", behavior: "smooth" }); }} onMouseLeave={() => setAddMenu(null)}>
                     <li className="mh">Who does it?</li>
                     <li role="none"><button role="menuitem" onClick={() => assign(x, "me")}><span><b>Me</b><em>Goes to your tasks</em></span>{t && t.owner !== "ai" && <Icon name="check" size={14} />}</button></li>
                     <li role="none"><button role="menuitem" disabled={!aiCan} onClick={() => assign(x, "ai")}><span><b>AI</b><em>{aiCan ? `Does it ${when(x.due)} and reports back` : "AI can't make calls"}</em></span>{t?.owner === "ai" && <Icon name="check" size={14} />}</button></li>
@@ -575,7 +575,7 @@ export function Workspace() {
                   <Pick label="Contact reason" missing={!reasons[c.id]} value={reasons[c.id] ?? ""} options={[{ value: "", label: "Not set" }, ...REASONS.map((r) => ({ value: r, label: r }))]} onChange={(v) => setReasons((r) => ({ ...r, [c.id]: v || undefined }))} />
                 </dd></div>
                 <div><dt><Icon name={channels(c).includes("merged") ? "merge" : channelIcon(c)} size={14} />Channel</dt><dd>{channels(c)}</dd></div>
-                <div className="tagrow"><dt><Icon name="smile" size={14} />Sentiment</dt><dd className="mood2" title={`Read by AI: ${c.sentiment.why}`}><span className={`mpill m-${c.sentiment.label.toLowerCase()}`}>{EMOJI[c.sentiment.label]} {c.sentiment.label}</span><span className="mwhy">{c.sentiment.why}</span></dd></div>
+                <div className="tagrow"><dt><Icon name="smile" size={14} />Sentiment</dt><dd className="mood2" title={`Read by AI: ${c.sentiment.why}`}><span className={`mpill m-${c.sentiment.label.toLowerCase()}`}>{EMOJI[c.sentiment.label]} {c.sentiment.label}</span></dd></div>
                 <div className="tagrow"><dt><Icon name="tag" size={14} />Tags</dt><dd>
                   <div className="tags">
                     {(tags[c.id] ?? []).map((t) => (
