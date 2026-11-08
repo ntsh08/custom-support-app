@@ -1,6 +1,6 @@
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
-  Unlink01Icon,
+  LinkOffIcon,
   MailReply01Icon,
   Alert02Icon, ArrowTurnBackwardIcon, BubbleChatIcon, CheckmarkCircle02Icon, Clock01Icon, CreditCardIcon,
   DeliveryTruck01Icon, GitMergeIcon, InboxIcon, Key01Icon, Location01Icon, Mail01Icon, MaximizeIcon,
@@ -41,7 +41,7 @@ const ICONS = {
   spark: SparklesIcon,
   translate: TranslateIcon,
   link: Link01Icon,
-  unlink: Unlink01Icon,
+  unlink: LinkOffIcon,
   calendar: Calendar03Icon,
   plus: Add01Icon,
   flag: Flag02Icon,
