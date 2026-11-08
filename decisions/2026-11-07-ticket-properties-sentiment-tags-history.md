@@ -21,7 +21,7 @@ The risk box is replaced by a single "Signals" row at the top of Customer histor
 Nitish, after the triage research: "We need to add sentiment in the ticket properties section" and tags "where you can select multiple". On fraud: "You should also add fraud signals for the customer. That was the whole point we were talking about: customer history."
 
 ## Evidence
-Zendesk Intelligent Triage sets intent, sentiment and language with confidence (research/competitors.md). Research insight 6: surface repeat-claim risk privately as a neutral signal, give low-risk customers a fast path (research/user-pain-points.md). Reddit agents check address and account history (research/reddit-follow-up.md).   Confidence: Medium
+Zendesk Intelligent Triage sets intent, sentiment and language with confidence (research/competitors.md). Research insight 6: surface repeat-claim risk privately as a neutral signal, give low-risk customers a fast path (research/Desk Research.md, Part 1). Reddit agents check address and account history (research/Desk Research.md, Part 2).   Confidence: Medium
 
 ## Rejected options
 - Fraud signals under Delivery evidence → moved to Customer history.
