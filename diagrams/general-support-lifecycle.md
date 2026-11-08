@@ -87,7 +87,7 @@ These are ownership models, not mutually exclusive categories of product. Human 
 | Proposed action | Intended change, policy basis and required authorization |
 | Action result | Successful, failed, pending or unknown; supporting reference |
 
-This is a conceptual separation for discussion, not a database schema. It responds to the [interview's fragmented records](../research/interviews/p01-support-practitioner.md).
+This is a conceptual separation for discussion, not a database schema. It responds to the [interview's fragmented records](../research/Custom%20Support%20Interview%20Transcript.md).
 
 ## Sources and limits
 

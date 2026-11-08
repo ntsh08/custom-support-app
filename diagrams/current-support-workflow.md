@@ -2,7 +2,7 @@
 
 Status: research reconstruction, first draft, 5 November 2026. Not a proposed product design or a universal support process.
 
-Evidence: [P01 interview synthesis](../research/interviews/p01-support-practitioner.md). Solid arrows show reported relationships; dashed arrows show links or timing that need clarification. Placement does not establish exact ordering of AI acknowledgment, task creation and labeling.
+Evidence: [P01 interview synthesis](../research/Custom%20Support%20Interview%20Transcript.md). Solid arrows show reported relationships; dashed arrows show links or timing that need clarification. Placement does not establish exact ordering of AI acknowledgment, task creation and labeling.
 
 ```mermaid
 flowchart TD

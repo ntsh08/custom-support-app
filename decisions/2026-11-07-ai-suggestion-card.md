@@ -22,7 +22,7 @@ Suggestions with a real action get a button left of "Add task" (Reship, Schedule
 Nitish: "Remove the summary part. Just show the suggestion part only." On closed tickets: "You can still give the AI summary once the ticket is closed… Keep that." On merging steps: "This could be only one suggestion instead of four." Add task: suggested by Claude, Nitish agreed ("show it by default", then "Option A").
 
 ## Evidence
-P01 keeps a personal tracker so follow-ups aren't missed (research/interviews/p01-support-practitioner.md).   Confidence: Medium
+P01 keeps a personal tracker so follow-ups aren't missed (research/Custom Support Interview Transcript.md).   Confidence: Medium
 
 ## Rejected options
 - Suggestions inside "Show investigation" → moved out.

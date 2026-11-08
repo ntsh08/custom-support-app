@@ -4,7 +4,7 @@ Drafted 5 November 2026. Working personas for the Juspay assignment, not validat
 
 Every line carries its source:
 
-- **[Interview]**: what Nitish's interviewee, a customer support executive, reported ([interview notes](interviews/p01-support-practitioner.md)). One person, B2B accounts, not consumer e-commerce.
+- **[Interview]**: what Nitish's interviewee, a customer support executive, reported ([interview notes](Custom%20Support%20Interview%20Transcript.md)). One person, B2B accounts, not consumer e-commerce.
 - **[Desk]**: public research ([pain points](user-pain-points.md), [Reddit follow-up](reddit-follow-up.md), [competitors](competitors.md)). Self-reported, unverified, mostly non-Indian.
 - **[Hypothesis]**: what the design needs to assume for the missing-delivery scenario. To be tested.
 

@@ -4,7 +4,7 @@ Status: Active          Type: IA
 Date: 2026-11-07        Decided by: Nitish
 Skill version: 1.0.0
 Screens: Queue
-Link: ../research/interviews/p01-support-practitioner.md
+Link: ../research/Custom%20Support%20Interview%20Transcript.md
 Supersedes: none
 
 ## Problem
@@ -19,7 +19,7 @@ Grouping the list by status means scrolling to reach a status once there are man
 Nitish: "suppose there are a lot of tickets in Waiting… assuming 50 tickets. I have to scroll if I have to find tickets of a certain status… this will not work." Customer name chosen over the issue as the row's first line because every ticket has the same title.
 
 ## Evidence
-P01's priorities: first response time and never losing a follow-up (research/interviews/p01-support-practitioner.md).   Confidence: Low
+P01's priorities: first response time and never losing a follow-up (research/Custom Support Interview Transcript.md).   Confidence: Low
 
 ## Rejected options
 - Status group headers in the list → too much scrolling at volume.
