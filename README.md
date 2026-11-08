@@ -2,7 +2,7 @@
 
 Juspay product design assignment: an AI-powered customer support workspace for an e-commerce business (desktop).
 
-- `research/`: competitor analysis, user pain points, Mobbin references
+- `research/`: competitor analysis and user pain points
 - `decisions/`: design decision log (why things are the way they are)
 - `process/`: [assignment activity log](process/activity-log.md), with evidence and learning
 - `diagrams/`: [current support workflow](diagrams/current-support-workflow.md) and planned operational diagrams
