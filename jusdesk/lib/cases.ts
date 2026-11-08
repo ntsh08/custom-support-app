@@ -148,13 +148,13 @@ export const CASES: Case[] = [
       { kind: "note", who: "You", time: "9:20 am", text: "Last delivery to this address was to flat B-204 (white door). Today's photo shows a green door. Probably the wrong flat." },
     ],
     evidence: [
-      { kind: "door", title: "Courier photo", note: "Green door, parcel on the step", door: "#2F6B4F", parcel: true },
+      { kind: "door", title: "Delivery proof", note: "Green door, parcel on the step", door: "#2F6B4F", parcel: true },
       { kind: "door", title: "Last delivery", note: "12 Oct · white door, flat B-204", door: "#F4F2EE", plate: "B-204" },
       { kind: "map", title: "Rider's GPS", note: "600 m from the address", metres: 600 },
     ],
     facts: [
       { icon: "key", label: "Delivery OTP", value: "Not collected" },
-      { icon: "alert", label: "Same pincode", value: "3 claims this week, all Shadowfax", tone: "bad" },
+      { icon: "alert", label: "Nearby claims", value: "3 this week, all Shadowfax", tone: "bad" },
     ],
     handoff: [
       "She wrote twice (chat 8:52, email 9:14). Both are merged here.",
@@ -283,12 +283,12 @@ export const CASES: Case[] = [
       { kind: "event", time: "10:03 am", text: "AI assigned this ticket to you", ai: true, assign: "you" },
     ],
     evidence: [
-      { kind: "missing", title: "Courier photo", note: "Shadowfax didn't share one" },
+      { kind: "missing", title: "Delivery proof", note: "Shadowfax didn't share one" },
       { kind: "map", title: "Rider's GPS", note: "1.1 km from the address", metres: 1100 },
     ],
     facts: [
       { icon: "key", label: "Delivery OTP", value: "Not collected" },
-      { icon: "alert", label: "Same pincode", value: "4th claim this week, all Shadowfax", tone: "bad" },
+      { icon: "alert", label: "Nearby claims", value: "4 this week, all Shadowfax", tone: "bad" },
       { icon: "box", label: "Size L", value: "Out of stock until December" },
     ],
     handoff: [
@@ -468,7 +468,7 @@ export const CASES: Case[] = [
       { kind: "event", time: "9:40 am", text: "AI assigned this ticket to you", ai: true, assign: "you" },
     ],
     evidence: [
-      { kind: "door", title: "Courier photo", note: "Her door, flat 12C", door: "#7A5236", parcel: true, plate: "12C" },
+      { kind: "door", title: "Delivery proof", note: "Her door, flat 12C", door: "#7A5236", parcel: true, plate: "12C" },
       { kind: "map", title: "Rider's GPS", note: "8 m from the address", metres: 8 },
     ],
     facts: [
@@ -579,7 +579,7 @@ export const CASES: Case[] = [
       { kind: "event", time: "10:31 am", text: "AI assigned this ticket to you", ai: true, assign: "you" },
     ],
     evidence: [
-      { kind: "missing", title: "Courier photo", note: "None yet: not delivered" },
+      { kind: "missing", title: "Delivery proof", note: "None yet: not delivered" },
       { kind: "map", title: "Rider at the scan", note: "4.2 km away, on the route", metres: 4200 },
     ],
     facts: [
@@ -655,7 +655,7 @@ export const CASES: Case[] = [
       { kind: "event", time: "9:22 am", text: "AI closed the ticket: customer confirmed", ai: true, status: "closed" },
     ],
     evidence: [
-      { kind: "gate", title: "Courier photo", note: "Society gate, guard's cabin" },
+      { kind: "gate", title: "Delivery proof", note: "Society gate, guard's cabin" },
       { kind: "map", title: "Rider's GPS", note: "15 m from the gate", metres: 15 },
     ],
     facts: [

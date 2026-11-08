@@ -661,7 +661,7 @@ export function Workspace() {
                   <div key={e.title}><dt><Icon name="attach" size={14} />{e.title}</dt><dd>{e.kind === "missing" ? <span className="mute">{e.note}</span> : <button className="viewlink" onClick={() => setPhoto(e)}>View photo</button>}</dd></div>
                 ))}
                 {c.evidence.filter((e): e is Extract<typeof e, { kind: "map" }> => e.kind === "map").map((e) => (
-                  <div key={e.title}><dt><Icon name="pin" size={14} />From address</dt><dd className={e.metres > 100 ? "bad" : ""}>{e.metres >= 1000 ? `${(e.metres / 1000).toFixed(1)} km` : `${e.metres} m`}</dd></div>
+                  <div key={e.title}><dt><Icon name="pin" size={14} />Rider&apos;s GPS</dt><dd className={e.metres > 100 ? "bad" : ""}>{e.metres >= 1000 ? `${(e.metres / 1000).toFixed(1)} km` : `${e.metres} m`} from address</dd></div>
                 ))}
                 {c.facts.filter((f) => f.label !== "Delivery OTP").map((f) => <div key={f.label}><dt>{f.icon && <Icon name={f.icon} size={14} />}{f.label}</dt><dd className={f.tone ?? ""}>{f.value}</dd></div>)}
               </dl>
