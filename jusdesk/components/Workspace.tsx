@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Fragment, useEffect, useMemo, useRef, useState } from "react";
+import { Fragment, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { CASES, STATUS, TITLE, type Case, type Group, type Msg, type Option, type Stage, type Task } from "@/lib/cases";
 import { EvidenceTile } from "./EvidenceTile";
 import { Icon, type IconName } from "./Icon";
@@ -500,11 +500,9 @@ export function Workspace() {
 
           {open && (
             <div className="cwrap"><div className={`composer${mode === "note" ? " is-note" : ""}`}>
-              <div className="tabs" role="tablist">
-                <button role="tab" aria-selected={mode === "reply"} className={mode === "reply" ? "on" : ""} onClick={() => setMode("reply")}><Icon name="reply" size={14} />Reply</button>
-                <button role="tab" aria-selected={mode === "note"} className={mode === "note" ? "on" : ""} onClick={() => setMode("note")}><Icon name="lock" size={14} />Internal note</button>
-              </div>
+              <ComposerTabs mode={mode} onChange={setMode} />
               <textarea
+                key={mode}
                 aria-label={mode === "note" ? "Internal note" : `Reply to ${c.customer}`}
                 value={draft}
                 placeholder={mode === "note" ? "Only your team sees this" : "Write a reply, or start with an AI draft"}
@@ -533,11 +531,9 @@ export function Workspace() {
                   <i className="sp" />
                 </> : <i className="sp" />}
                 <button className="gh" aria-label="Attach" onClick={() => setFlash("Attachments aren't wired up in the prototype")}><Icon name="attach" size={14} /></button>
-                {mode === "reply" ? (
-                  <button className="pri" onClick={send} disabled={!draft.trim()}><Icon name="send" size={14} />Send</button>
-                ) : (
-                  <button className="pri" onClick={send} disabled={!draft.trim()}><Icon name="note" size={14} />Add note</button>
-                )}
+                <button className="pri sendbtn" onClick={send} disabled={!draft.trim()}>
+                  <span key={mode} className="swap"><Icon name={mode === "reply" ? "send" : "note"} size={14} />{mode === "reply" ? "Send" : "Add note"}</span>
+                </button>
               </div>
             </div></div>
           )}
@@ -873,6 +869,23 @@ function Trace({ steps }: { steps: string[] }) {
       <div className={`steps${open ? " open" : ""}`}><div>
         <ol>{steps.map((t) => <li key={t}><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5" /></svg>{t}</li>)}</ol>
       </div></div>
+    </div>
+  );
+}
+
+/** Reply / Internal note tabs with one pill that slides to the selected tab. */
+function ComposerTabs({ mode, onChange }: { mode: "reply" | "note"; onChange: (m: "reply" | "note") => void }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [pill, setPill] = useState<{ x: number; w: number } | null>(null);
+  useLayoutEffect(() => {
+    const el = ref.current?.querySelector<HTMLElement>(`[data-m="${mode}"]`);
+    if (el) setPill({ x: el.offsetLeft, w: el.offsetWidth });
+  }, [mode]);
+  return (
+    <div ref={ref} className="tabs" role="tablist">
+      {pill && <span className="tabpill" aria-hidden style={{ width: pill.w, transform: `translateX(${pill.x}px)` }} />}
+      <button role="tab" data-m="reply" aria-selected={mode === "reply"} className={mode === "reply" ? "on" : ""} onClick={() => onChange("reply")}><Icon name="reply" size={14} />Reply</button>
+      <button role="tab" data-m="note" aria-selected={mode === "note"} className={mode === "note" ? "on" : ""} onClick={() => onChange("note")}><Icon name="lock" size={14} />Internal note</button>
     </div>
   );
 }

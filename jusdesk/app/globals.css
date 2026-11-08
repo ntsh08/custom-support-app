@@ -764,3 +764,24 @@ ul { list-style: none; }
 
 /* Back-to-back status lines sit closer: 8px instead of the 20px between messages */
 .grpmsg:has(> .stchg:first-child) + .grpmsg:has(> .stchg:first-child) { margin-top: -12px; }
+
+/* Composer: Reply ↔ Internal note switch (option C + 3, Nitish 8 Nov) */
+.composer { transition: background-color .22s var(--ease-out), border-color .22s var(--ease-out); }
+.composer .tabs { position: relative; }
+.composer .tabs button { position: relative; transition: color .22s var(--ease-out); }
+.composer .tabs button.on { background: none; }
+.tabpill { position: absolute; top: 0; left: 0; height: 24px; border-radius: 6px; background: var(--s2); box-shadow: 0 0 0 1px transparent;
+  transition: transform .24s var(--ease-out), width .24s var(--ease-out), background-color .22s var(--ease-out), box-shadow .22s var(--ease-out); }
+.composer.is-note .tabpill { background: #fff; box-shadow: 0 0 0 1px #F0DFAE; }
+.composer.is-note .tabs button { color: #A08439; }
+.composer.is-note .tabs button.on { color: #5C4300; }
+.composer.is-note textarea::placeholder { color: #B49A5A; }
+.composer textarea { animation: co-fade .18s var(--ease-out) both; }
+/* One button whose colour fades and whose label crossfades; fixed width so it never jumps */
+.composer .sendbtn { width: 104px; justify-content: center; overflow: hidden; transition: background-color .22s var(--ease-out), border-color .22s var(--ease-out), color .22s var(--ease-out); }
+.sendbtn .swap { display: inline-flex; align-items: center; gap: 6px; animation: swap-in .22s var(--ease-out) both; }
+@keyframes swap-in { from { opacity: 0; transform: translateY(6px); filter: blur(2px); } to { opacity: 1; transform: none; filter: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .tabpill { transition: background-color .15s ease; }
+  .composer textarea, .sendbtn .swap { animation: co-fade .15s ease both; }
+}
