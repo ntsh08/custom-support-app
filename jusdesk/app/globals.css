@@ -658,7 +658,7 @@ ul { list-style: none; }
 .seeprev, .viewlink { justify-self: start; border: 0; background: none; padding: 0; font: inherit; font-size: 12px; font-weight: 510; color: var(--ink2); cursor: pointer; }
 .seeprev { margin-top: 4px; }
 .seeprev:hover, .viewlink:hover { color: var(--ink); text-decoration: underline; }
-.viewlink { font-size: 13px; color: var(--acc); }
+.viewlink { font-size: 13px; color: var(--ink2); }
 .lt { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
 .lt li { display: flex; align-items: center; gap: 8px; min-height: 36px; }
 .lt .ltmain { flex: 1; display: grid; line-height: 18px; }

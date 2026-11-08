@@ -3,7 +3,7 @@
 Apply these to everything designed in this project: the app, static pages, Figma frames, slides and the presentation. They adapt Linear's DESIGN.md composition rules (VoltAgent awesome-design-md, linear.app) to light mode and our green. The reference code is `jusdesk/app/globals.css`.
 
 ## 1. One accent, used rarely
-- Green `#3A7C57` (hover `#2F6547`) appears only on the logo, the primary button, the focus ring and links.
+- Green `#3A7C57` (hover `#2F6547`) appears only on the logo, the primary button and the focus ring. Text links (View photo, See previous tickets) are ink2, ink + underline on hover (Nitish, 8 Nov).
 - Green is never a fill, a section background, a selected state or a decoration.
 - Customer messages are grey (s2); the executive's and the AI assistant's are white with a light outline. Green appears on AI surfaces only (see section 9).
 - No purple, no blue.
