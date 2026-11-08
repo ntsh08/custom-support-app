@@ -568,7 +568,7 @@ export function Workspace() {
                 {dueFor(status) && stage.timeLeft && <div><dt><Icon name="clock" size={14} />Reply due</dt><dd className={stage.urgent ?? ""}>{stage.timeLeft === "Now" ? "Now" : `In ${stage.timeLeft}`}</dd></div>}
                 {open && c.followUp && <div><dt><Icon name="calendar" size={14} />Follow up</dt><dd>{c.followUp}</dd></div>}
                 <div><dt><Icon name="flag" size={14} />Reason</dt><dd>
-                  <Pick label="Contact reason" missing={!reasons[c.id]} value={reasons[c.id] ?? ""} options={[{ value: "", label: "Not set" }, ...REASONS.map((r) => ({ value: r, label: r }))]} onChange={(v) => setReasons((r) => ({ ...r, [c.id]: v || undefined }))} />
+                  <Pick label="Contact reason" missing={!reasons[c.id]} value={reasons[c.id] ?? ""} options={[{ value: "", label: "Select reason" }, ...REASONS.map((r) => ({ value: r, label: r }))]} onChange={(v) => setReasons((r) => ({ ...r, [c.id]: v || undefined }))} />
                 </dd></div>
                 <div><dt><Icon name={channels(c).includes("merged") ? "merge" : channelIcon(c)} size={14} />Channel</dt><dd>{channels(c)}</dd></div>
                 <div className="tagrow"><dt><Icon name="smile" size={14} />Sentiment</dt><dd className="mood2" title={`Read by AI: ${c.sentiment.why}`}><span className={`mpill m-${c.sentiment.label.toLowerCase()}`}>{EMOJI[c.sentiment.label]} {c.sentiment.label}</span></dd></div>
@@ -840,7 +840,7 @@ function Pick({ label, value, options, onChange, missing, chip }: { label: strin
   return (
     <span className="pickwrap" ref={ref}>
       <button type="button" className={`pick2${missing ? " missing" : ""}${chip ? ` chip ${chip}` : ""}`} aria-label={label} aria-haspopup="listbox" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
-        {cur?.label ?? "Not set"}<Icon name="chev" size={12} />
+        {cur?.label ?? "Select reason"}<Icon name="chev" size={12} />
       </button>
       {open && (
         <ul className="sortmenu pickmenu" role="listbox" aria-label={label}>

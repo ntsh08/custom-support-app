@@ -122,6 +122,7 @@ export const TITLE = "Marked delivered, but not received";
 export const CASES: Case[] = [
   {
     id: "ananya",
+    reasonTag: "Wrong address",
     linkedTickets: [{ id: "#1043", channel: "Email", when: "9:14 am", state: "Merged into this ticket" }],
     actions: [{ match: "Reship size M", label: "Reship", primary: true, option: "reship" }, { match: "Chase Shadowfax", label: "Schedule", schedule: "Mon, 10 am" }],
     ticket: "#1042",
