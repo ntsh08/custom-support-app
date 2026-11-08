@@ -512,6 +512,7 @@ export function Workspace() {
                 onKeyDown={(e) => { if (e.key === "Enter" && e.metaKey) { e.preventDefault(); send(); } }}
               />
               {mode === "reply" && check && (
+                <div className="reveal"><div>
                 <div className="check" role="status">
                   <p className="chead"><Icon name="spark" size={14} />{todo(check) ? `${todo(check)} suggestion${todo(check) > 1 ? "s" : ""}` : "Looks good. Nothing to change."}<button aria-label="Close check" onClick={() => setCheck(null)}><Icon name="x" size={12} /></button></p>
                   {check.map((n) => (
@@ -521,7 +522,7 @@ export function Workspace() {
                       {n.fix && <button onClick={() => { setDrafts((d) => ({ ...d, [key]: n.fix!(draft) })); setCheck((cs) => cs && cs.filter((x) => x !== n)); }}>Apply</button>}
                     </div>
                   ))}
-                </div>
+                </div></div></div>
               )}
               <div className="crow">
                 {mode === "reply" ? <>

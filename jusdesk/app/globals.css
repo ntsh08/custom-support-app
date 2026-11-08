@@ -727,3 +727,30 @@ ul { list-style: none; }
 .ld-load { display: block; width: 120px; height: 6px; border-radius: 3px; background: var(--s3); overflow: hidden; }
 .ld-load i { display: block; height: 100%; border-radius: 3px; background: var(--ink3); }
 .ld-load i.warn { background: var(--warn); } .ld-load i.ai { background: #7CC4A0; }
+
+/* ---------- Motion (Emil's gate: only where it helps; transform/opacity, under 250ms) ---------- */
+:root { --ease-out: cubic-bezier(.23, 1, .32, 1); }
+
+/* Menus grow from the button that opened them. Close stays instant. */
+.sortmenu, .tagmenu { transform-origin: top right; transition: opacity .15s var(--ease-out), scale .15s var(--ease-out); }
+.tagmenu, .pickmenu { transform-origin: top left; }
+@starting-style { .sortmenu, .tagmenu { opacity: 0; scale: .97; } }
+
+/* Press feedback on buttons that commit something */
+.pri, .sec, .sum .sugg .sa, .sum .sugg .addtask { transition: scale .16s ease-out; }
+.pri:active:not(:disabled), .sec:active:not(:disabled), .sum .sugg .sa:active:not(:disabled), .sum .sugg .addtask:active { scale: .97; }
+
+/* Suggestion button turning into its done state */
+.sum .sugg .added { transition: opacity .18s var(--ease-out), scale .18s var(--ease-out); }
+@starting-style { .sum .sugg .added { opacity: 0; scale: .97; } }
+
+/* Check-reply notes open instead of pushing the composer up in one jump */
+.reveal { display: grid; grid-template-rows: 1fr; transition: grid-template-rows .2s var(--ease-out), opacity .2s var(--ease-out); }
+.reveal > div { min-height: 0; overflow: hidden; }
+@starting-style { .reveal { grid-template-rows: 0fr; opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .sortmenu, .tagmenu, .sum .sugg .added, .reveal { transition: opacity .15s ease; }
+  .pri, .sec, .sum .sugg .sa, .sum .sugg .addtask { transition: none; }
+  .pri:active, .sec:active, .sum .sugg .sa:active, .sum .sugg .addtask:active { scale: none; }
+}

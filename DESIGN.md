@@ -101,6 +101,16 @@ Colour carries meaning only:
 - Messages are 20px apart. They are grouped by day with a centred plain-text label (12px, ink2, 510, no pill or background) (Nitish, 7 Nov). Messages default to "Today"; a message can carry its own `day`.
 - Bubble borders are very soft: customer `#F0F0F3`, own `#F3F3F6`, AI `#E6F1EA`, note `#FAF1D6`, composer `#EDEDF0`.
 
+## 9b. Motion
+
+Only where it helps (Emil Kowalski's gate: frequency, purpose, speed, function). Transform and opacity only, one curve: `--ease-out: cubic-bezier(.23, 1, .32, 1)`.
+- Menus (sort, status, tags, Add task, property picks): grow from the button's corner, 97% → 100% + fade, 150ms. Closing is instant.
+- Buttons that commit (Send, Approve, suggestion buttons): scale to 97% while pressed, 160ms.
+- Suggestion button → "Done" / "Assigned to AI": the chip fades in from 97%, 180ms.
+- Check-reply notes open with a 200ms height reveal instead of jumping.
+- No motion on switching tickets, folding sections or the Team Lead chart. Reduced motion keeps only a short fade.
+(Nitish, 8 Nov)
+
 ## 10. Don'ts
 - No second accent colour. Exception: status chips (6px radius, 22px, 12px/510) are colour-coded, in the queue row and the header (Nitish, 7 Nov): First response light blue `#F0F5FF`/`#5B84E4`, Needs reply purple `#F2EEFD`/`#6B46C9`, Escalated orange `#FFF0E5`/`#C2410C`, both Waiting states grey `#EEEEF1`/`#4B4F57`, Closed light grey `#F3F3F5`/`#8A8E95` (Nitish asked for blue, a little purple and grey).
 - No coloured section backgrounds or tinted cards.
