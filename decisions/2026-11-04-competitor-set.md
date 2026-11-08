@@ -3,7 +3,7 @@
 Status: Active          Type: Scope
 Date: 2026-11-04        Decided by: Nitish
 Skill version: 1.0.0
-Screens: Research board (Figma), research/competitors.md
+Screens: research/competitors.md
 Link: research/competitors.md
 Supersedes: none
 

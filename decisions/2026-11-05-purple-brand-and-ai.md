@@ -1,10 +1,10 @@
 # Purple is the brand colour, and also marks what the AI did
 
-Status: Active          Type: Visual
+Status: Superseded          Type: Visual
 Date: 2026-11-05        Decided by: Nitish
 Skill version: 1.0.0
 Screens: All
-Link: Figma variables "JusDesk Color" (color/bg/brand, color/bg/ai, color/text/ai)
+Link: ../DESIGN.md
 Supersedes: none
 
 ## Problem
@@ -29,3 +29,6 @@ Contrast checked: white on purple/600 is 5.6:1; all text tokens pass WCAG AA on 
 
 ## Revisit when
 Users confuse brand actions with AI actions in testing.
+
+## Superseded 2026-11-09
+The design moved to Linear's composition rules with one green accent (#3A7C57); see ../DESIGN.md. (Nitish)

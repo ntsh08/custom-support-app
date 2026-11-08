@@ -1,10 +1,10 @@
 # Design language inspired by the Family app, adapted for desktop
 
-Status: Active          Type: Visual
+Status: Superseded          Type: Visual
 Date: 2026-11-05        Decided by: Nitish
 Skill version: 1.0.0
 Screens: All
-Link: Figma page "JusDesk · Design System"
+Link: ../DESIGN.md
 Supersedes: none
 
 ## Problem
@@ -29,3 +29,6 @@ Family screens on Mobbin ("Sending tokens" flow).   Confidence: Medium
 
 ## Revisit when
 Juspay feedback asks for a different feel.
+
+## Superseded 2026-11-09
+The design moved to Linear's composition rules with one green accent (#3A7C57); see ../DESIGN.md. (Nitish)
