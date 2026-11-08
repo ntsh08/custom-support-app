@@ -501,7 +501,7 @@ export function Workspace() {
           {open && (
             <div className="cwrap"><div className={`composer${mode === "note" ? " is-note" : ""}`}>
               <div className="tabs" role="tablist">
-                <button role="tab" aria-selected={mode === "reply"} className={mode === "reply" ? "on" : ""} onClick={() => setMode("reply")}>Reply</button>
+                <button role="tab" aria-selected={mode === "reply"} className={mode === "reply" ? "on" : ""} onClick={() => setMode("reply")}><Icon name="reply" size={14} />Reply</button>
                 <button role="tab" aria-selected={mode === "note"} className={mode === "note" ? "on" : ""} onClick={() => setMode("note")}><Icon name="lock" size={14} />Internal note</button>
               </div>
               <textarea
@@ -611,7 +611,7 @@ export function Workspace() {
                 <div><dt><Icon name="card" size={14} />Refunds</dt><dd>{c.history.refunds}</dd></div>
                 <div><dt><Icon name="pin" size={14} />Address</dt><dd className={/Shared/.test(c.history.address) ? "bad" : ""}>{c.history.address}</dd></div>
               </dl>
-              <button className="seeprev" onClick={() => setFlash(c.history.past.length ? `${c.history.past.length} previous tickets (prototype)` : "No previous tickets")}>See previous tickets</button>
+              <button className="seeprev" onClick={() => setFlash(c.history.past.length ? `${c.history.past.length} previous tickets (prototype)` : "No previous tickets")}>View previous tickets</button>
             </section>
 
             <section className={`blk${shut["Linked tickets"] ? " shut" : ""}`} hidden={tab !== "details"}>

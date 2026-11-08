@@ -12,6 +12,7 @@ import {
 const ICONS = {
   alert: Alert02Icon,
   undo: ArrowTurnBackwardIcon,
+  reply: ArrowTurnBackwardIcon,
   chat: BubbleChatIcon,
   done: CheckmarkCircle02Icon,
   clock: Clock01Icon,
