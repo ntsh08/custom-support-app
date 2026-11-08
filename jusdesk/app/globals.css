@@ -825,3 +825,7 @@ ul { list-style: none; }
 .lt .unlink { margin-left: auto; width: 24px; height: 24px; display: grid; place-items: center; border: 0; border-radius: 6px; background: none; color: var(--ink3); cursor: pointer; }
 .lt .unlink:hover { background: var(--s2); color: var(--ink); }
 .tasks li .tdue { margin-left: auto; align-self: flex-start; padding-top: 1px; font-size: 12px; font-style: normal; color: var(--ink3); white-space: nowrap; }
+
+/* Team Lead: same rules as the executive view (Nitish, 8 Nov) */
+.ld-act { color: var(--ink2); }
+.ld-own { display: inline-flex; align-items: center; gap: 8px; }

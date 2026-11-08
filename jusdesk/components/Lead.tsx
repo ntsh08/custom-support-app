@@ -14,8 +14,8 @@ import { Icon } from "./Icon";
 type Need = { kind: string; tone: "escalated" | "reply" | "first" | "others"; title: string; who: string; ticket: string; why: string; owner: string; age: string; urgent?: boolean };
 
 const NEEDS: Need[] = [
-  { kind: "Approval", tone: "escalated", title: "Approve ₹6,500 refund", who: "Rohan Shah", ticket: "#1039", why: "No proof of delivery, GPS 1.1 km off, size L out of stock. Above the ₹5,000 executive limit.", owner: "Escalated by Ritika", age: "12 min", urgent: true },
-  { kind: "Review", tone: "escalated", title: "Review potential fraud", who: "Meera Iyer", ticket: "#1044", why: "OTP verified at her door, 3rd claim in 2 months, shared address, 1 chargeback.", owner: "Escalated by Arjun", age: "20 min", urgent: true },
+  { kind: "Approval", tone: "escalated", title: "Approve ₹6,500 refund", who: "Rohan Shah", ticket: "#1039", why: "“The amount is above my ₹5,000 limit, but Rohan's profile looks genuine. There's no proof of delivery and the GPS was 1.1 km off. I think we should refund him.”", owner: "Escalated by Ritika", age: "12 min", urgent: true },
+  { kind: "Review", tone: "escalated", title: "Review potential fraud", who: "Meera Iyer", ticket: "#1044", why: "“The OTP was verified at her door and the photo matches her flat, but this is her 3rd claim in 2 months and another account at her address has claimed twice. I don't think we should refund yet.”", owner: "Escalated by Arjun", age: "20 min", urgent: true },
   { kind: "Failed refund", tone: "reply", title: "Refund failed at the bank", who: "Sana Kapoor", ticket: "#1031", why: "₹2,400 to UPI bounced: ID inactive. No money moved; executive is asking for a new UPI ID.", owner: "Neha is on it", age: "35 min" },
   { kind: "Courier", tone: "others", title: "Ekart reply due at 4 pm", who: "Kavya Pillai", ticket: "#1045", why: "Scanned delivered while the rider was 4.2 km away. If Ekart doesn't confirm, the rider needs a call.", owner: "Ritika", age: "6 h left" },
   { kind: "First reply", tone: "first", title: "3 tickets close to the first-reply deadline", who: "Meera Iyer and 2 more", ticket: "#1044", why: "Oldest has 9 minutes left. Arjun has 12 open tickets, the most on the team.", owner: "Arjun", age: "9 min left", urgent: true },
@@ -29,15 +29,15 @@ const KPIS: { label: string; value: string; note: string; pair: string; pairValu
 ];
 
 const PATTERNS = [
-  { title: "Shadowfax · pincode 560034", stat: "4 “not received” claims this week", usual: "Usually about 1", detail: "Tickets #1039, #1042 and 2 more. All marked delivered with no OTP; two had GPS over 500 m off.", act: "Raise with Shadowfax" },
+  { title: "Shadowfax · nearby claims", stat: "4 “not received” claims this week", usual: "Usually about 1", detail: "Tickets #1039, #1042 and 2 more. All marked delivered with no OTP; two had GPS over 500 m off.", act: "Raise with Shadowfax" },
   { title: "Delhivery · OTP-verified claims", stat: "3 claims from 2 linked accounts", usual: "Usually 0", detail: "Same address, OTP entered at the door each time. Signals, not a verdict.", act: "Review accounts" },
 ];
 
 const TEAM = [
-  { name: "Ritika", open: 9, frt: "11 min", reopen: "2%", load: 9 },
-  { name: "Arjun", open: 12, frt: "17 min", reopen: "5%", load: 12, warn: true },
-  { name: "Neha", open: 7, frt: "9 min", reopen: "1%", load: 7 },
-  { name: "AI assistant", open: 19, frt: "1 min", reopen: "3%", load: 19, ai: true },
+  { name: "Ritika", av: "RI", open: 9, frt: "11 min", reopen: "2%", load: 9 },
+  { name: "Arjun", av: "AR", open: 12, frt: "17 min", reopen: "5%", load: 12, warn: true },
+  { name: "Neha", av: "NE", open: 7, frt: "9 min", reopen: "1%", load: 7 },
+  { name: "AI assistant", av: "ai", open: 19, frt: "1 min", reopen: "3%", load: 19, ai: true },
 ];
 
 // "Not received" tickets per hour today. One series, so no legend; the title names it.
@@ -148,7 +148,7 @@ export function Lead() {
               <tbody>
                 {TEAM.map((t) => (
                   <tr key={t.name}>
-                    <td>{t.ai ? <span className="ld-ain"><Icon name="spark" size={12} />{t.name}</span> : t.name}</td>
+                    <td><span className="ld-own"><i className={`av${t.ai ? " ai" : ""}`} aria-hidden>{t.ai ? <Icon name="spark" size={10} /> : t.av}</i>{t.name}</span></td>
                     <td>{t.open}</td>
                     <td className={t.warn ? "warn" : ""}>{t.frt}{t.warn && " · over target"}</td>
                     <td>{t.reopen}</td>
