@@ -1,6 +1,6 @@
 # Assignment task: what we are designing
 
-Agreed with Nitish on 5 November 2026. This is the working plan for the designs. It narrows [design-scope-proposal.md](design-scope-proposal.md) to the case set below.
+Agreed with Nitish on 5 November 2026. This is the working plan for the designs.
 
 ## The brief
 
