@@ -130,7 +130,7 @@ Only where it helps (Emil Kowalski's gate: frequency, purpose, speed, function).
   - **Delivery details** (was Delivery evidence): Courier, Delivery OTP, each photo as a row with a "View photo" link that opens it in a modal, "Delivery proof" photo row, "Rider's GPS" distance from the address (red if over 100 m), then delivery facts ("Nearby claims", stock, scan). No images or map up front, no customer facts.
 
 ## 12. Team Lead overview (/lead)
-- One screen, no flows: nothing opens on click (decisions/2026-11-05-team-lead-dashboard-only.md). Same rail as the workspace; the rail's dashboard icon links between the two.
+- One screen, no flows: nothing opens on click (decisions/team-lead-dashboard-only.md). Same rail as the workspace; the rail's dashboard icon links between the two.
 - Order: four KPI tiles, each pairing speed with an outcome (open / waiting on couriers, first reply P90 / reopened, resolved / came back in 7 days, AI resolved alone / handed to people); then "Needs you now" (each item: type chip in the status colours, ticket chip, title, customer · owner, one-line why, time; urgent times red); beside it "Patterns the AI spotted" on the AI card (leads to investigate, never verdicts) and a single-series bar chart of "not received" tickets per hour with a hover tooltip; then "Team today" (open, first reply P90, reopened, load bar; the AI listed as a team member). Demo data.
 
 - Matches the executive rules: escalation items quote the executive's note to Priya; no pincode jargon ("nearby claims"); text links ink2; owners shown with the same 18px avatars.

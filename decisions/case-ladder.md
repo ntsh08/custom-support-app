@@ -1,7 +1,7 @@
 # Five cases from simple to hard, with the AI/human split shifting
 
 Status: Active          Type: Flow
-Date: 2026-11-05        Decided by: Nitish
+Decided by: Nitish
 Skill version: 1.0.0
 Screens: Executive queue, case workspace, Team Lead overview
 Link: ../process/scoping-the-assignment.md

@@ -1,7 +1,7 @@
 # Inter, light theme only
 
 Status: Active          Type: Visual
-Date: 2026-11-05        Decided by: Nitish
+Decided by: Nitish
 Skill version: 1.0.0
 Screens: All
 Link: ../DESIGN.md

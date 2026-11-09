@@ -1,7 +1,7 @@
 # AI flags possible fraud but never denies a claim; people decide
 
 Status: Active          Type: Interaction
-Date: 2026-11-05        Decided by: Nitish
+Decided by: Nitish
 Skill version: 1.0.0
 Screens: Case workspace (Case 5), Team Lead overview
 Link: ../process/scoping-the-assignment.md

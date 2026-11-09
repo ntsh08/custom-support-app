@@ -31,7 +31,7 @@ Prototype: [jusdesk-theta.vercel.app](https://jusdesk-theta.vercel.app) (executi
 
 ## 4. Team Lead overview
 
-One screen, fed by the same cases. It's a list of what needs the lead, with no flows behind the items ([decision](../decisions/2026-11-05-team-lead-dashboard-only.md)).
+One screen, fed by the same cases. It's a list of what needs the lead, with no flows behind the items ([decision](../decisions/team-lead-dashboard-only.md)).
 
 - **Needs you now:** Rohan's refund approval, Meera's review, a failed refund, Ekart's reply due at 4 pm, tickets close to the first-reply deadline.
 - **Patterns the AI spotted:** the Shadowfax claim spike, and OTP-verified claims from linked accounts.

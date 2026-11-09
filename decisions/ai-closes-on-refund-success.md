@@ -1,7 +1,7 @@
 # AI closes the ticket when the payment provider confirms the refund
 
 Status: Active          Type: Flow
-Date: 2026-11-05        Decided by: Nitish
+Decided by: Nitish
 Skill version: 1.0.0
 Screens: Case workspace (Case 4), Team Lead overview
 Link: ../process/scoping-the-assignment.md

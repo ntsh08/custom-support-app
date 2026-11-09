@@ -1,7 +1,7 @@
 # Competitor set: Zendesk + Sierra + Decagon
 
 Status: Active          Type: Scope
-Date: 2026-11-04        Decided by: Nitish
+Decided by: Nitish
 Skill version: 1.0.0
 Screens: research/competitors.md
 Link: research/competitors.md

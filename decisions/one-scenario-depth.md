@@ -1,7 +1,7 @@
 # Only the delivered-not-received scenario, explored through edge cases
 
 Status: Active          Type: Scope
-Date: 2026-11-05        Decided by: Nitish
+Decided by: Nitish
 Skill version: 1.0.0
 Screens: All executive screens, Team Lead overview
 Link: ../process/scoping-the-assignment.md

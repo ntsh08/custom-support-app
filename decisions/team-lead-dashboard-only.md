@@ -1,7 +1,7 @@
 # Team Lead: dashboard only, a list of what needs them
 
 Status: Active          Type: Scope
-Date: 2026-11-05        Decided by: Nitish
+Decided by: Nitish
 Skill version: 1.0.0
 Screens: Team Lead overview
 Link: ../process/scoping-the-assignment.md

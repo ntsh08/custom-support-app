@@ -1,7 +1,7 @@
 # Purple is the brand colour, and also marks what the AI did
 
 Status: Superseded          Type: Visual
-Date: 2026-11-05        Decided by: Nitish
+Decided by: Nitish
 Skill version: 1.0.0
 Screens: All
 Link: ../DESIGN.md
@@ -31,4 +31,4 @@ Contrast checked: white on purple/600 is 5.6:1; all text tokens pass WCAG AA on 
 Users confuse brand actions with AI actions in testing.
 
 ## Superseded
-The design moved to Linear's composition rules with one green accent (#3A7C57); see 2026-11-06-linear-rules-green-accent.md and ../DESIGN.md. (Nitish)
+The design moved to Linear's composition rules with one green accent (#3A7C57); see linear-rules-green-accent.md and ../DESIGN.md. (Nitish)

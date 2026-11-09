@@ -1,7 +1,7 @@
 # Fictional business: a fashion brand selling clothes online
 
 Status: Active          Type: Scope
-Date: 2026-11-05        Decided by: Nitish
+Decided by: Nitish
 Skill version: 1.0.0
 Screens: All (order data, products, copy)
 Link: ../process/scoping-the-assignment.md

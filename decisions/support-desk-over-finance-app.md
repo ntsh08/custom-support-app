@@ -1,7 +1,7 @@
 # Support desk (problem #2) instead of AI finance app (problem #1)
 
 Status: Active          Type: Scope
-Date: 2026-11-04        Decided by: Nitish
+Decided by: Nitish
 Skill version: 1.0.0
 Screens: All (sets the whole assignment)
 Link: https://www.figma.com/design/cfRDciFE94XNlCsyyshvrp/Juspay-Assignment---Nitish-Bhardwaj?node-id=1-27

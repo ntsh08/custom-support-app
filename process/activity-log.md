@@ -8,7 +8,7 @@ Figma: [Juspay Assignment, Nitish Bhardwaj](https://www.figma.com/design/cfRDciF
 
 | Activity | What it gave us | Evidence |
 |---|---|---|
-| Studied competitor products | Compared Zendesk with AI-native desks (Sierra, Decagon) and Plain. | [Competitors](../research/competitors.md); [competitor decision](../decisions/2026-11-04-competitor-set.md) |
+| Studied competitor products | Compared Zendesk with AI-native desks (Sierra, Decagon) and Plain. | [Competitors](../research/competitors.md); [competitor decision](../decisions/competitor-set.md) |
 | Desk research: public sources and Reddit | Pain points around gathering context, investigating deliveries, follow-ups and team oversight. Public anecdotes, not user validation. | [Desk Research](../research/Desk%20Research.md) |
 | Studied AI support playbooks | Separated four AI roles: copilot help, AI-owned work, human approval and full handover. | [Playbooks](#playbooks-referenced) |
 | Interviewed a support practitioner | Learned about manual follow-ups, personal tracking, internal tickets and response-time targets. The participant supports business accounts, so this informs the design but doesn't validate it for consumer delivery support. | [Interview transcript](../research/Custom%20Support%20Interview%20Transcript.md) |

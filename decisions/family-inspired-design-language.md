@@ -1,7 +1,7 @@
 # Design language inspired by the Family app, adapted for desktop
 
 Status: Superseded          Type: Visual
-Date: 2026-11-05        Decided by: Nitish
+Decided by: Nitish
 Skill version: 1.0.0
 Screens: All
 Link: ../DESIGN.md
@@ -31,4 +31,4 @@ Family screens on Mobbin ("Sending tokens" flow).   Confidence: Medium
 Juspay feedback asks for a different feel.
 
 ## Superseded
-The design moved to Linear's composition rules with one green accent (#3A7C57); see 2026-11-06-linear-rules-green-accent.md and ../DESIGN.md. (Nitish)
+The design moved to Linear's composition rules with one green accent (#3A7C57); see linear-rules-green-accent.md and ../DESIGN.md. (Nitish)
