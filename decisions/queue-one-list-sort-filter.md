@@ -23,8 +23,8 @@ P01's priorities: first response time and never losing a follow-up (research/Cus
 
 ## Rejected options
 - Status group headers in the list → too much scrolling at volume.
-- View tabs (Needs you, Follow-ups, Escalated, Waiting, Closed) → tried, then removed. Reason: Not stated.
-- An "Urgency" sort option → removed. Reason: Not stated.
+- View tabs (Needs you, Follow-ups, Escalated, Waiting, Closed) → tried, then removed. Nitish: with a large number of tickets it doesn't work, because he has to scroll just to see whether something needs a follow-up, and the tab labels weren't clear.
+- An "Urgency" sort option → removed. Nitish: urgency and due time are almost the same thing, and having both would confuse people about the difference, so only the simpler one, Due time, stays.
 
 ## Guardrails for the next designer
 - Don't bring back group headers without solving the 50-ticket scroll.

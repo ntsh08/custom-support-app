@@ -19,7 +19,7 @@ The JusDesk AI is always first on every ticket. It reads the message and investi
 The investigation now shows as an "AI investigation" card after the customer's first message on every ticket, with a two-line result and an expandable list of steps. The team-only "No reply sent" message and the per-reply "Show investigation" are gone. (Nitish)
 
 ## Why
-Nitish: "Just Desk AI will work with the first person who will reply and investigate, and reply only if he can reply."
+Nitish: "Just Desk AI will work with the first person who will reply and investigate, and reply only if he can reply." On staying silent instead of a holding reply (Nitish): we shouldn't answer someone filing a complaint before doing our own research. If the AI replies with something wrong or without enough context, it gives the customer the wrong impression of the company.
 
 ## Evidence
 None beyond the design discussion.   Confidence: Low

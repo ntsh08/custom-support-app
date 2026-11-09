@@ -16,7 +16,7 @@ The reply box was pre-filled by the AI, had a status picker that didn't make sen
 - No "After sending" picker; sending a reply sets Waiting on customer.
 
 ## Why
-Check reply, Nitish: "analyze the reply that he has written based on the customer sentiment or the request… AI can scan… and suggest if any changes are required." After sending picker: "Remove the after sending thing. Doesn't make sense." Empty box: "Can you not automatically create drafts? Just write a placeholder." Reason behind not auto-drafting: Not stated.
+Check reply, Nitish: "analyze the reply that he has written based on the customer sentiment or the request… AI can scan… and suggest if any changes are required." After sending picker: "Remove the after sending thing. Doesn't make sense." Empty box: "Can you not automatically create drafts? Just write a placeholder." Reason behind not auto-drafting (Nitish): a pre-filled draft isn't what the executive expects, and text already in the box looks as if they, or someone else, wrote it, which is confusing. If they want a draft, the AI draft button is right there.
 
 ## Evidence
 P01 uses AI to fix grammar and rephrase, and reads things himself because "the bot is sometimes wrong" (synthesis/personas.md).   Confidence: Medium

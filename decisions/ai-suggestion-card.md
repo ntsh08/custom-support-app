@@ -19,6 +19,9 @@ The summary repeated what the messages said, and AI next steps were split betwee
 Suggestions with a real action get a button left of "Add task" (Reship, Schedule, Send to Priya, Call rider), one primary per card, with an inline confirm. This brings back the case actions removed from Copilot, next to the step they belong to. Nitish: "give the primary CTA as well, left to the Add Task button, something like Reship, Schedule". (Nitish)
 
 ## Update
+Why suggestions instead of a summary on open tickets (Nitish): it's a question of priority. The AI has already investigated by the time the executive opens the ticket, and when it can't resolve it, it assigns the ticket with next steps. Those next steps are the most useful thing to show. What has happened on the ticket is covered by the AI investigation card, and anyone who wants a summary can ask Copilot.
+
+## Update
 "Schedule" became "Add task" on the courier-chase row, and confirmations open in a centred Linear-style modal instead of an inline confirm. (Nitish)
 
 ## Why

@@ -14,7 +14,7 @@ After a refund starts, the ticket needs a clear end. The store usually knows whe
 When the payment provider confirms the refund succeeded, AI sends the customer the amount, reference number (ARN/UTR) and expected date, then closes the ticket. A failed refund keeps the ticket open with the executive. If the customer says the money never arrived, the ticket reopens with the reference number ready. The Team Lead sees failed refunds only.
 
 ## Why
-Not stated directly. Nitish chose this after asking whether stores track the money reaching the customer's account; they usually don't, because the bank notifies the customer. Claude's earlier suggestion was to wait for the customer to confirm.
+Nitish: when a ticket needs a refund, the loop only closes when the customer gets the refund; otherwise there's no honest point to mark it done. Tracking the refund through to the customer was one of the gaps found in research (no competitor does it), so the design includes it on purpose. Background: Nitish chose this after asking whether stores track the money reaching the customer's account; they usually don't, because the bank notifies the customer. Claude's earlier suggestion was to wait for the customer to confirm.
 
 ## Evidence
 Designer judgement; common store practice (not verified across stores).   Confidence: Medium

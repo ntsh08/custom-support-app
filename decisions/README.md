@@ -5,6 +5,8 @@ Read the Active entries before changing a screen they list.
 
 | Decision | Type | Status |
 |----------|------|--------|
+| [The AI sets follow-ups from the SLA when a ticket starts waiting](ai-sla-follow-ups.md) | Interaction | Active |
+| [Confirmation modals show only what the executive needs at that moment](confirmation-modals.md) | Content | Active |
 | [Reply box starts empty; AI draft, Rephrase, Translate, Check reply](composer-ai-tools.md) | Interaction | Active |
 | [Copilot tab is a chat; no recommendation card or decision buttons](copilot-chat.md) | IA | Active |
 | [AI investigation card after the first message](ai-investigation-card.md) | Content | Active |
@@ -14,6 +16,7 @@ Read the Active entries before changing a screen they list.
 | [Sentiment, tags and customer history with risk signals](ticket-properties-sentiment-tags-history.md) | IA | Active |
 | [The AI is first on every ticket and replies only when it can answer](ai-first-replies-only-when-it-can.md) | Interaction | Active |
 | [Six ticket statuses; Reopened is a tag; auto-close after 14 days](ticket-statuses.md) | Flow | Active |
+| [Linear's composition rules with one green accent](2026-11-06-linear-rules-green-accent.md) | Visual | Active |
 | [Inter, light theme only](2026-11-05-inter-light-only.md) | Visual | Active |
 | [Purple is the brand colour and marks AI actions](2026-11-05-purple-brand-and-ai.md) | Visual | Superseded |
 | [Design language inspired by the Family app](2026-11-05-family-inspired-design-language.md) | Visual | Superseded |

@@ -14,7 +14,7 @@ The Copilot tab mixed a recommendation card, decision buttons and a small ask bo
 Copilot is a chat in the INA agent pattern, in our design system: centred empty state (gradient sparkles on a light circle), questions as grey bubbles, answers under a green "Copilot" label, suggested-question chips above an "Ask a follow-up" box. The recommendation card and its decision buttons (Reship, Send to Priya, refund steps) are removed.
 
 ## Why
-Nitish: "I'm taking reference from the INA agent, but keep the design system we have used." Decision buttons: Nitish chose "Leave them out". Reason: Not stated.
+Nitish: "I'm taking reference from the INA agent, but keep the design system we have used." Decision buttons: Nitish chose "Leave them out". Reason (Nitish): the actions belong next to the AI suggestion in the conversation, where the executive already has all the context and can see what the AI suggests. Acting from Copilot means switching tabs first, which is slower for support work.
 
 ## Evidence
 None.   Confidence: Low

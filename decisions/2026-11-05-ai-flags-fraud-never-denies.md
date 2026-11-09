@@ -14,7 +14,7 @@ Some "not received" claims may be false. AI can see patterns across accounts and
 AI shows fraud signals (repeat claims, linked accounts, payment links) privately to staff only. It never accuses the customer or denies the claim. The executive replies neutrally; the Team Lead decides.
 
 ## Why
-Not stated. Nitish asked for the fraud case to be covered and accepted this handling.
+Nitish: the customer relationship matters a lot, and denying a claim is a serious matter. Above a certain price point, someone has to take ownership of that call, so it can't be left to the AI. For small amounts the AI might handle it, but that's out of scope for this assignment.
 
 ## Evidence
 Desk research: matching proof can still be theft after a correct delivery (research/Desk Research.md, §2).   Confidence: Medium
