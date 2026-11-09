@@ -1,5 +1,7 @@
 # Plain swimlane: "Delivered, but I didn't get it"
 
+![Plain swimlane: 8 stages, 5 lanes](plain-swimlane.png)
+
 The same ticket, moved through Plain, an AI-native help desk.
 
 - **Read it as:** the same 8 stages and lanes as the [Zendesk swimlane](zendesk-swimlane.md), so the two can be compared stage by stage. Step numbers give the order.
@@ -10,6 +12,8 @@ The same ticket, moved through Plain, an AI-native help desk.
   - **Gap:** something missing or not shown
 
 ## Steps
+
+The same diagram as a table, one row per step.
 
 | Stage | # | Lane | Type | Step | What happens | Note |
 |---|---|---|---|---|---|---|

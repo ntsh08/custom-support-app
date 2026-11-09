@@ -1,5 +1,7 @@
 # Zendesk swimlane: "Delivered, but I didn't get it"
 
+![Zendesk swimlane: 8 stages, 5 lanes](zendesk-swimlane.png)
+
 How Zendesk handles this ticket today: an agent picks it from the queue, investigates, acts and closes it, using Zendesk with Copilot (auto assist) and the Shopify app.
 
 - **Read it as:** 8 stages, left to right. Step numbers give the order.
@@ -11,6 +13,8 @@ How Zendesk handles this ticket today: an agent picks it from the queue, investi
 Compare with the [Plain swimlane](plain-swimlane.md), which uses the same stages and lanes.
 
 ## Steps
+
+The same diagram as a table, one row per step.
 
 | Stage | # | Lane | Type | Step | What happens | Gap |
 |---|---|---|---|---|---|---|
