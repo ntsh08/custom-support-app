@@ -37,7 +37,7 @@ One screen, fed by the same cases. It's a list of what needs the lead, with no f
 - **Patterns the AI spotted:** the Shadowfax claim spike, and OTP-verified claims from linked accounts.
 - **How the team is doing:** open tickets, first-reply time, tickets resolved, the share the AI resolved alone, and a per-person table.
 
-Each item opens the ticket behind it.
+Items show the ticket number, but nothing opens on click in the prototype.
 
 ## 5. Edge cases considered but not designed
 

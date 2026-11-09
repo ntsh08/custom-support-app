@@ -1,12 +1,16 @@
-# Custom Support App
+# JusDesk
 
-Juspay product design assignment: an AI-powered customer support workspace for an e-commerce business (desktop).
+Juspay product design assignment: an AI-native support desk for an online fashion brand, designed around one complaint, "Marked delivered, but not received".
 
-- `research/`: competitor analysis and user pain points
-- `decisions/`: design decision log (why things are the way they are)
-- `process/`: [assignment activity log](process/activity-log.md), with evidence and learning
-- `diagrams/`: [current support workflow](diagrams/current-support-workflow.md) and planned operational diagrams
-- [Custom Support Interview Transcript](research/Custom%20Support%20Interview%20Transcript.md): findings, limits and follow-up questions
-- [General lifecycle and AI workflow maps](diagrams/general-support-lifecycle.md): conceptual diagrams for both ownership models
+- **Prototype:** [jusdesk-theta.vercel.app](https://jusdesk-theta.vercel.app) (executive workspace) and [/lead](https://jusdesk-theta.vercel.app/lead) (Team Lead overview)
+- **Figma:** [Juspay Assignment, Nitish Bhardwaj](https://www.figma.com/design/cfRDciFE94XNlCsyyshvrp/Juspay-Assignment---Nitish-Bhardwaj?node-id=1-27)
 
-Figma: https://www.figma.com/design/cfRDciFE94XNlCsyyshvrp/Juspay-Assignment---Nitish-Bhardwaj?node-id=1-27
+## What's in the repo
+
+- [process/scoping-the-assignment.md](process/scoping-the-assignment.md): the brief, the five cases and what's out of scope
+- [process/activity-log.md](process/activity-log.md): what was done, when, and the evidence
+- [research/](research/): [Desk Research](research/Desk%20Research.md), [competitors](research/competitors.md), [personas](research/personas.md) and the [interview transcript](research/Custom%20Support%20Interview%20Transcript.md)
+- [diagrams/](diagrams/): the [current support workflow](diagrams/current-support-workflow.md) and the [general support lifecycle](diagrams/general-support-lifecycle.md)
+- [decisions/](decisions/README.md): why things are the way they are
+- [DESIGN.md](DESIGN.md): the design rules the app follows
+- [jusdesk/](jusdesk/): the Next.js prototype

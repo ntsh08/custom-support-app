@@ -19,6 +19,12 @@ Statuses: First response · Needs reply · Waiting on customer · Waiting on oth
 - Reply timer shows only for First response and Needs reply.
 - Queue order: Needs reply, First response, Escalated, Waiting, Closed.
 
+## Update 2026-11-07
+The status picker next to Send was removed (see 2026-11-07-composer-ai-tools.md). Sending a reply sets Waiting on customer; the status button in the header changes it. (Nitish)
+
+## Update 2026-11-09
+When a ticket starts waiting, the AI adds a follow-up task from the SLA: courier tomorrow 10 am, customer in 3 days, lead in 2 hours. (Nitish)
+
 ## Why
 Nitish proposed First response, Needs reply, Waiting on customer, Closed, Reopened, and added Escalated. Waiting on others added because most of our cases wait on a courier, lead or bank. Reopened as a tag keeps reopened tickets in the urgent bucket. Auto-close because customers often stop replying once they find the parcel (Nitish).
 

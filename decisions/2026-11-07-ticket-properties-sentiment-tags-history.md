@@ -17,6 +17,9 @@ The right panel had no mood cue, only one single-choice reason, and fraud signal
 ## Update 2026-11-07
 The risk box is replaced by a single "Signals" row at the top of Customer history: Good customer / Low risk / High-risk claim, with a short why. Nitish: "Remove this card. Add a field like signals… Other signals could be like she is a good customer." (Nitish)
 
+## Update 2026-11-08
+Sentiment shows only the pill; the one-line why moved to a "Read by AI" tooltip. (Nitish: remove the sentiment subtitle.)
+
 ## Why
 Nitish, after the triage research: "We need to add sentiment in the ticket properties section" and tags "where you can select multiple". On fraud: "You should also add fraud signals for the customer. That was the whole point we were talking about: customer history."
 

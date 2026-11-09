@@ -127,7 +127,7 @@ Only where it helps (Emil Kowalski's gate: frequency, purpose, speed, function).
   - **Order details:** Item, Amount, Payment type (Prepaid / Cash on delivery (COD)), Payment method (UPI, Card, Cash). No language row.
   - **Linked tickets** means other tickets joined to this one, one line each: the #1043 ticket chip, then "Merged email ticket"; otherwise "No linked tickets." Courier requests and refunds aren't listed here.
   - **Tasks and follow-ups** has no "case stays open…" hint.
-  - **Delivery details** (was Delivery evidence): Courier, Delivery OTP, each photo as a row with a "View photo" link that opens it in a modal, "From address" distance (red if over 100 m), then delivery facts (pincode spikes, stock, scan). No images or map up front, no customer facts.
+  - **Delivery details** (was Delivery evidence): Courier, Delivery OTP, each photo as a row with a "View photo" link that opens it in a modal, "Delivery proof" photo row, "Rider's GPS" distance from the address (red if over 100 m), then delivery facts ("Nearby claims", stock, scan; Nitish, 8 Nov). No images or map up front, no customer facts.
 
 ## 12. Team Lead overview (/lead)
 - One screen, no flows: nothing opens on click (decisions/2026-11-05-team-lead-dashboard-only.md). Same rail as the workspace; the rail's dashboard icon links between the two.
