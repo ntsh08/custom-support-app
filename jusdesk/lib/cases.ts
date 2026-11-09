@@ -1,6 +1,6 @@
 import type { IconName } from "@/components/Icon";
 
-// Fictional demo data for the five agreed cases (process/assignment-task.md).
+// Fictional demo data for the five agreed cases (process/scoping-the-assignment.md).
 // Names, orders, couriers and amounts are invented.
 
 /** Ticket status: who has the ball. Reopened is a tag on "reply", not a status. */

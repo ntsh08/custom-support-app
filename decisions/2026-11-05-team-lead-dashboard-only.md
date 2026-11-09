@@ -4,7 +4,7 @@ Status: Active          Type: Scope
 Date: 2026-11-05        Decided by: Nitish
 Skill version: 1.0.0
 Screens: Team Lead overview
-Link: ../process/assignment-task.md
+Link: ../process/scoping-the-assignment.md
 Supersedes: none
 
 ## Problem

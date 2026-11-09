@@ -1,4 +1,4 @@
-# Assignment task: what we are designing
+# Scoping the assignment
 
 Scope agreed with Nitish on 5 November 2026, updated on 9 November to match the built prototype.
 
