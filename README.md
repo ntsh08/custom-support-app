@@ -28,6 +28,7 @@ This repo is written so you can hand it to Claude (or any assistant) and ask que
 | What the AI does on its own and what stays with people | [synthesis/how-jusdesk-uses-ai.md](synthesis/how-jusdesk-uses-ai.md) |
 | Why a design choice was made, and what was rejected | [decisions/README.md](decisions/README.md), then the entry it links |
 | Visual and interaction rules: colour, type, spacing, components, motion | [DESIGN.md](DESIGN.md) |
+| Which tools and AI skills were used, and for what | [process/tools.md](process/tools.md) |
 | How the prototype is built and run | [jusdesk/README.md](jusdesk/README.md); case data in [jusdesk/lib/cases.ts](jusdesk/lib/cases.ts) |
 
 ### Questions worth asking
