@@ -51,18 +51,6 @@ Read the Active entries before changing a screen they cover.
 | [Linear's composition rules with one green accent](linear-rules-green-accent.md) | Visual | Active |
 | [Inter, light theme only](inter-light-only.md) | Visual | Active |
 
-## Superseded
-
-An earlier direction, kept for the history, with what replaced it.
-
-| Decision | Replaced by |
-|---|---|
-| [Purple as the brand colour and the AI colour](purple-brand-and-ai.md) | [Linear rules with a green accent](linear-rules-green-accent.md) |
-
-## Open questions
-
-None. Every Active entry has a recorded reason.
-
 ## Adding an entry
 
-One file per decision, named with a short slug (for example `ticket-statuses.md`), added to the right section above. If a new decision replaces an old one, mark the old one Superseded and link the two.
+One file per decision, named with a short slug (for example `ticket-statuses.md`), added to the right section above.
