@@ -1,14 +1,14 @@
 # Inter, light theme only
 
-Status: Active          Type: Visual
-Decided by: Nitish
-Skill version: 1.0.0
-Screens: All
-Link: ../DESIGN.md
-Supersedes: none
+- **Status:** Active
+- **Type:** Visual
+- **Decided by:** Nitish
+- **Screens:** All
+- **Link:** ../DESIGN.md
+- **Supersedes:** none
 
 ## Problem
-Family's rounded look suggests SF Pro Rounded, but the prototype will be viewed in Chrome on a Mac and deployed on Vercel.
+A rounded font such as SF Pro Rounded was an option, but the prototype will be viewed in Chrome on a Mac and deployed on Vercel.
 
 ## Decision
 Use Inter in Figma and on the web. Light theme only.

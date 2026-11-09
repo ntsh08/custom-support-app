@@ -1,11 +1,11 @@
 # AI suggestion card replaces the AI summary on open tickets; each step can become a task for me or the AI
 
-Status: Active          Type: Interaction
-Decided by: Nitish
-Skill version: 1.0.0
-Screens: Case workspace (conversation)
-Link: ../DESIGN.md
-Supersedes: none
+- **Status:** Active
+- **Type:** Interaction
+- **Decided by:** Nitish
+- **Screens:** Case workspace (conversation)
+- **Link:** ../DESIGN.md
+- **Supersedes:** none
 
 ## Problem
 The summary repeated what the messages said, and AI next steps were split between the conversation and the task panel.
@@ -25,7 +25,7 @@ Why suggestions instead of a summary on open tickets (Nitish): it's a question o
 "Schedule" became "Add task" on the courier-chase row, and confirmations open in a centred Linear-style modal instead of an inline confirm. (Nitish)
 
 ## Why
-Nitish: "Remove the summary part. Just show the suggestion part only." On closed tickets: "You can still give the AI summary once the ticket is closed… Keep that." On merging steps: "This could be only one suggestion instead of four." Add task: suggested by Claude, Nitish agreed ("show it by default", then "Option A").
+Nitish: "Remove the summary part. Just show the suggestion part only." On closed tickets: "You can still give the AI summary once the ticket is closed… Keep that." On merging steps: "This could be only one suggestion instead of four." Add task: Nitish chose to show it by default ("show it by default", then "Option A").
 
 ## Evidence
 P01 keeps a personal tracker so follow-ups aren't missed (research/Custom Support Interview Transcript.md).   Confidence: Medium

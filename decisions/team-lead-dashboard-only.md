@@ -1,11 +1,11 @@
 # Team Lead: dashboard only, a list of what needs them
 
-Status: Active          Type: Scope
-Decided by: Nitish
-Skill version: 1.0.0
-Screens: Team Lead overview
-Link: ../process/scoping-the-assignment.md
-Supersedes: none
+- **Status:** Active
+- **Type:** Scope
+- **Decided by:** Nitish
+- **Screens:** Team Lead overview
+- **Link:** ../process/scoping-the-assignment.md
+- **Supersedes:** none
 
 ## Problem
 The Team Lead could need approval screens, case views and coaching flows. The brief asks for one screen, and time is short.

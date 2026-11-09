@@ -1,11 +1,11 @@
 # Status chips are colour-coded; the header shows status as a solid colour button (G3)
 
-Status: Active          Type: Visual
-Decided by: Nitish
-Skill version: 1.0.0
-Screens: Queue rows, Case header
-Link: ../DESIGN.md
-Supersedes: none
+- **Status:** Active
+- **Type:** Visual
+- **Decided by:** Nitish
+- **Screens:** Queue rows, Case header
+- **Link:** ../DESIGN.md
+- **Supersedes:** none
 
 ## Problem
 The first status chip colours didn't look good, and the header split button felt off because both halves did the same thing.

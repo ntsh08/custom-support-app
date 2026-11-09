@@ -9,7 +9,7 @@ What Nitish used to research, design, build and document JusDesk, and what each 
 | **Claude Code** (Claude desktop app, Code tab) | The main working partner: research, writing, building the prototype, editing Figma through its connector, and keeping this repo. Nitish directed the work and made every design call; Claude Code proposed options and did the execution. |
 | **Figma** | The submission file: research boards, swimlanes, personas, the JusDesk workflow, the AI callout cards, the executive and Team Lead screens, and the design system card. |
 | **Wispr Flow** | Voice dictation: most instructions to Claude were spoken, not typed. |
-| **Mobbin** | Screens and flows from real products (Zendesk, Plain, Linear, Intercom, Gorgias, Family and others) used as references. |
+| **Mobbin** | Screens and flows from real products (Zendesk, Plain, Linear, Intercom, Gorgias and others) used as references. |
 | **GitHub** | This repository: the docs, the decision log and the prototype's code. |
 | **Vercel** | Hosting for the prototype at [jusdesk-theta.vercel.app](https://jusdesk-theta.vercel.app). |
 

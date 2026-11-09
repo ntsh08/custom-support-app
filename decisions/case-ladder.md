@@ -1,11 +1,11 @@
 # Five cases from simple to hard, with the AI/human split shifting
 
-Status: Active          Type: Flow
-Decided by: Nitish
-Skill version: 1.0.0
-Screens: Executive queue, case workspace, Team Lead overview
-Link: ../process/scoping-the-assignment.md
-Supersedes: none
+- **Status:** Active
+- **Type:** Flow
+- **Decided by:** Nitish
+- **Screens:** Executive queue, case workspace, Team Lead overview
+- **Link:** ../process/scoping-the-assignment.md
+- **Supersedes:** none
 
 ## Problem
 One long "main path" was confusing. The work needed a clear way to show where AI acts alone and where people take over.

@@ -1,11 +1,11 @@
 # Team Lead overview opens on "Needs you now", and every speed number is paired with an outcome
 
-Status: Active          Type: IA
-Decided by: Nitish
-Skill version: 1.0.0
-Screens: Team Lead overview (/lead)
-Link: ../research/Desk%20Research.md
-Supersedes: none
+- **Status:** Active
+- **Type:** IA
+- **Decided by:** Nitish
+- **Screens:** Team Lead overview (/lead)
+- **Link:** ../research/Desk%20Research.md
+- **Supersedes:** none
 
 ## Problem
 Lead dashboards usually report the past and show speed on its own, so the lead finds out about problems after they can be fixed, and fast numbers can hide customers coming back.

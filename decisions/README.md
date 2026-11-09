@@ -53,11 +53,10 @@ Read the Active entries before changing a screen they cover.
 
 ## Superseded
 
-Earlier directions, kept for the history. Each one links to what replaced it.
+An earlier direction, kept for the history, with what replaced it.
 
 | Decision | Replaced by |
 |---|---|
-| [Design language inspired by the Family app](family-inspired-design-language.md) | [Linear rules with a green accent](linear-rules-green-accent.md) |
 | [Purple as the brand colour and the AI colour](purple-brand-and-ai.md) | [Linear rules with a green accent](linear-rules-green-accent.md) |
 
 ## Open questions

@@ -1,11 +1,11 @@
 # An AI investigation card follows the first message: what it found, then "As per our policy…"
 
-Status: Active          Type: Content
-Decided by: Nitish
-Skill version: 1.0.0
-Screens: Case workspace (conversation)
-Link: ../DESIGN.md
-Supersedes: none
+- **Status:** Active
+- **Type:** Content
+- **Decided by:** Nitish
+- **Screens:** Case workspace (conversation)
+- **Link:** ../DESIGN.md
+- **Supersedes:** none
 
 ## Problem
 The agent couldn't see what the AI checked before handing over, or why it did or didn't reply.

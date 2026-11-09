@@ -1,11 +1,11 @@
 # Support desk (problem #2) instead of AI finance app (problem #1)
 
-Status: Active          Type: Scope
-Decided by: Nitish
-Skill version: 1.0.0
-Screens: All (sets the whole assignment)
-Link: https://www.figma.com/design/cfRDciFE94XNlCsyyshvrp/Juspay-Assignment---Nitish-Bhardwaj?node-id=1-27
-Supersedes: none
+- **Status:** Active
+- **Type:** Scope
+- **Decided by:** Nitish
+- **Screens:** All (sets the whole assignment)
+- **Link:** https://www.figma.com/design/cfRDciFE94XNlCsyyshvrp/Juspay-Assignment---Nitish-Bhardwaj?node-id=1-27
+- **Supersedes:** none
 
 ## Problem
 The Juspay assignment offers two problem statements and asks for one, in 3 days.
@@ -14,13 +14,13 @@ The Juspay assignment offers two problem statements and asks for one, in 3 days.
 Design #2: a desktop AI-powered customer support workspace for an e-commerce business (executive workflow for "delivered but not received" + a single Team Lead screen).
 
 ## Why
-Claude recommended it and Nitish accepted. Reasons given: Juspay builds payments infrastructure for e-commerce merchants (checkout, UPI, refunds), so refunds, replacements and chargebacks sit in its own domain. It also fits Nitish's B2B and agent-UX background. Fewer candidates are likely to pick it than the consumer finance app. Nitish has not stated a reason of his own.
+Nitish: the second brief was clearer, and the first was vague. For this assignment he wanted a problem with a clearly defined problem statement.
 
 ## Evidence
-Designer judgement. Brief evaluates "workflow design" with edge cases and states, which this problem rewards.   Confidence: Medium
+Comparison of the two briefs.   Confidence: High
 
 ## Rejected options
-- #1 AI-native personal finance app → consumer app, further from Juspay's merchant-side products, and an easier place to produce generic "insight cards + chatbot" work.
+- #1 AI-native personal finance app → the brief was more open-ended, without a clearly defined problem.
 
 ## Guardrails for the next designer
 - Keep the work anchored on the given scenario and on payment/refund details (UPI, COD, refund to source vs. wallet), where Juspay context matters.

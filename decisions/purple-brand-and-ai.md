@@ -1,20 +1,20 @@
 # Purple is the brand colour, and also marks what the AI did
 
-Status: Superseded          Type: Visual
-Decided by: Nitish
-Skill version: 1.0.0
-Screens: All
-Link: ../DESIGN.md
-Supersedes: none
+- **Status:** Superseded
+- **Type:** Visual
+- **Decided by:** Nitish
+- **Screens:** All
+- **Link:** ../DESIGN.md
+- **Supersedes:** none
 
 ## Problem
-Family is black and white. JusDesk needed one brand colour, and AI actions needed a consistent marker.
+JusDesk needed one brand colour, and AI actions needed a consistent marker.
 
 ## Decision
 Purple (#7040F5, purple/600) is the brand colour for primary buttons, selection and links. Purple tints also mark anything the AI suggested or did (AI Suggestion, AI badge, AI timeline items). Red, amber, green and blue are only for status.
 
 ## Why
-Nitish chose a "fun purple" as the brand colour. Claude suggested reusing it for AI, since JusDesk is AI-native.
+Nitish chose a "fun purple" as the brand colour. The same purple also marked what the AI did.
 
 ## Evidence
 Contrast checked: white on purple/600 is 5.6:1; all text tokens pass WCAG AA on white.   Confidence: Medium

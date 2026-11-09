@@ -1,11 +1,11 @@
 # The AI sets follow-ups from the SLA when a ticket starts waiting
 
-Status: Active          Type: Interaction
-Decided by: Nitish
-Skill version: 1.0.0
-Screens: Case workspace (Tasks and follow-ups, toast)
-Link: ../synthesis/jusdesk-workflow.md
-Supersedes: none
+- **Status:** Active
+- **Type:** Interaction
+- **Decided by:** Nitish
+- **Screens:** Case workspace (Tasks and follow-ups, toast)
+- **Link:** ../synthesis/jusdesk-workflow.md
+- **Supersedes:** none
 
 ## Problem
 Waiting tickets get lost. In the interview, follow-ups lived in a personal tracker because the tool had no follow-up system.

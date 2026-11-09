@@ -1,11 +1,11 @@
 # Reply box starts empty; tools are AI draft, Rephrase, Translate, Check reply; no status picker
 
-Status: Active          Type: Interaction
-Decided by: Nitish
-Skill version: 1.0.0
-Screens: Case workspace (composer)
-Link: ../DESIGN.md
-Supersedes: none
+- **Status:** Active
+- **Type:** Interaction
+- **Decided by:** Nitish
+- **Screens:** Case workspace (composer)
+- **Link:** ../DESIGN.md
+- **Supersedes:** none
 
 ## Problem
 The reply box was pre-filled by the AI, had a status picker that didn't make sense, and had no way to check a reply before sending.

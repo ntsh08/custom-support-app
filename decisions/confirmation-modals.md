@@ -1,11 +1,11 @@
 # Confirmation modals show only what the executive needs at that moment
 
-Status: Active          Type: Content
-Decided by: Nitish
-Skill version: 1.0.0
-Screens: Case workspace (reship, refund and escalation modals)
-Link: ../DESIGN.md
-Supersedes: none
+- **Status:** Active
+- **Type:** Content
+- **Decided by:** Nitish
+- **Screens:** Case workspace (reship, refund and escalation modals)
+- **Link:** ../DESIGN.md
+- **Supersedes:** none
 
 ## Problem
 The first confirmation modals carried more than the executive needed to confirm an action: a full shipping address, a limit line and a tracking line.

@@ -1,11 +1,11 @@
 # Ticket list is one "All tickets" list with sort and filter; rows show name, title, ticket number and status
 
-Status: Active          Type: IA
-Decided by: Nitish
-Skill version: 1.0.0
-Screens: Queue
-Link: ../research/Custom%20Support%20Interview%20Transcript.md
-Supersedes: none
+- **Status:** Active
+- **Type:** IA
+- **Decided by:** Nitish
+- **Screens:** Queue
+- **Link:** ../research/Custom%20Support%20Interview%20Transcript.md
+- **Supersedes:** none
 
 ## Problem
 Grouping the list by status means scrolling to reach a status once there are many tickets.

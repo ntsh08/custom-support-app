@@ -1,11 +1,11 @@
 # The AI is first on every ticket and replies only when it can answer
 
-Status: Active          Type: Interaction
-Decided by: Nitish
-Skill version: 1.0.0
-Screens: Case workspace (conversation)
-Link: ../DESIGN.md
-Supersedes: none
+- **Status:** Active
+- **Type:** Interaction
+- **Decided by:** Nitish
+- **Screens:** Case workspace (conversation)
+- **Link:** ../DESIGN.md
+- **Supersedes:** none
 
 ## Problem
 Rohan got no reply while Ananya and Meera got a holding reply ("I'm passing this to our team"). The behaviour was inconsistent and the rule wasn't written down.

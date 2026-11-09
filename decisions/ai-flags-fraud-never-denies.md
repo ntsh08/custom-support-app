@@ -1,11 +1,11 @@
 # AI flags possible fraud but never denies a claim; people decide
 
-Status: Active          Type: Interaction
-Decided by: Nitish
-Skill version: 1.0.0
-Screens: Case workspace (Case 5), Team Lead overview
-Link: ../process/scoping-the-assignment.md
-Supersedes: none
+- **Status:** Active
+- **Type:** Interaction
+- **Decided by:** Nitish
+- **Screens:** Case workspace (Case 5), Team Lead overview
+- **Link:** ../process/scoping-the-assignment.md
+- **Supersedes:** none
 
 ## Problem
 Some "not received" claims may be false. AI can see patterns across accounts and payments that one executive can't.

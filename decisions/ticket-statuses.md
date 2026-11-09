@@ -1,11 +1,11 @@
 # Six ticket statuses, set by actions; Reopened is a tag; auto-close after 14 quiet days
 
-Status: Active          Type: Flow
-Decided by: Nitish
-Skill version: 1.0.0
-Screens: Queue, Case workspace (composer, Properties)
-Link: ../research/competitors.md
-Supersedes: none
+- **Status:** Active
+- **Type:** Flow
+- **Decided by:** Nitish
+- **Screens:** Queue, Case workspace (composer, Properties)
+- **Link:** ../research/competitors.md
+- **Supersedes:** none
 
 ## Problem
 The old groups (New tickets, With your lead, Waiting, Handled by AI, Closed) didn't say who had the ball, and mixed status with owner ("Handled by AI").

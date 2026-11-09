@@ -1,11 +1,11 @@
 # Only the delivered-not-received scenario, explored through edge cases
 
-Status: Active          Type: Scope
-Decided by: Nitish
-Skill version: 1.0.0
-Screens: All executive screens, Team Lead overview
-Link: ../process/scoping-the-assignment.md
-Supersedes: none
+- **Status:** Active
+- **Type:** Scope
+- **Decided by:** Nitish
+- **Screens:** All executive screens, Team Lead overview
+- **Link:** ../process/scoping-the-assignment.md
+- **Supersedes:** none
 
 ## Problem
 Support covers orders, deliveries, payments, refunds and returns. Designing for all of them in 3 days would stay shallow.

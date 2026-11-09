@@ -1,11 +1,11 @@
 # Competitor set: Zendesk + Sierra + Decagon
 
-Status: Active          Type: Scope
-Decided by: Nitish
-Skill version: 1.0.0
-Screens: research/competitors.md
-Link: research/competitors.md
-Supersedes: none
+- **Status:** Active
+- **Type:** Scope
+- **Decided by:** Nitish
+- **Screens:** research/competitors.md
+- **Link:** research/competitors.md
+- **Supersedes:** none
 
 ## Problem
 Secondary research needed "top 3 players" in AI customer support to learn how they handle the ticket journey and where AI helps.
@@ -14,7 +14,7 @@ Secondary research needed "top 3 players" in AI customer support to learn how th
 Study one market leader (Zendesk) and two AI-native companies (Sierra, Decagon).
 
 ## Why
-Nitish chose "1 leader, 2 AI natives" over the suggested Zendesk/Intercom/Freshdesk and the all-AI-native options. A further reason was not stated.
+Nitish: he wanted to compare an established product, Zendesk, with newer ones such as Sierra, to separate what large companies already accept as standard from the problems the new products are solving that Zendesk doesn't.
 
 ## Evidence
 Designer judgement.   Confidence: Medium

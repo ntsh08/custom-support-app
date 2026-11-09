@@ -1,11 +1,11 @@
 # Properties get sentiment and multi-select tags; a Customer history block carries refunds, address and private risk signals
 
-Status: Active          Type: IA
-Decided by: Nitish
-Skill version: 1.0.0
-Screens: Case workspace (right panel: Properties, Customer history)
-Link: ../research/competitors.md
-Supersedes: none
+- **Status:** Active
+- **Type:** IA
+- **Decided by:** Nitish
+- **Screens:** Case workspace (right panel: Properties, Customer history)
+- **Link:** ../research/competitors.md
+- **Supersedes:** none
 
 ## Problem
 The right panel had no mood cue, only one single-choice reason, and fraud signals sat under delivery evidence on one case only.

@@ -1,11 +1,11 @@
 # Copilot tab is a chat with suggested questions above a text box; no recommendation card or decision buttons
 
-Status: Active          Type: IA
-Decided by: Nitish
-Skill version: 1.0.0
-Screens: Right panel (Copilot tab)
-Link: ../DESIGN.md
-Supersedes: none
+- **Status:** Active
+- **Type:** IA
+- **Decided by:** Nitish
+- **Screens:** Right panel (Copilot tab)
+- **Link:** ../DESIGN.md
+- **Supersedes:** none
 
 ## Problem
 The Copilot tab mixed a recommendation card, decision buttons and a small ask box.
