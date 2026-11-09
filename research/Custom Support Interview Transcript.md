@@ -55,4 +55,4 @@ Participant-reported text as translated; verify against the original conversatio
 4. Surface missing required metadata before it silently prevents a deadline.
 5. Let executives inspect and correct AI classifications and suggestions.
 
-Current workflow map: [diagram and evidence notes](../../diagrams/current-support-workflow.md).
+Current workflow map: [diagram and evidence notes](../diagrams/current-support-workflow.md).
