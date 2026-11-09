@@ -44,6 +44,13 @@ Read the Active entries before changing a screen they cover.
 | [Dashboard only: a list of what needs the lead](team-lead-dashboard-only.md) | Scope | Active |
 | [Opens on "Needs you now"; speed always paired with an outcome](team-lead-needs-you-now.md) | IA | Active |
 
+## Visual
+
+| Decision | Type | Status |
+|---|---|---|
+| [Green is the one accent colour](green-accent.md) | Visual | Active |
+| [Inter is the only font](inter-font.md) | Visual | Active |
+
 ## Adding an entry
 
 One file per decision, named with a short slug (for example `ticket-statuses.md`), added to the right section above.
