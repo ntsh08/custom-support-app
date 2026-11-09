@@ -1,7 +1,7 @@
 # Six ticket statuses, set by actions; Reopened is a tag; auto-close after 14 quiet days
 
 Status: Active          Type: Flow
-Date: 2026-11-07        Decided by: Nitish
+Decided by: Nitish
 Skill version: 1.0.0
 Screens: Queue, Case workspace (composer, Properties)
 Link: ../research/competitors.md
@@ -19,10 +19,10 @@ Statuses: First response · Needs reply · Waiting on customer · Waiting on oth
 - Reply timer shows only for First response and Needs reply.
 - Queue order: Needs reply, First response, Escalated, Waiting, Closed.
 
-## Update 2026-11-07
-The status picker next to Send was removed (see 2026-11-07-composer-ai-tools.md). Sending a reply sets Waiting on customer; the status button in the header changes it. (Nitish)
+## Update
+The status picker next to Send was removed (see composer-ai-tools.md). Sending a reply sets Waiting on customer; the status button in the header changes it. (Nitish)
 
-## Update 2026-11-09
+## Update
 When a ticket starts waiting, the AI adds a follow-up task from the SLA: courier tomorrow 10 am, customer in 3 days, lead in 2 hours. (Nitish)
 
 ## Why

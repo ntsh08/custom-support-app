@@ -1,7 +1,7 @@
 # Copilot tab is a chat with suggested questions above a text box; no recommendation card or decision buttons
 
 Status: Active          Type: IA
-Date: 2026-11-07        Decided by: Nitish
+Decided by: Nitish
 Skill version: 1.0.0
 Screens: Right panel (Copilot tab)
 Link: ../DESIGN.md
@@ -23,7 +23,7 @@ None.   Confidence: Low
 - Recommendation card with actions in Copilot → removed.
 
 ## Guardrails for the next designer
-- Case-stage actions now run from the AI suggestion card (see 2026-11-07-ai-suggestion-card.md), not from Copilot.
+- Case-stage actions now run from the AI suggestion card (see ai-suggestion-card.md), not from Copilot.
 
 ## Revisit when
 The case actions need a home again.

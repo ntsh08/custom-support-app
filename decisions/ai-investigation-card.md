@@ -1,7 +1,7 @@
 # An AI investigation card follows the first message: what it found, then "As per our policy…"
 
 Status: Active          Type: Content
-Date: 2026-11-07        Decided by: Nitish
+Decided by: Nitish
 Skill version: 1.0.0
 Screens: Case workspace (conversation)
 Link: ../DESIGN.md

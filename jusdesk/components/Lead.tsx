@@ -83,7 +83,7 @@ export function Lead() {
         <header className="ld-head">
           <div>
             <h1>Team overview</h1>
-            <p>Friday, 7 Nov · Priya, team lead · “Marked delivered, but not received” queue</p>
+            <p>Friday, 6 Nov · Priya, team lead · “Marked delivered, but not received” queue</p>
           </div>
           <span className="ld-live"><i />Live · updated 2 min ago</span>
         </header>

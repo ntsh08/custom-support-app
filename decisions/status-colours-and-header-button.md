@@ -1,7 +1,7 @@
 # Status chips are colour-coded; the header shows status as a solid colour button (G3)
 
 Status: Active          Type: Visual
-Date: 2026-11-07        Decided by: Nitish
+Decided by: Nitish
 Skill version: 1.0.0
 Screens: Queue rows, Case header
 Link: ../DESIGN.md

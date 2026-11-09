@@ -1,7 +1,7 @@
 # Ticket list is one "All tickets" list with sort and filter; rows show name, title, ticket number and status
 
 Status: Active          Type: IA
-Date: 2026-11-07        Decided by: Nitish
+Decided by: Nitish
 Skill version: 1.0.0
 Screens: Queue
 Link: ../research/Custom%20Support%20Interview%20Transcript.md

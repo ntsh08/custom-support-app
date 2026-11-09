@@ -27,7 +27,7 @@ Desk research: matching proof can still be theft after a correct delivery (resea
 - Never let AI deny a claim on its own.
 - Don't treat matching proof of delivery as proof the customer is lying.
 
-## Update 2026-11-07
+## Update
 Signals moved into the Customer history block, with a source on each one and a risk box on every case: "Low risk · nothing unusual found" for clean customers (fast path, research insight 6), "Worth a look before deciding" when signals exist. Refunds and address sharing added as history rows. (Nitish)
 
 ## Revisit when

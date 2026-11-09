@@ -30,5 +30,5 @@ Contrast checked: white on purple/600 is 5.6:1; all text tokens pass WCAG AA on 
 ## Revisit when
 Users confuse brand actions with AI actions in testing.
 
-## Superseded 2026-11-09
+## Superseded
 The design moved to Linear's composition rules with one green accent (#3A7C57); see ../DESIGN.md. (Nitish)

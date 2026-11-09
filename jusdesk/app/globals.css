@@ -234,7 +234,7 @@ ul { list-style: none; }
   .narrow p { color: var(--ink2); max-width: 32ch; margin: 0 auto; }
 }
 
-/* Sentiment, tags, customer history (Nitish, 7 Nov) */
+/* Sentiment, tags, customer history */
 .dkv dd.mood { display: flex; flex-direction: column; line-height: 18px; padding: 6px 0; }
 .dkv dd.mood span { font-size: 12px; font-weight: 400; color: var(--ink3); }
 .dkv dd.mood.bad { color: var(--bad); } .dkv dd.mood.warn { color: var(--warn); } .dkv dd.mood.good { color: var(--ok); }
@@ -257,7 +257,7 @@ ul { list-style: none; }
 .pastlbl { margin: 12px 0 0; font-size: 12px; color: var(--ink3); }
 .past { margin-top: 0; }
 
-/* Risk signals in customer history: private, neutral, sourced (Nitish, 7 Nov) */
+/* Risk signals in customer history: private, neutral, sourced */
 .risk { margin-top: 12px; background: var(--s1); border: 1px solid var(--hair); border-radius: 8px; padding: 10px 12px; }
 .risk .rhead { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--ink3); margin: 0 0 4px; }
 .risk .rlvl { font-weight: 510; margin: 0 0 6px; }
@@ -268,13 +268,13 @@ ul { list-style: none; }
 .risk li em { font-style: normal; font-size: 12px; color: var(--ink3); white-space: nowrap; }
 .risk .rnote { margin: 8px 0 0; padding-top: 8px; border-top: 1px solid var(--hair); font-size: 12px; color: var(--ink2); }
 
-/* Statuses (Nitish, 7 Nov) */
+/* Statuses */
 .reo { font-style: normal; font-size: 11px; font-weight: 510; color: var(--warn); margin-left: 6px; margin-right: auto; }
 .tags .reo { margin: 0; font-size: 12px; color: var(--warn); }
 .dkv dd.stat { display: flex; flex-direction: column; line-height: 18px; padding: 6px 0; }
 .dkv dd.stat span { font-size: 12px; font-weight: 400; color: var(--ink3); }
 
-/* Panel tabs: Details / Copilot (Nitish, 7 Nov) */
+/* Panel tabs: Details / Copilot */
 .panel .bar.ptabs { justify-content: flex-start; gap: 20px; border-bottom: 1px solid var(--hair); align-items: stretch; }
 .ptabs button { position: relative; border: 0; background: none; padding: 0; font: inherit; font-weight: 510; color: var(--ink3); cursor: pointer; }
 .ptabs button:hover { color: var(--ink2); }
@@ -282,14 +282,14 @@ ul { list-style: none; }
 .ptabs button.on::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; border-radius: 1px; background: var(--ink); }
 .blk[hidden] { display: none; }
 
-/* Collapsible panel sections (Nitish, 7 Nov) */
+/* Collapsible panel sections */
 .blk h4 button.fold { gap: 6px; margin-left: -2px; font-weight: 510; color: var(--ink2); cursor: pointer; }
 .fold svg { color: var(--ink3); transition: transform .15s ease; }
 .blk.shut .fold svg { transform: rotate(-90deg); }
 .blk.shut > :not(h4) { display: none; }
 @media (prefers-reduced-motion: reduce) { .fold svg { transition: none; } }
 
-/* Composer tools + Check reply (Nitish, 7 Nov) */
+/* Composer tools + Check reply */
 .crow .sp { flex: 1; }
 .gh:disabled { color: var(--ink3); opacity: .6; cursor: default; }
 .gh.on { background: var(--s2); color: var(--ink); }
@@ -305,7 +305,7 @@ ul { list-style: none; }
 
 .rt .l1 em.warn { color: var(--warn); }
 
-/* Queue row: name + time, title, ticket tag + coloured status chip (Nitish, 7 Nov) */
+/* Queue row: name + time, title, ticket tag + coloured status chip */
 .row:has(.l3) { height: auto; padding-top: 10px; padding-bottom: 10px; align-items: flex-start; }
 .rt .l3 { display: flex; gap: 4px; margin-top: 6px; }
 .tk, .st { height: 22px; display: inline-flex; align-items: center; padding: 0 7px; border-radius: 6px; font-size: 12px; font-weight: 400; }
@@ -320,7 +320,7 @@ ul { list-style: none; }
 .st-customer { background: #EEEEF1; color: #4B4F57; }
 .st-closed { background: #F3F3F5; color: #8A8E95; }
 
-/* Queue header: sort + filter (Nitish, 7 Nov) */
+/* Queue header: sort + filter */
 .qbar b span { margin-left: 6px; font-weight: 400; color: var(--ink3); font-size: 12px; }
 .qtools { position: relative; display: flex; align-items: center; gap: 2px; }
 .qsort { height: 28px; display: inline-flex; align-items: center; gap: 6px; padding: 0 8px; border: 0; border-radius: 6px; background: none; font-size: 12px; font-weight: 510; color: var(--ink2); cursor: pointer; }
@@ -334,7 +334,7 @@ ul { list-style: none; }
 .sortmenu b { font-size: 13px; font-weight: 510; color: var(--ink); }
 .sortmenu em { font-style: normal; font-size: 12px; color: var(--ink3); }
 
-/* Header: title + status split button; tags = ticket, customer, language (Nitish, 7 Nov) */
+/* Header: title + status split button; tags = ticket, customer, language */
 .hrow { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .split { position: relative; display: inline-flex; flex: none; border: 1px solid var(--hair2); border-radius: 8px; }
 .split button { height: 28px; display: inline-flex; align-items: center; gap: 6px; border: 0; background: none; font-size: 12px; font-weight: 510; color: var(--ink); cursor: pointer; }
@@ -347,14 +347,14 @@ ul { list-style: none; }
 .dot.st-first { background: #5B84E4; } .dot.st-reply { background: #6B46C9; } .dot.st-escalated { background: #C2410C; }
 .dot.st-others, .dot.st-customer { background: #8A8E95; } .dot.st-closed { background: #C9CBD0; }
 
-/* Split button takes the status colour; tighter title-to-tags gap (Nitish, 7 Nov) */
+/* Split button takes the status colour; tighter title-to-tags gap */
 .head .tags { margin-top: 0; }
 .hrow { min-height: 20px; }
 .split button { color: inherit; }
 .split .sp-more { border-left-color: rgb(0 0 0 / .08); color: inherit; }
 .split button:hover, .split .sp-more[aria-expanded="true"] { background: rgb(0 0 0 / .04); }
 
-/* Header: split button centred on the title + tags block, with an outline (Nitish, 7 Nov) */
+/* Header: split button centred on the title + tags block, with an outline */
 .head { grid-template-columns: minmax(0, 1fr) auto; column-gap: 16px; }
 .hrow { display: contents; }
 .head h1 { grid-column: 1; grid-row: 1; }
@@ -362,7 +362,7 @@ ul { list-style: none; }
 .head .split { grid-column: 2; grid-row: 1 / span 2; align-self: center; border: 1px solid color-mix(in srgb, currentColor 35%, transparent); }
 .split .sp-more { border-left: 1px solid color-mix(in srgb, currentColor 35%, transparent); }
 
-/* Header status button G3: solid fill in the status colour, white text, split (Nitish, 7 Nov) */
+/* Header status button G3: solid fill in the status colour, white text, split */
 .head .split { border: 0; color: #fff; overflow: visible; }
 .head .split.st-first { background: #5B84E4; }
 .head .split.st-reply { background: #6B46C9; }
@@ -374,12 +374,12 @@ ul { list-style: none; }
 .head .split button:hover, .head .split .sp-more[aria-expanded="true"] { background: rgb(0 0 0 / .1); }
 .head .split .stmenu { color: var(--ink); }
 
-/* Day label as plain text; status-change lines in the conversation (Nitish, 7 Nov) */
+/* Day label as plain text; status-change lines in the conversation */
 .day span { height: auto; padding: 0; border-radius: 0; background: none; color: var(--ink2); font-size: 12px; line-height: 16px; font-weight: 510; }
 .stchg { display: flex; align-items: center; justify-content: center; gap: 6px; margin: 0; font-size: 12px; color: var(--ink2); }
 .stchg span { color: var(--ink3); }
 
-/* What you can try next: under the assistant's reply, team-only (Nitish, 7 Nov) */
+/* What you can try next: under the assistant's reply, team-only */
 .trynext { margin: 12px 0 0; padding-top: 12px; border-top: 1px solid #E3EEE7; }
 .trynext p { display: flex; align-items: center; gap: 6px; margin: 0 0 4px; font-size: 12px; font-weight: 510; color: var(--ink2); }
 .trynext p svg { color: var(--ink3); }
@@ -388,20 +388,20 @@ ul { list-style: none; }
 .trynext li svg { flex: none; color: var(--acc); }
 .sum.writing .trynext { opacity: .35; } .sum.writing .trynext p { opacity: 1; }
 
-/* AI suggestion card: only the next steps (Nitish, 7 Nov) */
+/* AI suggestion card: only the next steps */
 .sum .sugg { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
 .sum .sugg li { display: flex; align-items: center; gap: 8px; min-height: 24px; font-size: 13px; line-height: 18px; color: var(--ink); }
 .sum .sugg li svg { flex: none; color: var(--acc); }
 .sum.writing .sugg { opacity: .35; }
 
-/* Add task from an AI suggestion, always visible (Nitish, 7 Nov) */
+/* Add task from an AI suggestion, always visible */
 .sum .sugg li > span:first-child { flex: 1; min-width: 0; }
 .addtask { flex: none; height: 24px; display: inline-flex; align-items: center; gap: 4px; padding: 0 8px; border: 1px solid var(--hair2); border-radius: 6px; background: none; font-size: 12px; font-weight: 510; color: var(--ink2); cursor: pointer; }
 .addtask:hover { background: rgb(0 0 0 / .04); color: var(--ink); }
 .sum .sugg em.added { flex: none; display: inline-flex; align-items: center; gap: 4px; font-style: normal; font-size: 12px; color: var(--ok); padding: 0 8px; }
 .sum .sugg li { min-height: 30px; }
 
-/* Add task: Me or AI (Nitish, 7 Nov) */
+/* Add task: Me or AI */
 .addwrap { position: relative; flex: none; }
 .addmenu { width: 240px; top: calc(100% + 4px); right: 0; }
 .addmenu button:disabled { opacity: .45; cursor: default; }
@@ -409,7 +409,7 @@ ul { list-style: none; }
 .addmenu button svg { color: var(--ink3); }
 .tasks .owner { display: inline-flex; align-items: center; gap: 3px; margin-left: 6px; padding: 0 5px; height: 18px; border-radius: 4px; background: #E3F0E8; color: #2F6547; font-size: 11px; font-weight: 510; font-style: normal; vertical-align: 1px; }
 
-/* Task rows: top-aligned, assignee + due under the text; reassignable suggestions (Nitish, 7 Nov) */
+/* Task rows: top-aligned, assignee + due under the text; reassignable suggestions */
 .tasks li { align-items: flex-start; padding: 6px 0; }
 .tasks li > svg, .tasks li > .tick { margin-top: 1px; }
 .tasks .tbody { flex: 1; min-width: 0; display: grid; gap: 2px; }
@@ -423,11 +423,11 @@ ul { list-style: none; }
 .addmenu .rm { font-size: 13px; font-weight: 400; color: var(--ink2); }
 .addmenu button svg { color: var(--ink2); }
 
-/* AI investigated but didn't reply: a team-only assistant message (Nitish, 7 Nov) */
+/* AI investigated but didn't reply: a team-only assistant message */
 .msg.inv .who .team { margin-left: auto; display: inline-flex; align-items: center; gap: 4px; font-style: normal; font-size: 12px; color: var(--ink3); }
 .msg.inv .noreply { font-style: italic; color: var(--ink2); }
 
-/* AI investigation card after the first message (Nitish, 7 Nov) */
+/* AI investigation card after the first message */
 .invcard { align-self: stretch; border: 1px solid var(--hair); border-radius: 12px; background: var(--s1); padding: 10px 14px 8px; display: grid; gap: 4px; }
 .invcard .ihead { display: flex; align-items: center; gap: 6px; margin: 0; font-size: 12px; color: var(--ink2); }
 .invcard .ihead svg { color: var(--ink3); flex: none; }
@@ -437,15 +437,15 @@ ul { list-style: none; }
 .invcard .isum { margin: 0; font-size: 13px; line-height: 20px; color: var(--ink); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .invcard .trace { margin: 0; }
 
-/* Investigation card gets the AI signature: gradient border, green label and icon (Nitish, 7 Nov) */
+/* Investigation card gets the AI signature: gradient border, green label and icon */
 .invcard { border: 1.5px solid transparent; background: var(--ai-fill) padding-box, var(--ai-edge) border-box; }
 .invcard .ihead svg:first-child, .invcard .ihead b { color: var(--acc-h); }
 
-/* Investigation card: evidence found, then the policy that decided (Nitish, 7 Nov) */
+/* Investigation card: evidence found, then the policy that decided */
 .invcard .isum { display: block; -webkit-line-clamp: unset; overflow: visible; }
 .invcard .isum b { font-weight: 510; color: var(--ink); }
 
-/* Copilot tab: chat with suggestion chips above a text box, INA pattern in our design system (Nitish, 7 Nov) */
+/* Copilot tab: chat with suggestion chips above a text box, INA pattern in our design system */
 .panel .scroll[hidden] { display: none; }
 .copilot { flex: 1; min-height: 0; display: flex; flex-direction: column; }
 .cothread { flex: 1; min-height: 0; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 16px; }
@@ -473,22 +473,22 @@ ul { list-style: none; }
 .cosend { width: 28px; height: 28px; display: grid; place-items: center; border: 0; border-radius: 8px; background: var(--s2); color: var(--ink2); cursor: pointer; }
 .cosend:not(:disabled) { background: var(--acc); color: #fff; }
 .cosend:disabled { cursor: default; }
-/* Copilot: larger text in chips and the text box (Nitish, 7 Nov) */
+/* Copilot: larger text in chips and the text box */
 .cochips button { font-size: 13px; min-height: 32px; padding: 5px 12px; }
 .cobox textarea { font-size: 14px; line-height: 20px; }
 
-/* Copilot logo: filled gradient tile with white sparkles; prompt fits two lines (Nitish, 7 Nov) */
+/* Copilot logo: filled gradient tile with white sparkles; prompt fits two lines */
 .cologo { border: 0; background: linear-gradient(135deg, #2F6547, #3A7C57 35%, #7CC4A0 75%, #5EB8A8); }
 .coempty { max-width: 300px; }
 .cologo { width: auto; height: auto; border: 0; border-radius: 0; background: none; }
 .cologo { width: 72px; height: 72px; display: grid; place-items: center; border-radius: 50%; background: #F1F7F3; }
 
-/* Note mode: Add note button in the note yellow (Nitish, 7 Nov) */
+/* Note mode: Add note button in the note yellow */
 .composer.is-note .pri { background: #F2C94C; border-color: #E3B53A; color: #5C4300; }
 .composer.is-note .pri:hover:not(:disabled) { background: #E8BC3A; }
 .composer.is-note .pri:disabled { opacity: 1; background: #F7E3A6; border-color: #F0D78E; color: #A08439; }
 
-/* Pick: our dropdown instead of the OS select (Nitish, 7 Nov) */
+/* Pick: our dropdown instead of the OS select */
 .pickwrap { position: relative; display: inline-flex; }
 .pick2 { display: inline-flex; align-items: center; gap: 6px; height: 26px; margin-left: -6px; padding: 0 6px; border: 0; border-radius: 6px; background: none; font: inherit; font-weight: 510; color: var(--ink); cursor: pointer; }
 .pick2 svg { color: var(--ink3); }
@@ -498,7 +498,7 @@ ul { list-style: none; }
 .pickmenu .stline { font-size: 13px; }
 .dkv dd.stat .pickwrap { align-self: flex-start; }
 
-/* Copilot motion, after the INA agent: question rises in, "Thinking" shimmer, answer streams with a caret, follow-ups load then fade in (Nitish, 7 Nov) */
+/* Copilot motion, after the INA agent: question rises in, "Thinking" shimmer, answer streams with a caret, follow-ups load then fade in */
 @keyframes co-rise { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
 @keyframes co-fade { from { opacity: 0; } to { opacity: 1; } }
 @keyframes co-shine { 0%, 18% { background-position: 100% 0; } 82%, 100% { background-position: 0% 0; } }
@@ -517,7 +517,7 @@ ul { list-style: none; }
 .cobox.busy textarea { opacity: .5; }
 @media (prefers-reduced-motion: reduce) { .coq, .coa, .cothink, .cochips, .coorb, .coshimmer, .cocaret, .coskel { animation: none; } .coshimmer { color: var(--ink2); -webkit-text-fill-color: currentColor; background: none; } }
 
-/* Copilot motion simplified: one clear thinking state, everything else a quick fade (Nitish, 7 Nov) */
+/* Copilot motion simplified: one clear thinking state, everything else a quick fade */
 .coq { animation: co-fade .15s ease-out both; }
 .coa, .cochips { animation: co-fade .2s ease-out both; }
 .cothink { animation: co-fade .15s ease-out both; gap: 8px; padding: 2px 0; }
@@ -525,7 +525,7 @@ ul { list-style: none; }
 .coorb { width: 20px; height: 20px; color: var(--acc); animation: co-spin 2.4s linear infinite; }
 .coshimmer { font-size: 13px; line-height: 20px; background: linear-gradient(90deg, #2F6547 0%, #2F6547 30%, #A8D9B9 45%, #A8D9B9 55%, #2F6547 70%, #2F6547 100%); background-size: 300% 100%; -webkit-background-clip: text; background-clip: text; animation: co-shine 1.6s ease-in-out infinite; }
 
-/* Presenter notes: black floating sheet, draggable, shrink or close; back on refresh (Nitish, 7 Nov) */
+/* Presenter notes: black floating sheet, draggable, shrink or close; back on refresh */
 .cmt { position: fixed; z-index: 50; width: 340px; background: #111214; color: #E9EAEC; border-radius: 12px; font-size: 13px; line-height: 19px; box-shadow: 0 8px 24px rgb(0 0 0 / .18); }
 .cmt header { display: flex; align-items: center; gap: 8px; height: 40px; padding: 0 8px 0 14px; cursor: grab; user-select: none; touch-action: none; }
 .cmt header:active { cursor: grabbing; }
@@ -556,7 +556,7 @@ ul { list-style: none; }
 /* Commentary labels follow the design system: sentence case, 12px/510, no caps or tracking */
 .cmt-n, .cmt dt { text-transform: none; letter-spacing: 0; font-size: 12px; font-weight: 510; }
 
-/* Suggestion actions: one primary per card, left of Add task; inline confirm (Nitish, 7 Nov) */
+/* Suggestion actions: one primary per card, left of Add task; inline confirm */
 .sum .sugg .sa { height: 24px; padding: 0 10px; font-size: 12px; gap: 4px; }
 .sum .sugg li.sconfirm { display: grid; gap: 6px; margin: 4px 0 8px; padding: 10px 12px; border: 1px solid var(--hair); border-radius: 8px; background: var(--s0); }
 .sum .sugg li.sconfirm b { font-weight: 590; }
@@ -564,24 +564,24 @@ ul { list-style: none; }
 .sum .sugg li.sconfirm .policy { margin: 0; font-size: 12px; color: var(--ink2); }
 .sum .sugg li.sconfirm .btns { display: flex; gap: 6px; }
 
-/* One button per suggestion, all primary and the same width (Nitish, 7 Nov) */
+/* One button per suggestion, all primary and the same width */
 .sum .sugg .sa, .sum .sugg .addtask, .sum .sugg .added { width: 116px; justify-content: center; flex: none; }
 .sum .sugg .addtask.pri { height: 24px; padding: 0 8px; border: 1px solid var(--acc); background: var(--acc); color: #fff; font-size: 12px; font-weight: 510; }
 .sum .sugg .addtask.pri:hover { background: var(--acc-h); }
 .sum .sugg .addtask.pri svg { color: #fff; }
 .sum .sugg .sa, .sum .sugg .addtask, .sum .sugg .added { width: 92px; }
 .sum .sugg .sa, .sum .sugg .addtask, .sum .sugg .added { border-radius: 6px; }
-/* Suggestion buttons are secondary: white, hairline border, ink text (Nitish, 7 Nov) */
+/* Suggestion buttons are secondary: white, hairline border, ink text */
 .sum .sugg .sa.pri, .sum .sugg .addtask.pri { background: var(--s0); border: 1px solid var(--hair2); color: var(--ink); }
 .sum .sugg .sa.pri:hover:not(:disabled), .sum .sugg .addtask.pri:hover { background: var(--s2); }
 .sum .sugg .addtask.pri svg { color: var(--ink3); }
-/* Suggestion rows: very light grey band each, with space between (Nitish, 7 Nov) */
+/* Suggestion rows: very light grey band each, with space between */
 .sum .sugg { gap: 8px; }
 .sum .sugg li:not(.sconfirm) { padding: 8px 8px 8px 12px; border-radius: 8px; background: #F8F8FA; min-height: 40px; }
 .sum .sugg .sa, .sum .sugg .addtask { height: 28px; }
 .sum .sugg .sa.pri, .sum .sugg .addtask.pri { height: 28px; }
 
-/* Confirm opens as a side sheet, not inline (Nitish, 7 Nov) */
+/* Confirm opens as a side sheet, not inline */
 @keyframes sheet-in { from { transform: translateX(18px); opacity: 0; } to { transform: none; opacity: 1; } }
 @keyframes scrim-in { from { opacity: 0; } to { opacity: 1; } }
 .sheet-scrim { position: fixed; inset: 0; z-index: 60; background: rgb(17 18 20 / .24); display: flex; justify-content: flex-end; animation: scrim-in .18s ease-out both; }
@@ -596,25 +596,25 @@ ul { list-style: none; }
 .sheet-note { margin: 0; padding-top: 12px; border-top: 1px solid var(--hair); font-size: 13px; color: var(--ink2); }
 .sheet footer { flex: none; display: flex; justify-content: flex-end; gap: 8px; padding: 12px 20px; border-top: 1px solid var(--hair); }
 @media (prefers-reduced-motion: reduce) { .sheet, .sheet-scrim { animation: none; } }
-/* AI suggestion: green-tinted rows; team-only note like the investigation card (Nitish, 7 Nov) */
+/* AI suggestion: green-tinted rows; team-only note like the investigation card */
 .sum .sugg li:not(.sconfirm) { background: #F2F8F4; }
 .sum .lbl .team { margin-left: auto; display: inline-flex; align-items: center; gap: 4px; font-style: normal; font-size: 12px; font-weight: 400; color: var(--ink3); }
 .sum.writing .lbl .team { background: none; -webkit-text-fill-color: currentColor; }
-/* Confirm is a centred modal, not a side drawer (Nitish, 7 Nov) */
+/* Confirm is a centred modal, not a side drawer */
 @keyframes modal-in { from { transform: translateY(6px) scale(.98); opacity: 0; } to { transform: none; opacity: 1; } }
 .sheet-scrim { align-items: center; justify-content: center; padding: 24px; }
 .sheet { width: 480px; max-width: 100%; height: auto; max-height: calc(100vh - 48px); border: 1px solid var(--hair); border-radius: 12px; box-shadow: 0 16px 40px rgb(17 18 20 / .14); overflow: hidden; animation: modal-in .2s cubic-bezier(.22, 1, .36, 1) both; }
 .sheet .sheet-body { flex: none; }
-/* Lighter green rows; the investigation result sits on the same green band (Nitish, 7 Nov) */
+/* Lighter green rows; the investigation result sits on the same green band */
 .sum .sugg li:not(.sconfirm) { background: #F6FAF7; }
 .invcard .isum { margin: 4px 0 2px; padding: 10px 12px; border-radius: 8px; background: #F6FAF7; }
-/* Assigned state: neutral text, one line, grows past 92px if needed (Nitish, 7 Nov) */
+/* Assigned state: neutral text, one line, grows past 92px if needed */
 .sum .sugg .added, .sum .sugg button.added { width: auto; min-width: 92px; white-space: nowrap; color: var(--ink2); font-weight: 510; }
 .sum .sugg button.added svg { color: var(--ink3); }
 .sum .sugg .sa, .sum .sugg .addtask, .sum .sugg .added, .sum .sugg .sa.pri, .sum .sugg .addtask.pri { border-radius: 8px; }
 .sum .sugg button.added { border-radius: 8px; }
 
-/* Escalation modal, layout D: addressed to Priya, the ask on a green card, editable note (Nitish, 7 Nov) */
+/* Escalation modal, layout D: addressed to Priya, the ask on a green card, editable note */
 .sheet-body.esc { gap: 16px; padding: 18px 20px 20px; }
 .esc-to { display: flex; align-items: center; gap: 10px; }
 .esc-av { width: 32px; height: 32px; flex: none; border-radius: 50%; background: #E3F0E8; color: var(--acc-h); display: grid; place-items: center; font-size: 12px; font-weight: 590; }
@@ -633,7 +633,7 @@ ul { list-style: none; }
 .esc-note textarea:focus { border-color: var(--acc); background: var(--s0); }
 .tk { gap: 4px; } .tk svg { color: var(--ink3); flex: none; }
 
-/* Properties: Status as the queue chip; Sentiment as an emoji pill (option B) (Nitish, 7 Nov) */
+/* Properties: Status as the queue chip; Sentiment as an emoji pill (option B) */
 .pick2.chip { margin-left: 0; height: 24px; padding: 0 8px; border-radius: 6px; gap: 4px; font-size: 12px; }
 .pick2.chip svg { color: currentColor; opacity: .7; }
 .pick2.chip:hover, .pick2.chip[aria-expanded="true"] { filter: brightness(.97); }
@@ -648,13 +648,13 @@ ul { list-style: none; }
 .pick2.chip.st-others, .pick2.chip.st-customer { background: #EEEEF1; color: #4B4F57; }
 .pick2.chip.st-closed { background: #F3F3F5; color: #8A8E95; }
 
-/* Customer history: one Signals row instead of the risk card (Nitish, 7 Nov) */
+/* Customer history: one Signals row instead of the risk card */
 .dkv dd.sig { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; padding: 6px 0; font-weight: 400; }
 .sigchip { display: inline-flex; align-items: center; gap: 4px; height: 24px; padding: 0 8px; border-radius: 6px; font-size: 12px; font-weight: 510; }
 .sig-good { background: #E7F5EC; color: #15803D; } .sig-low { background: #F1F1F4; color: #4B4F57; } .sig-high { background: #FDECEB; color: #B42318; }
 .sigwhy { font-size: 12px; line-height: 16px; color: var(--ink3); }
 
-/* Right panel cleanup (Nitish, 7 Nov) */
+/* Right panel cleanup */
 .seeprev, .viewlink { justify-self: start; border: 0; background: none; padding: 0; font: inherit; font-size: 12px; font-weight: 510; color: var(--ink2); cursor: pointer; }
 .seeprev { margin-top: 4px; }
 .seeprev:hover, .viewlink:hover { color: var(--ink); text-decoration: underline; }
@@ -670,7 +670,7 @@ ul { list-style: none; }
 .ltval { display: flex; align-items: center; gap: 8px; font-weight: 400; } .ltstate { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; color: var(--ink2); } .ltstate svg { color: var(--ink3); }
 .lt li { min-height: 30px; gap: 8px; }
 
-/* Team Lead overview (/lead): one screen, no flows (Nitish, 7 Nov) */
+/* Team Lead overview (/lead): one screen, no flows */
 .ld { display: grid; grid-template-columns: 52px minmax(0, 1fr); height: 100vh; min-width: 1100px; }
 .ld .rail a.nav, .ld .rail span.nav { color: var(--ink3); }
 .ld .rail .nav.on { color: var(--ink); }
@@ -765,7 +765,7 @@ ul { list-style: none; }
 /* Back-to-back status lines sit closer: 8px instead of the 20px between messages */
 .grpmsg:has(> .stchg:first-child) + .grpmsg:has(> .stchg:first-child) { margin-top: -12px; }
 
-/* Composer: Reply ↔ Internal note switch (option C + 3, Nitish 8 Nov) */
+/* Composer: Reply ↔ Internal note switch (option C + 3) */
 .composer { transition: background-color .22s var(--ease-out), border-color .22s var(--ease-out); }
 .composer .tabs { position: relative; }
 .composer .tabs button { position: relative; transition: color .22s var(--ease-out); }
@@ -795,7 +795,7 @@ ul { list-style: none; }
 .composer.is-note .crow .tools > .gh { opacity: 0; transform: translateY(6px); transition-duration: .16s; }
 @media (prefers-reduced-motion: reduce) { .crow .tools > .gh { transform: none !important; transition-property: opacity, color; } }
 
-/* Modals, Linear-style (Nitish, 8 Nov): no dividers, 13px, 28px buttons, soft shadow.
+/* Modals, Linear-style: no dividers, 13px, 28px buttons, soft shadow.
    Confirmations: small title + ×, facts in one hairline box. Escalations: the question as title, then the AI's note. */
 .sheet { width: 440px; box-shadow: 0 8px 24px rgb(17 18 20 / .08); }
 .sheet header { height: auto; padding: 16px 16px 0; border-bottom: 0; }
@@ -816,7 +816,7 @@ ul { list-style: none; }
 .sheet .esc-note textarea { width: 100%; border: 1px solid var(--hair2); border-radius: 8px; padding: 8px 10px; font: inherit; font-size: 13px; line-height: 20px; color: var(--ink); background: var(--s0); resize: none; outline: 0; }
 .sheet .esc-note textarea:focus { border-color: var(--acc); }
 
-/* Owner pick with avatars, unmerge icon, task due on the right (Nitish, 8 Nov) */
+/* Owner pick with avatars, unmerge icon, task due on the right */
 .av { flex: none; width: 18px; height: 18px; border-radius: 50%; display: inline-grid; place-items: center; background: var(--s3); color: var(--ink2); font-size: 8px; font-weight: 600; font-style: normal; letter-spacing: .02em; }
 .av.ai { background: #E3F0E8; color: #2F6547; }
 .pick2 .av, .pickmenu .av { margin-right: 6px; }
@@ -826,6 +826,6 @@ ul { list-style: none; }
 .lt .unlink:hover { background: var(--s2); color: var(--ink); }
 .tasks li .tdue { margin-left: auto; align-self: flex-start; padding-top: 1px; font-size: 12px; font-style: normal; color: var(--ink3); white-space: nowrap; }
 
-/* Team Lead: same rules as the executive view (Nitish, 8 Nov) */
+/* Team Lead: same rules as the executive view */
 .ld-act { color: var(--ink2); }
 .ld-own { display: inline-flex; align-items: center; gap: 8px; }

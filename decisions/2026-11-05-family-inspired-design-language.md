@@ -30,5 +30,5 @@ Family screens on Mobbin ("Sending tokens" flow).   Confidence: Medium
 ## Revisit when
 Juspay feedback asks for a different feel.
 
-## Superseded 2026-11-09
+## Superseded
 The design moved to Linear's composition rules with one green accent (#3A7C57); see ../DESIGN.md. (Nitish)

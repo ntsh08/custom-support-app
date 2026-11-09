@@ -4,7 +4,7 @@ What Nitish did on the assignment, what each step taught him, and where the evid
 
 Figma: [Juspay Assignment, Nitish Bhardwaj](https://www.figma.com/design/cfRDciFE94XNlCsyyshvrp/Juspay-Assignment---Nitish-Bhardwaj?node-id=1-27).
 
-Dates are when the work was recorded in Git or shared, not time spent.
+The assignment window was three days, 4–6 November 2026.
 
 ## 1. Research (4–5 Nov)
 
@@ -25,18 +25,15 @@ Dates are when the work was recorded in Git or shared, not time spent.
 |---|---|---|---|
 | Agreed the scope | 5 Nov | One complaint ("marked delivered, not received"), five cases from simple to hard, and a dashboard-only Team Lead screen. | [Scoping the assignment](scoping-the-assignment.md); six decisions dated 5 Nov |
 
-## 3. Design and prototype (5–9 Nov)
+## 3. Design and prototype
 
-| Activity | Date | What it gave us | Evidence |
-|---|---|---|---|
-| First visual direction and prototype | 5 Nov | A Family-inspired, purple first version and a working Next.js prototype of all five cases. Later replaced. | Decisions marked Superseded |
-| Visual direction rounds | 6 Nov | Compared type, structure, colour and icons against Linear, Attio and Plain. Settled on Linear's rules, Inter and a green accent. | [DESIGN.md](../DESIGN.md) |
-| Executive workspace | 6–7 Nov | Queue, conversation and details panel; ticket statuses; AI investigation and suggestion cards; Copilot; composer AI tools. | [DESIGN.md](../DESIGN.md); decisions dated 7 Nov |
-| Team Lead overview | 7 Nov | One screen: what needs the lead, patterns the AI spotted, team stats. | [/lead](https://jusdesk-theta.vercel.app/lead) |
-| Polish and motion | 8 Nov | Restrained motion, clearer labels, Linear-style modals, owner avatars. | [DESIGN.md](../DESIGN.md) sections 8–9b |
-| AI follow-ups from the SLA | 9 Nov | The AI sets a follow-up task whenever a ticket starts waiting. | [JusDesk workflow](../decisions/jusdesk-workflow.png) |
-| Figma cards for the submission | 9 Nov | The workflow table, the AI features, the executive edge cases, the Team Lead overview and the design system. | Figma link above |
-| Repo clean-up | 9 Nov | Removed outdated drafts, merged the research into one document, and kept a single Figma link. | Git history |
+| Activity | What it gave us | Evidence |
+|---|---|---|
+| First visual direction and prototype | A Family-inspired, purple first version and a working Next.js prototype of all five cases. Later replaced. | Decisions marked Superseded |
+| Visual direction rounds | Compared type, structure, colour and icons against Linear, Attio and Plain. Settled on Linear's rules, Inter and a green accent. | [DESIGN.md](../DESIGN.md) |
+| Executive workspace | Queue, conversation and details panel; ticket statuses; AI investigation and suggestion cards; Copilot; composer AI tools; AI follow-ups from the SLA; restrained motion. | [DESIGN.md](../DESIGN.md); [decisions](../decisions/README.md); [JusDesk workflow](../decisions/jusdesk-workflow.png) |
+| Team Lead overview | One screen: what needs the lead, patterns the AI spotted, team stats. | [/lead](https://jusdesk-theta.vercel.app/lead) |
+| Figma cards for the submission | The workflow table, the AI features, the executive edge cases, the Team Lead overview and the design system. | Figma link above |
 
 Prototype: [jusdesk-theta.vercel.app](https://jusdesk-theta.vercel.app).
 

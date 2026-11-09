@@ -1,7 +1,7 @@
 # Reply box starts empty; tools are AI draft, Rephrase, Translate, Check reply; no status picker
 
 Status: Active          Type: Interaction
-Date: 2026-11-07        Decided by: Nitish
+Decided by: Nitish
 Skill version: 1.0.0
 Screens: Case workspace (composer)
 Link: ../DESIGN.md
