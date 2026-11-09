@@ -4,8 +4,8 @@ Drafted 5 November 2026. Working personas for the Juspay assignment, not validat
 
 Every line carries its source:
 
-- **[Interview]**: what Nitish's interviewee, a customer support executive, reported ([interview notes](Custom%20Support%20Interview%20Transcript.md)). One person, B2B accounts, not consumer e-commerce.
-- **[Desk]**: public research ([desk research](Desk%20Research.md), [competitors](competitors.md)). Self-reported, unverified, mostly non-Indian.
+- **[Interview]**: what Nitish's interviewee, a customer support executive, reported ([interview notes](../research/Custom%20Support%20Interview%20Transcript.md)). One person, B2B accounts, not consumer e-commerce.
+- **[Desk]**: public research ([desk research](../research/Desk%20Research.md), [competitors](../research/competitors.md)). Self-reported, unverified, mostly non-Indian.
 - **[Hypothesis]**: what the design needs to assume for the missing-delivery scenario. To be tested.
 
 The personas are named by role. The interviewee is not named here.

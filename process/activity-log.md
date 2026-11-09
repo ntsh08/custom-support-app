@@ -15,7 +15,7 @@ Figma: [Juspay Assignment, Nitish Bhardwaj](https://www.figma.com/design/cfRDciF
 | Interviewed a support practitioner | Learned about manual follow-ups, personal tracking, internal tickets and response-time targets. The participant supports business accounts, so this informs the design but doesn't validate it for consumer delivery support. | [Interview transcript](../research/Custom%20Support%20Interview%20Transcript.md) |
 | Mapped the participant's current workflow | Showed where records split, what blocks closure and what to ask next. | [Current workflow](../diagrams/current-support-workflow.md) |
 | Mapped the general support lifecycle | Showed where the executive owns the work and where the AI does. | [Lifecycle maps](../diagrams/general-support-lifecycle.md) |
-| Drafted personas | Support Executive from the interview and desk research. The Team Lead is assumed, because no lead was interviewed. | [Personas](../research/personas.md) |
+| Drafted personas | Support Executive from the interview and desk research. The Team Lead is assumed, because no lead was interviewed. | [Personas](../synthesis/personas.md) |
 
 ## 2. Scoping
 
@@ -28,7 +28,7 @@ Figma: [Juspay Assignment, Nitish Bhardwaj](https://www.figma.com/design/cfRDciF
 | Activity | What it gave us | Evidence |
 |---|---|---|
 | Visual direction rounds | Compared type, structure, colour and icons against Linear, Attio and Plain. Settled on Linear's rules, Inter and a green accent. | [DESIGN.md](../DESIGN.md) |
-| Executive workspace | Queue, conversation and details panel; ticket statuses; AI investigation and suggestion cards; Copilot; composer AI tools; AI follow-ups from the SLA; restrained motion. | [DESIGN.md](../DESIGN.md); [decisions](../decisions/README.md); [JusDesk workflow](../decisions/jusdesk-workflow.png) |
+| Executive workspace | Queue, conversation and details panel; ticket statuses; AI investigation and suggestion cards; Copilot; composer AI tools; AI follow-ups from the SLA; restrained motion. | [DESIGN.md](../DESIGN.md); [decisions](../decisions/README.md); [JusDesk workflow](../synthesis/jusdesk-workflow.md) |
 | Team Lead overview | One screen: what needs the lead, patterns the AI spotted, team stats. | [/lead](https://jusdesk-theta.vercel.app/lead) |
 | Figma cards for the submission | The workflow table, the AI features, the executive edge cases, the Team Lead overview and the design system. | Figma link above |
 
