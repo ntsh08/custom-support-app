@@ -11,7 +11,6 @@ Juspay product design assignment: an AI-native support desk for an online fashio
 - [process/activity-log.md](process/activity-log.md): what was done, when, and the evidence
 - [research/](research/): [Desk Research](research/Desk%20Research.md), [competitors](research/competitors.md), workflow research ([Zendesk](research/workflow%20research/zendesk-swimlane.md) and [Plain](research/workflow%20research/plain-swimlane.md) swimlanes) and the [interview transcript](research/Custom%20Support%20Interview%20Transcript.md)
 - [synthesis/](synthesis/): the [research summary](synthesis/research-summary.md), [personas](synthesis/personas.md), the [JusDesk swimlane](synthesis/jusdesk-swimlane.md), the [JusDesk workflow](synthesis/jusdesk-workflow.md) and [how JusDesk uses AI](synthesis/how-jusdesk-uses-ai.md)
-- [diagrams/](diagrams/): the [current support workflow](diagrams/current-support-workflow.md) and the [general support lifecycle](diagrams/general-support-lifecycle.md)
 - [decisions/](decisions/README.md): why things are the way they are
 - [DESIGN.md](DESIGN.md): the design rules the app follows
 - [jusdesk/](jusdesk/): the Next.js prototype
