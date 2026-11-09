@@ -18,8 +18,10 @@ Grouping the list by status means scrolling to reach a status once there are man
 ## Why
 Nitish: "suppose there are a lot of tickets in Waiting… assuming 50 tickets. I have to scroll if I have to find tickets of a certain status… this will not work." Customer name chosen over the issue as the row's first line because every ticket has the same title.
 
+Why the list is sorted by due time and the time left is so prominent (Nitish): the interview showed that response speed is one of the key metrics in customer support, and first response matters most. So the list puts the ticket that's due soonest at the top, and each row shows how long is left to reply.
+
 ## Evidence
-P01's priorities: first response time and never losing a follow-up (research/Custom Support Interview Transcript.md).   Confidence: Low
+In the interview, first response time (P90, measured after the bot's acknowledgement) is a core metric, and a late first response triggers an escalation (research/Custom Support Interview Transcript.md).   Confidence: Medium
 
 ## Rejected options
 - Status group headers in the list → too much scrolling at volume.
