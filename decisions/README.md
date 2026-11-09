@@ -5,6 +5,7 @@ Read the Active entries before changing a screen they list.
 
 | Decision | Type | Status |
 |----------|------|--------|
+| [Team Lead overview opens on "Needs you now"; speed always paired with an outcome](team-lead-needs-you-now.md) | IA | Active |
 | [The AI sets follow-ups from the SLA when a ticket starts waiting](ai-sla-follow-ups.md) | Interaction | Active |
 | [Confirmation modals show only what the executive needs at that moment](confirmation-modals.md) | Content | Active |
 | [Reply box starts empty; AI draft, Rephrase, Translate, Check reply](composer-ai-tools.md) | Interaction | Active |
